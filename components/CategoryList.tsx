@@ -20,7 +20,7 @@ const CategoryList: React.FC<CategoryListProps> = () => {
                 alt={item.name}
                 className="rounded-t-3xl"
               />
-              <p className="text-center text-xs font-extrabold text-[#253031] mt-3">
+              <p className="text-center text-xs font-extrabold text-black-items mt-3">
                 {item.name}
               </p>
             </div>

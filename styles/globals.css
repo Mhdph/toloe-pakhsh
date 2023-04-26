@@ -35,3 +35,16 @@ body {
   height: 96px;
   background: #ffffff;
 }
+.card {
+  min-width: 170px;
+  height: 264px;
+  background: #ffffff;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
+  border-radius: 24px;
+}
+.special_offer {
+  width: 390px;
+  height: 564px;
+  background: linear-gradient(270deg, #f6602d 0%, #fa8821 100%);
+  border-radius: 48px;
+}

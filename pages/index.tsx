@@ -1,11 +1,7 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import CategoryList from "@/components/CategoryList";
-
-const inter = Inter({ subsets: ["latin"] });
+import LstItmes from "@/components/LstItmes";
 
 export default function Home() {
   return (
@@ -13,6 +9,7 @@ export default function Home() {
       <Navbar />
       <HeroSection />
       <CategoryList />
+      <LstItmes />
     </main>
   );
 }
