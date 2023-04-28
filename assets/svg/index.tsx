@@ -8,3 +8,8 @@ export { default as StoreSvg } from "./StoreSvg";
 export { default as ProfileSvg } from "./ProfileSvg";
 export { default as MenuSvg } from "./MenuSvg";
 export { default as LogoSvg } from "./LogoSvg";
+export { default as LocationSvg } from "./LocationSvg";
+export { default as InstaSvg } from "./InstaSvg";
+export { default as TelegramSvg } from "./TelegramSvg";
+export { default as PhoneSvg } from "./PhoneSvg";
+export { default as MailSvg } from "./MailSvg";
