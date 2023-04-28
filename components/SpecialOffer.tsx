@@ -27,7 +27,7 @@ const SpecialOffer: React.FC<SpecialOfferProps> = () => {
         <div className="card">7</div>
       </div>
       <div className="flex justify-center mt-72">
-        <button className="bg-white text-center text-[#f02d3c] h-9 w-[350px] rounded-3xl">
+        <button className="bg-white text-center text-[#f02d3c] text-xs font-extrabold h-9 w-[350px] rounded-3xl">
           مشاهده محصولات
         </button>
       </div>
