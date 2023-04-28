@@ -4,6 +4,7 @@ import CategoryList from "@/components/CategoryList";
 import LstItmes from "@/components/LstItmes";
 import SpecialOffer from "@/components/SpecialOffer";
 import AboutUs from "@/components/AboutUs";
+import ContactUs from "@/components/ContactUs";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       </div>
       <SpecialOffer />
       <AboutUs />
+      <ContactUs />
     </main>
   );
 }
