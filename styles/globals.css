@@ -5,6 +5,7 @@
 
 body {
   font-family: "Vazirmatn", sans-serif;
+  direction: rtl;
 }
 .footer_bg {
   background: linear-gradient(270deg, #f02d3c 0%, #f6622c 100%);
@@ -47,4 +48,21 @@ body {
   height: 564px;
   background: linear-gradient(270deg, #f6602d 0%, #fa8821 100%);
   border-radius: 48px;
+}
+.btn_primary {
+  width: 350px;
+  height: 36px;
+  background: linear-gradient(270deg, #f02d3c 0%, #f6622c 100%);
+  border-radius: 24px;
+}
+.seperator {
+  width: 350px;
+  height: 0px;
+  border: 1px solid rgba(37, 48, 49, 0.1);
+}
+.btn_Primary_small {
+  width: 170px;
+  height: 36px;
+  background: linear-gradient(270deg, #f02d3c 0%, #f6622c 100%);
+  border-radius: 24px;
 }
