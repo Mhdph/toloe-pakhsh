@@ -12,7 +12,10 @@ const SpecialOffer: React.FC<SpecialOfferProps> = () => {
         تخفیفات ویژه
       </p>
       <div className="flex items-center absolute top-28 right-4 gap-3">
-        <div className="bg-white h-[60px] w-[60px] rounded-3xl">1</div>
+        <div className="bg-white h-[60px] w-[60px] rounded-3xl">
+          <p></p>
+          <p></p>
+        </div>
         <div className="bg-white h-[60px] w-[60px] rounded-3xl">2</div>
         <div className="bg-white h-[60px] w-[60px] rounded-3xl">3</div>
         <div className="bg-white h-[60px] w-[60px] rounded-3xl">4</div>

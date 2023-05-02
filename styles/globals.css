@@ -81,3 +81,6 @@ body {
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);
   border-radius: 0px 0px 48px 48px;
 }
+.bg_primary {
+  background: linear-gradient(270deg, #f02d3c 0%, #f6622c 100%);
+}
