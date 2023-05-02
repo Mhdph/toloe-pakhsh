@@ -1,9 +1,9 @@
 import SearchBarSvg from "@/assets/svg/SearchBarSvg";
 import React from "react";
 
-function SearchBar() {
+function SearchBarWF() {
   return (
-    <div className="serach_bar w-full rounded-b-3xl h-[152px]">
+    <div className="serach_bar w-full rounded-b-3xl h-[68px]">
       <div className="relative w-full px-4 pt-4">
         <input
           type="text"
@@ -18,4 +18,4 @@ function SearchBar() {
   );
 }
 
-export default SearchBar;
+export default SearchBarWF;
