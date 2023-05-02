@@ -6,17 +6,17 @@ type NavbarProps = {};
 const Navbar: React.FC<NavbarProps> = () => {
   return (
     <div className="flex justify-between items-center w-full h-[72px] navbar_shadow">
-      <div className="navbar_bg_left flex items-center justify-center">
+      <div className="navbar_bg_right flex items-center justify-center">
         <div className="cursor-pointer">
-          <ActiveStoreSvg />
+          <MenuSvg />
         </div>
       </div>
       <div className="mt-8">
         <LogoSvg />
       </div>
-      <div className="navbar_bg_right flex items-center justify-center">
+      <div className="navbar_bg_left flex items-center justify-center">
         <div className="cursor-pointer">
-          <MenuSvg />
+          <ActiveStoreSvg />
         </div>
       </div>
     </div>
