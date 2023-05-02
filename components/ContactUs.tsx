@@ -11,7 +11,7 @@ import React from "react";
 function ContactUs() {
   return (
     <div className="contact_us mt-4 px-4 text-black-items mb-16">
-      <div className="relative mt-12">
+      <div className="relative pt-12">
         <p className="text-white font-semibold text-4xl">با ما در تماس باشید</p>
         <div className="absolute left-2 -bottom-4 ">
           <SubTractSvg />
