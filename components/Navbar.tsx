@@ -5,7 +5,7 @@ type NavbarProps = {};
 
 const Navbar: React.FC<NavbarProps> = () => {
   return (
-    <div className="flex justify-between items-center w-full h-[72px] navbar_shadow">
+    <div className="flex fixed z-50 bg-white justify-between items-center w-full h-[72px] navbar_shadow">
       <div className="navbar_bg_right flex items-center justify-center">
         <div className="cursor-pointer">
           <MenuSvg />

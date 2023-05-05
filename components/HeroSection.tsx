@@ -5,7 +5,7 @@ type HeroSectionProps = {};
 
 const HeroSection: React.FC<HeroSectionProps> = () => {
   return (
-    <div>
+    <div className="mt-10">
       <Image src={HeroImage} alt="ajil shab eyd picture" />
     </div>
   );
