@@ -1,4 +1,5 @@
 import ContactUs from "@/components/ContactUs";
+import LatestBlog from "@/components/LatestBlog";
 import LstItmes from "@/components/LstItmes";
 import Navbar from "@/components/Navbar";
 import SpecialOffer from "@/components/SpecialOffer";
@@ -13,6 +14,7 @@ function Store() {
       <SpecialOffer />
       <LstItmes />
       <LstItmes />
+      <LatestBlog />
       <ContactUs />
     </div>
   );

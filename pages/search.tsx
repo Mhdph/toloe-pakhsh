@@ -19,12 +19,9 @@ function Search() {
       </div>
       <hr className="divedr opacity-25 my-10" />
       <LstItmes />
-      <SeeProduct />
       <hr className="divedr opacity-25 mb-10" />
       <LstItmes />
-      <SeeProduct />
       <hr className="divedr opacity-0 mb-4" />
-
       <ContactUs />
     </div>
   );
