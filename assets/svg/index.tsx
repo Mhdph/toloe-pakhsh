@@ -13,3 +13,5 @@ export { default as InstaSvg } from "./InstaSvg";
 export { default as TelegramSvg } from "./TelegramSvg";
 export { default as PhoneSvg } from "./PhoneSvg";
 export { default as MailSvg } from "./MailSvg";
+export { default as EyeSvg } from "./EyeSvg";
+export { default as AvatarSvg } from "./AvatarSvg";
