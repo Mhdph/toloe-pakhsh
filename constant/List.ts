@@ -31,3 +31,26 @@ export const CategoryListItem = [
     image: torshijat,
   },
 ];
+
+export const ProfileLinkListItem = [
+  {
+    name: "سبد خرید",
+    url: "",
+  },
+  {
+    name: "تاریخچه سفارشات",
+    url: "",
+  },
+  {
+    name: "موارد دلخواه",
+    url: "",
+  },
+  {
+    name: "بازدید های اخیر",
+    url: "",
+  },
+  {
+    name: "اطلاعات حساب کاربری",
+    url: "",
+  },
+];

@@ -15,3 +15,4 @@ export { default as PhoneSvg } from "./PhoneSvg";
 export { default as MailSvg } from "./MailSvg";
 export { default as EyeSvg } from "./EyeSvg";
 export { default as AvatarSvg } from "./AvatarSvg";
+export { default as ArrowOrangeSvg } from "./ArrowOrangeSvg";
