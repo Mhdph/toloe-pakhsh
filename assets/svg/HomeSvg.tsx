@@ -23,8 +23,8 @@ function HomeSvg() {
             y2="-5.83629e-08"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#F02D3C" />
-            <stop offset="1" stop-color="#F6622C" />
+            <stop stopColor="#F02D3C" />
+            <stop offset="1" stopColor="#F6622C" />
           </linearGradient>
         </defs>
       </svg>

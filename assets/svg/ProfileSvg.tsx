@@ -11,8 +11,8 @@ function ProfileSvg() {
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M10.05 0C6.31011 0 3.25137 2.91452 3.25137 6.51604C3.25137 10.1164 6.31013 13.0309 10.05 13.0309C13.7899 13.0309 16.8474 10.1164 16.8474 6.51604C16.8474 2.91457 13.7899 0 10.05 0ZM5.41564 6.50518C5.41564 6.5088 5.41563 6.51242 5.41563 6.51604C5.41563 6.51966 5.41564 6.52327 5.41564 6.52689C5.42179 8.95293 7.48955 10.9414 10.05 10.9414C12.6142 10.9414 14.6843 8.94699 14.6843 6.51604C14.6843 4.08387 12.6142 2.08953 10.05 2.08953C7.48958 2.08953 5.42179 4.07794 5.41564 6.50518Z"
           fill="url(#paint0_linear_252_260)"
         />
@@ -29,8 +29,8 @@ function ProfileSvg() {
             y2="-2.1855e-07"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#F02D3C" />
-            <stop offset="1" stop-color="#F6622C" />
+            <stop stopColor="#F02D3C" />
+            <stop offset="1" stopColor="#F6622C" />
           </linearGradient>
           <linearGradient
             id="paint1_linear_252_260"
@@ -40,8 +40,8 @@ function ProfileSvg() {
             y2="-2.1855e-07"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#F02D3C" />
-            <stop offset="1" stop-color="#F6622C" />
+            <stop stopColor="#F02D3C" />
+            <stop offset="1" stopColor="#F6622C" />
           </linearGradient>
         </defs>
       </svg>

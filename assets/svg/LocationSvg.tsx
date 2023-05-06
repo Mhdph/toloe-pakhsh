@@ -15,8 +15,8 @@ function LocationSvg() {
           fill="url(#paint0_linear_378_336)"
         />
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M9 4.31828C6.3218 4.31828 4.15069 6.52048 4.15069 9.23704C4.15069 11.9536 6.32179 14.1558 9 14.1558C11.6782 14.1558 13.8493 11.9536 13.8493 9.23704C13.8493 6.52048 11.6782 4.31828 9 4.31828ZM5.92527 9.23704C5.92527 7.5146 7.30187 6.11828 9 6.11828C10.6981 6.11828 12.0747 7.5146 12.0747 9.23704C12.0747 10.9595 10.6981 12.3558 9 12.3558C7.30187 12.3558 5.92527 10.9595 5.92527 9.23704Z"
           fill="url(#paint1_linear_378_336)"
         />
@@ -29,8 +29,8 @@ function LocationSvg() {
             y2="0.108154"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#F02D3C" />
-            <stop offset="1" stop-color="#F6622C" />
+            <stop stopColor="#F02D3C" />
+            <stop offset="1" stopColor="#F6622C" />
           </linearGradient>
           <linearGradient
             id="paint1_linear_378_336"
@@ -40,8 +40,8 @@ function LocationSvg() {
             y2="0.108154"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#F02D3C" />
-            <stop offset="1" stop-color="#F6622C" />
+            <stop stopColor="#F02D3C" />
+            <stop offset="1" stopColor="#F6622C" />
           </linearGradient>
         </defs>
       </svg>

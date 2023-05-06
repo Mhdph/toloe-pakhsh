@@ -29,7 +29,7 @@ function StarSvg() {
         <path
           d="M46.1949 4.71257L46.1949 4.71255L46.1927 4.7146C46.03 4.87233 45.9555 5.09999 45.9925 5.32295L45.9925 5.32296L45.9931 5.32653L46.3486 7.29408C46.3612 7.3641 46.3318 7.43524 46.2727 7.47605L46.2726 7.47598L46.2672 7.47994C46.2086 7.52273 46.13 7.52835 46.0649 7.49344L46.0624 7.4921L44.2919 6.56867C44.1954 6.5175 44.0894 6.49064 43.9826 6.48759L43.9826 6.48749H43.9754H43.867H43.8485L43.8302 6.49022C43.7657 6.49982 43.7014 6.52041 43.6413 6.55294L41.8735 7.47914C41.8339 7.49863 41.7897 7.50568 41.7464 7.49945C41.6454 7.47851 41.5781 7.38182 41.5938 7.27936L41.9493 5.31418L41.9494 5.31419L41.95 5.31022C41.9868 5.08653 41.9126 4.85899 41.7511 4.69999L41.7497 4.69862L40.3056 3.29889C40.2544 3.24915 40.2369 3.17509 40.2601 3.10846L40.2608 3.10651C40.2845 3.03635 40.3447 2.98542 40.4172 2.97356L42.3986 2.68612C42.6326 2.66002 42.8375 2.51686 42.9428 2.30629L42.9428 2.30629L42.9439 2.30408L43.8181 0.511788C43.8252 0.498521 43.8332 0.487213 43.8416 0.477902L43.8646 0.460072L43.8818 0.446623L43.8935 0.433725L43.9052 0.42944L43.9052 0.429618L43.9142 0.425914L43.9365 0.416748H44.0399C44.102 0.426442 44.1555 0.464686 44.1844 0.519857L45.0703 2.30436C45.0704 2.30459 45.0705 2.30482 45.0706 2.30505C45.171 2.50955 45.3652 2.6509 45.589 2.68517L45.589 2.68518L45.5909 2.68546L47.5787 2.97382L47.5792 2.9739C47.6536 2.98453 47.7161 3.03556 47.7416 3.10621C47.7627 3.17357 47.7435 3.2472 47.6915 3.296L47.6907 3.29675L46.1949 4.71257ZM40.0239 3.02637C40.0775 2.868 40.2143 2.75241 40.3795 2.72641L40.0239 3.02637Z"
           stroke="url(#paint4_linear_390_1927)"
-          stroke-width="0.5"
+          strokeWidth="0.5"
         />
         <defs>
           <linearGradient
@@ -40,8 +40,8 @@ function StarSvg() {
             y2="0.166748"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#F02D3C" />
-            <stop offset="1" stop-color="#F6622C" />
+            <stop stopColor="#F02D3C" />
+            <stop offset="1" stopColor="#F6622C" />
           </linearGradient>
           <linearGradient
             id="paint1_linear_390_1927"
@@ -51,8 +51,8 @@ function StarSvg() {
             y2="0.166748"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#F02D3C" />
-            <stop offset="1" stop-color="#F6622C" />
+            <stop stopColor="#F02D3C" />
+            <stop offset="1" stopColor="#F6622C" />
           </linearGradient>
           <linearGradient
             id="paint2_linear_390_1927"
@@ -62,8 +62,8 @@ function StarSvg() {
             y2="0.166748"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#F02D3C" />
-            <stop offset="1" stop-color="#F6622C" />
+            <stop stopColor="#F02D3C" />
+            <stop offset="1" stopColor="#F6622C" />
           </linearGradient>
           <linearGradient
             id="paint3_linear_390_1927"
@@ -73,8 +73,8 @@ function StarSvg() {
             y2="0.166748"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#F02D3C" />
-            <stop offset="1" stop-color="#F6622C" />
+            <stop stopColor="#F02D3C" />
+            <stop offset="1" stopColor="#F6622C" />
           </linearGradient>
           <linearGradient
             id="paint4_linear_390_1927"
@@ -84,8 +84,8 @@ function StarSvg() {
             y2="0.166748"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#F02D3C" />
-            <stop offset="1" stop-color="#F6622C" />
+            <stop stopColor="#F02D3C" />
+            <stop offset="1" stopColor="#F6622C" />
           </linearGradient>
         </defs>
       </svg>

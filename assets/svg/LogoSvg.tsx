@@ -11,8 +11,8 @@ function LogoSvg() {
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M50.5 0.5H45.5V11.75C45.5 12.4404 44.9404 13 44.25 13C43.5596 13 43 12.4404 43 11.75V0.5H38V11.75C38 12.4404 37.4404 13 36.75 13H35.5V11.5H35.4951C35.3639 8.16412 32.618 5.5 29.25 5.5C25.7982 5.5 23 8.29822 23 11.75V18H29.25C29.9404 18 30.5 18.5596 30.5 19.25C30.5 19.9404 29.9404 20.5 29.25 20.5H23V25.5H31.75C33.8211 25.5 35.5 23.8211 35.5 21.75V18H36.75C38.157 18 39.4554 17.5351 40.5 16.7505C41.5446 17.5351 42.843 18 44.25 18C45.657 18 46.9554 17.5351 48 16.7505C48.7919 17.3453 49.7296 17.7563 50.75 17.9204V18H59.25C62.7018 18 65.5 15.2018 65.5 11.75C65.5 8.29822 62.7018 5.5 59.25 5.5H56L51 10.5H58.25C58.9404 10.5 59.5 11.0596 59.5 11.75C59.5 12.4404 58.9404 13 58.25 13H50.5V0.5ZM29.25 10.5C28.5596 10.5 28 11.0596 28 11.75V13H30.5V11.75C30.5 11.0596 29.9404 10.5 29.25 10.5Z"
           fill="url(#paint0_linear_272_9488)"
         />
@@ -29,8 +29,8 @@ function LogoSvg() {
             y2="0.500004"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#F02D3C" />
-            <stop offset="1" stop-color="#F6622C" />
+            <stop stopColor="#F02D3C" />
+            <stop offset="1" stopColor="#F6622C" />
           </linearGradient>
           <linearGradient
             id="paint1_linear_272_9488"
@@ -40,8 +40,8 @@ function LogoSvg() {
             y2="0.500004"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#F02D3C" />
-            <stop offset="1" stop-color="#F6622C" />
+            <stop stopColor="#F02D3C" />
+            <stop offset="1" stopColor="#F6622C" />
           </linearGradient>
         </defs>
       </svg>
