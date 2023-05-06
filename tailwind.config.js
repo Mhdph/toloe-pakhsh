@@ -15,6 +15,9 @@ module.exports = {
       colors: {
         "black-items": "#253031",
       },
+      boxShadow: {
+        ca: "0px 2px 6px rgba(0, 0, 0, 0.25)",
+      },
     },
   },
   plugins: [require("tailwind-scrollbar")],
