@@ -84,3 +84,6 @@ body {
 .divedr {
   border: 0.5px solid rgba(37, 48, 49, 0.4);
 }
+.background-gray {
+  background: rgba(37, 48, 49, 0.1);
+}
