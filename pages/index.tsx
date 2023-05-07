@@ -12,8 +12,8 @@ export default function Home() {
     <main className="flex flex-col">
       <Navbar />
       <HeroSection />
-      <OfferHero />
       <CategoryList />
+      <OfferHero />
       <LstItmes />
       <SpecialOffer />
       <AboutUs />

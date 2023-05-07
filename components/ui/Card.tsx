@@ -71,7 +71,7 @@ function Card() {
               </svg>
             </div>
           </div>
-          <button className="btn_primary justify-around rounded-[18px] text-white flex items-center text-xs font-extrabold">
+          <button className="btn_primary w-[360px] py-1 justify-around rounded-[18px] text-white flex items-center text-xs font-extrabold">
             افزودن
             <ActiveStoreSvg />
           </button>
