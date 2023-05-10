@@ -18,3 +18,6 @@ export { default as AvatarSvg } from "./AvatarSvg";
 export { default as ArrowOrangeSvg } from "./ArrowOrangeSvg";
 export { default as ArrowBackSvg } from "./ArrowBackSvg";
 export { default as ArrowDownSvg } from "./ArrowDownSvg";
+export { default as HearSvg } from "./HeartSvg";
+export { default as FilterSvg } from "./FilterSvg";
+export { default as UpDownSvg } from "./UpDownSvg";
