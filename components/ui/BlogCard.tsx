@@ -10,7 +10,7 @@ function BlogCard() {
         alt="product image"
         height={120}
         width={170}
-        className="border-b"
+        className="border-b rounded-t-3xl"
       />
       <div className="px-2 mt-2">
         <div className="flex items-center justify-between ">
@@ -29,7 +29,7 @@ function BlogCard() {
           زیادی برای آقایان و بانوان دارد.
         </p>
         <div className="flex items-center gap-4 mt-12">
-          <button className="btn_primary justify-around rounded-[18px] text-white flex items-center text-xs font-extrabold">
+          <button className="btn_primary justify-around rounded-[18px] w-full py-2 text-white flex items-center text-xs font-extrabold">
             ادامه مطلب
           </button>
         </div>
