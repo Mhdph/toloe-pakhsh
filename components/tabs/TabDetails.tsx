@@ -14,13 +14,13 @@ function TabDetails({ openTab }: TabDetailsProps) {
             <HistoryCard color="primary" />
           </div>
           <div className={openTab === 2 ? "block" : "hidden"} id="link2">
-            <p>tab2</p>
+            <HistoryCard color="delivered" />
           </div>
           <div className={openTab === 3 ? "block" : "hidden"} id="link3">
-            <p>tab3</p>
+            <HistoryCard color="canceled" />
           </div>
           <div className={openTab === 4 ? "block" : "hidden"} id="link3">
-            <p>tab4</p>
+            <HistoryCard color="returned" />
           </div>
         </div>
       </div>

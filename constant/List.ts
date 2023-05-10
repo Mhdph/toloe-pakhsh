@@ -35,15 +35,15 @@ export const CategoryListItem = [
 export const ProfileLinkListItem = [
   {
     name: "سبد خرید",
-    url: "",
+    url: "/shopingbasket",
   },
   {
     name: "تاریخچه سفارشات",
-    url: "",
+    url: "/history",
   },
   {
     name: "موارد دلخواه",
-    url: "",
+    url: "/favourite",
   },
   {
     name: "بازدید های اخیر",
