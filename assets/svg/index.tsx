@@ -21,3 +21,4 @@ export { default as ArrowDownSvg } from "./ArrowDownSvg";
 export { default as HearSvg } from "./HeartSvg";
 export { default as FilterSvg } from "./FilterSvg";
 export { default as UpDownSvg } from "./UpDownSvg";
+export { default as CloseWhiteSvg } from "./CloseWhiteSvg";

@@ -1,11 +1,12 @@
+import { CloseWhiteSvg, FilterSvg, UpDownSvg } from "@/assets/svg";
 import SearchBarSvg from "@/assets/svg/SearchBarSvg";
 import React from "react";
 
 function SearchBar() {
   return (
     <div className="pt-16">
-      <div className="serach_bar w-full rounded-b-3xl h-[152px]">
-        <div className="relative w-full px-4 pt-4">
+      <div className="serach_bar px-4 w-full rounded-b-3xl h-[152px]">
+        <div className="relative w-full pt-4">
           <input
             type="text"
             id="voice-search"
@@ -14,6 +15,23 @@ function SearchBar() {
           <div className="absolute inset-y-0 right-3 mt-3 flex items-center pr-4 pointer-events-none">
             <SearchBarSvg />
           </div>
+        </div>
+        <div className="flex items-center mt-4 justify-between">
+          <div className="bg-white rounded-[14px] px-3 py-1.5 gap-2 flex items-center">
+            <FilterSvg />
+            <p className="font-extrabold text-xs ">فیلترها</p>
+          </div>
+          <p className="font-normal text-xs tracking-widest text-white">
+            نمایش ۱ - ۱۶ از ۲۷۴ نتیجه
+          </p>
+          <div className="bg-white rounded-[14px] px-3 py-1.5 gap-2 flex items-center">
+            <UpDownSvg />
+          </div>
+        </div>
+        <hr className="mt-3 mb-2   opacity-25" />
+        <div className="flex w-[90px] px-2 items-center gap-2  rounded-xl py-1 filter_background">
+          <p className="text-white  font-normal text-[10px]">موجود در انبار</p>
+          <CloseWhiteSvg />
         </div>
       </div>
     </div>

@@ -87,3 +87,6 @@ body {
 .background-gray {
   background: rgba(37, 48, 49, 0.1);
 }
+.filter_background {
+  background: rgba(255, 255, 255, 0.3);
+}
