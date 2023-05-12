@@ -51,6 +51,6 @@ export const ProfileLinkListItem = [
   },
   {
     name: "اطلاعات حساب کاربری",
-    url: "",
+    url: "/account",
   },
 ];

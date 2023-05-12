@@ -22,3 +22,5 @@ export { default as HearSvg } from "./HeartSvg";
 export { default as FilterSvg } from "./FilterSvg";
 export { default as UpDownSvg } from "./UpDownSvg";
 export { default as CloseWhiteSvg } from "./CloseWhiteSvg";
+export { default as ProfilePicSvg } from "./ProfilePicSvg";
+export { default as EditSvg } from "./EditSvg";
