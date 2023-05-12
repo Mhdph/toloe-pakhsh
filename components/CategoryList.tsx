@@ -11,7 +11,7 @@ interface CategoryListItems {
 const CategoryList: React.FC<CategoryListProps> = () => {
   return (
     <div className="flex items-center justify-center mt-4 flex-col">
-      <p className="text-2xl font-normal text-black-items mb-1">
+      <p className="text-2xl font-normal text-black-items mb-1 lg:mb-3">
         دسته بندی محصولات
       </p>
       <div className="flex items-center justify-center flex-wrap gap-2">

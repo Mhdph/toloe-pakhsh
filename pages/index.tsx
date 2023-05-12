@@ -10,7 +10,7 @@ import OfferHero from "@/components/OfferHero";
 export default function Home() {
   return (
     <main className="flex flex-col">
-      <Navbar />
+      {/* <Navbar /> */}
       <HeroSection />
       <CategoryList />
       <OfferHero />
