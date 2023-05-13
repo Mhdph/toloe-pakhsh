@@ -31,3 +31,8 @@ export { default as LocationIcon } from "./LocationIcon";
 export { default as PhoneIcon } from "./PhoneIcon";
 export { default as InstagramIcon } from "./InstagramIcon";
 export { default as TelegramIcon } from "./TelegramIcon";
+export { default as LogoIcon } from "./LogoIcon";
+export { default as BucketIcon } from "./BucketIcon";
+export { default as AccoutIcon } from "./AccoutIcon";
+export { default as HomeIcon } from "./HomeIcon";
+export { default as BucketBlackIcon } from "./BucketBlackIcon";
