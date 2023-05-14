@@ -73,11 +73,7 @@ const Navbar: React.FC<NavbarProps> = () => {
             className="flex items-center gap-3 text-[14px] font-extrabold text-black-items"
             activeClassName="bg-white rounded-t-3xl px-24 text-[#F6622C] border-t border-t-[#F6622C]"
           >
-            {router.pathname == "/profile" ? (
-              <ActiveProfileSvg />
-            ) : (
-              <AccoutIcon />
-            )}
+            {router.pathname == "/profile" ? <ProfileSvg /> : <AccoutIcon />}
             <span className="text-xs py-2 font-black text-center">
               حساب کاربری
             </span>
@@ -88,11 +84,7 @@ const Navbar: React.FC<NavbarProps> = () => {
             className="flex items-center gap-3 text-[14px] font-extrabold text-black-items"
             activeClassName="bg-white rounded-t-3xl px-24 text-[#F6622C] border-t border-t-[#F6622C]"
           >
-            {router.pathname == "/store" ? (
-              <ActiveStoreSvg />
-            ) : (
-              <BucketBlackIcon />
-            )}
+            {router.pathname == "/store" ? <StoreSvg /> : <BucketBlackIcon />}
             <span className="text-xs font-black py-2">فروشگاه</span>
           </ActiveLink>
           <ActiveLink
@@ -100,7 +92,7 @@ const Navbar: React.FC<NavbarProps> = () => {
             className="flex items-center gap-3 text-[14px] font-extrabold text-black-items"
             activeClassName="bg-white rounded-t-3xl px-24 text-[#F6622C] border-t border-t-[#F6622C]"
           >
-            {router.pathname == "/search" ? <ActiveSearch /> : <SearchBarSvg />}
+            {router.pathname == "/search" ? <SearchSvg /> : <SearchBarSvg />}
             <span className="text-xs font-black py-2 text-center">
               جست و جو
             </span>

@@ -4,7 +4,7 @@ import React from "react";
 
 function SearchBar() {
   return (
-    <div className="pt-16">
+    <div className="pt-16 md:hidden">
       <div className="serach_bar px-4 w-full rounded-b-3xl h-[152px]">
         <div className="relative w-full pt-4">
           <input

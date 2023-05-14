@@ -3,7 +3,7 @@ import React from "react";
 
 function SearchBarWF() {
   return (
-    <div className="pt-16">
+    <div className="pt-16 md:hidden">
       <div className="serach_bar w-full rounded-b-3xl h-[68px]">
         <div className="relative w-full px-4 pt-4">
           <input

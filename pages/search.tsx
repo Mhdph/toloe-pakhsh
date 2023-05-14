@@ -10,9 +10,8 @@ import React from "react";
 function Search() {
   return (
     <div>
-      <Navbar />
       <SearchBar />
-      <div className="flex  max-w-[390px] min-w-[390px] flex-wrap px-2 justify-center gap-2 mt-6">
+      <div className="flex  max-w-[390px] min-w-[390px] md:w-full flex-wrap px-2 justify-center gap-2 mt-6">
         <Card />
         <Card />
         <Card /> <Card />

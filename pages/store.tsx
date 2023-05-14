@@ -8,7 +8,6 @@ import SearchBarWF from "@/components/ui/SearchBarWF";
 function Store() {
   return (
     <div>
-      <Navbar />
       <SearchBarWF />
       <LstItmes />
       <SpecialOffer />
