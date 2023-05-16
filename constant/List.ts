@@ -1,56 +1,58 @@
-import ProductImage from "@/assets/tempImages/Product Photo.png";
-import advie from "@/assets/tempImages/advie.png";
-import ajil from "@/assets/tempImages/ajil.png";
-import shokolat from "@/assets/tempImages/shokolat.png";
-import torshijat from "@/assets/tempImages/torshijat.png";
-import mive from "@/assets/tempImages/mive.png";
+import ProductImage from '@/assets/tempImages/Product Photo.png';
+import advie from '@/assets/tempImages/advie.png';
+import ajil from '@/assets/tempImages/ajil.png';
+import shokolat from '@/assets/tempImages/shokolat.png';
+import torshijat from '@/assets/tempImages/torshijat.png';
+import mive from '@/assets/tempImages/mive.png';
 
 export const CategoryListItem = [
   {
-    name: "شیرینی جات",
+    name: 'شیرینی جات',
     image: ProductImage,
   },
   {
-    name: "شکلات",
+    name: 'شکلات',
     image: shokolat,
   },
   {
-    name: "میوه خشک",
+    name: 'میوه خشک',
     image: mive,
   },
   {
-    name: "آجیل و خشکبار",
+    name: 'آجیل و خشکبار',
     image: ajil,
   },
   {
-    name: "ادویه",
+    name: 'ادویه',
     image: advie,
   },
   {
-    name: "ترشیجات",
+    name: 'ترشیجات',
     image: torshijat,
   },
 ];
 
 export const ProfileLinkListItem = [
   {
-    name: "سبد خرید",
-    url: "/shopingbasket",
+    name: 'سبد خرید',
+    url: '/shopingbasket',
   },
   {
-    name: "تاریخچه سفارشات",
-    url: "/history",
+    name: 'تاریخچه سفارشات',
+    url: '/history',
   },
   {
-    name: "موارد دلخواه",
-    url: "/favourite",
+    name: 'موارد دلخواه',
+    url: '/favourite',
   },
   {
-    name: "بازدید های اخیر",
-    url: "/latest",
+    name: 'بازدید های اخیر',
+    url: '/latest',
   },
   {
-    name: "اطلاعات حساب کاربری",
-    url: "/account",
+    name: 'اطلاعات حساب کاربری',
+    url: '/account',
   },
 ];
+
+export const FilterList = ['پربازدید', 'جدید', 'پرفروش', 'ارزان ترین', 'گران ترین'];

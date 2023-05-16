@@ -5,9 +5,9 @@ import Product from '@/assets/tempImages/Product.png';
 
 import Image from 'next/image';
 import HeartSvg from '@/assets/svg/HeartSvg';
-function Card() {
+function ListCard() {
   return (
-    <div className='h-[264px] min-w-[170px] max-w-[170px] rounded-3xl border border-black-items border-opacity-40 bg-white md:h-[300px] md:min-w-[223px] md:max-w-[223px]'>
+    <div className='h-[264px] min-w-[170px] max-w-[170px] rounded-3xl border border-black-items border-opacity-40 bg-white md:h-[300px] md:min-w-[196px] md:max-w-[196px]'>
       <div className='flex justify-center'>
         <Image src={Product} alt='product image' className='h-[120px] w-[170px] border-b md:w-[223px]' />
       </div>
@@ -49,4 +49,4 @@ function Card() {
   );
 }
 
-export default Card;
+export default ListCard;
