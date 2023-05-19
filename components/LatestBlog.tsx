@@ -1,28 +1,25 @@
-import Image from "next/image";
-import React from "react";
-import SeeProduct from "./ui/SeeProduct";
-import BlogCard from "./ui/BlogCard";
-import ItemLogo from "@/assets/images/ItemLogo.png";
+import Image from 'next/image';
+import React from 'react';
+import SeeProduct from './ui/SeeProduct';
+import BlogCard from './ui/BlogCard';
+import ItemLogo from '@/assets/images/ItemLogo.png';
 
 function LatestBlog() {
   return (
-    <div>
-      <div className="mt-12 w-full relative">
-        <Image alt="logo" src={ItemLogo} />
-        <p className="text-black-items font-normal text-2xl text-right absolute mt-2 top-3 right-6">
-          تازه ترین مقالات
-        </p>
-        <div className="w-full flex items-center gap-3 absolute py-2 px-4 top-5 whitespace-nowrap my-12 scroll-smooth overflow-x-scroll scrollbar-none">
-          <BlogCard />
-          <BlogCard />
-          <BlogCard />
+    <div className='md:px-10'>
+      <div className='relative mt-12 w-full'>
+        <Image alt='logo' src={ItemLogo} />
+        <p className='absolute right-6 top-3 mt-2 text-right text-2xl font-normal text-black-items'>تازه ترین مقالات</p>
+        <div className='absolute top-5 my-12 flex w-full items-center gap-3 overflow-x-scroll scroll-smooth whitespace-nowrap px-4 py-2 scrollbar-none md:justify-center md:pr-16'>
           <BlogCard />
           <BlogCard />
           <BlogCard />
           <BlogCard />
         </div>
       </div>
-      <SeeProduct />
+      <div className='md:ml-40 md:mt-28'>
+        <SeeProduct />
+      </div>
     </div>
   );
 }
