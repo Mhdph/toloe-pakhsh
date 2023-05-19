@@ -26,7 +26,7 @@ module.exports = {
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
       colors: {
-        'black-items': '#253031',
+        'black-items': '#253031', 
       },
       boxShadow: {
         ca: '0px 2px 6px rgba(0, 0, 0, 0.25)',

@@ -27,7 +27,7 @@ const Navbar: React.FC<NavbarProps> = () => {
 
   return (
     <div>
-      <div className='navbar_shadow fixed z-50 flex h-[72px] w-full items-center justify-between bg-white md:hidden'>
+      <div className='navbar_shadow fixed z-50 flex h-[72px] w-full items-center justify-between bg-white lg:hidden'>
         <div className='navbar_bg_right flex items-center justify-center'>
           <div className='cursor-pointer'>
             <MenuSvg />
@@ -42,7 +42,7 @@ const Navbar: React.FC<NavbarProps> = () => {
           </div>
         </div>
       </div>
-      <div className='hidden md:inline'>
+      <div className='hidden lg:inline'>
         <div className='flex items-center  justify-between px-12 py-6'>
           <LogoIcon />
           <div className='flex items-center justify-between gap-16 text-[14px]'>
