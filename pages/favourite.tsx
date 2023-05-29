@@ -1,32 +1,29 @@
-import { FilterSvg, UpDownSvg } from "@/assets/svg";
-import Navbar from "@/components/Navbar";
-import BackgroundTitle from "@/components/ui/BackgroundTitle";
-import Card from "@/components/ui/Card";
-import React from "react";
+import { FilterSvg, UpDownSvg } from '@/assets/svg';
+import Navbar from '@/components/Navbar';
+import BackgroundTitle from '@/components/ui/BackgroundTitle';
+import Card from '@/components/ui/Card';
+import React from 'react';
 
-function favourite() {
+function Favourite() {
   return (
     <div>
-      <Navbar />
-      <BackgroundTitle name="موارد دلخواه" />
-      <div className="flex items-center justify-between px-4 mt-6">
-        <p className="font-normal text-xs tracking-wider text-black-items">
-          نمایش ۱ - ۱۶ از ۲۷۴ موارد
-        </p>
+      <BackgroundTitle name='موارد دلخواه' />
+      <div className='mt-6 flex items-center justify-between px-4'>
+        <p className='text-xs font-normal tracking-wider text-black-items'>نمایش ۱ - ۱۶ از ۲۷۴ موارد</p>
 
-        <div className="border-black-items h-[30px] w-[30px] flex items-center justify-center border rounded-full">
-          <div className="">
+        <div className='flex h-[30px] w-[30px] items-center justify-center rounded-full border border-black-items'>
+          <div className=''>
             <UpDownSvg />
           </div>
         </div>
       </div>
-      <div className="flex  max-w-[390px] min-w-[390px] flex-wrap px-2 justify-center gap-2 mt-6">
+      <div className='mt-6 grid grid-cols-2 gap-8 pr-2.5 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5'>
         <Card />
         <Card />
-        <Card /> <Card />
+        <Card /> <Card /> <Card /> <Card />
       </div>
     </div>
   );
 }
 
-export default favourite;
+export default Favourite;
