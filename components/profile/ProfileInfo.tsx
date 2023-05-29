@@ -1,16 +1,16 @@
-import { AvatarSvg } from "@/assets/svg";
-import React from "react";
+import { AvatarSvg } from '@/assets/svg';
+import React from 'react';
 
 function ProfileInfo() {
   return (
-    <div className="pt-[72px]">
-      <div className="serach_bar h-32 flex items-center px-5 gap-4">
+    <div className='pt-[72px] md:pt-8 '>
+      <div className='serach_bar flex h-full items-center gap-4 rounded-t-3xl px-5 py-4 md:flex-col'>
         <AvatarSvg />
-        <div className="text-white text-xs font-normal flex-1">
-          <p className="font-black">نام و نام خانوادگی</p>
-          <hr className="borde border-solid border-white my-1 opacity-20" />
+        <div className='flex-1 text-xs font-normal text-white md:text-center'>
+          <p className='font-black'>نام و نام خانوادگی</p>
+          <hr className='borde my-1 border-solid border-white opacity-20' />
           <p>+۹۸ ۹۲۳ ۲۵۳ ۲۹ ۱۳</p>
-          <hr className="borde border-solid border-white my-1 opacity-20" />
+          <hr className='borde my-1 border-solid border-white opacity-20' />
           <p>آدرس: خراسان رضوی - مشهد - ...</p>
         </div>
       </div>
