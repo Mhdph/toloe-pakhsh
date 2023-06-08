@@ -1,7 +1,7 @@
 import { FilterSvg, UpDownSvg } from '@/assets/svg';
 import CloseSvg from '@/assets/svg/CloseSvg';
 import ContactUs from '@/components/ContactUs';
-import LstItmes from '@/components/LstItmes';
+import LstItmes from '@/components/ListItmes';
 import SearchBar from '@/components/SearchBar';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/Accordion';
 import Card from '@/components/ui/Card';
