@@ -21,7 +21,7 @@ const ListItmes: React.FC<ListItmesProps> = ({ title }) => {
             <ListCard />
             <ListCard />
           </div>
-          <div className='mt-5 w-full pl-28'>
+          <div className='mt-5 w-full pl-28 2xl:pl-[360px]'>
             <SeeProduct />
           </div>
         </div>
