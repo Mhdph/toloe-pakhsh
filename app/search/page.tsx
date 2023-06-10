@@ -1,7 +1,7 @@
 import { FilterSvg, UpDownSvg } from "@/assets/svg";
 import CloseSvg from "@/assets/svg/CloseSvg";
 import ContactUs from "@/components/ContactUs";
-import LstItmes from "@/components/ListItmes";
+import ListItems from "@/components/ListItems";
 import SearchBar from "@/components/SearchBar";
 import SearchAccordion from "@/components/search/SearchAccordion";
 import SearchBrand from "@/components/search/SearchBrand";
@@ -107,9 +107,9 @@ function Search() {
         </div>
       </div>
       <hr className="divedr my-10 opacity-25" />
-      <LstItmes title="محصولات مشابه" />
+      <ListItems title="محصولات مشابه" />
       <hr className="divedr mb-10 opacity-25" />
-      <LstItmes title="محصولات پیشنهادی" />
+      <ListItems title="محصولات پیشنهادی" />
       <hr className="divedr mb-4 opacity-0" />
       <ContactUs />
     </div>

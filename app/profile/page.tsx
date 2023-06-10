@@ -1,4 +1,4 @@
-import Myorder from "@/components/profile/Myorder";
+import Myorder from "@/components/profile/MyOrder";
 import ProfileInfo from "@/components/profile/ProfileInfo";
 import ProfilePageList from "@/components/profile/ProfilePageList";
 import BackgroundTitle from "@/components/ui/BackgroundTitle";
