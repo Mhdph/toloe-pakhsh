@@ -1,4 +1,4 @@
-import Myorder from "@/components/profile/Myorder";
+import MyOrder from "@/components/profile/MyOrder";
 import ProfileInfo from "@/components/profile/ProfileInfo";
 import ProfilePageList from "@/components/profile/ProfilePageList";
 import React from "react";
@@ -19,7 +19,7 @@ function ProfileLayout({ children }: ProfileLayoutProps) {
         </div>
         <div className="flex flex-col md:col-span-3">
           <div className="hidden md:inline">
-            <Myorder />
+            <MyOrder />
           </div>
           {children}
         </div>
