@@ -18,12 +18,8 @@ const CategoryList: React.FC<CategoryListProps> = () => {
         {CategoryListItem.map((item: CategoryListItems) => (
           <div key={item.name} className="category_card">
             <div>
-              <Image
-                src={item.image}
-                alt={item.name}
-                className="rounded-t-3xl"
-              />
-              <p className="text-center text-xs font-extrabold text-black-items mt-3">
+              <Image src={item.image} className="mt-3" alt={item.name} />
+              <p className="text-center text-xs font-extrabold text-black-items">
                 {item.name}
               </p>
             </div>
