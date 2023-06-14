@@ -12,6 +12,8 @@ import {
   ProfileSvg,
 } from "@/assets/svg";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { cn } from "@/lib/cn";
 type FooterProps = {};
 
 const Footer: React.FC<FooterProps> = () => {
@@ -21,10 +23,12 @@ const Footer: React.FC<FooterProps> = () => {
     <div className="lg:hidden">
       <div className="fixed bottom-0 left-0 z-50 h-16 w-full bg-white ">
         <div className="mx-auto grid h-full max-w-lg grid-cols-4 pt-1 font-medium">
-          <ActiveLink
+          <Link
             href="/profile"
-            className="inline-flex flex-col items-center justify-center border-gray-200 px-1 text-center"
-            activeClassName="footer_bg border-none"
+            className={cn(
+              pathName === "/profile" ? "footer_bg border-none" : "",
+              "inline-flex flex-col items-center justify-center px-1 text-center"
+            )}
           >
             {pathName == "/profile" ? <ActiveProfileSvg /> : <ProfileSvg />}
             {pathName == "/profile" ? (
@@ -32,12 +36,14 @@ const Footer: React.FC<FooterProps> = () => {
                 حساب کاربری
               </span>
             ) : null}
-          </ActiveLink>
+          </Link>
 
-          <ActiveLink
+          <Link
             href="/store"
-            className="inline-flex flex-col items-center justify-center border-x border-gray-200 px-5 py-2  "
-            activeClassName="footer_bg border-none"
+            className={cn(
+              pathName === "/store" ? "footer_bg border-none" : "",
+              "inline-flex flex-col items-center justify-center px-1 text-center"
+            )}
           >
             {pathName == "/store" ? <ActiveStoreSvg /> : <StoreSvg />}
             {pathName == "/store" ? (
@@ -45,11 +51,13 @@ const Footer: React.FC<FooterProps> = () => {
                 فروشگاه
               </span>
             ) : null}
-          </ActiveLink>
-          <ActiveLink
+          </Link>
+          <Link
             href="/search"
-            className="inline-flex flex-col items-center justify-center border-r border-gray-200  px-5 py-2  "
-            activeClassName="footer_bg border-none"
+            className={cn(
+              pathName === "/search" ? "footer_bg border-none" : "",
+              "inline-flex flex-col items-center justify-center px-1 text-center"
+            )}
           >
             {pathName == "/search" ? <ActiveSearch /> : <SearchSvg />}
             {pathName == "/search" ? (
@@ -57,17 +65,19 @@ const Footer: React.FC<FooterProps> = () => {
                 جست و جو
               </span>
             ) : null}
-          </ActiveLink>
-          <ActiveLink
+          </Link>
+          <Link
             href="/"
-            className="inline-flex flex-col items-center justify-center border-r border-gray-200  px-5 py-2  "
-            activeClassName="footer_bg border-none"
+            className={cn(
+              pathName === "/" ? "footer_bg border-none" : "",
+              "inline-flex flex-col items-center justify-center px-1 text-center"
+            )}
           >
             {pathName == "/" ? <ActiveHomeSvg /> : <HomeSvg />}
             {pathName == "/" ? (
               <span className="py-2 text-xs font-black text-white">خانه</span>
             ) : null}
-          </ActiveLink>
+          </Link>
         </div>
       </div>
     </div>
