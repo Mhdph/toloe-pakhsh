@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import shablon from "@/assets/images/shablon.png";
 import shablondesktop from "@/assets/images/shablondesktop.png";
