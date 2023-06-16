@@ -12,7 +12,7 @@ export default function Home() {
       <HeroSection />
       <CategoryList />
       <OfferHero />
-      <ListItems title="آخرین محصولات" />
+      <ListItems link="" title="آخرین محصولات" />
       <SpecialOffer />
       <AboutUs />
       <ContactUs />

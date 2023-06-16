@@ -107,9 +107,9 @@ function Search() {
         </div>
       </div>
       <hr className="divedr my-10 opacity-25" />
-      <ListItems title="محصولات مشابه" />
+      <ListItems link="store" title="محصولات مشابه" />
       <hr className="divedr mb-10 opacity-25" />
-      <ListItems title="محصولات پیشنهادی" />
+      <ListItems link="store" title="محصولات پیشنهادی" />
       <hr className="divedr mb-4 opacity-0" />
       <ContactUs />
     </div>

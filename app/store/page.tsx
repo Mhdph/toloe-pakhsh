@@ -8,10 +8,10 @@ function Store() {
   return (
     <div>
       <SearchBarWF />
-      <ListItems title="آخرین محصولات" />
+      <ListItems link="account" title="آخرین محصولات" />
       <SpecialOffer />
-      <ListItems title="شیرینی جات" />
-      <ListItems title="ترشی جات" />
+      <ListItems link="account" title="شیرینی جات" />
+      <ListItems link="account" title="ترشی جات" />
       <LatestBlog />
       <ContactUs />
     </div>
