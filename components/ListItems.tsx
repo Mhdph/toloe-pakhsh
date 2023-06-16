@@ -3,21 +3,11 @@ import React from "react";
 import Image from "next/image";
 import SeeProduct from "./ui/SeeProduct";
 import ListCard from "./ui/ListCard";
+import { ProductData } from "@/types";
 type ListItemsProps = {
   title: string;
   link: string;
-  data: [
-    {
-      id: number;
-      name: string;
-      unit: string;
-      unitCount: string;
-      price: number;
-      picture: string;
-      brand: string;
-      exist: boolean;
-    }
-  ];
+  data: ProductData;
 };
 
 const ListItems: React.FC<ListItemsProps> = ({ title, link, data }) => {
