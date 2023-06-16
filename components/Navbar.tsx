@@ -32,9 +32,9 @@ const Navbar: React.FC<NavbarProps> = () => {
             <MenuSvg />
           </div>
         </div>
-        <div className="mt-8">
+        <Link href="/" className="mt-8">
           <LogoSvg />
-        </div>
+        </Link>
         <div className="navbar_bg_left flex items-center justify-center">
           <div className="cursor-pointer">
             <ActiveStoreSvg />

@@ -13,6 +13,7 @@ import {
   TelegramSvg,
 } from "@/assets/svg";
 import SubTractSvg from "@/assets/svg/SubTractSvg";
+import Link from "next/link";
 import React from "react";
 
 function ContactUs() {
@@ -41,29 +42,41 @@ function ContactUs() {
           </div>
           <div className="flex flex-col items-center bg-white card_shadow rounded-3xl py-4">
             <PhoneSvg />
-            <p className="text-center text mt-3 font-extrabold">
-              0990 731 52 43 - (051) 3883 45 78
-            </p>
+            <a
+              href="tel:+98990731243 "
+              className="text-center text mt-3 font-extrabold"
+            >
+              78 45 3883 (051) - 43 52 731 0990
+            </a>
           </div>
           <div className="flex items-center justify-center gap-4">
             <div className="flex flex-col items-center bg-white px-8 card_shadow rounded-3xl py-4">
               <InstaSvg />
-              <p className="text-center text mt-3 font-extrabold">
+              <a
+                href="https://www.instagram.com/TolouPakhsh/"
+                className="text-center text mt-3 font-extrabold"
+              >
                 TolouPakhsh@
-              </p>
+              </a>
             </div>
             <div className="flex flex-col items-center bg-white px-8 card_shadow rounded-3xl py-4">
               <TelegramSvg />
-              <p className="text-center text mt-3 font-extrabold">
+              <a
+                href="https://telegram.me/TolouPakhsh/"
+                className="text-center text mt-3 font-extrabold"
+              >
                 TolouPakhsh@
-              </p>
+              </a>
             </div>
           </div>
           <div className="flex flex-col items-center bg-white card_shadow rounded-3xl py-4">
             <MailSvg />
-            <p className="text-center text mt-3 font-extrabold">
+            <a
+              href="mailto: Contact@TolouPakhsh.com"
+              className="text-center text mt-3 font-extrabold"
+            >
               Contact@TolouPakhsh.com
-            </p>
+            </a>
           </div>
         </div>
       </div>
@@ -81,9 +94,12 @@ function ContactUs() {
             <div className="flex justify-between text-xs mt-4">
               <div className="flex flex-col items-center gap-1">
                 <PhoneIcon />
-                <p className="text-center  mt-3 font-extrabold">
-                  0990 731 52 43 - (051) 3883 45 78
-                </p>
+                <a
+                  href="tel:+98990731243 "
+                  className="text-center  mt-3 font-extrabold"
+                >
+                  78 45 3883 (051) - 43 52 731 0990
+                </a>
               </div>
               <div className="flex flex-col items-center gap-1">
                 <LocationIcon />
@@ -93,18 +109,25 @@ function ContactUs() {
                 <p>(مراجعه فقط با هماهنگی)</p>
                 <div className="flex items-center justify-center mt-10 gap-4">
                   <div className="bg-white flex items-center justify-center h-12 w-12 rounded-full">
-                    <TelegramIcon />
+                    <a href="https://www.telegram.me/TolouPakhsh/">
+                      <TelegramIcon />
+                    </a>
                   </div>
                   <div className="bg-white flex items-center justify-center h-12 w-12 rounded-full">
-                    <InstagramIcon />
+                    <a href="https://www.instagram.com/TolouPakhsh/">
+                      <InstagramIcon />
+                    </a>
                   </div>
                 </div>
               </div>
               <div className="flex flex-col items-center gap-1">
                 <MailIcon />
-                <p className="text-center  mt-3 font-extrabold">
+                <a
+                  href="mailto: Contact@TolouPakhsh.com"
+                  className="text-center  mt-3 font-extrabold"
+                >
                   Contact@TolouPakhsh.com
-                </p>
+                </a>
               </div>
             </div>
           </div>
