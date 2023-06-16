@@ -5,9 +5,10 @@ import SeeProduct from "./ui/SeeProduct";
 import ListCard from "./ui/ListCard";
 type ListItemsProps = {
   title: string;
+  link: string;
 };
 
-const ListItems: React.FC<ListItemsProps> = ({ title }) => {
+const ListItems: React.FC<ListItemsProps> = ({ title, link }) => {
   return (
     <div className="md:px-10">
       <div className="relative mt-12 w-full">
@@ -24,7 +25,7 @@ const ListItems: React.FC<ListItemsProps> = ({ title }) => {
             <ListCard />
           </div>
           <div className="mt-5 w-full xl:pl-28 2xl:pl-[360px]">
-            <SeeProduct />
+            <SeeProduct link={link} />
           </div>
         </div>
       </div>

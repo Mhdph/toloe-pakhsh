@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 function AboutUs() {
@@ -40,7 +41,7 @@ function AboutUs() {
             </p>
             <div className="flex flex-row-reverse my-2 md:hidden">
               <button className="btn_Primary_small text-white text-xs font-extrabold ">
-                مشاهده محصولات
+                <Link href="/store">مشاهده محصولات</Link>
               </button>
             </div>
           </div>
@@ -74,7 +75,7 @@ function AboutUs() {
             </p>
             <div className="flex flex-row-reverse my-2 md:hidden">
               <button className="btn_Primary_small text-white text-xs font-extrabold ">
-                وبلاگ
+                <Link href="/blog">وبلاگ </Link>
               </button>
             </div>
           </div>

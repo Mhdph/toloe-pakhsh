@@ -4,6 +4,7 @@ import shablon from "@/assets/images/shablon.png";
 import shablondesktop from "@/assets/images/shablondesktop.png";
 import Image from "next/image";
 import useMediaQuery from "@/hooks/useMediaQuery";
+import Link from "next/link";
 
 function OfferHero() {
   const isMobile = useMediaQuery("(max-width: 648px)");
@@ -19,8 +20,8 @@ function OfferHero() {
       <p className="font-black text-xs md:text-[14px]">
         برای خرید های بالای ۳۰۰ هزار تومان
       </p>
-      <button className="bg-white px-4 py-1.5 rounded-3xl text-xs md:text-[14px] font-extrabold text-[#F02D3C]">
-        مشاهده محصولات
+      <button className="bg-white px-4 py-1.5 cursor-pointer rounded-3xl text-xs md:text-[14px] font-extrabold text-[#F02D3C]">
+        <Link href="/store">مشاهده محصولات</Link>
       </button>
     </div>
   );
