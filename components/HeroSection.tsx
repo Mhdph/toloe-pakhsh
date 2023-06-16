@@ -11,7 +11,11 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
 
   return (
     <div className="mt-10 md:mt-0 flex items-center justify-center">
-      <Image src={isMobile ? HeroImage : Ajil} alt="ajil shab eyd picture" />
+      <Image
+        src={isMobile ? HeroImage : Ajil}
+        alt="ajil shab eyd picture"
+        className="w-full h-[321px]"
+      />
     </div>
   );
 };
