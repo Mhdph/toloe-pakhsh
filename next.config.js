@@ -1,4 +1,8 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+  images: {
+    domains: ["tolouapi.iran.liara.run"],
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
