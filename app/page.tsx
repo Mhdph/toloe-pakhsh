@@ -5,27 +5,18 @@ import SpecialOffer from "@/components/SpecialOffer";
 import AboutUs from "@/components/AboutUs";
 import ContactUs from "@/components/ContactUs";
 import OfferHero from "@/components/OfferHero";
-import { baseUrl } from "@/lib/config";
-
-async function getData() {
-  const res = await fetch(`${baseUrl}/product`);
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
-}
+import { getAllCategory, getAllProduct } from "@/lib/dataFn";
 
 export default async function Home() {
-  const data = await getData();
+  const data = await getAllProduct();
+  const categoryData = await getAllCategory();
   return (
     <main className="flex flex-col">
       <HeroSection />
-      <CategoryList />
+      <CategoryList data={categoryData.data} />
       <OfferHero />
       <ListItems data={data.data} link="" title="آخرین محصولات" />
-      {/* <SpecialOffer /> */}
+      <SpecialOffer data={data.data} />
       <AboutUs />
       <ContactUs />
     </main>
