@@ -1,3 +1,4 @@
+"use client";
 import { ActiveStoreSvg, ArrowDownSvg } from "@/assets/svg";
 import StarSvg from "@/assets/svg/StarSvg";
 import React from "react";
@@ -6,6 +7,7 @@ import Product from "@/assets/tempImages/Product.png";
 import Image from "next/image";
 import HeartSvg from "@/assets/svg/HeartSvg";
 import { baseUrl } from "@/lib/config";
+import useProductStore from "@/store/zustand";
 
 interface dataItem {
   data: {
@@ -19,10 +21,29 @@ interface dataItem {
     exist: boolean;
   };
 }
-
+export interface ProductProps {
+  name: string;
+  id: number;
+  quantity: number;
+  // Include other properties as needed
+}
 function ListCard({
-  data: { brand, picture, name, unitCount, unit, price },
+  data: { brand, picture, name, unitCount, unit, price, id },
 }: dataItem) {
+  const addProduct = useProductStore((state) => state.addProduct);
+  const products = useProductStore((state) => state.products);
+  const quantity = 0;
+  // Access the products array and do something with it
+  console.log(products);
+  const handleAddToCart = () => {
+    const product: ProductProps = {
+      name,
+      id,
+      quantity,
+      // other properties
+    };
+    addProduct(product);
+  };
   return (
     <div className="h-[264px] min-w-[170px] max-w-[170px] rounded-3xl border border-black-items border-opacity-40 bg-white md:h-[300px] md:min-w-[196px] md:max-w-[196px]">
       <div className="flex justify-center">
@@ -68,7 +89,10 @@ function ListCard({
               <HeartSvg />
             </div>
           </div>
-          <button className="btn_primary flex w-[110px] items-center justify-around rounded-[18px] py-1 text-xs font-extrabold text-white md:w-[157px] md:py-2">
+          <button
+            onClick={handleAddToCart}
+            className="btn_primary flex w-[110px] items-center justify-around rounded-[18px] py-1 text-xs font-extrabold text-white md:w-[157px] md:py-2"
+          >
             افزودن
             <ActiveStoreSvg />
           </button>
