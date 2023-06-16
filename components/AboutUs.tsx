@@ -14,10 +14,15 @@ function AboutUs() {
           پخش مواد غذایی٬اولین بنکداری آنلاین در ایران را راه اندازی کرده است تا
           شما عزیزان بتوانید محصولات با کیفیت را با قیمت عمده تهیه کنید.
         </p>
+        <div className="flex flex-row-reverse mt-6 md:hidden">
+          <button className="btn_Primary_small text-white text-xs font-extrabold ">
+            <Link href="/"> ادامه مطلب...</Link>
+          </button>
+        </div>
       </div>
       <div className="flex md:items-center md:justify-center flex-row-reverse my-2 md:mt-10">
         <button className="border-black-items border bg-white text-black-items font-extrabold text-[14px] hidden md:inline rounded-3xl px-10 py-1.5">
-          ادامه مطلب...
+          <Link href="/"> ادامه مطلب...</Link>
         </button>
       </div>
 
@@ -28,7 +33,7 @@ function AboutUs() {
       </div>
       <div>
         <div className="flex flex-col md:justify-center md:gap-4 md:mt-10 md:pb-4 md:flex-row md:items-center overflow-hidden">
-          <hr className="seperator my-6 md:hidden" />
+          <hr className="seperator my-4 md:hidden" />
           <div className="md:text-center">
             <p className="text-2xl font-normal text-black-items mb-3 md:font-semibold">
               محصولات
@@ -58,7 +63,7 @@ function AboutUs() {
             </p>
             <div className="flex flex-row-reverse my-2 md:hidden">
               <button className="btn_Primary_small text-white text-xs font-extrabold ">
-                ادامه مطلب...
+                <Link href="/"> ادامه مطلب...</Link>
               </button>
             </div>
           </div>
