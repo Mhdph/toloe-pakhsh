@@ -1,6 +1,6 @@
 import React from "react";
 
-function ProfileSvg() {
+function ProfileIcon() {
   return (
     <div>
       <svg
@@ -49,4 +49,4 @@ function ProfileSvg() {
   );
 }
 
-export default ProfileSvg;
+export default React.memo(ProfileIcon);

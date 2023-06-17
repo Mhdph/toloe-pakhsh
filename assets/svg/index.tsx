@@ -1,6 +1,4 @@
 export { default as HomeSvg } from "./HomeSvg";
-export { default as SearchSvg } from "./SearchSvg";
-export { default as ProfileSvg } from "./ProfileSvg";
 export { default as LogoSvg } from "./LogoSvg";
 export { default as LocationSvg } from "./LocationSvg";
 export { default as InstaSvg } from "./InstaSvg";

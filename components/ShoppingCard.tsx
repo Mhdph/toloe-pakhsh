@@ -1,22 +1,21 @@
-import CloseSvg from "@/assets/svg/CloseSvg";
-import StarSvg from "@/assets/svg/StarSvg";
 import Image from "next/image";
 import React from "react";
 import Sohan from "@/assets/tempImages/sohan.png";
+import { CloseIcon, StarIcon } from "@/assets/Icons";
 
 function ShoppingCard() {
   return (
     <div className="bg-white shadow-ca rounded-3xl h-[184px] w-full flex items-center">
       <div className="relative">
         <div className="absolute right-4 top-4">
-          <CloseSvg />
+          <CloseIcon />
         </div>
         <Image src={Sohan} alt="product image" className="h-full" />
       </div>
       <div className="flex-1 px-2">
         <div className="flex items-center justify-between">
           <p className="font-black text-xs">آبنبات چوبی قلبی</p>
-          <StarSvg />
+          <StarIcon />
         </div>
         <p className="text-[10px] font-normal mt-1">طرح سگ ۲۴ عددی</p>
         <hr className=" my-1" />

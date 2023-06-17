@@ -1,7 +1,5 @@
-import { FilterSvg, UpDownSvg } from "@/assets/svg";
-import CloseSvg from "@/assets/svg/CloseSvg";
+import { CloseIcon, FilterIcon, UpDownIcon } from "@/assets/Icons";
 import ContactUs from "@/components/ContactUs";
-import ListItems from "@/components/ListItems";
 import SearchBar from "@/components/SearchBar";
 import SearchAccordion from "@/components/search/SearchAccordion";
 import SearchBrand from "@/components/search/SearchBrand";
@@ -18,7 +16,7 @@ function Search() {
         <div className="filter_bg_sidebar hidden h-[1108px] min-w-[300px] rounded-3xl bg-red-700 px-3 md:flex md:flex-col">
           <div className="mt-4 px-4">
             <div className="flex items-center gap-2">
-              <FilterSvg />
+              <FilterIcon />
               <p className="text-ca font-black"> فیلتر ها</p>
             </div>
             <hr className="my-2 border-[0.5px] border-black-items border-opacity-80" />
@@ -68,7 +66,7 @@ function Search() {
           <div className="hidden justify-between md:flex">
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-2">
-                <UpDownSvg />
+                <UpDownIcon />
                 <p className="text-ca font-black">مرتب سازی</p>
               </div>
 
@@ -88,7 +86,7 @@ function Search() {
             <p className="text-[10px]  font-normal text-black-items">
               موجود در انبار
             </p>
-            <CloseSvg />
+            <CloseIcon />
           </div>
           <div className="mt-6 grid grid-cols-2 gap-8 pr-2.5 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
             <Card />

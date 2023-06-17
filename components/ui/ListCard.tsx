@@ -1,11 +1,12 @@
 "use client";
-import { ActiveStoreSvg, ArrowDownSvg } from "@/assets/svg";
-import StarSvg from "@/assets/svg/StarSvg";
+import {
+  HeartIcon,
+  StoreIcon,
+  StoreActiveIcon,
+  StarIcon,
+} from "@/assets/Icons";
 import React from "react";
-import Product from "@/assets/tempImages/Product.png";
-
 import Image from "next/image";
-import HeartSvg from "@/assets/svg/HeartSvg";
 import { baseUrl } from "@/lib/config";
 import useProductStore from "@/store/zustand";
 
@@ -58,7 +59,7 @@ function ListCard({
       <div className="mt-2 px-2">
         <div className="flex items-center justify-between ">
           <p className="text-xs font-black md:text-ca">{name}</p>
-          <StarSvg />
+          <StarIcon />
         </div>
         <p className="mt-1 text-[10px] font-normal md:mt-2 md:text-xs">
           {brand}
@@ -86,7 +87,7 @@ function ListCard({
         <div className="mt-2 flex items-center gap-2 md:mt-3 md:justify-center">
           <div className="flex h-9 w-9 items-center justify-center rounded-full border border-[#F6602D] md:h-10 md:w-10">
             <div className="">
-              <HeartSvg />
+              <HeartIcon />
             </div>
           </div>
           <button
@@ -94,7 +95,7 @@ function ListCard({
             className="btn_primary flex w-[110px] items-center justify-around rounded-[18px] py-1 text-xs font-extrabold text-white md:w-[157px] md:py-2"
           >
             افزودن
-            <ActiveStoreSvg />
+            <StoreActiveIcon />
           </button>
         </div>
       </div>

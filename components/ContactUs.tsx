@@ -1,19 +1,12 @@
 import {
-  AbousUsSvgLeft,
-  AboutUsSvgRight,
-  InstaSvg,
-  InstagramIcon,
   LocationIcon,
-  LocationSvg,
-  MailIcon,
-  MailSvg,
   PhoneIcon,
-  PhoneSvg,
+  InstagramIcon,
   TelegramIcon,
-  TelegramSvg,
-} from "@/assets/svg";
+  MailIcon,
+} from "@/assets/Icons";
+import { AbousUsSvgLeft, AboutUsSvgRight } from "@/assets/svg";
 import SubTractSvg from "@/assets/svg/SubTractSvg";
-import Link from "next/link";
 import React from "react";
 
 function ContactUs() {
@@ -34,14 +27,14 @@ function ContactUs() {
         <hr className="border border-white my-3 round3" />
         <div className="flex flex-col gap-4 pb-10">
           <div className="flex flex-col items-center bg-white card_shadow rounded-3xl py-4">
-            <LocationSvg />
+            <LocationIcon />
             <p className="text-center text mt-3 font-extrabold">
               مشهد - طرحچی ۱۳ - انبار طلوع پخش
             </p>
             <p>(مراجعه فقط با هماهنگی)</p>
           </div>
           <div className="flex flex-col items-center bg-white card_shadow rounded-3xl py-4">
-            <PhoneSvg />
+            <PhoneIcon />
             <a
               href="tel:+98990731243 "
               className="text-center text mt-3 font-extrabold"
@@ -51,7 +44,7 @@ function ContactUs() {
           </div>
           <div className="flex items-center justify-center gap-4">
             <div className="flex flex-col items-center bg-white px-8 card_shadow rounded-3xl py-4">
-              <InstaSvg />
+              <InstagramIcon />
               <a
                 href="https://www.instagram.com/TolouPakhsh/"
                 className="text-center text mt-3 font-extrabold"
@@ -60,7 +53,7 @@ function ContactUs() {
               </a>
             </div>
             <div className="flex flex-col items-center bg-white px-8 card_shadow rounded-3xl py-4">
-              <TelegramSvg />
+              <TelegramIcon />
               <a
                 href="https://telegram.me/TolouPakhsh/"
                 className="text-center text mt-3 font-extrabold"
@@ -70,7 +63,7 @@ function ContactUs() {
             </div>
           </div>
           <div className="flex flex-col items-center bg-white card_shadow rounded-3xl py-4">
-            <MailSvg />
+            <MailIcon />
             <a
               href="mailto: Contact@TolouPakhsh.com"
               className="text-center text mt-3 font-extrabold"

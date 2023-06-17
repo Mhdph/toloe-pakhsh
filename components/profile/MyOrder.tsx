@@ -1,7 +1,7 @@
-import ArrowBlackLeft from "@/assets/svg/ArrowBlackLeft";
 import React from "react";
 import Rectangl from "@/assets/tempImages/Rectangl.png";
 import Image from "next/image";
+import { ArrowBlackLeftIcon } from "@/assets/Icons";
 function MyOrder() {
   return (
     <div className="mt-8 px-4">
@@ -9,7 +9,7 @@ function MyOrder() {
         <p className="font-semibold">سفارش های من</p>
         <div className="flex items-center gap-1">
           <p className="text-xs font-extrabold">مشاهده همه</p>
-          <ArrowBlackLeft />
+          <ArrowBlackLeftIcon />
         </div>
       </div>
       <div className="mt-4 flex items-center justify-center gap-3">

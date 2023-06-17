@@ -1,19 +1,18 @@
 "use client";
 import React from "react";
-import ActiveLink from "./ui/ActiveLink";
-import {
-  ActiveHomeSvg,
-  HomeSvg,
-  ActiveSearch,
-  SearchSvg,
-  ActiveStoreSvg,
-  StoreSvg,
-  ActiveProfileSvg,
-  ProfileSvg,
-} from "@/assets/svg";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@/lib/cn";
+import {
+  HomeActiveIcon,
+  HomeIcon,
+  ProfileActiveIcon,
+  SearchActiveIcon,
+  StoreActiveIcon,
+  StoreIcon,
+  ProfileIcon,
+  SearchIcon,
+} from "@/assets/Icons";
 type FooterProps = {};
 
 const Footer: React.FC<FooterProps> = () => {
@@ -30,7 +29,7 @@ const Footer: React.FC<FooterProps> = () => {
               "inline-flex flex-col items-center justify-center px-1 text-center"
             )}
           >
-            {pathName == "/profile" ? <ActiveProfileSvg /> : <ProfileSvg />}
+            {pathName == "/profile" ? <ProfileActiveIcon /> : <ProfileIcon />}
             {pathName == "/profile" ? (
               <span className="py-2 text-center text-xs font-black text-white">
                 حساب کاربری
@@ -45,7 +44,7 @@ const Footer: React.FC<FooterProps> = () => {
               "inline-flex flex-col items-center justify-center px-1 text-center"
             )}
           >
-            {pathName == "/store" ? <ActiveStoreSvg /> : <StoreSvg />}
+            {pathName == "/store" ? <StoreActiveIcon /> : <StoreIcon />}
             {pathName == "/store" ? (
               <span className="py-2 text-xs font-black text-white">
                 فروشگاه
@@ -59,7 +58,7 @@ const Footer: React.FC<FooterProps> = () => {
               "inline-flex flex-col items-center justify-center px-1 text-center"
             )}
           >
-            {pathName == "/search" ? <ActiveSearch /> : <SearchSvg />}
+            {pathName == "/search" ? <SearchActiveIcon /> : <SearchIcon />}
             {pathName == "/search" ? (
               <span className="py-2 text-center text-xs font-black text-white">
                 جست و جو
@@ -73,7 +72,7 @@ const Footer: React.FC<FooterProps> = () => {
               "inline-flex flex-col items-center justify-center px-1 text-center"
             )}
           >
-            {pathName == "/" ? <ActiveHomeSvg /> : <HomeSvg />}
+            {pathName == "/" ? <HomeActiveIcon /> : <HomeIcon />}
             {pathName == "/" ? (
               <span className="py-2 text-xs font-black text-white">خانه</span>
             ) : null}
