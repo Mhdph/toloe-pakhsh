@@ -1,6 +1,6 @@
 import React from "react";
 
-function HeartSvg() {
+function HeartIcon() {
   return (
     <div>
       <svg
@@ -33,4 +33,4 @@ function HeartSvg() {
   );
 }
 
-export default React.memo(HeartSvg);
+export default React.memo(HeartIcon);

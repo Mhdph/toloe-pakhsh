@@ -1,6 +1,6 @@
 import React from "react";
 
-function EditSvg() {
+function EditIcon() {
   return (
     <div>
       <svg
@@ -38,4 +38,4 @@ function EditSvg() {
   );
 }
 
-export default React.memo(EditSvg);
+export default React.memo(EditIcon);

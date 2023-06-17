@@ -1,6 +1,6 @@
 import React from "react";
 
-function CloseWhiteSvg() {
+function CloseWhiteIcon() {
   return (
     <div>
       <svg
@@ -19,4 +19,4 @@ function CloseWhiteSvg() {
   );
 }
 
-export default React.memo(CloseWhiteSvg);
+export default React.memo(CloseWhiteIcon);

@@ -1,6 +1,6 @@
 import React from "react";
 
-function ArrowDownSvg() {
+function ArrowDownIcon() {
   return (
     <div>
       <svg
@@ -19,4 +19,4 @@ function ArrowDownSvg() {
   );
 }
 
-export default React.memo(ArrowDownSvg);
+export default React.memo(ArrowDownIcon);

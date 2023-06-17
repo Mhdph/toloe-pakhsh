@@ -1,6 +1,6 @@
 import React from "react";
 
-function MenuSvg() {
+function MenuIcon() {
   return (
     <div className="cursor-pointer">
       <svg
@@ -27,4 +27,4 @@ function MenuSvg() {
   );
 }
 
-export default MenuSvg;
+export default React.memo(MenuIcon);

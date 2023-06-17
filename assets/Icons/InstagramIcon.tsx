@@ -3,7 +3,6 @@ import React from "react";
 function InstagramIcon() {
   return (
     <div>
-      {" "}
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -63,4 +62,4 @@ function InstagramIcon() {
   );
 }
 
-export default InstagramIcon;
+export default React.memo(InstagramIcon);

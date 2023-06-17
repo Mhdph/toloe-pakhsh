@@ -1,6 +1,6 @@
 import React from "react";
 
-function EyeSvg() {
+function EyeIcon() {
   return (
     <div>
       <svg
@@ -25,4 +25,4 @@ function EyeSvg() {
   );
 }
 
-export default EyeSvg;
+export default React.memo(EyeIcon);
