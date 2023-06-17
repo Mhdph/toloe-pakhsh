@@ -14,7 +14,7 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
       <Image
         src={isMobile ? HeroImage : Ajil}
         alt="ajil shab eyd picture"
-        className="w-full h-[321px]"
+        className=" h-[321px] md:h-[532px]"
       />
     </div>
   );
