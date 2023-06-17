@@ -1,4 +1,4 @@
-import StarSvg from "@/assets/svg/StarSvg";
+import StarSvg from "@/assets/Icons/StarIcon";
 import { getOneProduct } from "@/lib/dataFn";
 import Image from "next/image";
 import React from "react";

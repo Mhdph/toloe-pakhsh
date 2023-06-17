@@ -28,3 +28,6 @@ export { default as StoreActiveIcon } from "./StoreActiveIcon";
 export { default as StoreIcon } from "./StoreIcon";
 export { default as TelegramIcon } from "./TelegramIcon";
 export { default as UpDownIcon } from "./UpDownIcon";
+export { default as StarIcon } from "./StarIcon";
+export { default as ProfileIcon } from "./ProfileIcon";
+export { default as SearchIcon } from "./SearchIcon";

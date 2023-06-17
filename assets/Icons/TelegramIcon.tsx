@@ -49,4 +49,4 @@ function TelegramIcon() {
   );
 }
 
-export default React.memo(TelegramIcon);
+export default TelegramIcon;

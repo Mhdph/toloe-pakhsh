@@ -1,24 +1,22 @@
 "use client";
 import {
-  AccoutIcon,
-  ActiveStoreSvg,
-  BucketBlackIcon,
-  BucketIcon,
-  HomeIcon,
-  HomeSvg,
+  MenuIcon,
   LogoIcon,
-  LogoSvg,
-  MenuSvg,
-  ProfileSvg,
-  SearchSvg,
-  StoreSvg,
-} from "@/assets/svg";
+  StoreActiveIcon,
+  BucketIcon,
+  AccoutIcon,
+  ProfileActiveIcon,
+  StoreIcon,
+  BucketBlackIcon,
+  HomeIcon,
+  HomeActiveIcon,
+} from "@/assets/Icons";
 import SearchBarSvg from "@/assets/svg/SearchBarSvg";
 import { usePathname } from "next/navigation";
 import React from "react";
-import ActiveLink from "./ui/ActiveLink";
 import Link from "next/link";
 import { cn } from "@/lib/cn";
+import { SearchIcon } from "lucide-react";
 
 type NavbarProps = {};
 
@@ -29,15 +27,15 @@ const Navbar: React.FC<NavbarProps> = () => {
       <div className="navbar_shadow fixed z-50 flex h-[72px] w-full items-center justify-between bg-white lg:hidden">
         <div className="navbar_bg_right flex items-center justify-center">
           <div className="cursor-pointer">
-            <MenuSvg />
+            <MenuIcon />
           </div>
         </div>
         <Link href="/" className="mt-8">
-          <LogoSvg />
+          <LogoIcon />
         </Link>
         <div className="navbar_bg_left flex items-center justify-center">
           <div className="cursor-pointer">
-            <ActiveStoreSvg />
+            <StoreActiveIcon />
           </div>
         </div>
       </div>
@@ -76,7 +74,7 @@ const Navbar: React.FC<NavbarProps> = () => {
               "flex items-center gap-3 px-24 text-[14px] font-extrabold"
             )}
           >
-            {pathName == "/profile" ? <ProfileSvg /> : <AccoutIcon />}
+            {pathName == "/profile" ? <ProfileActiveIcon /> : <AccoutIcon />}
             <span className="py-2 text-center text-xs font-black">
               حساب کاربری
             </span>
@@ -91,7 +89,7 @@ const Navbar: React.FC<NavbarProps> = () => {
               "flex items-center gap-3 px-24 text-[14px] font-extrabold"
             )}
           >
-            {pathName == "/store" ? <StoreSvg /> : <BucketBlackIcon />}
+            {pathName == "/store" ? <StoreIcon /> : <BucketBlackIcon />}
             <span className="py-2 text-xs font-black">فروشگاه</span>
           </Link>
           <Link
@@ -103,7 +101,7 @@ const Navbar: React.FC<NavbarProps> = () => {
               "flex items-center gap-3 px-24 text-[14px] font-extrabold"
             )}
           >
-            {pathName == "/search" ? <SearchSvg /> : <SearchBarSvg />}
+            {pathName == "/search" ? <SearchIcon /> : <SearchBarSvg />}
             <span className="py-2 text-center text-xs font-black">
               جست و جو
             </span>
@@ -117,7 +115,7 @@ const Navbar: React.FC<NavbarProps> = () => {
               "flex items-center gap-3 px-24 text-[14px] font-extrabold"
             )}
           >
-            {pathName == "/" ? <HomeSvg /> : <HomeIcon />}
+            {pathName == "/" ? <HomeActiveIcon /> : <HomeIcon />}
 
             <span className="py-2 text-xs font-black">خانه</span>
           </Link>

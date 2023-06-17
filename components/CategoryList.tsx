@@ -1,5 +1,4 @@
-import { CategoryListItem } from "@/constant/List";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import React from "react";
 
 interface CategoryListProps {
