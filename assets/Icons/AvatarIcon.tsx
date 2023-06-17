@@ -1,6 +1,6 @@
 import React from "react";
 
-function AvatarSvg() {
+function AvatarIcon() {
   return (
     <div>
       <svg
@@ -57,4 +57,4 @@ function AvatarSvg() {
   );
 }
 
-export default React.memo(AvatarSvg);
+export default React.memo(AvatarIcon);

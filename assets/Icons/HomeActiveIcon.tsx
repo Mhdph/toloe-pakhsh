@@ -1,6 +1,6 @@
 import React from "react";
 
-function ActiveHomeSvg() {
+function HomeActiveIcon() {
   return (
     <div>
       <svg
@@ -19,4 +19,4 @@ function ActiveHomeSvg() {
   );
 }
 
-export default ActiveHomeSvg;
+export default React.memo(HomeActiveIcon);

@@ -1,6 +1,6 @@
 import React from "react";
 
-function FilterSvg() {
+function FilterIcon() {
   return (
     <div>
       <svg
@@ -31,4 +31,4 @@ function FilterSvg() {
   );
 }
 
-export default React.memo(FilterSvg);
+export default React.memo(FilterIcon);

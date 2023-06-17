@@ -1,6 +1,6 @@
 import React from "react";
 
-function ActiveSearch() {
+function SearchActiveIcon() {
   return (
     <div>
       <svg
@@ -25,4 +25,4 @@ function ActiveSearch() {
   );
 }
 
-export default ActiveSearch;
+export default React.memo(SearchActiveIcon);

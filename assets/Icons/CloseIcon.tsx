@@ -1,6 +1,6 @@
 import React from "react";
 
-function CloseSvg() {
+function CloseIcon() {
   return (
     <div>
       <svg
@@ -19,4 +19,4 @@ function CloseSvg() {
   );
 }
 
-export default CloseSvg;
+export default React.memo(CloseIcon);
