@@ -1,4 +1,4 @@
-import { CloseWhiteSvg, FilterSvg, UpDownSvg } from "@/assets/svg";
+import { CloseWhiteIcon, FilterIcon, UpDownIcon } from "@/assets/Icons";
 import SearchBarSvg from "@/assets/svg/SearchBarSvg";
 import React from "react";
 
@@ -18,20 +18,20 @@ function SearchBar() {
         </div>
         <div className="flex items-center mt-4 justify-between">
           <div className="bg-white rounded-[14px] px-3 py-1.5 gap-2 flex items-center">
-            <FilterSvg />
+            <FilterIcon />
             <p className="font-extrabold text-xs ">فیلترها</p>
           </div>
           <p className="font-normal text-xs tracking-widest text-white">
             نمایش ۱ - ۱۶ از ۲۷۴ نتیجه
           </p>
           <div className="bg-white rounded-[14px] px-3 py-1.5 gap-2 flex items-center">
-            <UpDownSvg />
+            <UpDownIcon />
           </div>
         </div>
         <hr className="mt-3 mb-2   opacity-25" />
         <div className="flex w-[90px] px-2 items-center gap-2  rounded-xl py-1 filter_background">
           <p className="text-white  font-normal text-[10px]">موجود در انبار</p>
-          <CloseWhiteSvg />
+          <CloseWhiteIcon />
         </div>
       </div>
     </div>
