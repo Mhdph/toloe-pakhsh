@@ -72,7 +72,7 @@ const Footer: React.FC<FooterProps> = () => {
               "inline-flex flex-col items-center justify-center px-1 text-center"
             )}
           >
-            {pathName == "/" ? <HomeActiveIcon /> : <HomeIcon />}
+            {pathName == "/" ? <HomeIcon /> : <HomeActiveIcon />}
             {pathName == "/" ? (
               <span className="py-2 text-xs font-black text-white">خانه</span>
             ) : null}
