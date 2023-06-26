@@ -34,3 +34,4 @@ export { default as SearchIcon } from "./SearchIcon";
 export { default as MiniBucketIcon } from "./MiniBucketIcon";
 export { default as ShareIcon } from "./ShareIcon";
 export { default as FavouriteIcon } from "./FavouriteIcon";
+export { default as HomeWhiteIcon } from "./HomeWhiteIcon";

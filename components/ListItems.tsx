@@ -24,8 +24,10 @@ const ListItems: React.FC<ListItemsProps> = ({ title, link, data }) => {
               <ListCard key={item.id} data={item} />
             ))}
           </div>
-          <div className="mt-5 w-full xl:pl-28 2xl:pl-[360px]">
-            <SeeProduct link={link} />
+          <div className="mt-5  flex justify-center ">
+            <div className="2xl:w-[1100px] w-[1030px]">
+              <SeeProduct link={link} />
+            </div>
           </div>
         </div>
       </div>
