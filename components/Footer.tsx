@@ -5,7 +5,7 @@ import Link from "next/link";
 import { cn } from "@/lib/cn";
 import {
   HomeActiveIcon,
-  HomeIcon,
+  HomeWhiteIcon,
   ProfileActiveIcon,
   SearchActiveIcon,
   StoreActiveIcon,
@@ -72,7 +72,7 @@ const Footer: React.FC<FooterProps> = () => {
               "inline-flex flex-col items-center justify-center px-1 text-center"
             )}
           >
-            {pathName == "/" ? <HomeIcon /> : <HomeActiveIcon />}
+            {pathName == "/" ? <HomeWhiteIcon /> : <HomeActiveIcon />}
             {pathName == "/" ? (
               <span className="py-2 text-xs font-black text-white">خانه</span>
             ) : null}

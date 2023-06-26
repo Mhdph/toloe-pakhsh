@@ -4,7 +4,7 @@ import Image from "next/image";
 import { HeartIcon, StarIcon, StoreActiveIcon } from "@/assets/Icons";
 function Card() {
   return (
-    <div className="h-[264px] min-w-[170px] max-w-[170px] rounded-3xl border border-black-items border-opacity-40 bg-white md:h-[300px] md:min-w-[223px] md:max-w-[223px]">
+    <div className=" min-w-[175px] max-w-[180px] rounded-3xl border border-black-items border-opacity-40 bg-white md:h-[300px] md:min-w-[223px] md:max-w-[223px]">
       <div className="flex justify-center">
         <Image
           src={Product}
@@ -40,7 +40,7 @@ function Card() {
             </span>
           </div>
         </div>
-        <div className="mt-2 flex items-center gap-2 md:mt-3 md:justify-center">
+        <div className="mt-2 flex items-center gap-4 mb-2 md:mt-3 md:justify-center">
           <div className="flex h-9 w-9 items-center justify-center rounded-full border border-[#F6602D] md:h-10 md:w-10">
             <div className="">
               <HeartIcon />
