@@ -39,10 +39,14 @@ const SpecialOffer: React.FC<SpecialOfferProps> = ({ data }) => {
           <ListCard key={item.id} data={item} />
         ))}
       </div>
-      <div className="mt-80 flex justify-center md:ml-40 md:mt-60 md:justify-end md:pb-10 2xl:ml-[420px]">
-        <button className="h-9 w-[350px] rounded-3xl bg-white text-center text-xs font-extrabold text-[#f02d3c] md:w-[196px]">
-          <Link href="/store">مشاهده محصولات</Link>
-        </button>
+      <div className="mt-36 md:mt-16  flex justify-center ">
+        <div className="2xl:w-[1100px] w-[1030px]">
+          <div className="flex justify-center md:justify-end text-white">
+            <button className="h-9 w-[350px] mt-48 mb-16 rounded-3xl bg-white text-center text-xs font-extrabold text-[#f02d3c] md:w-[196px]">
+              <Link href="/store">مشاهده محصولات</Link>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
