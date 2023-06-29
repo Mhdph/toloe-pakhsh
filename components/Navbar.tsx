@@ -24,7 +24,7 @@ const Navbar: React.FC<NavbarProps> = () => {
   const pathName = usePathname();
   return (
     <div>
-      <div className="navbar_shadow fixed z-50 flex h-[72px] w-full items-center justify-between bg-white lg:hidden">
+      <div className="navbar_shadow fixed z-50 flex pb-2 h-[72px] w-full items-center justify-between bg-white lg:hidden">
         <div className="navbar_bg_right flex items-center justify-center">
           <div className="cursor-pointer">
             <MenuIcon />

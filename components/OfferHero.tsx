@@ -21,10 +21,10 @@ function OfferHero() {
         برای خرید های بالای ۳۰۰ هزار تومان
       </p>
       <Link
-        className="bg-white px-4 py-1.5 cursor-pointer rounded-3xl text-xs md:text-[14px] font-extrabold text-[#F02D3C]"
+        className="bg-white z-50 px-4 py-1.5 cursor-pointer rounded-3xl text-xs md:text-[14px] font-extrabold text-[#F02D3C]"
         href="/store"
       >
-        مشاهده محصولات
+        <button>مشاهده محصولات</button>
       </Link>
     </div>
   );
