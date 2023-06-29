@@ -1,19 +1,18 @@
-import Navbar from "@/components/Navbar";
-import "./globals.css";
-import Footer from "@/components/Footer";
+import Navbar from '@/components/Navbar';
+import './globals.css';
+import Footer from '@/components/Footer';
+import QueryWrapper from '@/lib/QueryWrapper';
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
-    <html lang="en">
-      <body>
-        <Navbar />
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <QueryWrapper>
+      <html lang='en'>
+        <body>
+          <Navbar />
+          {children}
+          <Footer />
+        </body>
+      </html>
+    </QueryWrapper>
   );
 }

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 interface CategoryListProps {
@@ -19,7 +20,7 @@ const CategoryList: React.FC<CategoryListProps> = ({ data }) => {
       <div className="flex items-center justify-center flex-wrap gap-2">
         {data.map((item) => (
           <div key={item.name} className="category_card">
-            <div>
+            <Link href={`/search?category=${item.name}`}>
               <Image
                 height={110}
                 width={110}
@@ -30,7 +31,7 @@ const CategoryList: React.FC<CategoryListProps> = ({ data }) => {
               <p className="text-center text-xs font-extrabold text-black-items">
                 {item.name}
               </p>
-            </div>
+            </Link>
           </div>
         ))}
       </div>

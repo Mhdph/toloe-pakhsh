@@ -1,5 +1,4 @@
-import { EditSvg, ProfilePicSvg } from '@/assets/svg';
-import Navbar from '@/components/Navbar';
+import {ProfilePicSvg} from '@/assets/svg';
 import BackgroundTitle from '@/components/ui/BackgroundTitle';
 import ProfileInput from '@/components/ui/ProfileInput';
 import React from 'react';

@@ -32,7 +32,6 @@ interface productData {
 
 async function SingleProduct({ params: { id } }: { params: { id: number } }) {
   const data = await getOneProduct(id);
-  console.log(data);
   return (
     <div>
       {data.map((item: productData) => (
