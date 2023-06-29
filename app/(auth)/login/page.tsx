@@ -1,62 +1,57 @@
-import LoginLeftBg from "@/assets/svg/LoginLeftBg";
-import LoginRightBg from "@/assets/svg/LoginRightBg";
-import ContactUs from "@/components/ContactUs";
-import React from "react";
+import LoginLeftBg from '@/assets/svg/LoginLeftBg';
+import LoginRightBg from '@/assets/svg/LoginRightBg';
+import ContactUs from '@/components/ContactUs';
+import Link from 'next/link';
+import React from 'react';
 
 function login() {
   return (
     <div>
-      <div className="h-[200px] bg-gray-200 md:hidden"></div>
-      <div className="flex text-black-items flex-col md:flex-row mt-14 md:justify-center md:items-center ">
-        <div className="hidden md:inline relative right-80">
+      <div className='h-[200px] bg-gray-200 md:hidden'></div>
+      <div className='mt-14 flex flex-col text-black-items md:flex-row md:items-center md:justify-center '>
+        <div className='relative right-80 hidden md:inline'>
           <LoginRightBg />
         </div>
-        <div className="md:border md:rounded-3xl z-50 bg-white md:h-[600px] md:min-w-[412px] md:border-[#F34535] md:mb-4">
+        <div className='z-50 bg-white md:mb-4 md:h-[600px] md:min-w-[412px] md:rounded-3xl md:border md:border-[#F34535]'>
           <div>
-            <p className="text-4xl md:text-[32px] text-center font-semibold md:mt-28">
-              ورود به حساب
-            </p>
-            <p className="text-xs md:text-sm text-center mt-4">
-              لطفا شماره موبایل خود را وارد کنید.
-            </p>
-            <div className="flex flex-col px-4 mt-12">
-              <label className="font-black mb-1 text-xs md:text-sm" htmlFor="">
+            <p className='text-center text-4xl font-semibold md:mt-28 md:text-[32px]'>ورود به حساب</p>
+            <p className='mt-4 text-center text-xs md:text-sm'>لطفا شماره موبایل خود را وارد کنید.</p>
+            <div className='mt-12 flex flex-col px-4'>
+              <label className='mb-1 text-xs font-black md:text-sm' htmlFor=''>
                 شماره تلفن
               </label>
               <input
-                className="rounded py-1.5 text-center outline-none w-full border border-gray-300"
-                type="text"
-                placeholder="-- -- --- --۰۹"
+                className='w-full rounded border border-gray-300 py-1.5 text-center outline-none'
+                type='text'
+                placeholder='-- -- --- --۰۹'
               />
-              <div className="flex gap-1 mt-6 items-center">
-                <input type="checkbox" className="rounded-2xl border-black" />
-                <p className="font-normal text-xs md:text-sm">
-                  مرا به خاطر بسپار
-                </p>
+              <div className='mt-6 flex items-center gap-1'>
+                <input type='checkbox' className='rounded-2xl border-black' />
+                <p className='text-xs font-normal md:text-sm'>مرا به خاطر بسپار</p>
               </div>
-              <div className="md:flex md:items-end md:justify-between">
-                <div className="hidden md:inline"></div>
-                <button className="btn_primary py-3 w-full md:w-40 font-extrabold text-xs mt-8 md:mt-3 md:px-6 text-white">
+              <div className='md:flex md:items-end md:justify-between'>
+                <div className='hidden md:inline'></div>
+                <button className='btn_primary mt-8 w-full py-3 text-xs font-extrabold text-white md:mt-3 md:w-40 md:px-6'>
                   ارسال کد تایید
                 </button>
               </div>
             </div>
-            <hr className="border-[0.5px] border-solid mt-14 mb-6 md:hidden" />
-            <div className="flex bg-gradient-to-r special_offer items-center flex-col gap-4 md:mt-20 md:py-6 md:rounded-b-3xl">
-              <p className="text-base font-semibold text-center md:text-white">
-                آیا حساب کاربری ندارید؟
-              </p>
-              <button className="border-[#F6622C] text-xs font-extrabold text-[#F02D3C] md:bg-white h-9 w-full md:w-40 md:bg-32 rounded-3xl border-2 border-opacity-70 ">
-                ثبت نام
-              </button>
+            <hr className='mb-6 mt-14 border-[0.5px] border-solid md:hidden' />
+            <div className='special_offer flex flex-col items-center gap-4 bg-gradient-to-r md:mt-20 md:rounded-b-3xl md:py-6'>
+              <p className='text-center text-base font-semibold md:text-white'>آیا حساب کاربری ندارید؟</p>
+              <Link href='/register'>
+                <button className='md:bg-32 h-9 w-full rounded-3xl border-2 border-[#F6622C] border-opacity-70 text-xs font-extrabold text-[#F02D3C] md:w-40 md:bg-white '>
+                  ثبت نام
+                </button>
+              </Link>
             </div>
           </div>
         </div>
-        <div className="hidden md:inline relative left-80">
+        <div className='relative left-80 hidden md:inline'>
           <LoginLeftBg />
         </div>
       </div>
-      <div className="hidden md:inline">
+      <div className='hidden md:inline'>
         <ContactUs />
       </div>
     </div>
