@@ -1,5 +1,4 @@
-import Navbar from '@/components/Navbar';
-import { Tabs } from '@/components/tabs';
+import {Tabs} from '@/components/tabs';
 import BackgroundTitle from '@/components/ui/BackgroundTitle';
 import React from 'react';
 
