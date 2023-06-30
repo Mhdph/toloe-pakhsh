@@ -35,13 +35,15 @@ function ListCard({data: {brand, picture, name, unitCount, unit, price, id}}: da
 
     mutate({name, id, quantity: 1});
   };
+
+  console.log(baseUrl + picture);
   return (
     <div className='h-[264px] min-w-[170px] max-w-[170px] rounded-3xl border border-black-items border-opacity-40 bg-white md:h-[300px] md:min-w-[196px] md:max-w-[196px]'>
       <div className='flex justify-center'>
         <Image
           src={baseUrl + picture}
           alt='product image'
-          className='h-[120px] w-[170px] border-b md:w-[223px]'
+          className='h-[120px] w-[170px] rounded-t-3xl border-b md:w-[223px]'
           width={170}
           height={120}
         />

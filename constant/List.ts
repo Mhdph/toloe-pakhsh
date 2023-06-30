@@ -47,7 +47,7 @@ export const ProfileLinkListItem = [
   },
   {
     name: 'بازدید های اخیر',
-    url: '/latest',
+    url: '/lastvisit',
   },
   {
     name: 'اطلاعات حساب کاربری',
