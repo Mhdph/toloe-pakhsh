@@ -37,10 +37,10 @@ function login() {
               </div>
             </div>
             <hr className='mb-6 mt-14 border-[0.5px] border-solid md:hidden' />
-            <div className='special_offer flex flex-col items-center gap-4 bg-gradient-to-r md:mt-20 md:rounded-b-3xl md:py-6'>
+            <div className='login_bg flex flex-col items-center gap-4 bg-gradient-to-r md:mt-20 md:rounded-b-3xl md:py-6'>
               <p className='text-center text-base font-semibold md:text-white'>آیا حساب کاربری ندارید؟</p>
-              <Link href='/register'>
-                <button className='md:bg-32 h-9 w-full rounded-3xl border-2 border-[#F6622C] border-opacity-70 text-xs font-extrabold text-[#F02D3C] md:w-40 md:bg-white '>
+              <Link href='/register' className='w-full px-4 md:w-40'>
+                <button className='h-9 w-full rounded-3xl border-2 border-[#F6622C] border-opacity-70  text-xs font-extrabold text-[#F02D3C] md:w-40 md:bg-white '>
                   ثبت نام
                 </button>
               </Link>
