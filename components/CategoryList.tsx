@@ -1,36 +1,33 @@
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
+import {baseUrl} from '@/lib/config';
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
 
 interface CategoryListProps {
   data: [
     {
       name: string;
       picture: string;
-    }
+    },
   ];
 }
 
-const CategoryList: React.FC<CategoryListProps> = ({ data }) => {
+const CategoryList: React.FC<CategoryListProps> = ({data}) => {
   return (
-    <div className="flex items-center justify-center mt-4 flex-col">
-      <p className="text-2xl font-normal text-black-items mb-1 lg:mb-3">
-        دسته بندی محصولات
-      </p>
-      <div className="flex items-center justify-center flex-wrap gap-2">
+    <div className='mt-4 flex flex-col items-center justify-center'>
+      <p className='mb-1 text-2xl font-normal text-black-items lg:mb-3'>دسته بندی محصولات</p>
+      <div className='flex flex-wrap items-center justify-center gap-2'>
         {data.map((item) => (
-          <div key={item.name} className="category_card">
+          <div key={item.name} className='category_card'>
             <Link href={`/search?category=${item.name}`}>
               <Image
                 height={110}
                 width={110}
-                src={item.picture}
-                className="mt-3"
+                src={baseUrl + item.picture}
+                className='max-h-[110px] min-h-[110px] min-w-[110px] max-w-[110px] rounded-t-3xl '
                 alt={item.name}
               />
-              <p className="text-center text-xs font-extrabold text-black-items">
-                {item.name}
-              </p>
+              <p className='mt-2 text-center text-xs font-extrabold text-black-items'>{item.name}</p>
             </Link>
           </div>
         ))}
