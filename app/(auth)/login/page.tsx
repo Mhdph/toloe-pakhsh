@@ -1,10 +1,33 @@
+'use client';
 import LoginLeftBg from '@/assets/svg/LoginLeftBg';
 import LoginRightBg from '@/assets/svg/LoginRightBg';
 import ContactUs from '@/components/ContactUs';
+import {baseUrl} from '@/lib/config';
+import {useMutation} from '@tanstack/react-query';
+import axios from 'axios';
 import Link from 'next/link';
-import React from 'react';
+import React, {useState} from 'react';
 
-function login() {
+interface LoginProps {
+  phone: string;
+}
+
+function Login() {
+  const [phone, setPhone] = useState('');
+  const {mutate, error, isLoading} = useMutation({
+    mutationFn: (user: LoginProps) => {
+      return axios.post(`${baseUrl}/user/add`, user);
+    },
+    onError: () => {
+      console.log('shoma bayad login');
+    },
+  });
+  const loginForm = (e: React.MouseEvent<HTMLButtonElement>) => {
+    console.log('hi');
+    e.preventDefault();
+
+    mutate({phone});
+  };
   return (
     <div>
       <div className='h-[200px] bg-gray-200 md:hidden'></div>
@@ -24,6 +47,7 @@ function login() {
                 className='w-full rounded border border-gray-300 py-1.5 text-center outline-none'
                 type='text'
                 placeholder='-- -- --- --۰۹'
+                onChange={(e) => setPhone(e.target.value)}
               />
               <div className='mt-6 flex items-center gap-1'>
                 <input type='checkbox' className='rounded-2xl border-black' />
@@ -31,7 +55,10 @@ function login() {
               </div>
               <div className='md:flex md:items-end md:justify-between'>
                 <div className='hidden md:inline'></div>
-                <button className='btn_primary mt-8 w-full py-3 text-xs font-extrabold text-white md:mt-3 md:w-40 md:px-6'>
+                <button
+                  onClick={loginForm}
+                  className='btn_primary mt-8 w-full py-3 text-xs font-extrabold text-white md:mt-3 md:w-40 md:px-6'
+                >
                   ارسال کد تایید
                 </button>
               </div>
@@ -58,4 +85,4 @@ function login() {
   );
 }
 
-export default login;
+export default Login;
