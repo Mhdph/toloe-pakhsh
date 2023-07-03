@@ -5,6 +5,7 @@ import Image from 'next/image';
 import {baseUrl} from '@/lib/config';
 import {useMutation} from '@tanstack/react-query';
 import axios from 'axios';
+import useProductStore from '@/store/zustand';
 
 interface dataItem {
   data: {
@@ -24,9 +25,17 @@ export interface ProductProps {
   quantity: number;
 }
 function ListCard({data: {brand, picture, name, unitCount, unit, price, id}}: dataItem) {
+  const addProduct = useProductStore((state) => state.addProduct);
+  const products = useProductStore((state) => state.products);
+
+  const user = localStorage.getItem('token');
+  const quantity = 0;
   const {mutate, error, isLoading} = useMutation({
     mutationFn: (newTodo: ProductProps) => {
       return axios.post(`${baseUrl}/cart-row/add`, newTodo);
+    },
+    onError: () => {
+      console.log('shoma bayad login');
     },
   });
   const addCardRow = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -36,7 +45,17 @@ function ListCard({data: {brand, picture, name, unitCount, unit, price, id}}: da
     mutate({name, id, quantity: 1});
   };
 
-  console.log(baseUrl + picture);
+  const handleAddToCart = () => {
+    const product: ProductProps = {
+      name,
+      id,
+      quantity,
+    };
+    addProduct(product);
+  };
+
+  console.log(products);
+  console.log(user);
   return (
     <div className='h-[264px] min-w-[170px] max-w-[170px] rounded-3xl border border-black-items border-opacity-40 bg-white md:h-[300px] md:min-w-[196px] md:max-w-[196px]'>
       <div className='flex justify-center'>
@@ -77,7 +96,7 @@ function ListCard({data: {brand, picture, name, unitCount, unit, price, id}}: da
             </div>
           </div>
           <button
-            onClick={addCardRow}
+            onClick={user === null ? handleAddToCart : addCardRow}
             disabled={isLoading}
             className='btn_primary flex w-[110px] items-center justify-around rounded-[18px] py-1 text-xs font-extrabold text-white md:w-[157px] md:py-2'
           >
