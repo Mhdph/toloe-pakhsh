@@ -31,7 +31,7 @@ const Navbar: React.FC<NavbarProps> = () => {
             <MenuIcon />
           </div>
         </div>
-        <Link href='/' className='mt-8'>
+        <Link href='/' className='mt-8 cursor-pointer'>
           <LogoIcon />
         </Link>
         <div className='navbar_bg_left flex items-center justify-center'>
@@ -42,11 +42,13 @@ const Navbar: React.FC<NavbarProps> = () => {
       </div>
       <div className='hidden lg:inline'>
         <div className='flex items-center  justify-between px-12 py-6'>
-          <DesktopLogo />
+          <Link href='/' className='cursor-pointer'>
+            <DesktopLogo />
+          </Link>
           <div className='flex items-center justify-between gap-16 text-[14px]'>
-            <p>وبلاگ</p>
-            <p>درباره ما</p>
-            <p>سیستم کسب درامد</p>
+            <Link href='/blog'>وبلاگ</Link>
+            <Link href='/aboutus'>درباره ما</Link>
+            <Link href='/'>سیستم کسب درامد</Link>
           </div>
           <div className='flex items-center gap-4'>
             <div className='relative  '>
@@ -61,7 +63,9 @@ const Navbar: React.FC<NavbarProps> = () => {
               </div>
             </div>
             <div className='contact_us flex h-10 w-10 items-center justify-center rounded-full bg-red-700'>
-              <BucketIcon />
+              <Link href='/shopingbasket'>
+                <BucketIcon />
+              </Link>
             </div>
           </div>
         </div>
