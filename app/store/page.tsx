@@ -3,7 +3,7 @@ import LatestBlog from '@/components/LatestBlog';
 import ListItems from '@/components/ListItems';
 import SpecialOffer from '@/components/SpecialOffer';
 import SearchBarWF from '@/components/ui/SearchBarWF';
-import {getAllProduct} from '@/lib/dataFn';
+import {getAllProduct} from '@/service/product';
 
 export default async function Store() {
   const data = await getAllProduct();

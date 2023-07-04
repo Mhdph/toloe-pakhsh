@@ -2,9 +2,8 @@
 import LoginLeftBg from '@/assets/svg/LoginLeftBg';
 import LoginRightBg from '@/assets/svg/LoginRightBg';
 import ContactUs from '@/components/ContactUs';
-import {baseUrl} from '@/lib/config';
+import {LoginFn} from '@/service/auth';
 import {useMutation} from '@tanstack/react-query';
-import axios from 'axios';
 import Link from 'next/link';
 import React, {useState} from 'react';
 
@@ -14,19 +13,12 @@ interface LoginProps {
 
 function Login() {
   const [phone, setPhone] = useState('');
-  const {mutate, error, isLoading} = useMutation({
-    mutationFn: (user: LoginProps) => {
-      return axios.post(`${baseUrl}/user/add`, user);
-    },
-    onError: () => {
-      console.log('shoma bayad login');
-    },
-  });
-  const loginForm = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log('hi');
-    e.preventDefault();
 
-    mutate({phone});
+  const {mutate} = useMutation(() => LoginFn({phone}));
+
+  const loginForm = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    mutate();
   };
   return (
     <div>
