@@ -6,16 +6,17 @@ import {LoginFn} from '@/service/auth';
 import {useMutation} from '@tanstack/react-query';
 import Link from 'next/link';
 import React, {useState} from 'react';
-
-interface LoginProps {
-  phone: string;
-}
+import {useRouter} from 'next/navigation';
 
 function Login() {
   const [phone, setPhone] = useState('');
-
-  const {mutate} = useMutation(() => LoginFn({phone}));
-
+  const router = useRouter();
+  const {mutate} = useMutation(() => LoginFn({phone}), {
+    onSuccess: () => {
+      localStorage.setItem('phoneNumber', phone);
+      router.push('/confirmcode');
+    },
+  });
   const loginForm = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     mutate();
