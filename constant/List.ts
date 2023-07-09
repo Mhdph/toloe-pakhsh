@@ -56,3 +56,13 @@ export const ProfileLinkListItem = [
 ];
 
 export const FilterList = ['پربازدید', 'جدید', 'پرفروش', 'ارزان ترین', 'گران ترین'];
+
+export const sidebar = [
+  {name: 'سفارشات', url: '/dashboard/orders'},
+  {name: 'دسته بندی ها', url: '/dashboard/categories'},
+  {name: 'محصولات', url: '/dashboard/products'},
+  {name: 'دیدگاه ها', url: '/dashboard/comments'},
+  {name: 'کاربران', url: '/dashboard/users'},
+  {name: 'اسلایدر', url: '/dashboard/slider'},
+  {name: 'درباره طلوع پخش', url: '/dashboard/about'},
+];
