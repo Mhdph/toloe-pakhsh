@@ -16,14 +16,26 @@ function Account() {
           <ProfileInput label='نام خانوادگی*' placeholder='بدری' />
           <ProfileInput label='تاریخ تولد*' placeholder='۱۳۷۷/۰۳/۰۹' />
         </div>
+        <div className='md:flex md:justify-end'>
+          <button className='bg_primary w-full rounded-3xl py-2.5 text-xs font-extrabold text-white md:w-48'>
+            ذخیره تغییرات{' '}
+          </button>
+        </div>
         <hr className='my-6 border opacity-50' />
         <div className='flex flex-col gap-6 md:flex-row md:gap-12'>
-          <div>
-            <ProfileInput label=' شماره تلفن' placeholder='۰۹۲۳۲۵۳۲۹۱۳' />
-            <p className='mt-1 text-xs'>برای تغییر شماره تلفن ارسال کد اعتبار سنجی الزامی است</p>
+          <div className='flex flex-col gap-6 md:flex-row md:gap-12'>
+            <div>
+              <ProfileInput label=' شماره تلفن' placeholder='۰۹۲۳۲۵۳۲۹۱۳' />
+              <p className='mt-1 text-xs'>برای تغییر شماره تلفن ارسال کد اعتبار سنجی الزامی است</p>
+            </div>
+            <ProfileInput label='کد ملی' placeholder='ـ  ـ  ـ  ـ  ـ  ـ  ـ  ـ  ـ  ـ  ' />
+            <ProfileInput label='ایمیل' placeholder='com.----@-----' />
           </div>
-          <ProfileInput label='کد ملی' placeholder='ـ  ـ  ـ  ـ  ـ  ـ  ـ  ـ  ـ  ـ  ' />
-          <ProfileInput label='ایمیل' placeholder='com.----@-----' />
+        </div>
+        <div className='md:flex md:justify-end'>
+          <button className='bg_primary w-full rounded-3xl py-2.5 text-xs font-extrabold text-white md:w-48'>
+            ذخیره تغییرات{' '}
+          </button>
         </div>
         <hr className='my-6 border opacity-50' />
         <p className='text-2xl'>آدرس ۱</p>
