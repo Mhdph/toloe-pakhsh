@@ -1,4 +1,4 @@
-import { EditSvg } from '@/assets/svg';
+import {EditIcon} from '@/assets/Icons';
 import React from 'react';
 
 type Props = {
@@ -6,7 +6,7 @@ type Props = {
   placeholder: string;
 };
 
-function ProfileInput({ label, placeholder }: Props) {
+function ProfileInput({label, placeholder}: Props) {
   return (
     <div className='md:w-[304px]'>
       <label className='mb-1 text-xs font-black' htmlFor=''>
@@ -14,7 +14,7 @@ function ProfileInput({ label, placeholder }: Props) {
       </label>
       <div className='relative'>
         <div className='absolute left-2 top-2 pr-3'>
-          <EditSvg />
+          <EditIcon />
         </div>
         <input
           className='w-full rounded border border-gray-300 py-1.5 text-right outline-none placeholder:pr-1'
