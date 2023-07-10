@@ -37,3 +37,5 @@ export {default as FavouriteIcon} from './FavouriteIcon';
 export {default as HomeWhiteIcon} from './HomeWhiteIcon';
 export {default as InstagramDesktopIcon} from './InstagramDesktopIcon';
 export {default as TelegramDesktopIcon} from './TelegramDesktopIcon';
+export {default as PhoneBlackIcon} from './PhoneBlackIcon';
+export {default as AvatarBlackIcon} from './AvatarBlackIcon';
