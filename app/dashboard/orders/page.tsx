@@ -22,8 +22,8 @@ function page() {
           جست و جو
         </button>
       </div>
-      <Tabs defaultValue='all' className='mt-4 md:px-10'>
-        <TabsList className='flex justify-between gap-2 border-t border-main-red border-opacity-70'>
+      <Tabs defaultValue='all' className='mt-4'>
+        <TabsList className=' flex justify-between gap-2 border-t border-main-red border-opacity-70'>
           <TabsTrigger value='returned'> مرجوع شده</TabsTrigger>
           <hr className='h-6 border-l border-main-red border-opacity-40' />
           <TabsTrigger value='canceled'> لغو شده</TabsTrigger>

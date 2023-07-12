@@ -4,6 +4,10 @@ import MiddleIcon from '../ui/MiddleIcon';
 import ProductImage from '@/assets/tempImages/Product Photo.png';
 import shokolat from '@/assets/tempImages/shokolat.png';
 import Image from 'next/image';
+import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from '@/components/ui/Accordion';
+import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from '@/components/ui/Select';
+import ShoppingCard from '../ShoppingCard';
+import OrdersItem from './OrdersItem';
 
 function OrdersCard() {
   return (
@@ -36,6 +40,33 @@ function OrdersCard() {
           <Image src={ProductImage} className='h-20 w-20' alt='product photo' />
         </div>
         <hr className='my-4 border-b border-b-black-items border-opacity-10' />
+        <Accordion type='multiple'>
+          <AccordionItem className='border-none' value='item-1'>
+            <AccordionTrigger> تومان ۱۰۸,۰۰۰</AccordionTrigger>
+            <AccordionContent>
+              <OrdersItem />
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+        <hr className='my-4 border-b border-b-black-items border-opacity-10' />
+
+        <div className='grid w-full grid-cols-4'>
+          <div className='col-span-1'>
+            <button className='bg_primary w-40 rounded-3xl py-2.5 text-xs font-extrabold text-white md:w-48'>
+              ثبت
+            </button>
+          </div>
+          <Select>
+            <SelectTrigger className='col-span-3 w-full'>
+              <SelectValue placeholder='یک کیلو گرم' />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value='light'>Light</SelectItem>
+              <SelectItem value='dark'>Dark</SelectItem>
+              <SelectItem value='system'>System</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
       </div>
     </div>
   );
