@@ -11,7 +11,7 @@ import OrdersItem from './OrdersItem';
 
 function OrdersCard() {
   return (
-    <div className='rounded-xl border-2 border-main-red px-6 text-black-items'>
+    <div className='rounded-xl border border-main-red px-6 text-black-items'>
       <div className='py-4'>
         <div className='flex items-center justify-between'>
           <p>۱۴۰۲ / ۰۱ / ۲۷</p>

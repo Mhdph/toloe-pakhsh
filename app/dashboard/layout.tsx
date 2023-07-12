@@ -12,7 +12,7 @@ function ProfileLayout({children}: ProfileLayoutProps) {
         <div className='col-span-1 hidden md:inline'>
           <Sidebar />
         </div>
-        <div className='flex flex-col md:col-span-3'>{children}</div>
+        <div className='mt-4 flex flex-col md:col-span-3'>{children}</div>
       </div>
     </div>
   );
