@@ -2,7 +2,9 @@ lockfileVersion: 5.4
 
 specifiers:
   '@radix-ui/react-accordion': ^1.1.2
+  '@radix-ui/react-label': ^2.0.2
   '@radix-ui/react-select': ^1.2.2
+  '@radix-ui/react-slot': ^1.0.2
   '@radix-ui/react-switch': ^1.0.3
   '@radix-ui/react-tabs': ^1.0.4
   '@tanstack/react-query': ^4.29.19
@@ -32,7 +34,9 @@ specifiers:
 
 dependencies:
   '@radix-ui/react-accordion': 1.1.2_2ejdisobb7q4dn5gvncpcai4wu
+  '@radix-ui/react-label': 2.0.2_2ejdisobb7q4dn5gvncpcai4wu
   '@radix-ui/react-select': 1.2.2_2ejdisobb7q4dn5gvncpcai4wu
+  '@radix-ui/react-slot': 1.0.2_xomkljxbsahfbuzbqqeyw47ndm
   '@radix-ui/react-switch': 1.0.3_2ejdisobb7q4dn5gvncpcai4wu
   '@radix-ui/react-tabs': 1.0.4_2ejdisobb7q4dn5gvncpcai4wu
   '@tanstack/react-query': 4.29.19_biqbaboplfbrettd7655fr4n2y
@@ -543,6 +547,27 @@ packages:
       '@radix-ui/react-use-layout-effect': 1.0.1_xomkljxbsahfbuzbqqeyw47ndm
       '@types/react': 18.2.9
       react: 18.2.0
+    dev: false
+
+  /@radix-ui/react-label/2.0.2_2ejdisobb7q4dn5gvncpcai4wu:
+    resolution: {integrity: sha512-N5ehvlM7qoTLx7nWPodsPYPgMzA5WM8zZChQg8nyFJKnDO5WHdba1vv5/H6IO5LtJMfD2Q3wh1qHFGNtK0w3bQ==}
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.22.5
+      '@radix-ui/react-primitive': 1.0.3_2ejdisobb7q4dn5gvncpcai4wu
+      '@types/react': 18.2.9
+      '@types/react-dom': 18.2.4
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /@radix-ui/react-popper/1.1.2_2ejdisobb7q4dn5gvncpcai4wu:
