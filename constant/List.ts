@@ -63,6 +63,7 @@ export const sidebar = [
   {name: 'محصولات', url: '/dashboard/products'},
   {name: 'دیدگاه ها', url: '/dashboard/comments'},
   {name: 'کاربران', url: '/dashboard/users'},
+  {name: 'تخفیفات', url: '/dashboard/offers'},
   {name: 'اسلایدر', url: '/dashboard/slider'},
   {name: 'درباره طلوع پخش', url: '/dashboard/about'},
 ];
