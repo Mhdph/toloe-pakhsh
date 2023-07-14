@@ -12,7 +12,7 @@ const buttonVariants = cva(
         default:
           'bg-gradient-to-r from-[#f6622c] from-10% via-[#f55330] via-30% to-[#f02d3c] to-90% text-primary-foreground bg-gradient-to-r from-[#f6622c] from-10% via-[#f55330] via-30% to-[#f02d3c] to-90%',
         destructive: 'bg-white text-black hover:bg-destructive/90',
-        outline: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
+        outline: 'border border-main-red text-main-red bg-background hover:bg-accent hover:text-accent-foreground',
         secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
