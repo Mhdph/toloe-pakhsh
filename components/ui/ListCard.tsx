@@ -6,6 +6,7 @@ import {baseUrl} from '@/lib/config';
 import {useMutation} from '@tanstack/react-query';
 import axios from 'axios';
 import useProductStore from '@/store/zustand';
+import Link from 'next/link';
 
 interface dataItem {
   data: {
@@ -58,7 +59,7 @@ function ListCard({data: {brand, picture, name, unitCount, unit, price, id}}: da
   console.log(user);
   return (
     <div className='h-[264px] min-w-[170px] max-w-[170px] rounded-3xl border border-black-items border-opacity-40 bg-white md:h-[300px] md:min-w-[196px] md:max-w-[196px]'>
-      <div className='flex justify-center'>
+      <Link href={`/store/${id}`} className='flex justify-center'>
         <Image
           src={baseUrl + picture}
           alt='product image'
@@ -66,29 +67,31 @@ function ListCard({data: {brand, picture, name, unitCount, unit, price, id}}: da
           width={170}
           height={120}
         />
-      </div>
+      </Link>
       <div className='mt-2 px-2'>
-        <div className='flex items-center justify-between '>
-          <p className='text-xs font-black md:text-ca'>{name}</p>
-          <StarIcon />
-        </div>
-        <p className='mt-1 text-[10px] font-normal md:mt-2 md:text-xs'>{brand}</p>
-        <hr className=' my-1 md:my-2' />
-        <div className='flex items-center justify-between'>
-          <p className='text-xs text-black-items md:text-ca'>واحد:</p>
-          <div className='flex items-center'>
-            <p className='text-xs font-black md:text-ca'>{unitCount}</p>
-            <span className='mr-1 text-[10px] font-normal opacity-60 md:text-xs'>{unit}</span>
+        <Link href={`/store/${id}`}>
+          <div className='flex items-center justify-between '>
+            <p className='text-xs font-black md:text-ca'>{name}</p>
+            <StarIcon />
           </div>
-        </div>
-        <hr className=' my-1 md:my-2' />
-        <div className='flex items-center justify-between'>
-          <p className='text-xs text-black-items md:text-ca'>قیمت:</p>
-          <div className='flex items-center'>
-            <p className='text-xs font-black md:text-ca'>{price}</p>
-            <span className='mr-1 text-[10px] font-normal opacity-60 md:text-xs'>تومان</span>
+          <p className='mt-1 text-[10px] font-normal md:mt-2 md:text-xs'>{brand}</p>
+          <hr className=' my-1 md:my-2' />
+          <div className='flex items-center justify-between'>
+            <p className='text-xs text-black-items md:text-ca'>واحد:</p>
+            <div className='flex items-center'>
+              <p className='text-xs font-black md:text-ca'>{unitCount}</p>
+              <span className='mr-1 text-[10px] font-normal opacity-60 md:text-xs'>{unit}</span>
+            </div>
           </div>
-        </div>
+          <hr className=' my-1 md:my-2' />
+          <div className='flex items-center justify-between'>
+            <p className='text-xs text-black-items md:text-ca'>قیمت:</p>
+            <div className='flex items-center'>
+              <p className='text-xs font-black md:text-ca'>{price}</p>
+              <span className='mr-1 text-[10px] font-normal opacity-60 md:text-xs'>تومان</span>
+            </div>
+          </div>
+        </Link>
         <div className='mt-2 flex items-center gap-2 md:mt-3 md:justify-center'>
           <div className='flex h-9 w-9 items-center justify-center rounded-full border border-[#F6602D] md:h-10 md:w-10'>
             <div className=''>
