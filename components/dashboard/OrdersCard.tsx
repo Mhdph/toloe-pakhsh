@@ -58,12 +58,14 @@ function OrdersCard() {
           </div>
           <Select>
             <SelectTrigger className='col-span-3 w-full'>
-              <SelectValue placeholder='یک کیلو گرم' />
+              <SelectValue placeholder='وضعیت ارسال' />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value='light'>Light</SelectItem>
-              <SelectItem value='dark'>Dark</SelectItem>
-              <SelectItem value='system'>System</SelectItem>
+              <SelectItem value='sending'>در حال ارسال</SelectItem>
+              <SelectItem value='Posted'>ارسال شده</SelectItem>
+              <SelectItem value='delivered'>تحویل شده</SelectItem>
+              <SelectItem value='canceled'> لفو شده</SelectItem>
+              <SelectItem value='returned'> مرجوع شده</SelectItem>
             </SelectContent>
           </Select>
         </div>
