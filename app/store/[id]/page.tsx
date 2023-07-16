@@ -7,6 +7,7 @@ import {FavouriteIcon, MiniBucketIcon, MinusIcon, PlusIcon, ShareIcon} from '@/a
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/Tabs';
 import ContactUs from '@/components/ContactUs';
 import {getOneProduct} from '@/service/product';
+import Comments from '@/components/Comments';
 interface productData {
   id: number;
   name: string;
@@ -113,7 +114,9 @@ async function SingleProduct({params: {id}}: {params: {id: number}}) {
               </div>
               <hr className='my-2 md:hidden' />
             </TabsContent>
-            <TabsContent value='comment'></TabsContent>
+            <TabsContent value='comment'>
+              <Comments />
+            </TabsContent>
             <TabsContent value='compare'></TabsContent>
           </Tabs>
         </div>
