@@ -3,6 +3,7 @@ import sohanOrder from '@/assets/tempImages/sohanOrder.png';
 import Image from 'next/image';
 import {AddCategories} from '@/components/dashboard/AddCategories';
 import {Button} from '@/components/ui/Button';
+import {EditCategories} from '@/components/dashboard/EditCategories';
 
 function page() {
   return (
@@ -29,7 +30,7 @@ function page() {
               <div className='w-2/5 rounded-lg border-b'>برچسب</div>
             </div>
             <div className='mt-6 flex justify-end'>
-              <Button className='w-40'>ویرایش</Button>
+              <EditCategories />
             </div>
           </div>
         </div>

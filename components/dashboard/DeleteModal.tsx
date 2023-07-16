@@ -27,9 +27,7 @@ const DeleteModal: React.FC<DeleteModalProps> = ({handleRemove}) => {
     <div>
       <Dialog>
         <DialogTrigger asChild>
-          <p className='flex cursor-pointer items-center px-2 py-1 text-sm capitalize text-orange-500 hover:bg-slate-100 dark:hover:bg-dark-table-header'>
-            حذف
-          </p>
+          <Button variant='outline'>حذف</Button>
         </DialogTrigger>
         {open ? (
           <DialogContent className='mt-60 sm:max-w-[425px] md:mt-0'>

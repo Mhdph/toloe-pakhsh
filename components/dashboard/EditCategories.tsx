@@ -8,7 +8,7 @@ import Image from 'next/image';
 import React from 'react';
 import DeleteModal from './DeleteModal';
 
-export function AddCategories() {
+export function EditCategories() {
   const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -56,7 +56,7 @@ export function AddCategories() {
             <Input id='name' placeholder='نام' className='col-span-3' />
           </div>
         </div>
-        <DialogFooter>
+        <DialogFooter className='flex items-center gap-2'>
           <Button type='submit'>ذخیره تغییرات</Button>
           <DeleteModal handleRemove={() => console.log('hi')} />
         </DialogFooter>
