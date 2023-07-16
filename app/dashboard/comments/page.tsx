@@ -4,6 +4,7 @@ import User from '@/assets/images/User profile.png';
 import {Button} from '@/components/ui/Button';
 import {StarIcon} from '@/assets/Icons';
 import Sohan from '@/assets/tempImages/sohan.png';
+import AdminComment from '@/components/dashboard/AdminComment';
 
 function page() {
   return (
@@ -29,11 +30,9 @@ function page() {
         <p className='text-sm font-black'>تافی</p>
         <p className='pb-2 text-sm font-normal'>تافی رز پنج ستاره دلبوث 3 کیلویی</p>
       </div>
-      <div className='col-span-1 flex flex-col justify-between p-3'>
+      <div className='col-span-1 flex flex-col items-center justify-between py-3'>
         <Button className='w-28'>تایید دیدگاه</Button>
-        <Button className='w-28' variant='outline'>
-          پاسخ
-        </Button>
+        <AdminComment />
       </div>
     </div>
   );
