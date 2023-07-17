@@ -12,7 +12,7 @@ export async function getAllProduct() {
 
 //get one product
 export async function getOneProduct(productId: number) {
-  const res = await fetch(`${baseUrl}/product/${productId}`);
+  const res = await fetch(`${baseUrl}/product/getbyid/${productId}`);
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }
