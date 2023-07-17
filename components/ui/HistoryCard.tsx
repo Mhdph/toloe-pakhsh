@@ -1,4 +1,4 @@
-import { ArrowDownSvg } from '@/assets/svg';
+import {ArrowDownIcon} from '@/assets/Icons';
 import React from 'react';
 import bassteshokolat from '@/assets/tempImages/bassteshokolat.png';
 import Image from 'next/image';
@@ -9,7 +9,7 @@ type Props = {
   className?: string;
 };
 
-function HistoryCard({ color = 'primary', className, ...rest }: Props) {
+function HistoryCard({color = 'primary', className, ...rest}: Props) {
   const colors = {
     primary: 'bg-[#FBF2C0] ',
     delivered: 'bg-[#C0DFFB] text-[#213664]',
@@ -37,7 +37,7 @@ function HistoryCard({ color = 'primary', className, ...rest }: Props) {
       <div className='flex items-center justify-between'>
         <div className='flex h-9 w-9 items-center justify-center rounded-full bg-white shadow-ca'>
           <div className=''>
-            <ArrowDownSvg />
+            <ArrowDownIcon />
           </div>
         </div>
         <button className='btn_primary px-12 py-1.5 text-xs font-extrabold text-white'>تکرار خرید</button>
