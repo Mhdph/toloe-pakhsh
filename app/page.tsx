@@ -7,7 +7,11 @@ import ContactUs from '@/components/ContactUs';
 import OfferHero from '@/components/OfferHero';
 import {getAllProduct} from '@/service/product';
 import {getAllCategory} from '@/service/category';
+import {Metadata} from 'next';
 
+export const metadata: Metadata = {
+  title: 'طلوع پخش',
+};
 export default async function Home() {
   const data = await getAllProduct();
   const categoryData = await getAllCategory();
