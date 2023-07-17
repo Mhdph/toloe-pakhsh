@@ -7,7 +7,8 @@ import {useMutation} from '@tanstack/react-query';
 import axios from 'axios';
 import useProductStore from '@/store/zustand';
 import Link from 'next/link';
-
+// import {getCookie} from '@/helpers/Cookie';
+import Cookies from 'js-cookie';
 interface dataItem {
   data: {
     id: number;
@@ -29,7 +30,7 @@ function ListCard({data: {brand, picture, name, unitCount, unit, price, id}}: da
   const addProduct = useProductStore((state) => state.addProduct);
   const products = useProductStore((state) => state.products);
 
-  const user = localStorage.getItem('token');
+  const user = Cookies.get('token');
   const quantity = 0;
   const {mutate, error, isLoading} = useMutation({
     mutationFn: (newTodo: ProductProps) => {
@@ -55,8 +56,6 @@ function ListCard({data: {brand, picture, name, unitCount, unit, price, id}}: da
     addProduct(product);
   };
 
-  console.log(products);
-  console.log(user);
   return (
     <div className='h-[264px] min-w-[170px] max-w-[170px] rounded-3xl border border-black-items border-opacity-40 bg-white md:h-[300px] md:min-w-[196px] md:max-w-[196px]'>
       <Link href={`/store/${id}`} className='flex justify-center'>

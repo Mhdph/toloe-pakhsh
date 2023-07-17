@@ -7,13 +7,14 @@ import {useMutation} from '@tanstack/react-query';
 import Link from 'next/link';
 import React, {useState} from 'react';
 import {useRouter} from 'next/navigation';
+import Cookies from 'js-cookie';
 
 function Login() {
   const [phone, setPhone] = useState('');
   const router = useRouter();
   const {mutate} = useMutation(() => LoginFn({phone}), {
     onSuccess: () => {
-      localStorage.setItem('phoneNumber', phone);
+      Cookies.set('phoneNumber', phone);
       router.push('/confirmcode');
     },
   });
