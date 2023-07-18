@@ -70,7 +70,7 @@ function ListCard({data: {brand, picture, name, unitCount, unit, price, id}}: da
       <div className='mt-2 px-2'>
         <Link href={`/store/${id}`}>
           <div className='flex items-center justify-between '>
-            <p className='text-xs font-black md:text-ca'>{name}</p>
+            <p className='w-1/2 truncate text-xs font-black md:text-ca'>{name}</p>
             <StarIcon />
           </div>
           <p className='mt-1 text-[10px] font-normal md:mt-2 md:text-xs'>{brand}</p>
