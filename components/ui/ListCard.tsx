@@ -9,6 +9,7 @@ import useProductStore from '@/store/zustand';
 import Link from 'next/link';
 // import {getCookie} from '@/helpers/Cookie';
 import Cookies from 'js-cookie';
+import {toast} from 'react-hot-toast';
 interface dataItem {
   data: {
     id: number;
@@ -36,12 +37,11 @@ function ListCard({data: {brand, picture, name, unitCount, unit, price, id}}: da
     mutationFn: (newTodo: ProductProps) => {
       return axios.post(`${baseUrl}/cart-row/add`, newTodo);
     },
-    onError: () => {
-      console.log('shoma bayad login');
+    onError: (error: Error) => {
+      toast.error(error.message);
     },
   });
   const addCardRow = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log('hi');
     e.preventDefault();
 
     mutate({name, id, quantity: 1});
@@ -53,6 +53,7 @@ function ListCard({data: {brand, picture, name, unitCount, unit, price, id}}: da
       id,
       quantity,
     };
+    console.log(product);
     addProduct(product);
   };
 
@@ -98,7 +99,7 @@ function ListCard({data: {brand, picture, name, unitCount, unit, price, id}}: da
             </div>
           </div>
           <button
-            onClick={user === null ? handleAddToCart : addCardRow}
+            onClick={user === undefined ? handleAddToCart : addCardRow}
             disabled={isLoading}
             className='btn_primary flex w-[110px] items-center justify-around rounded-[18px] py-1 text-xs font-extrabold text-white md:w-[157px] md:py-2'
           >
