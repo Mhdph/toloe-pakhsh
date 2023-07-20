@@ -20,6 +20,7 @@ interface dataItem {
     picture: string;
     brand: string;
     exist: boolean;
+    off: number;
   };
 }
 export interface ProductProps {
@@ -27,7 +28,7 @@ export interface ProductProps {
   id: number;
   quantity: number;
 }
-function ListCard({data: {brand, picture, name, unitCount, unit, price, id}}: dataItem) {
+function ListCard({data: {brand, picture, name, unitCount, unit, price, id, off}}: dataItem) {
   const addProduct = useProductStore((state) => state.addProduct);
   const products = useProductStore((state) => state.products);
 
@@ -59,15 +60,23 @@ function ListCard({data: {brand, picture, name, unitCount, unit, price, id}}: da
 
   return (
     <div className='h-[264px] min-w-[170px] max-w-[170px] rounded-3xl border border-black-items border-opacity-40 bg-white md:h-[300px] md:min-w-[196px] md:max-w-[196px]'>
-      <Link href={`/store/${id}`} className='flex justify-center'>
-        <Image
-          src={baseUrl + picture}
-          alt='product image'
-          className='h-[120px] w-[170px] rounded-t-3xl border-b md:w-[223px]'
-          width={170}
-          height={120}
-        />
+      <Link href={`/store/${id}`} className=' flex justify-center'>
+        <div className='relative'>
+          {off !== 0 ? (
+            <div className='absolute left-2 top-1 flex h-9 w-9 items-center justify-center rounded-full bg-red-500 p-2 text-sm font-extrabold  text-white'>
+              {off}%
+            </div>
+          ) : null}
+          <Image
+            src={baseUrl + picture}
+            alt='product image'
+            className='h-[120px] w-[170px] rounded-t-3xl border-b md:w-[223px]'
+            width={170}
+            height={120}
+          />
+        </div>
       </Link>
+
       <div className='mt-2 px-2'>
         <Link href={`/store/${id}`}>
           <div className='flex items-center justify-between '>

@@ -7,4 +7,5 @@ export type ProductData = Array<{
   picture: string;
   brand: string;
   exist: boolean;
+  off: number;
 }>;

@@ -15,6 +15,7 @@ import useAddCategory from '@/service/category/useAddCategory';
 import axios from 'axios';
 import {baseUrl} from '@/lib/config';
 import {toast} from 'react-hot-toast';
+import Cookies from 'js-cookie';
 
 type CategorySchema = z.infer<typeof addCategorySchema>;
 
@@ -31,12 +32,18 @@ export function AddCategories() {
   const {mutate, isLoading} = useAddCategory();
 
   const addCategory: SubmitHandler<CategorySchema> = async (data) => {
+    const token = Cookies.get('token');
     if (selectedFile) {
       const formData = new FormData();
       formData.append('picture', selectedFile);
       formData.append('name', data.name);
       try {
-        await axios.post(`${baseUrl}/category/add`, formData);
+        await axios.post(`${baseUrl}/category/add`, formData, {
+          headers: {
+            Authorization: 'Bearer ' + token,
+          },
+        });
+        toast.success('کتگوری با موفقیت اضافه شد');
       } catch (error: any) {
         toast.error(error.message);
       }
