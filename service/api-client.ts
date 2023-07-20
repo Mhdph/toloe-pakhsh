@@ -1,4 +1,5 @@
 import axios, {AxiosRequestConfig} from 'axios';
+import Cookies from 'js-cookie';
 
 export interface FetchResponse<T> {
   count: number;
@@ -10,7 +11,7 @@ const axiosInstance = axios.create({
   baseURL: 'https://tolouapi.iran.liara.run',
 });
 
-const token = 'YOUR_TOKEN_HERE';
+const token = Cookies.get('token');
 axiosInstance.defaults.headers.common['Authorization'] = token;
 
 class APIClient<T> {
