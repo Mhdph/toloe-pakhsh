@@ -35,7 +35,7 @@ const SpecialOffer: React.FC<SpecialOfferProps> = ({data}) => {
         </div>
       </div>
       <div className='absolute top-0 mt-48 flex w-full items-center gap-3 overflow-x-scroll scroll-smooth whitespace-nowrap px-4 py-2 scrollbar-none md:mt-32 md:justify-center 2xl:gap-8'>
-        {data.slice(0, 5).map((item) => (
+        {data.map((item) => (
           <ListCard key={item.id} data={item} />
         ))}
       </div>

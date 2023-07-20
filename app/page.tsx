@@ -5,15 +5,13 @@ import SpecialOffer from '@/components/SpecialOffer';
 import AboutUs from '@/components/AboutUs';
 import ContactUs from '@/components/ContactUs';
 import OfferHero from '@/components/OfferHero';
-import {getAllProduct} from '@/service/product';
+import {getAllProduct, getAllOffProduct} from '@/service/product';
 import {getAllCategory} from '@/service/category';
-import {Metadata} from 'next';
 
-export const metadata: Metadata = {
-  title: 'طلوع پخش',
-};
 export default async function Home() {
   const data = await getAllProduct();
+  const dataOff = await getAllOffProduct();
+
   const categoryData = await getAllCategory();
   return (
     <main className='flex flex-col'>
@@ -21,7 +19,7 @@ export default async function Home() {
       <CategoryList data={categoryData.data} />
       <OfferHero />
       <ListItems data={data.data} link='' title='آخرین محصولات' />
-      <SpecialOffer data={data.data} />
+      <SpecialOffer data={dataOff.data} />
       <AboutUs />
       <ContactUs />
     </main>

@@ -10,6 +10,15 @@ export async function getAllProduct() {
   return res.json();
 }
 
+export async function getAllOffProduct() {
+  const res = await fetch(`${baseUrl}/product/offproducts`);
+  if (!res.ok) {
+    throw new Error('Failed to fetch data');
+  }
+
+  return res.json();
+}
+
 //get one product
 export async function getOneProduct(productId: number) {
   const res = await fetch(`${baseUrl}/product/getbyid/${productId}`);
