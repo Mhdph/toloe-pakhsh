@@ -21,10 +21,26 @@ type CategorySchema = z.infer<typeof addCategorySchema>;
 
 export function AddCategories() {
   const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     setSelectedFile(file || null);
+    if (file) {
+      const token = Cookies.get('token');
+      const formData = new FormData();
+      formData.append('file', file);
+      try {
+        const res = await axios.post(`${baseUrl}/upload`, formData, {
+          headers: {
+            Authorization: 'Bearer ' + token,
+          },
+        });
+        Cookies.set('picture', res.data);
+      } catch (err: any) {
+        toast.error(err.message);
+      }
+    }
   };
+
   const form = useForm<CategorySchema>({
     resolver: zodResolver(addCategorySchema),
   });
@@ -32,22 +48,10 @@ export function AddCategories() {
   const {mutate, isLoading} = useAddCategory();
 
   const addCategory: SubmitHandler<CategorySchema> = async (data) => {
-    const token = Cookies.get('token');
-    if (selectedFile) {
-      const formData = new FormData();
-      formData.append('picture', selectedFile);
-      formData.append('name', data.name);
-      try {
-        await axios.post(`${baseUrl}/category/add`, formData, {
-          headers: {
-            Authorization: 'Bearer ' + token,
-          },
-        });
-        toast.success('کتگوری با موفقیت اضافه شد');
-      } catch (error: any) {
-        toast.error(error.message);
-      }
-    }
+    mutate({
+      name: data.name,
+      picture: Cookies.get('picture')!,
+    });
   };
   return (
     <Dialog>
