@@ -38,3 +38,23 @@ export async function getFavoriteProduct() {
 
   return res.json();
 }
+
+// get all shirini product
+export async function getAllShiriniProduct() {
+  const res = await fetch(`${baseUrl}/product?categoryid=11`);
+  if (!res.ok) {
+    throw new Error('Failed to fetch data');
+  }
+
+  return res.json();
+}
+
+// get all torshi product
+export async function getAllTorshiProduct() {
+  const res = await fetch(`${baseUrl}/product?categoryid=10`);
+  if (!res.ok) {
+    throw new Error('Failed to fetch data');
+  }
+
+  return res.json();
+}

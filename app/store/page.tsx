@@ -1,20 +1,22 @@
 import ContactUs from '@/components/ContactUs';
-import LatestBlog from '@/components/LatestBlog';
 import ListItems from '@/components/ListItems';
 import SpecialOffer from '@/components/SpecialOffer';
 import SearchBarWF from '@/components/ui/SearchBarWF';
-import {getAllProduct} from '@/service/product';
+import {getAllOffProduct, getAllProduct, getAllShiriniProduct, getAllTorshiProduct} from '@/service/product';
 
 export default async function Store() {
   const data = await getAllProduct();
+  const dataOff = await getAllOffProduct();
+  const TorshiData = await getAllTorshiProduct();
+  const ShiriniData = await getAllShiriniProduct();
+
   return (
     <div>
       <SearchBarWF />
       <ListItems data={data.data} link='account' title='آخرین محصولات' />
-      <SpecialOffer data={data.data} />
-      {/* <ListItems link='account' title='شیرینی جات' />
-      <ListItems link='account' title='ترشی جات' /> */}
-      {/* <LatestBlog /> */}
+      <SpecialOffer data={dataOff.data} />
+      <ListItems data={ShiriniData.data} link='account' title='شیرینی جات' />
+      <ListItems data={TorshiData.data} link='account' title='ترشی جات' />
       <ContactUs />
     </div>
   );
