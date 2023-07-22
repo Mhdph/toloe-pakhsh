@@ -1,13 +1,14 @@
 export interface Discount {
   name: string;
-  expireTime: string;
+  expireTime: Date;
   enable: boolean;
-  precentage: number;
+  percentage: number;
   password: string;
 }
 export interface DiscountAdd {
   name?: string;
-  expireTime?: string;
-  precentage?: number;
+  expireTime?: Date;
+  percentage?: number;
   password?: string;
+  category: string;
 }

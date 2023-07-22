@@ -6,11 +6,10 @@ import {toast} from 'react-hot-toast';
 
 const apiClient = new APIClient<DiscountAdd>('discount/add');
 
-const useAddDiscount = (data: DiscountAdd) => {
+const useAddDiscount = () => {
   const queryClient = useQueryClient();
 
-  return useMutation<DiscountAdd, Error, Discount>({
-    mutationFn: () => apiClient.post(data),
+  return useMutation<DiscountAdd, Error, DiscountAdd>((data) => apiClient.post(data), {
     onSuccess: () => {
       queryClient.refetchQueries(CACHE_KEY_DISCOUNT);
       toast.success('تخفیف با موفقیت اضافه شد');
