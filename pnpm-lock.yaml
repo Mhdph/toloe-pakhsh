@@ -22,6 +22,7 @@ specifiers:
   eslint: 8.42.0
   eslint-config-next: 13.4.4
   js-cookie: ^3.0.5
+  jwt-decode: ^3.1.2
   lucide-react: ^0.241.0
   next: 13.4.4
   next-nprogress-bar: ^2.0.3
@@ -62,6 +63,7 @@ dependencies:
   eslint: 8.42.0
   eslint-config-next: 13.4.4_tizxnkcvjrb4cldxgwq5h3lj5u
   js-cookie: 3.0.5
+  jwt-decode: 3.1.2
   lucide-react: 0.241.0_react@18.2.0
   next: 13.4.4_biqbaboplfbrettd7655fr4n2y
   next-nprogress-bar: 2.0.3
@@ -2547,6 +2549,10 @@ packages:
     dependencies:
       array-includes: 3.1.6
       object.assign: 4.1.4
+    dev: false
+
+  /jwt-decode/3.1.2:
+    resolution: {integrity: sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==}
     dev: false
 
   /language-subtag-registry/0.3.22:

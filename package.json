@@ -29,6 +29,7 @@
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.4",
     "js-cookie": "^3.0.5",
+    "jwt-decode": "^3.1.2",
     "lucide-react": "^0.241.0",
     "next": "13.4.4",
     "next-nprogress-bar": "^2.0.3",
