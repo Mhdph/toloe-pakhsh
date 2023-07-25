@@ -2,11 +2,17 @@
 import LoginLeftBg from '@/assets/svg/LoginLeftBg';
 import LoginRightBg from '@/assets/svg/LoginRightBg';
 import ContactUs from '@/components/ContactUs';
-import {setCookie} from '@/helpers/Cookie';
 import {ConfirmCodeFn} from '@/service/auth';
 import {useMutation} from '@tanstack/react-query';
 import {useRouter} from 'next/navigation';
 import React from 'react';
+import jwt_decode from 'jwt-decode';
+import Cookies from 'js-cookie';
+
+interface token {
+  userId: string;
+  role: string;
+}
 
 function ConfirmCode() {
   const [isEmailSent, setIsEmailSent] = React.useState(true);
@@ -16,7 +22,9 @@ function ConfirmCode() {
   const router = useRouter();
   const {mutate, isLoading} = useMutation(() => ConfirmCodeFn({code, phone}), {
     onSuccess: (data) => {
-      setCookie('token', data.token, 1000);
+      Cookies.set('token', data.token);
+      const decoded: token = jwt_decode(data.token);
+      Cookies.set('userId', decoded.userId);
       router.push('/fulldetails');
     },
   });
