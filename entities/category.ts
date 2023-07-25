@@ -4,7 +4,8 @@ export interface AddCategoryChild {
 }
 
 export interface AddCategory {
-  formData: FormData;
+  name: string;
+  picture: string;
 }
 export interface Category {
   id: string;

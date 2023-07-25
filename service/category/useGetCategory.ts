@@ -5,10 +5,10 @@ import {CACHE_KEY_CATEGORY} from '../constants';
 
 const apiClient = new APIClient<User>('/category');
 
-const useUser = (slug: string) =>
+const useGetCategory = (slug: string) =>
   useQuery({
     queryKey: [CACHE_KEY_CATEGORY, slug],
     queryFn: () => apiClient.get(slug),
   });
 
-export default useUser;
+export default useGetCategory;

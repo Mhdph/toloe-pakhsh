@@ -51,7 +51,7 @@ export async function getAllShiriniProduct() {
 
 // get all torshi product
 export async function getAllTorshiProduct() {
-  const res = await fetch(`${baseUrl}/product?categoryid=10`);
+  const res = await fetch(`${baseUrl}/product?categoryName=ترشی جات`);
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }
