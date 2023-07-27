@@ -1,14 +1,36 @@
+'use client';
 import {CloseIcon, FilterIcon, UpDownIcon} from '@/assets/Icons';
 import ContactUs from '@/components/ContactUs';
 import SearchBar from '@/components/SearchBar';
 import SearchAccordion from '@/components/search/SearchAccordion';
 import SearchBrand from '@/components/search/SearchBrand';
-import SearchSlider from '@/components/search/SearchSlider';
 import Card from '@/components/ui/Card';
 import {Switch} from '@/components/ui/Switch';
 import {FilterList} from '@/constant/List';
+import useProducts from '@/service/product/useProducts';
+import useProductQueryStore from '@/store/search';
+import {useSearchParams} from 'next/navigation';
+import {useEffect} from 'react';
 
 function Search() {
+  const {setCategoryName, setOff} = useProductQueryStore();
+  const searchParams = useSearchParams();
+  useEffect(() => {
+    const search = searchParams.get('cat');
+    if (search) {
+      setCategoryName(search);
+    }
+  }, []);
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCategoryName(event.target.value);
+  };
+  const handleOnSaleChange = (checked: boolean) => {
+    console.log(checked);
+    setOff(checked);
+  };
+  const {data} = useProducts();
+
   return (
     <div>
       <SearchBar />
@@ -32,6 +54,7 @@ function Search() {
                 <input
                   className='w-full rounded border border-[#ACACAC] py-1.5 text-right outline-none  placeholder:pr-1'
                   type='text'
+                  onChange={handleSearchChange}
                 />
                 <p className='text-base font-bold text-[#ACACAC]'>تومان</p>
               </div>
@@ -55,7 +78,7 @@ function Search() {
             <hr className='my-4 border-b-[0.1px] border-black-items border-opacity-10' />
             <div className='flex items-center justify-between'>
               <p className='text-sm font-black text-[#F13739]'> دارای تخفیف</p>
-              <Switch />
+              <Switch onCheckedChange={handleOnSaleChange} />
             </div>
           </div>
         </div>
