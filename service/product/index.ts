@@ -11,7 +11,7 @@ export async function getAllProduct() {
 }
 
 export async function getAllOffProduct() {
-  const res = await fetch(`${baseUrl}/product/offproducts`);
+  const res = await fetch(`${baseUrl}/product?off=true`);
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }
