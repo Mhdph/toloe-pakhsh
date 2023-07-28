@@ -6,14 +6,12 @@ import {AddCart} from '@/entities/Cart';
 
 const apiClient = new APIClient<AddCart>('/cart-row/add');
 
-const useAddCart = (data: AddCart) => {
+const useAddCart = () => {
   const queryClient = useQueryClient();
 
-  return useMutation<AddCart, Error, AddCart>({
-    mutationFn: () => apiClient.post(data),
+  return useMutation<AddCart, Error, AddCart>((data) => apiClient.post(data), {
     onSuccess: () => {
       queryClient.refetchQueries(CACHE_KEY_CART);
-      toast.success('کتگوری با موفقیت اضافه شد');
     },
     onError: (error) => {
       toast.error(error.message);

@@ -1,15 +1,12 @@
 'use client';
-import {HeartIcon, StoreActiveIcon, StarIcon} from '@/assets/Icons';
-import React from 'react';
-import Image from 'next/image';
+import {HeartIcon, StarIcon, StoreActiveIcon} from '@/assets/Icons';
 import {baseUrl} from '@/lib/config';
-import {useMutation} from '@tanstack/react-query';
-import axios from 'axios';
 import useProductStore from '@/store/zustand';
+import Image from 'next/image';
 import Link from 'next/link';
-// import {getCookie} from '@/helpers/Cookie';
+import useAddCart from '@/service/cart/useAddCart';
 import Cookies from 'js-cookie';
-import {toast} from 'react-hot-toast';
+import {number} from 'zod';
 interface dataItem {
   data: {
     id: number;
@@ -27,35 +24,38 @@ export interface ProductProps {
   name: string;
   id: number;
   quantity: number;
+  brand: string;
+  unit: string;
+  unitCount: string;
+  price: number;
+  picture: string;
 }
 function ListCard({data: {brand, picture, name, unitCount, unit, price, id, off}}: dataItem) {
   const addProduct = useProductStore((state) => state.addProduct);
-  const products = useProductStore((state) => state.products);
-
-  const user = Cookies.get('token');
-  const quantity = 0;
-  const {mutate, error, isLoading} = useMutation({
-    mutationFn: (newTodo: ProductProps) => {
-      return axios.post(`${baseUrl}/cart-row/add`, newTodo);
-    },
-    onError: (error: Error) => {
-      toast.error(error.message);
-    },
-  });
-  const addCardRow = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-
-    mutate({name, id, quantity: 1});
-  };
-
+  // const user = Cookies.get('token');
+  const user = undefined;
+  const quantity = 1;
+  const {mutate, isLoading} = useAddCart();
   const handleAddToCart = () => {
     const product: ProductProps = {
       name,
       id,
       quantity,
+      unit,
+      unitCount,
+      brand,
+      price,
+      picture,
     };
     console.log(product);
     addProduct(product);
+  };
+  const addCardRow = () => {
+    mutate({
+      price,
+      productId: id,
+      count: quantity,
+    });
   };
 
   return (

@@ -11,9 +11,7 @@ export interface UpdateCart {
   count: number;
 }
 export interface AddCart {
-  name: string;
+  productId: number;
   count: number;
-  unit: string;
   price: number;
-  brand: string;
 }
