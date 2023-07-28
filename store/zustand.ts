@@ -1,10 +1,16 @@
-import { create } from "zustand";
-import { devtools } from "zustand/middleware";
+import {create} from 'zustand';
+import {devtools} from 'zustand/middleware';
 
 interface Product {
   id: number;
   name: string;
   quantity: number; // Add quantity property to the Product type
+  brand: string;
+  unit: string;
+  unitCount: string;
+  price: number;
+  picture: string;
+  totalPrice?: number; // Add totalPrice property to the Product type
 }
 
 interface ProductStore {
@@ -22,21 +28,20 @@ const useProductStore = create<ProductStore>()(
         const existingProduct = state.products.find((p) => p.id === product.id);
 
         if (existingProduct) {
-          // If product already exists, increase the quantity
           const updatedProduct = {
             ...existingProduct,
             quantity: existingProduct.quantity + 1,
+            totalPrice: (existingProduct.quantity + 1) * product.price,
           };
 
-          const updatedProducts = state.products.map((p) =>
-            p.id === product.id ? updatedProduct : p
-          );
+          const updatedProducts = state.products.map((p) => (p.id === product.id ? updatedProduct : p));
 
-          return { products: updatedProducts };
+          return {products: updatedProducts};
         }
 
-        // If product does not exist, add it with quantity = 1
-        return { products: [...state.products, { ...product, quantity: 1 }] };
+        return {
+          products: [...state.products, {...product, quantity: 1, totalPrice: product.price}],
+        };
       });
     },
 
@@ -45,15 +50,14 @@ const useProductStore = create<ProductStore>()(
         products: state.products.filter((product) => product.id !== productId),
       }));
     },
-
     updateProductQuantity: (productId, quantity) => {
       set((state) => ({
         products: state.products.map((product) =>
-          product.id === productId ? { ...product, quantity } : product
+          product.id === productId ? {...product, quantity, totalPrice: quantity * product.price} : product,
         ),
       }));
     },
-  }))
+  })),
 );
 
 export default useProductStore;
