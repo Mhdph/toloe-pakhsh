@@ -1,6 +1,13 @@
+'use client';
+import useProductStore from '@/store/zustand';
 import React from 'react';
 
 function Checkout() {
+  const products = useProductStore((state) => state.products);
+  const [totalPrice, setTotalPrice] = React.useState(0);
+  React.useEffect(() => {
+    setTotalPrice(products.reduce((total: number, item: any) => total + Number(item.totalPrice), 0));
+  }, [products]);
   return (
     <div className='h-[412px] md:rounded-3xl md:border md:border-red-500'>
       <p className='mt-12 text-center text-4xl font-semibold'> صورت حساب </p>
@@ -10,7 +17,7 @@ function Checkout() {
         <div className='flex items-center justify-between'>
           <p className='text-xs font-semibold text-black-items'>مجموع محصولات:</p>
           <div className='flex items-center'>
-            <p className='text-base font-semibold'>۱۳۸,۰۰۰</p>
+            <p className='text-base font-semibold'>{totalPrice}</p>
             <span className='mr-1 text-xs font-normal opacity-60'>تومان</span>
           </div>
         </div>{' '}

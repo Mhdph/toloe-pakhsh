@@ -10,8 +10,6 @@ function ShopingBasket() {
       <div className='md:flex'>
         <div className='mt-8 flex flex-col gap-2 px-4 md:flex-1'>
           <ShoppingCard />
-          <ShoppingCard />
-          <ShoppingCard />
         </div>
         <div className='md:flex md:flex-col md:gap-4'>
           <OffCode />
