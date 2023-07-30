@@ -12,3 +12,18 @@ export interface Category {
   name: string;
   picture: string;
 }
+
+export interface CategoryandChilds {
+  id: number;
+  name: string;
+  picture: string;
+  hierarchy: boolean;
+  chailds: Child[];
+}
+
+export interface Child {
+  id: number;
+  name: string;
+  picture: string;
+  hierarchy: boolean;
+}
