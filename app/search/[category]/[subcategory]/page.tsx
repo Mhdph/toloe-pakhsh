@@ -1,6 +1,8 @@
 import SearchPage from '@/components/SearchPage';
-function Search() {
+import React from 'react';
+
+function page() {
   return <SearchPage />;
 }
 
-export default Search;
+export default page;

@@ -1,6 +1,6 @@
 import SearchPage from '@/components/SearchPage';
-function Search() {
+function SearchWitchCategory() {
   return <SearchPage />;
 }
 
-export default Search;
+export default SearchWitchCategory;
