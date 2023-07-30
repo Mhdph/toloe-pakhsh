@@ -13,13 +13,14 @@ export default async function Home() {
   const dataOff = await getAllOffProduct();
 
   const categoryData = await getAllCategory();
+  console.log(dataOff.data.products);
   return (
     <main className='flex flex-col'>
       <HeroSection />
       <CategoryList data={categoryData.data} />
       <OfferHero />
-      <ListItems data={data.data} link='' title='آخرین محصولات' />
-      <SpecialOffer data={dataOff.data} />
+      <ListItems data={data.data.products} link='' title='آخرین محصولات' />
+      <SpecialOffer data={dataOff.data.products} />
       <AboutUs />
       <ContactUs />
     </main>
