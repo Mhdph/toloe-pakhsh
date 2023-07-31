@@ -1,3 +1,4 @@
+'use client';
 import {AvatarBlackIcon, PhoneBlackIcon} from '@/assets/Icons';
 import {Badge} from '../ui/Badge';
 import MiddleIcon from '../ui/MiddleIcon';
@@ -6,10 +7,28 @@ import shokolat from '@/assets/tempImages/shokolat.png';
 import Image from 'next/image';
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from '@/components/ui/Accordion';
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from '@/components/ui/Select';
-import ShoppingCard from '../ShoppingCard';
 import OrdersItem from './OrdersItem';
+import useUpdateOrder from '@/service/order/useUpdateOrder';
+import {z} from 'zod';
+import {UpdateOrderSchema} from '@/validation/orders';
+import {SubmitHandler, useForm} from 'react-hook-form';
+import {zodResolver} from '@hookform/resolvers/zod';
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from '@/components/ui/Form';
+import {Button} from '../ui/Button';
+type UpdateOrderSchema = z.infer<typeof UpdateOrderSchema>;
 
 function OrdersCard() {
+  const id = '123';
+  const {mutate} = useUpdateOrder(id);
+  const form = useForm<UpdateOrderSchema>({
+    resolver: zodResolver(UpdateOrderSchema),
+  });
+  const updateOrder: SubmitHandler<UpdateOrderSchema> = async (data) => {
+    mutate({
+      state: data.state,
+    });
+  };
+
   return (
     <div className='rounded-xl border border-main-red px-6 text-black-items'>
       <div className='py-4'>
@@ -50,25 +69,41 @@ function OrdersCard() {
         </Accordion>
         <hr className='my-4 border-b border-b-black-items border-opacity-10' />
 
-        <div className='grid w-full grid-cols-4'>
-          <div className='col-span-1'>
-            <button className='bg_primary w-40 rounded-3xl py-2.5 text-xs font-extrabold text-white md:w-48'>
-              ثبت
-            </button>
-          </div>
-          <Select>
-            <SelectTrigger className='col-span-3 w-full'>
-              <SelectValue placeholder='وضعیت ارسال' />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value='sending'>در حال ارسال</SelectItem>
-              <SelectItem value='Posted'>ارسال شده</SelectItem>
-              <SelectItem value='delivered'>تحویل شده</SelectItem>
-              <SelectItem value='canceled'> لفو شده</SelectItem>
-              <SelectItem value='returned'> مرجوع شده</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(updateOrder)} className='grid w-full grid-cols-4'>
+            <div className='col-span-1 w-full'>
+              <Button className='w-80' type='submit'>
+                ثبت
+              </Button>
+            </div>
+
+            <div className='col-span-3 w-full'>
+              <FormField
+                control={form.control}
+                name='state'
+                render={({field}) => (
+                  <FormItem>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder='مشخص کردن وضعیت سفارش' />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value='SENDING'>در حال ارسال</SelectItem>
+                        <SelectItem value='SENDED'>ارسال شده</SelectItem>
+                        <SelectItem value='CLOSE'>تحویل شده</SelectItem>
+                        <SelectItem value='REJECT'> لفو شده</SelectItem>
+                        <SelectItem value='DECLINE'> مرجوع شده</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+          </form>
+        </Form>
       </div>
     </div>
   );
