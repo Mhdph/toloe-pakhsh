@@ -8,6 +8,8 @@ import {useRouter} from 'next/navigation';
 import React from 'react';
 import jwt_decode from 'jwt-decode';
 import Cookies from 'js-cookie';
+import Button from '@/components/ui/Button';
+import useConfirmCode from '@/service/auth/useConfirmCode';
 
 interface token {
   userId: string;
@@ -19,18 +21,15 @@ function ConfirmCode() {
   const [resendCountdown, setResendCountdown] = React.useState(120);
   const [code, setCode] = React.useState('');
   const phone = '09158287807';
-  const router = useRouter();
-  const {mutate, isLoading} = useMutation(() => ConfirmCodeFn({code, phone}), {
-    onSuccess: (data) => {
-      Cookies.set('token', data.token);
-      const decoded: token = jwt_decode(data.token);
-      Cookies.set('userId', decoded.userId);
-      router.push('/fulldetails');
-    },
-  });
+
+  const {mutate, isLoading, error} = useConfirmCode();
+
   const sendCode = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    mutate();
+    mutate({
+      code,
+      phone,
+    });
   };
 
   React.useEffect(() => {
@@ -93,14 +92,11 @@ function ConfirmCode() {
 
               <div className='md:flex md:items-end md:justify-between'>
                 <div className='hidden md:inline'></div>
-                <button
-                  disabled={isLoading}
-                  onClick={sendCode}
-                  className='btn_primary mt-8 w-full py-3 text-xs font-extrabold text-white md:mt-3 md:w-40 md:px-6'
-                >
+                <Button isLoading={isLoading} onClick={sendCode} className='w-40'>
                   ادامه
-                </button>
+                </Button>
               </div>
+              <p className='fonts text-base text-red-500'>{error?.message}</p>
             </div>
             <p className='my-6 text-center text-xs font-normal'>{resendCountdown} ثانیه تا دریافت مجدد کد</p>
           </div>
