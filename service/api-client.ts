@@ -12,7 +12,7 @@ const axiosInstance = axios.create({
 });
 
 const token = Cookies.get('token');
-axiosInstance.defaults.headers.common['Authorization'] = token;
+axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
 class APIClient<T> {
   endpoint: string;
@@ -39,6 +39,9 @@ class APIClient<T> {
 
   update = (id: number | string, data: T) => {
     return axiosInstance.patch<T>(this.endpoint + '/' + id, data).then((res) => res.data);
+  };
+  patch = (data: T) => {
+    return axiosInstance.patch<T>(this.endpoint, data).then((res) => res.data);
   };
 }
 
