@@ -6,11 +6,10 @@ import {AddCategoryChild} from '@/entities/category';
 
 const apiClient = new APIClient<AddCategoryChild>('/parent-category/add');
 
-const useAddChildCategory = (data: AddCategoryChild) => {
+const useAddChildCategory = () => {
   const queryClient = useQueryClient();
 
-  return useMutation<AddCategoryChild, Error, AddCategoryChild>({
-    mutationFn: () => apiClient.post(data),
+  return useMutation<AddCategoryChild, Error, AddCategoryChild>((data) => apiClient.post(data), {
     onSuccess: () => {
       queryClient.refetchQueries(CACHE_KEY_CATEGORY);
       toast.success('کتگوری زیر شاخه با موفقیت اضافه شد');

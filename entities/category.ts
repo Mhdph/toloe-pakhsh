@@ -1,6 +1,6 @@
 export interface AddCategoryChild {
-  parentCategoryId: string;
-  name: string;
+  parentCategoryId: number;
+  chaildCategoryId: number;
 }
 
 export interface AddCategory {
