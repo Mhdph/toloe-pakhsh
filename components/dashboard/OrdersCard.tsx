@@ -72,7 +72,7 @@ function OrdersCard() {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(updateOrder)} className='grid w-full grid-cols-4'>
             <div className='col-span-1 w-full'>
-              <Button className='w-80' type='submit'>
+              <Button type='submit' className='w-40'>
                 ثبت
               </Button>
             </div>

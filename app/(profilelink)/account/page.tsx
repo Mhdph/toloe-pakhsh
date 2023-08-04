@@ -2,7 +2,7 @@
 import {EditIcon} from '@/assets/Icons';
 import {ProfilePicSvg} from '@/assets/svg';
 import BackgroundTitle from '@/components/ui/BackgroundTitle';
-import {Button} from '@/components/ui/Button';
+import Button from '@/components/ui/Button';
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from '@/components/ui/Form';
 import {Input} from '@/components/ui/Input';
 import User from '@/entities/user';
