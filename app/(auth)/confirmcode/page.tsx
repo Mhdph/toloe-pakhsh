@@ -2,19 +2,9 @@
 import LoginLeftBg from '@/assets/svg/LoginLeftBg';
 import LoginRightBg from '@/assets/svg/LoginRightBg';
 import ContactUs from '@/components/ContactUs';
-import {ConfirmCodeFn} from '@/service/auth';
-import {useMutation} from '@tanstack/react-query';
-import {useRouter} from 'next/navigation';
-import React from 'react';
-import jwt_decode from 'jwt-decode';
-import Cookies from 'js-cookie';
 import Button from '@/components/ui/Button';
 import useConfirmCode from '@/service/auth/useConfirmCode';
-
-interface token {
-  userId: string;
-  role: string;
-}
+import React from 'react';
 
 function ConfirmCode() {
   const [isEmailSent, setIsEmailSent] = React.useState(true);
