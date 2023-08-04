@@ -7,6 +7,7 @@ import SearchBrand from '@/components/search/SearchBrand';
 import Card from '@/components/ui/Card';
 import {Switch} from '@/components/ui/Switch';
 import {FilterList} from '@/constant/List';
+import useGetCategoriesAndChilds from '@/service/category/useGetCategoriesandChilds';
 import useProducts from '@/service/product/useProducts';
 import useProductQueryStore from '@/store/search';
 import {useSearchParams} from 'next/navigation';
@@ -14,6 +15,7 @@ import {useEffect} from 'react';
 
 function SearchPage() {
   const {setCategoryName, setOff} = useProductQueryStore();
+  const {data: categoryData} = useGetCategoriesAndChilds();
   const searchParams = useSearchParams();
   useEffect(() => {
     const search = searchParams.get('cat');
@@ -30,6 +32,8 @@ function SearchPage() {
     setOff(checked);
   };
   const {data} = useProducts();
+
+  console.log(categoryData?.data);
 
   return (
     <div>
