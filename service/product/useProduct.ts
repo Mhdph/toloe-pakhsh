@@ -5,10 +5,10 @@ import {Product} from '@/entities/product';
 
 const apiClient = new APIClient<Product>('/product');
 
-const useFavoriteProduct = (slug: number) =>
+const useProduct = (slug: number) =>
   useQuery({
     queryKey: [CACHE_KEY_PRODUCT],
     queryFn: () => apiClient.get(slug),
   });
 
-export default useFavoriteProduct;
+export default useProduct;

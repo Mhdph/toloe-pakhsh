@@ -8,7 +8,7 @@ const apiClient = new APIClient<Product>('/product/favorite');
 const useFavoriteProduct = () =>
   useQuery({
     queryKey: [CACHE_KEY_PRODUCT],
-    queryFn: () => apiClient.getAll,
+    queryFn: apiClient.getAll,
   });
 
 export default useFavoriteProduct;

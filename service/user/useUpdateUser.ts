@@ -9,7 +9,7 @@ const apiClient = new APIClient<UpdateUser>('/user/update');
 const useUpdateUser = () => {
   const queryClient = useQueryClient();
 
-  return useMutation<UpdateUser, Error, UpdateUser>((data) => apiClient.post(data), {
+  return useMutation<UpdateUser, Error, UpdateUser>((data) => apiClient.patch(data), {
     onSuccess: (data) => {
       queryClient.refetchQueries(CACHE_KEY_USER);
       toast.success('اطلاعات با موفقیت به روز رسانی شد');
