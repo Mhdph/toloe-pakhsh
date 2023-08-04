@@ -1,10 +1,12 @@
 'use client';
 import useProductStore from '@/store/zustand';
+import Cookies from 'js-cookie';
 import React from 'react';
 
 function Checkout() {
   const products = useProductStore((state) => state.products);
   const [totalPrice, setTotalPrice] = React.useState(0);
+  const token = Cookies.get('token');
   React.useEffect(() => {
     setTotalPrice(products.reduce((total: number, item: any) => total + Number(item.totalPrice), 0));
   }, [products]);
@@ -47,7 +49,11 @@ function Checkout() {
         </div>
       </div>
       <div className='mt-16 flex justify-center px-4 text-white md:justify-end'>
-        <button className='btn_primary h-9 w-full text-xs font-extrabold'>پرداخت</button>
+        {token === undefined ? (
+          <button className='btn_primary h-9 w-full text-xs font-extrabold'>برای تکمیل خرید خود لطفا وارد شوید</button>
+        ) : (
+          <button className='btn_primary h-9 w-full text-xs font-extrabold'>پرداخت</button>
+        )}
       </div>
     </div>
   );

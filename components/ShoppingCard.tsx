@@ -34,13 +34,13 @@ function ShoppingCard() {
           className='flex h-[184px] w-full items-center rounded-3xl border border-black-items border-opacity-40 bg-white md:h-[148px]'
         >
           <div className='relative'>
-            <div onClick={() => removeProduct(item.id)} className='absolute right-4 top-4 md:top-6'>
+            <div onClick={() => removeProduct(item.id)} className='absolute right-4 top-4 cursor-pointer md:top-6'>
               <CloseIcon />
             </div>
             <Image
               src={baseUrl + item.picture}
               width={100}
-              height={100}
+              height={140}
               alt='product image'
               className='h-full md:pr-2'
             />

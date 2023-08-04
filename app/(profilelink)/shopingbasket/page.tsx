@@ -5,6 +5,7 @@ import Checkout from '@/components/shoppingBasket/Checkout';
 import OffCode from '@/components/shoppingBasket/OffCode';
 import BackgroundTitle from '@/components/ui/BackgroundTitle';
 import useProductStore from '@/store/zustand';
+import Link from 'next/link';
 
 function ShopingBasket() {
   const products = useProductStore((state) => state.products);
@@ -23,7 +24,7 @@ function ShopingBasket() {
               <OffCode />
               <Checkout />
               <div className='background-gray mb-16 h-[222px] md:rounded-3xl'>
-                <div className='flex flex-col  gap-6 pt-1'>
+                <Link href='/history' className='flex flex-col  gap-6 pt-1'>
                   <p className='mt-12 text-center text-4xl font-semibold'>تکرار خرید</p>
                   <p className='text-cente text-center text-xs font-normal'>
                     شما میتوانید سفارشات پیشین خود را تکرار کنید.
@@ -31,7 +32,7 @@ function ShopingBasket() {
                   <div className='flex justify-center px-4  text-white md:justify-end'>
                     <button className='btn_primary h-9 w-full text-xs font-extrabold'>تاریخچه سفارشات</button>
                   </div>
-                </div>
+                </Link>
               </div>
             </div>
           </div>
