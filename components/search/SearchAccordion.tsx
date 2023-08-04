@@ -1,39 +1,47 @@
-import React from "react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/Accordion";
+'use client';
+import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from '@/components/ui/Accordion';
+import useGetCategoriesAndChilds from '@/service/category/useGetCategoriesandChilds';
+import useProductQueryStore from '@/store/search';
+import {useRouter} from 'next/navigation';
 
 function SearchAccordion() {
+  const {data: categoryData} = useGetCategoriesAndChilds();
+  const {setCategoryName} = useProductQueryStore();
+  const router = useRouter();
+
+  const handleCategorySearch = (item: string) => {
+    setCategoryName(item);
+    router.push(`/search/${item}`);
+  };
+  const handleSubCategorySearch = (item: string, sub: string) => {
+    setCategoryName(sub);
+    router.push(`/search/${item}/${sub}`);
+  };
   return (
-    <Accordion type="single" collapsible className="w-full">
-      <AccordionItem value="item-1">
-        <AccordionTrigger className="text-sm font-black text-[#F13739]">
-          دسته بندی
-        </AccordionTrigger>
+    <Accordion type='single' collapsible className='w-full'>
+      <AccordionItem value='item-1'>
+        <AccordionTrigger className='text-sm font-black text-[#F13739]'>دسته بندی</AccordionTrigger>
         <AccordionContent>
           <div>
-            <Accordion className="px-4" type="multiple">
-              <AccordionItem value="item-1">
-                <AccordionTrigger>شیرینی جات</AccordionTrigger>
-                <AccordionContent>
-                  Yes. It comes with default styles that matches the other
-                  aesthetic.
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
-            <hr className="border-[0.5px] border-black-items border-opacity-10" />
-            <Accordion className="px-4" type="multiple">
-              <AccordionItem value="item-2">
-                <AccordionTrigger>شکلات</AccordionTrigger>
-                <AccordionContent>
-                  Yes. Its animated by default, but you can disable it if you
-                  prefer.
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
+            {categoryData?.data.map((item) => (
+              <div key={item.id}>
+                <Accordion className='px-4' type='multiple'>
+                  <AccordionItem value='item-1'>
+                    <AccordionTrigger onClick={() => handleCategorySearch(item.name)}>{item.name}</AccordionTrigger>
+                    {item.chailds.length > 0 ? (
+                      <AccordionContent className='cursor-pointer'>
+                        {item.chailds.map((sub) => (
+                          <p key={sub.id} onClick={() => handleSubCategorySearch(item.name, sub.name)}>
+                            {sub.name}
+                          </p>
+                        ))}
+                      </AccordionContent>
+                    ) : null}{' '}
+                  </AccordionItem>
+                </Accordion>
+                <hr className='border-[0.5px] border-black-items border-opacity-10' />
+              </div>
+            ))}
           </div>
         </AccordionContent>
       </AccordionItem>
