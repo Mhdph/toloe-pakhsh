@@ -1,5 +1,5 @@
 'use client';
-import {Button} from '@/components/ui/Button';
+import Button from '@/components/ui/Button';
 import {Dialog, DialogContent, DialogFooter, DialogTrigger} from '@/components/ui/Dialog';
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from '@/components/ui/Select';
 import useAddCategory from '@/service/category/useAddCategory';
