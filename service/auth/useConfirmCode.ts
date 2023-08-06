@@ -24,7 +24,7 @@ const useConfirmCode = () => {
     (confirmCodeData) => {
       // Map properties from ConfirmCode to ConfirmUser
       const confirmUserData: ConfirmUser = {
-        token: confirmCodeData.code, // Use the 'code' property as 'token'
+        token: confirmCodeData.code,
       };
 
       return apiClient.post(confirmUserData);

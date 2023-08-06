@@ -3,23 +3,37 @@ import LoginLeftBg from '@/assets/svg/LoginLeftBg';
 import LoginRightBg from '@/assets/svg/LoginRightBg';
 import ContactUs from '@/components/ContactUs';
 import Button from '@/components/ui/Button';
-import useConfirmCode from '@/service/auth/useConfirmCode';
+import {ConfirmCodeFn} from '@/service/auth';
+import jwt_decode from 'jwt-decode';
+import Cookies from 'js-cookie';
+import {useMutation} from '@tanstack/react-query';
 import React from 'react';
+import {useRouter} from 'next/navigation';
+interface token {
+  userId: string;
+  role: string;
+}
 
 function ConfirmCode() {
   const [isEmailSent, setIsEmailSent] = React.useState(true);
   const [resendCountdown, setResendCountdown] = React.useState(120);
   const [code, setCode] = React.useState('');
   const phone = '09158287807';
+  const router = useRouter();
 
-  const {mutate, isLoading, error} = useConfirmCode();
+  const {mutate, isLoading, error} = useMutation(() => ConfirmCodeFn({code, phone}), {
+    onSuccess: (data) => {
+      Cookies.set('token', data.token);
+      Cookies.set('token', data.token);
+      const decoded: token = jwt_decode(data.token);
+      Cookies.set('userId', decoded.userId);
+      router.push('/fulldetails');
+    },
+  });
 
   const sendCode = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    mutate({
-      code,
-      phone,
-    });
+    mutate();
   };
 
   React.useEffect(() => {
@@ -86,7 +100,9 @@ function ConfirmCode() {
                   ادامه
                 </Button>
               </div>
-              <p className='fonts text-base text-red-500'>{error?.message}</p>
+              <p className='text-center text-base font-semibold text-red-500'>
+                {error && error instanceof Error ? error.message : null}
+              </p>
             </div>
             <p className='my-6 text-center text-xs font-normal'>{resendCountdown} ثانیه تا دریافت مجدد کد</p>
           </div>
