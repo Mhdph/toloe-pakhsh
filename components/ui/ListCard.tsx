@@ -32,8 +32,7 @@ export interface ProductProps {
 }
 function ListCard({data: {brand, picture, name, unitCount, unit, price, id, off}}: dataItem) {
   const addProduct = useProductStore((state) => state.addProduct);
-  // const user = Cookies.get('token');
-  const user = undefined;
+  const user = Cookies.get('token');
   const quantity = 1;
   const {mutate, isLoading} = useAddCart();
   const handleAddToCart = () => {
