@@ -3,12 +3,14 @@ import APIClient from '../api-client';
 import {CACHE_KEY_CART} from '../constants';
 import {Cart} from '@/entities/Cart';
 
-const apiClient = new APIClient<Cart>('/cart/openCart');
+type CartArray = Cart[]; // Array type based on the Cart interface
+
+const apiClient = new APIClient<CartArray>('/cart/listCartState?state=OPEN');
 
 const useGetCart = () =>
   useQuery({
     queryKey: [CACHE_KEY_CART],
-    queryFn: () => apiClient.getAll,
+    queryFn: apiClient.getAll,
   });
 
 export default useGetCart;

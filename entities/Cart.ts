@@ -1,14 +1,21 @@
 export interface Cart {
-  name: string;
+  cartId: number;
   count: number;
-  unit: string;
+  id: number;
   price: number;
-  totalPrice: number;
-  start: string;
-  brand: string;
+  productDescription: any;
+  productId: number;
+  productName: string;
+  productOff: number;
+  productPicture: string;
+  productStar: number;
+  productUnit: string;
+  productUnitCount: string;
+  sumRow: string;
 }
 export interface UpdateCart {
   count: number;
+  id: number;
 }
 export interface AddCart {
   productId: number;

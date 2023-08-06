@@ -4,17 +4,17 @@ import ShoppingCard from '@/components/ShoppingCard';
 import Checkout from '@/components/shoppingBasket/Checkout';
 import OffCode from '@/components/shoppingBasket/OffCode';
 import BackgroundTitle from '@/components/ui/BackgroundTitle';
+import useGetCart from '@/service/cart/useGetCart';
 import useProductStore from '@/store/zustand';
 import Link from 'next/link';
 
 function ShopingBasket() {
   const products = useProductStore((state) => state.products);
-
+  const {data} = useGetCart();
   return (
     <div>
-      {products.length > 0 ? (
+      {products.length > 0 || (data && data?.data.length > 0) ? (
         <>
-          {' '}
           <BackgroundTitle name='سبد خرید' />
           <div className='md:flex'>
             <div className='mt-8 flex flex-col gap-2 px-4 md:flex-1'>

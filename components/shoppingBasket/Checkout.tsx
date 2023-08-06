@@ -1,15 +1,27 @@
 'use client';
+import useGetCart from '@/service/cart/useGetCart';
 import useProductStore from '@/store/zustand';
 import Cookies from 'js-cookie';
 import React from 'react';
 
 function Checkout() {
+  // user login or not
+  const user = Cookies.get('token');
+
+  //zustand
   const products = useProductStore((state) => state.products);
-  const [totalPrice, setTotalPrice] = React.useState(0);
+  //backend
+  const {data} = useGetCart();
+  const [totalPrice, setTotalPrice] = React.useState<number | undefined>(0);
   const token = Cookies.get('token');
   React.useEffect(() => {
-    setTotalPrice(products.reduce((total: number, item: any) => total + Number(item.totalPrice), 0));
-  }, [products]);
+    user !== undefined
+      ? setTotalPrice(data && data.data[0].reduce((total: number, item: any) => total + Number(item.sumRow), 0))
+      : setTotalPrice(products.reduce((total: number, item: any) => total + Number(item.totalPrice), 0));
+  }, [products, data]);
+
+  // data backend
+
   return (
     <div className='h-[412px] md:rounded-3xl md:border md:border-red-500'>
       <p className='mt-12 text-center text-4xl font-semibold'> صورت حساب </p>
