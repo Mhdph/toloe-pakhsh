@@ -14,7 +14,7 @@ import {useSearchParams} from 'next/navigation';
 import {useEffect} from 'react';
 
 function SearchPage() {
-  const {setCategoryName, setOff} = useProductQueryStore();
+  const {setEndPrice, setOff,setExist,setStartPrice,} = useProductQueryStore();
   const {data: categoryData} = useGetCategoriesAndChilds();
   const searchParams = useSearchParams();
   useEffect(() => {
@@ -24,12 +24,17 @@ function SearchPage() {
     }
   }, []);
 
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCategoryName(event.target.value);
-  };
+  const handleStartChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setStartPrice(event.target.value);
+  }; 
+  const handleEndChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEndPrice(event.target.value);
+  }; 
   const handleOnSaleChange = (checked: boolean) => {
-    console.log(checked);
     setOff(checked);
+  }; 
+  const handleOnExistChange = (checked: boolean) => {
+    setExist(checked);
   };
   const {data} = useProducts();
 
@@ -58,7 +63,7 @@ function SearchPage() {
                 <input
                   className='w-full rounded border border-[#ACACAC] py-1.5 text-right outline-none  placeholder:pr-1'
                   type='text'
-                  onChange={handleSearchChange}
+                  onChange={handleStartChange}
                 />
                 <p className='text-base font-bold text-[#ACACAC]'>تومان</p>
               </div>
@@ -66,7 +71,8 @@ function SearchPage() {
                 <p className='text-base font-bold text-[#ACACAC]'>تا</p>
                 <input
                   className='w-full rounded border border-[#ACACAC] py-1.5 text-right outline-none  placeholder:pr-1'
-                  type='text'
+                  type='text' 
+                  onChange={handleEndChange}
                 />
                 <p className='text-base font-bold text-[#ACACAC]'>تومان</p>
               </div>
@@ -76,12 +82,12 @@ function SearchPage() {
             <hr className='mb-4 mt-1 border-b-[0.1px] border-black-items border-opacity-10' />
             <div className='flex items-center justify-between'>
               <p className='text-sm font-black text-[#F13739]'> موجود در انبار</p>
-              <Switch />
+              <Switch onCheckedChange={handleOnSaleChange}/>
             </div>{' '}
             <hr className='my-4 border-b-[0.1px] border-black-items border-opacity-10' />
             <div className='flex items-center justify-between'>
               <p className='text-sm font-black text-[#F13739]'> دارای تخفیف</p>
-              <Switch onCheckedChange={handleOnSaleChange} />
+              <Switch onCheckedChange={handleOnExistChange} />
             </div>
           </div>
         </div>
