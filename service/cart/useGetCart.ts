@@ -3,9 +3,9 @@ import APIClient from '../api-client';
 import {CACHE_KEY_CART} from '../constants';
 import {Cart} from '@/entities/Cart';
 
-type CartArray = Cart[]; // Array type based on the Cart interface
+type CartArray = Cart; // Array type based on the Cart interface
 
-const apiClient = new APIClient<CartArray>('/cart/listCartState?state=OPEN');
+const apiClient = new APIClient<CartArray>('/cart/listUserCart?state=OPEN');
 
 const useGetCart = () =>
   useQuery({
