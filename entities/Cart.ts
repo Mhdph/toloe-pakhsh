@@ -24,7 +24,7 @@ export interface Cart {
 export interface CartRow {
   count: string;
   price: number;
-  cartId: number;
+  cartRowId: number;
   sumRow: string;
   productId: number;
   sumRowOff: string;

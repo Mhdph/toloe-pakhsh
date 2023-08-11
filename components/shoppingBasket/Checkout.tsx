@@ -1,4 +1,5 @@
 'use client';
+import {persianNumeralToNumber} from '@/helpers/PersianToEnglish';
 import useGetCart from '@/service/cart/useGetCart';
 import useProductStore from '@/store/zustand';
 import Cookies from 'js-cookie';
@@ -12,13 +13,21 @@ function Checkout() {
   const products = useProductStore((state) => state.products);
   //backend
   const {data} = useGetCart();
-  const [totalPrice, setTotalPrice] = React.useState<number | undefined>(0);
+  const [totalPrice, setTotalPrice] = React.useState<string | undefined>('');
   const token = Cookies.get('token');
+
   React.useEffect(() => {
-    user !== undefined
-      ? setTotalPrice(data && data.data[0].reduce((total: number, item: any) => total + Number(item.sumRow), 0))
-      : setTotalPrice(products.reduce((total: number, item: any) => total + Number(item.totalPrice), 0));
-  }, [products, data]);
+    if (user !== undefined) {
+      if (data && data.data.length > 0) {
+        const sumRows = data.data[0].cartRows.map((cartItem) => persianNumeralToNumber(cartItem.sumRow));
+        const totalSum = sumRows.reduce((total, sumRow) => total + sumRow, 0);
+        setTotalPrice(totalSum.toLocaleString('fa-IR'));
+      }
+    } else {
+      const totalPriceFromProducts = products.reduce((total, item) => total + Number(item.totalPrice), 0);
+      setTotalPrice(totalPriceFromProducts.toString());
+    }
+  }, [user, products, data]);
 
   // data backend
 
