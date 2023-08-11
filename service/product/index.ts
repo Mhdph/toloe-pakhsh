@@ -41,7 +41,7 @@ export async function getFavoriteProduct() {
 
 // get all shirini product
 export async function getAllShiriniProduct() {
-  const res = await fetch(`${baseUrl}/product?categoryid=11`);
+  const res = await fetch(`${baseUrl}/product?categoryName=شیرینی جات`);
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }
@@ -51,7 +51,7 @@ export async function getAllShiriniProduct() {
 
 // get all torshi product
 export async function getAllTorshiProduct() {
-  const res = await fetch(`${baseUrl}/product?categoryName=ترشی جات`);
+  const res = await fetch(`${baseUrl}/product?categoryName=ترشیجات`);
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }
