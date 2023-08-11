@@ -19,7 +19,7 @@ const CategoryList: React.FC<CategoryListProps> = ({data}) => {
       <div className='flex flex-wrap items-center justify-center gap-2'>
         {data.map((item) => (
           <div key={item.name} className='category_card'>
-            <Link href={`/search?category=${item.name}`}>
+            <Link href={`/product-category/${item.name}`}>
               <Image
                 height={110}
                 width={110}
