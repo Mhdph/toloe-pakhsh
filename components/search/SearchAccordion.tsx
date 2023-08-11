@@ -11,11 +11,11 @@ function SearchAccordion() {
 
   const handleCategorySearch = (item: string) => {
     setCategoryName(item);
-    router.push(`/search/${item}`);
+    router.push(`/product-category/${item}`);
   };
   const handleSubCategorySearch = (item: string, sub: string) => {
     setCategoryName(sub);
-    router.push(`/search/${item}/${sub}`);
+    router.push(`/product-category/${item}/${sub}`);
   };
   return (
     <Accordion type='single' collapsible className='w-full'>
