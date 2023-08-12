@@ -48,7 +48,7 @@ function DashboardCategories() {
                   </div>
                 ))}
               </div>
-              <div className='mt-6 flex justify-end'>
+              <div className='mt-6 flex justify-end gap-3'>
                 <Button onClick={() => handleRemove(item.id)}>پاک کردن</Button>
 
                 <Button onClick={() => openModal(item.id)}>ویرایش</Button>

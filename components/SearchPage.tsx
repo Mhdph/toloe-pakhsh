@@ -10,15 +10,17 @@ import {FilterList} from '@/constant/List';
 import useGetCategoriesAndChilds from '@/service/category/useGetCategoriesandChilds';
 import useProducts from '@/service/product/useProducts';
 import useProductQueryStore from '@/store/search';
-import {useSearchParams} from 'next/navigation';
+import {useParams} from 'next/navigation';
 import {useEffect} from 'react';
 
 function SearchPage() {
-  const {setEndPrice, setOff,setExist,setStartPrice,} = useProductQueryStore();
+  const {setEndPrice, setOff, setExist, setStartPrice, setCategoryName} = useProductQueryStore();
+  const gameQuery = useProductQueryStore((s) => s.productQuery);
+  console.log(gameQuery);
   const {data: categoryData} = useGetCategoriesAndChilds();
-  const searchParams = useSearchParams();
+  const searchParams = useParams();
   useEffect(() => {
-    const search = searchParams.get('cat');
+    const search = decodeURIComponent(searchParams.category || '');
     if (search) {
       setCategoryName(search);
     }
@@ -26,19 +28,17 @@ function SearchPage() {
 
   const handleStartChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setStartPrice(event.target.value);
-  }; 
+  };
   const handleEndChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEndPrice(event.target.value);
-  }; 
+  };
   const handleOnSaleChange = (checked: boolean) => {
     setOff(checked);
-  }; 
+  };
   const handleOnExistChange = (checked: boolean) => {
     setExist(checked);
   };
   const {data} = useProducts();
-
-  console.log(categoryData?.data);
 
   return (
     <div>
@@ -71,7 +71,7 @@ function SearchPage() {
                 <p className='text-base font-bold text-[#ACACAC]'>تا</p>
                 <input
                   className='w-full rounded border border-[#ACACAC] py-1.5 text-right outline-none  placeholder:pr-1'
-                  type='text' 
+                  type='text'
                   onChange={handleEndChange}
                 />
                 <p className='text-base font-bold text-[#ACACAC]'>تومان</p>
@@ -82,7 +82,7 @@ function SearchPage() {
             <hr className='mb-4 mt-1 border-b-[0.1px] border-black-items border-opacity-10' />
             <div className='flex items-center justify-between'>
               <p className='text-sm font-black text-[#F13739]'> موجود در انبار</p>
-              <Switch onCheckedChange={handleOnSaleChange}/>
+              <Switch onCheckedChange={handleOnSaleChange} />
             </div>{' '}
             <hr className='my-4 border-b-[0.1px] border-black-items border-opacity-10' />
             <div className='flex items-center justify-between'>
@@ -112,7 +112,7 @@ function SearchPage() {
           </div>
           <hr className='my-2 hidden border border-black-items border-opacity-10 md:inline' />
           <div className='filter_bg_sidebar hidden w-[120px] items-center justify-center gap-3 rounded-xl  px-3 py-1.5 md:flex'>
-            <p className='text-[10px]  font-normal text-black-items'>موجود در انبار</p>
+            <p className='text-[10px]  font-normal text-black-items'> {gameQuery.categoryName}</p>
             <CloseIcon />
           </div>
           <div className='mt-6 grid grid-cols-2 gap-y-2 pr-2.5 sm:grid-cols-2 md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5'>

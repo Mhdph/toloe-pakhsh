@@ -1,21 +1,20 @@
 'use client';
-import {Button} from '@/components/ui/Button';
+import Button from '@/components/ui/Button';
 import {Dialog, DialogContent, DialogFooter, DialogTrigger} from '@/components/ui/Dialog';
 import {Input} from '@/components/ui/Input';
-import {Label} from '@/components/ui/Label';
+import {baseUrl} from '@/lib/config';
+import useAddCategory from '@/service/category/useAddCategory';
+import {addCategorySchema} from '@/validation/category';
+import {zodResolver} from '@hookform/resolvers/zod';
 import {DialogTitle} from '@radix-ui/react-dialog';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 import Image from 'next/image';
 import React from 'react';
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from '../ui/Form';
 import {SubmitHandler, useForm} from 'react-hook-form';
-import {zodResolver} from '@hookform/resolvers/zod';
-import {z} from 'zod';
-import {addCategorySchema} from '@/validation/category';
-import useAddCategory from '@/service/category/useAddCategory';
-import axios from 'axios';
-import {baseUrl} from '@/lib/config';
 import {toast} from 'react-hot-toast';
-import Cookies from 'js-cookie';
+import {z} from 'zod';
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from '../ui/Form';
 
 type CategorySchema = z.infer<typeof addCategorySchema>;
 
@@ -34,7 +33,8 @@ export function AddCategories() {
             Authorization: 'Bearer ' + token,
           },
         });
-        Cookies.set('picture', res.data);
+        console.log(res);
+        Cookies.set('picture', res.data.imagePath.imagePath);
       } catch (err: any) {
         toast.error(err.message);
       }
@@ -53,6 +53,7 @@ export function AddCategories() {
       picture: Cookies.get('picture')!,
     });
   };
+
   return (
     <Dialog>
       <DialogTrigger asChild>
