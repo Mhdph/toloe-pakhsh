@@ -18,8 +18,8 @@ export default async function Home() {
       <HeroSection />
       <CategoryList data={categoryData.data} />
       <OfferHero />
-      <ListItems data={data.data.products} link='' title='آخرین محصولات' />
-      <SpecialOffer data={dataOff.data.products} />
+      <ListItems data={data.data} link='' title='آخرین محصولات' />
+      <SpecialOffer data={dataOff.data} />
       <AboutUs />
       <ContactUs />
     </main>
