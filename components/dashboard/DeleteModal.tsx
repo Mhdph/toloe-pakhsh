@@ -1,56 +1,40 @@
-import React, {useState} from 'react';
+'use client';
+import React from 'react';
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/Dialog';
-import {DialogClose} from '@radix-ui/react-dialog';
-import {Button} from '../ui/Button';
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/AlertDialog';
+import Button from '@/components/ui/Button';
 
-type DeleteModalProps = {
-  handleRemove: () => void;
-};
+interface DeleteModalProps {
+  deleteFn: VoidFunction;
+}
 
-const DeleteModal: React.FC<DeleteModalProps> = ({handleRemove}) => {
-  const [open, setOpen] = useState(true);
-
-  const handleAction = () => {
-    setOpen(false);
-    handleRemove();
-  };
-
+function DeleteModal({deleteFn}: DeleteModalProps) {
   return (
-    <div>
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button variant='outline'>حذف</Button>
-        </DialogTrigger>
-        {open ? (
-          <DialogContent className='mt-60 sm:max-w-[425px] md:mt-0'>
-            <DialogHeader>
-              <DialogTitle>ایا از انجام این عملیات مطمعن هستید؟</DialogTitle>
-              <DialogDescription>
-                با تایید این عملیات ممکن است داده ها از سرور پاک شود و قابل بازگشت نباشد
-              </DialogDescription>
-            </DialogHeader>
-            <DialogFooter className='flex flex-col gap-2 md:flex-row'>
-              <DialogClose asChild>
-                <Button variant='outline' type='submit'>
-                  انصراف
-                </Button>
-              </DialogClose>
-              <Button onClick={handleAction} type='submit'>
-                ذخیره تغییرات{' '}
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-        ) : null}
-      </Dialog>
-    </div>
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button variant='outline'>پاک کردن</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>آیا مطمعن هستید؟</AlertDialogTitle>
+          <AlertDialogDescription>با انجام این عملیات داده ها پاک شده و قابل دسترسی نخواهند بود</AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter className='flex items-center gap-2'>
+          <AlertDialogCancel>بازگشت</AlertDialogCancel>
+          <AlertDialogAction onClick={deleteFn}>ادامه</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
-};
+}
+
 export default DeleteModal;
