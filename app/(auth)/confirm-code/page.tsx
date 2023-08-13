@@ -18,16 +18,16 @@ function ConfirmCode() {
   const [isEmailSent, setIsEmailSent] = React.useState(true);
   const [resendCountdown, setResendCountdown] = React.useState(120);
   const [code, setCode] = React.useState('');
-  const phone = '09158287807';
+  const userId = +Cookies.get('userId')!;
   const router = useRouter();
 
-  const {mutate, isLoading, error} = useMutation(() => ConfirmCodeFn({code, phone}), {
+  const {mutate, isLoading, error} = useMutation(() => ConfirmCodeFn({code, userId}), {
     onSuccess: (data) => {
       Cookies.set('token', data.token);
       Cookies.set('token', data.token);
       const decoded: token = jwt_decode(data.token);
       Cookies.set('userId', decoded.userId);
-      router.push('/fulldetails');
+      router.push('/full-details');
     },
   });
 
