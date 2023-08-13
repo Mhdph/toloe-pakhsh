@@ -7,4 +7,5 @@ export interface Product {
   picture: string;
   brand: string;
   exist: boolean;
+  off: number;
 }

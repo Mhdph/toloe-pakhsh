@@ -91,7 +91,7 @@ function SearchPage() {
             </div>
           </div>
         </div>
-        <div className=' w-full flex-col justify-center md:flex'>
+        <div className=' w-full flex-col md:flex'>
           <div className='hidden justify-between md:flex'>
             <div className='flex items-center gap-6'>
               <div className='flex items-center gap-2'>
@@ -106,7 +106,7 @@ function SearchPage() {
               ))}
             </div>
             <div className='flex gap-6 text-ca font-normal text-black-items'>
-              <p>۲۷۴ نتیجه یافت شد</p>
+              <p>{data?.count} نتیجه یافت شد</p>
               <p className='tracking-widest'> صفحه ۱ / ۱۶</p>
             </div>
           </div>
@@ -116,18 +116,11 @@ function SearchPage() {
             <CloseIcon />
           </div>
           <div className='mt-6 grid grid-cols-2 gap-y-2 pr-2.5 sm:grid-cols-2 md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5'>
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
+            {data?.data.map((item) => (
+              <div key={item.id}>
+                <Card data={item} />
+              </div>
+            ))}
           </div>
         </div>
       </div>

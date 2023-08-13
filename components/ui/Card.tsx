@@ -1,52 +1,75 @@
-import React from "react";
-import Product from "@/assets/tempImages/Product.png";
-import Image from "next/image";
-import { HeartIcon, StarIcon, StoreActiveIcon } from "@/assets/Icons";
-function Card() {
+import {HeartIcon, StarIcon, StoreActiveIcon} from '@/assets/Icons';
+import {baseUrl} from '@/lib/config';
+import Image from 'next/image';
+import Link from 'next/link';
+import Button from './Button';
+
+interface dataItem {
+  data: {
+    id: number;
+    name: string;
+    unit: string;
+    unitCount: string;
+    price: number;
+    picture: string;
+    brand: string;
+    exist: boolean;
+    off: number;
+  };
+}
+
+function Card({data: {brand, picture, name, unitCount, unit, price, id, off}}: dataItem) {
   return (
-    <div className=" min-w-[175px] max-w-[180px] rounded-3xl border border-black-items border-opacity-40 bg-white md:h-[300px] md:min-w-[223px] md:max-w-[223px]">
-      <div className="flex justify-center">
-        <Image
-          src={Product}
-          alt="product image"
-          className="h-[120px] w-[170px] border-b md:w-[223px]"
-        />
-      </div>
-      <div className="mt-2 px-2">
-        <div className="flex items-center justify-between ">
-          <p className="text-xs font-black md:text-ca">آبنبات چوبی قلبی</p>
-          <StarIcon />
+    <div className=' min-w-[175px] max-w-[180px] rounded-3xl border border-black-items border-opacity-40 bg-white md:h-[300px] md:min-w-[223px] md:max-w-[223px]'>
+      <Link href={`/store/${id}`} className=' flex justify-center'>
+        <div className='relative'>
+          {off !== 0 ? (
+            <div className='absolute left-2 top-1 flex h-9 w-9 items-center justify-center rounded-full bg-red-500 p-2 text-sm font-extrabold  text-white'>
+              {off}%
+            </div>
+          ) : null}
+          <Image
+            src={baseUrl + picture}
+            alt='product image'
+            className='h-[120px] w-[170px] rounded-t-3xl border-b md:w-[223px]'
+            width={170}
+            height={120}
+          />
         </div>
-        <p className="mt-1 text-[10px] font-normal md:mt-2 md:text-xs">
-          طرح سگ ۲۴ عددی
-        </p>
-        <hr className=" my-1 md:my-2" />
-        <div className="flex items-center justify-between">
-          <p className="text-xs text-black-items md:text-ca">واحد:</p>
-          <div className="flex items-center">
-            <p className="text-xs font-black md:text-ca">۱</p>
-            <span className="mr-1 text-[10px] font-normal opacity-60 md:text-xs">
-              بسته
-            </span>
+      </Link>
+
+      <div className='mt-2 px-2'>
+        <Link href={`/store/${id}`}>
+          <div className='flex items-center justify-between '>
+            <p className='w-1/2 truncate text-xs font-black md:text-ca'>{name}</p>
+            <StarIcon />
           </div>
-        </div>
-        <hr className=" my-1 md:my-2" />
-        <div className="flex items-center justify-between">
-          <p className="text-xs text-black-items md:text-ca">قیمت:</p>
-          <div className="flex items-center">
-            <p className="text-xs font-black md:text-ca">۱۳۸,۰۰۰</p>
-            <span className="mr-1 text-[10px] font-normal opacity-60 md:text-xs">
-              تومان
-            </span>
+          <p className='mt-1 text-[10px] font-normal md:mt-2 md:text-xs'>{brand}</p>
+          <hr className=' my-1 md:my-2' />
+          <div className='flex items-center justify-between'>
+            <p className='text-xs text-black-items md:text-ca'>واحد:</p>
+            <div className='flex items-center'>
+              <p className='text-xs font-black md:text-ca'>{unitCount}</p>
+              <span className='mr-1 text-[10px] font-normal opacity-60 md:text-xs'>{unit}</span>
+            </div>
           </div>
-        </div>
-        <div className="mt-2 flex items-center gap-4 mb-2 md:mt-3 md:justify-center">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full border border-[#F6602D] md:h-10 md:w-10">
-            <div className="">
+          <hr className=' my-1 md:my-2' />
+          <div className='flex items-center justify-between'>
+            <p className='text-xs text-black-items md:text-ca'>قیمت:</p>
+            <div className='flex items-center'>
+              <p className='text-xs font-black md:text-ca'>{price}</p>
+              <span className='mr-1 text-[10px] font-normal opacity-60 md:text-xs'>تومان</span>
+            </div>
+          </div>
+        </Link>
+        <div className='mt-2 flex items-center gap-2 md:mt-3 md:justify-center'>
+          <div className='flex h-9 w-9 items-center justify-center rounded-full border border-[#F6602D] md:h-10 md:w-10'>
+            <div className=''>
               <HeartIcon />
             </div>
           </div>
-          <button className="btn_primary flex w-[110px] items-center justify-around rounded-[18px] py-1 text-xs font-extrabold text-white md:w-[157px] md:py-2">
+          <button className='btn_primary flex w-[110px] items-center justify-around rounded-[18px] py-1 text-xs font-extrabold text-white md:w-[157px] md:py-2'>
+            {' '}
             افزودن
             <StoreActiveIcon />
           </button>
