@@ -1,6 +1,7 @@
 import SearchBarSvg from '@/assets/svg/SearchBarSvg';
+import AddProduct from '@/components/dashboard/AddProduct';
 import DashboardProductCard from '@/components/dashboard/DashboardProductCard';
-import {Button} from '@/components/ui/Button';
+import Button from '@/components/ui/Button';
 import {Input} from '@/components/ui/Input';
 import React from 'react';
 
@@ -17,7 +18,14 @@ function page() {
         <Button className='w-48'> جست و جو</Button>
       </div>
       <hr className='my-5 border border-main-red opacity-60' />
-      <DashboardProductCard />
+      <div className='grid grid-cols-4'>
+        <div className='col-span-3'>
+          <DashboardProductCard />
+        </div>
+        <div className='col-span-1'>
+          <AddProduct />
+        </div>
+      </div>
     </div>
   );
 }
