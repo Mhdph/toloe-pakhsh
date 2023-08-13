@@ -8,14 +8,15 @@ import Link from 'next/link';
 import React, {useState} from 'react';
 import {useRouter} from 'next/navigation';
 import Cookies from 'js-cookie';
+import Button from '@/components/ui/Button';
 
 function Login() {
   const [phone, setPhone] = useState('');
   const router = useRouter();
-  const {mutate} = useMutation(() => LoginFn({phone}), {
+  const {mutate, isLoading} = useMutation(() => LoginFn({phone}), {
     onSuccess: () => {
       Cookies.set('phoneNumber', phone);
-      router.push('/confirmcode');
+      router.push('/confirm-code');
     },
   });
   const loginForm = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -49,12 +50,9 @@ function Login() {
               </div>
               <div className='md:flex md:items-end md:justify-between'>
                 <div className='hidden md:inline'></div>
-                <button
-                  onClick={loginForm}
-                  className='btn_primary mt-8 w-full py-3 text-xs font-extrabold text-white md:mt-3 md:w-40 md:px-6'
-                >
+                <Button onClick={loginForm} isLoading={isLoading}>
                   ارسال کد تایید
-                </button>
+                </Button>
               </div>
             </div>
             <hr className='mb-6 mt-14 border-[0.5px] border-solid md:hidden' />

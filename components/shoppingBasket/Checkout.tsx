@@ -71,9 +71,13 @@ function Checkout() {
       </div>
       <div className='mt-16 flex justify-center px-4 text-white md:justify-end'>
         {token === undefined ? (
-          <button className='btn_primary h-9 w-full text-xs font-extrabold'>برای تکمیل خرید خود لطفا وارد شوید</button>
+          <button className='btn_primary h-9 w-full text-xs font-extrabold'>
+            <p>رای تکمیل خرید خود لطفا وارد شویب</p>د
+          </button>
         ) : (
-          <button className='btn_primary h-9 w-full text-xs font-extrabold'>پرداخت</button>
+          <button className='btn_primary h-9 w-full text-xs font-extrabold'>
+            <p>پرداخت</p>
+          </button>
         )}
       </div>
     </div>

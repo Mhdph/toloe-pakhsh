@@ -68,7 +68,7 @@ function ShoppingCard() {
         <>
           {data?.data[0].cartRows.map((cartItem) => (
             <div
-              key={Math.random()}
+              key={cartItem.cartRowId}
               className='flex h-[184px] w-full items-center rounded-3xl border border-black-items border-opacity-40 bg-white md:h-[148px]'
             >
               <div className='relative'>

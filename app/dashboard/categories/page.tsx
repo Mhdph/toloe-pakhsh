@@ -8,6 +8,7 @@ import {baseUrl} from '@/lib/config';
 import Button from '@/components/ui/Button';
 import {AddChildCategories} from '@/components/dashboard/AddChildCategories';
 import useDeleteCategory from '@/service/category/useDeleteCategory';
+import DeleteModal from '@/components/dashboard/DeleteModal';
 
 function DashboardCategories() {
   const {data} = useGetCategoriesAndChilds();
@@ -35,7 +36,7 @@ function DashboardCategories() {
         <div key={item.id} className='bg-[#EAEBEB] p-4 text-black-items'>
           <div className='grid grid-cols-3 rounded-3xl border border-black-items border-opacity-20 bg-white'>
             <div className='col-span-1 flex flex-col items-center justify-center py-3'>
-              <img src={baseUrl + '/' + item.picture} alt='category photo' />
+              <Image src={baseUrl + item.picture} alt='category photo' height={220} width={220} />
             </div>
             <div className='col-span-2 flex flex-col px-4 py-4'>
               <p className='mt-2 text-3xl'>{item.name}</p>
@@ -49,8 +50,7 @@ function DashboardCategories() {
                 ))}
               </div>
               <div className='mt-6 flex justify-end gap-3'>
-                <Button onClick={() => handleRemove(item.id)}>پاک کردن</Button>
-
+                <DeleteModal deleteFn={() => handleRemove(item.id)} />
                 <Button onClick={() => openModal(item.id)}>ویرایش</Button>
               </div>
             </div>

@@ -1,5 +1,5 @@
 'use client';
-import {Button} from '@/components/ui/Button';
+import Button from '@/components/ui/Button';
 import {Input} from '@/components/ui/Input';
 import {Label} from '@/components/ui/Label';
 import MiddleIcon from '@/components/ui/MiddleIcon';

@@ -33,8 +33,7 @@ export function AddCategories() {
             Authorization: 'Bearer ' + token,
           },
         });
-        console.log(res);
-        Cookies.set('picture', res.data.imagePath.imagePath);
+        Cookies.set('picture', res.data.data.imagePath);
       } catch (err: any) {
         toast.error(err.message);
       }

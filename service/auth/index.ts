@@ -5,12 +5,12 @@ interface LoginProps {
 }
 
 interface ConfirmCode {
-  phone: string;
+  userId: number;
   code: string;
 }
 
 export const LoginFn = async (user: LoginProps) => {
-  const response = await api.post(`/user/add`, user);
+  const response = await api.post(`/one-code/add`, user);
   return response.data;
 };
 
