@@ -6,7 +6,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import useAddCart from '@/service/cart/useAddCart';
 import Cookies from 'js-cookie';
-import {number} from 'zod';
+import Button from './Button';
+import useAddFavouriteProduct from '@/service/product/useAddFavouriteProduct';
 interface dataItem {
   data: {
     id: number;
@@ -32,6 +33,7 @@ export interface ProductProps {
 }
 function ListCard({data: {brand, picture, name, unitCount, unit, price, id, off}}: dataItem) {
   const addProduct = useProductStore((state) => state.addProduct);
+  const {mutate: addtoFavourite} = useAddFavouriteProduct();
   const user = Cookies.get('token');
   const quantity = 1;
   const {mutate, isLoading} = useAddCart();
@@ -54,6 +56,11 @@ function ListCard({data: {brand, picture, name, unitCount, unit, price, id, off}
       price,
       productId: id,
       count: quantity,
+    });
+  };
+  const addFavourite = (id: number) => {
+    addtoFavourite({
+      favorite: [id],
     });
   };
 
@@ -100,20 +107,22 @@ function ListCard({data: {brand, picture, name, unitCount, unit, price, id, off}
             </div>
           </div>
         </Link>
-        <div className='mt-2 flex items-center gap-2 md:mt-3 md:justify-center'>
-          <div className='flex h-9 w-9 items-center justify-center rounded-full border border-[#F6602D] md:h-10 md:w-10'>
-            <div className=''>
+        <div className='mt-2 flex items-center gap-2 md:mt-3 md:justify-between'>
+          <div
+            onClick={() => addFavourite(id)}
+            className='flex h-9 w-9 items-center justify-center rounded-full border border-[#F6602D] md:h-10 md:w-10'
+          >
+            <div className='cursor-pointer'>
               <HeartIcon />
             </div>
           </div>
-          <button
+          <Button
             onClick={user === undefined ? handleAddToCart : addCardRow}
-            disabled={isLoading}
-            className='btn_primary flex w-[110px] items-center justify-around rounded-[18px] py-1 text-xs font-extrabold text-white md:w-[157px] md:py-2'
+            isLoading={isLoading}
+            className='flex w-[110px] items-center justify-around  md:w-[140px]'
           >
-            افزودن
-            <StoreActiveIcon />
-          </button>
+            افزودن <StoreActiveIcon />
+          </Button>
         </div>
       </div>
     </div>
