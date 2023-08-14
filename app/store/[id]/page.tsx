@@ -1,67 +1,57 @@
+'use client';
 import StarSvg from '@/assets/Icons/StarIcon';
 import Image from 'next/image';
 import React from 'react';
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from '@/components/ui/Select';
 import MiddleIcon from '@/components/ui/MiddleIcon';
 import {FavouriteIcon, MiniBucketIcon, MinusIcon, PlusIcon, ShareIcon} from '@/assets/Icons';
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/Tabs';
 import ContactUs from '@/components/ContactUs';
 import {getOneProduct} from '@/service/product';
 import Comments from '@/components/Comments';
-interface productData {
-  id: number;
-  name: string;
-  unit: string;
-  unitCount: string;
-  price: number;
-  picture: string;
-  brand: string;
-  exist: boolean;
-}
+import {baseUrl} from '@/lib/config';
+import ListItems from '@/components/ListItems';
+import useSameProduct from '@/service/product/useSameProduct';
+import useProduct from '@/service/product/useProduct';
 
-async function SingleProduct({params: {id}}: {params: {id: number}}) {
-  const data = await getOneProduct(id);
+function SingleProduct() {
+  const id = 1;
+  // const {data: mamad} = useProduct(id);
+  const {data: product} = useSameProduct();
+  console.log(product);
   return (
     <div>
-      <div>
+      {/* <div>
         <div className='md:mt-7 md:grid md:grid-cols-3 md:px-10'>
           <div className='md:col-span-1'>
-            <Image src={data.picture} alt={data.name} width={390} height={200} className='h-[200px]' />
+            <Image
+              src={baseUrl + data.data?.picture}
+              alt={data.data?.name!}
+              width={390}
+              height={200}
+              className='h-[200px]'
+            />
           </div>
           <div className='flex flex-col px-4 font-semibold md:col-span-2 md:rounded-3xl md:bg-white md:p-4 md:shadow-2xl'>
             <div className='flex items-center justify-between'>
-              <p className=' text-4xl md:text-5xl '>{data.name}</p>
+              <p className=' text-4xl md:text-5xl '>{data.data?.name}</p>
               <StarSvg />
             </div>
-            <p className='mt-3 text-base md:text-xl'>طرح سگ ۲۴ عددی</p>
+            <p className='mt-3 text-base md:text-xl'>{data.data?.description}</p>
             <hr className='my-2' />
             <div className='flex items-center justify-between'>
               <p className='text-base'>برند:</p>
-              <p className='text-xs font-normal text-black-items'>{data.brand}</p>
+              <p className='text-xs font-normal text-black-items'>{data.data?.brand}</p>
             </div>
             <hr className='my-2' />
             <div className='flex items-center justify-between'>
               <p className='text-base md:text-xl'>قیمت:</p>
               <div className='flex items-center'>
-                <p className='text-xs font-black md:text-ca'>{data.price}</p>
+                <p className='text-xs font-black md:text-ca'>{data.data?.price}</p>
                 <span className='mr-1 text-[10px] font-normal opacity-60 md:text-xs'>تومان</span>
               </div>
             </div>
             <hr className='my-2' />
-            <div className='flex items-center justify-between'>
-              <p className='text-base md:text-[20px]'>واحد:</p>
-              <Select>
-                <SelectTrigger className='w-[180px]'>
-                  <SelectValue placeholder='یک کیلو گرم' />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value='light'>Light</SelectItem>
-                  <SelectItem value='dark'>Dark</SelectItem>
-                  <SelectItem value='system'>System</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <hr className='my-2' />
+
             <div className='flex items-center justify-between'>
               <p className='text-base md:text-xl'>تعداد:</p>
               <div className='flex items-center gap-2'>
@@ -119,9 +109,10 @@ async function SingleProduct({params: {id}}: {params: {id: number}}) {
           <TabsContent value='compare'></TabsContent>
         </Tabs>
       </div>
+      <ListItems data={product?.data!} link='/' title='محصولات مشابه' />
       <div className='hidden md:inline'>
         <ContactUs />
-      </div>
+      </div> */}
     </div>
   );
 }
