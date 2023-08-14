@@ -7,7 +7,7 @@ import {ProductData} from '@/types';
 type ListItemsProps = {
   title: string;
   link: string;
-  data: ProductData;
+  data: ProductData | undefined;
 };
 
 const ListItems: React.FC<ListItemsProps> = ({title, link, data}) => {
@@ -18,7 +18,7 @@ const ListItems: React.FC<ListItemsProps> = ({title, link, data}) => {
         <p className='absolute right-6 top-3 mt-2 text-right text-2xl font-normal text-black-items'>{title}</p>
         <div>
           <div className='absolute top-5 my-12 flex w-full items-center gap-3 overflow-x-scroll scroll-smooth whitespace-nowrap px-4 py-2 scrollbar-none md:justify-center 2xl:gap-8'>
-            {data.slice(0, 5).map((item) => (
+            {data?.slice(0, 5).map((item) => (
               <ListCard key={item.id} data={item} />
             ))}
           </div>

@@ -13,7 +13,7 @@ interface Props {
 
 const QueryWrapper = ({children}: Props) => (
   <QueryClientProvider client={queryClient}>
-    <Toaster />
+    <Toaster position='top-left' />
     {children}
     <ProgressBar height='4px' color='#fe595e' options={{showSpinner: false}} shallowRouting />
   </QueryClientProvider>
