@@ -14,7 +14,7 @@ import {UpdateOrderSchema} from '@/validation/orders';
 import {SubmitHandler, useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from '@/components/ui/Form';
-import {Button} from '../ui/Button';
+import Button from '../ui/Button';
 type UpdateOrderSchema = z.infer<typeof UpdateOrderSchema>;
 
 function OrdersCard() {
