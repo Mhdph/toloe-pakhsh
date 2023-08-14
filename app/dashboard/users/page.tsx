@@ -1,7 +1,7 @@
 import React from 'react';
 import UserCard from '@/components/dashboard/UserCard';
 import SearchBarSvg from '@/assets/svg/SearchBarSvg';
-import {Button} from '@/components/ui/Button';
+import Button from '@/components/ui/Button';
 import {Input} from '@/components/ui/Input';
 
 function page() {

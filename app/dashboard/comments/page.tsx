@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import User from '@/assets/images/User profile.png';
-import {Button} from '@/components/ui/Button';
+import Button from '@/components/ui/Button';
 import {StarIcon} from '@/assets/Icons';
 import Sohan from '@/assets/tempImages/sohan.png';
 import AdminComment from '@/components/dashboard/AdminComment';
