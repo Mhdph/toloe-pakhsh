@@ -11,6 +11,7 @@ import Image from 'next/image';
 import MiddleIcon from './ui/MiddleIcon';
 import {persianNumeralToNumber} from '@/helpers/PersianToEnglish';
 import {Loader2} from 'lucide-react';
+import useDeleteCartRow from '@/service/cart/useDeleteCartRow';
 
 function ShoppingCard() {
   // user login or not
@@ -61,7 +62,13 @@ function ShoppingCard() {
       removeProduct(id);
     }
   };
-  console.log(data?.data[0].cartRows.map((item) => console.log(item)));
+
+  const {mutate: deleteRow} = useDeleteCartRow();
+
+  const deleteCardRow = (id: string | number) => {
+    deleteRow(id);
+  };
+
   return (
     <>
       {user !== undefined ? (
@@ -73,7 +80,7 @@ function ShoppingCard() {
             >
               <div className='relative'>
                 <div
-                  onClick={() => removeProduct(cartItem.cartRowId)}
+                  onClick={() => deleteCardRow(cartItem.cartRowId)}
                   className='absolute right-4 top-4 cursor-pointer md:top-6'
                 >
                   <CloseIcon />
