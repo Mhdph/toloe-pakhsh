@@ -22,7 +22,11 @@ function Favourite() {
               </div>
             </div>
             <div className='mt-6 grid grid-cols-2 gap-8 pr-2.5 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5'>
-              <Card />
+              {data?.data.map((item) => (
+                <div key={item.id}>
+                  <Card data={item} />
+                </div>
+              ))}{' '}
             </div>
           </>
         ))

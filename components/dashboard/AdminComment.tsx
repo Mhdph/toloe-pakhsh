@@ -1,6 +1,6 @@
 import React from 'react';
 import {Dialog, DialogContent, DialogFooter, DialogTrigger} from '@/components/ui/Dialog';
-import {Button} from '../ui/Button';
+import Button from '../ui/Button';
 import {Label} from '../ui/Label';
 import {Textarea} from '../ui/TextArea';
 
