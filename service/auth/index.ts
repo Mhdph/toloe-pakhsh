@@ -5,7 +5,7 @@ interface LoginProps {
 }
 
 interface ConfirmCode {
-  userId: number;
+  phone: string;
   code: string;
 }
 

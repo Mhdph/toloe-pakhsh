@@ -8,4 +8,5 @@ export interface Product {
   brand: string;
   exist: boolean;
   off: number;
+  description: string;
 }

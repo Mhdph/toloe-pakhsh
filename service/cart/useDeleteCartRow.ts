@@ -4,15 +4,15 @@ import {toast} from 'react-hot-toast';
 import {CACHE_KEY_CART} from '../constants';
 import {Cart} from '@/entities/Cart';
 
-const apiClient = new APIClient<Cart>('/cart-row/delete');
+const apiClient = new APIClient<string | number>('/cart-row/delete');
 
-const useDeleteCartRow = (id: string) => {
+const useDeleteCartRow = () => {
   const queryClient = useQueryClient();
 
-  return useMutation<Cart, Error, Cart>({
-    mutationFn: () => apiClient.delete(id),
-    onSuccess: () => {
+  return useMutation<string | number, Error, string | number>((data) => apiClient.delete(data), {
+    onSuccess: (data) => {
       queryClient.refetchQueries(CACHE_KEY_CART);
+      toast.success('اطلاعات با موفقیت به روز رسانی شد');
     },
     onError: (error) => {
       toast.error(error.message);
