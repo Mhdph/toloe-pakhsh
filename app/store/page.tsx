@@ -7,16 +7,15 @@ import {getAllOffProduct, getAllProduct, getAllShiriniProduct, getAllTorshiProdu
 export default async function Store() {
   const data = await getAllProduct();
   const dataOff = await getAllOffProduct();
-  const TorshiData = await getAllTorshiProduct();
-  const ShiriniData = await getAllShiriniProduct();
-  console.log(TorshiData);
+  // const TorshiData = await getAllTorshiProduct();
+  // const ShiriniData = await getAllShiriniProduct();
   return (
     <div>
       <SearchBarWF />
-      <ListItems data={data.data.products} link='account' title='آخرین محصولات' />
-      <SpecialOffer data={dataOff.data.products} />
-      <ListItems data={ShiriniData.data.products} link='account' title='شیرینی جات' />
-      <ListItems data={TorshiData.data.products} link='account' title='ترشی جات' />
+      <ListItems data={data.data} link='account' title='آخرین محصولات' />
+      <SpecialOffer data={dataOff.data} />
+      {/* <ListItems data={ShiriniData.data} link='account' title='شیرینی جات' /> */}
+      {/* <ListItems data={TorshiData.data} link='account' title='ترشی جات' /> */}
       <ContactUs />
     </div>
   );
