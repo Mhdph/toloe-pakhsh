@@ -1,10 +1,28 @@
+'use client';
 import LoginLeftBg from '@/assets/svg/LoginLeftBg';
 import LoginRightBg from '@/assets/svg/LoginRightBg';
 import ContactUs from '@/components/ContactUs';
+import Button from '@/components/ui/Button';
+import {LoginFn} from '@/service/auth';
+import {useMutation} from '@tanstack/react-query';
+import Cookies from 'js-cookie';
 import Link from 'next/link';
-import React from 'react';
+import {useRouter} from 'next/navigation';
+import React, {useState} from 'react';
 
-function login() {
+function Register() {
+  const [phone, setPhone] = useState('');
+  const router = useRouter();
+  const {mutate, isLoading} = useMutation(() => LoginFn({phone}), {
+    onSuccess: () => {
+      Cookies.set('phoneNumber', phone);
+      router.push('/confirm-code');
+    },
+  });
+  const registerForm = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    mutate();
+  };
   return (
     <div>
       <div className='h-[200px] bg-gray-200 md:hidden'></div>
@@ -24,6 +42,7 @@ function login() {
                 className='w-full rounded border border-gray-300 py-1.5 text-center outline-none'
                 type='text'
                 placeholder='-- -- --- --۰۹'
+                onChange={(e) => setPhone(e.target.value)}
               />
               <div className='mt-6 flex items-center gap-1'>
                 <input type='checkbox' className='rounded-2xl border-black' />
@@ -31,9 +50,13 @@ function login() {
               </div>
               <div className='md:flex md:items-end md:justify-between'>
                 <div className='hidden md:inline'></div>
-                <button className='btn_primary mt-8 w-full py-3 text-xs font-extrabold text-white md:mt-3 md:w-40 md:px-6'>
+                <Button
+                  onClick={registerForm}
+                  isLoading={isLoading}
+                  className='btn_primary mt-8 w-full py-3 text-xs font-extrabold text-white md:mt-3 md:w-40 md:px-6'
+                >
                   ارسال کد تایید
-                </button>
+                </Button>
               </div>
             </div>
             <hr className='mb-6 mt-14 border-[0.5px] border-solid md:hidden' />
@@ -58,4 +81,4 @@ function login() {
   );
 }
 
-export default login;
+export default Register;

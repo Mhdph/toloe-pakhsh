@@ -3,12 +3,13 @@ import LoginLeftBg from '@/assets/svg/LoginLeftBg';
 import LoginRightBg from '@/assets/svg/LoginRightBg';
 import ContactUs from '@/components/ContactUs';
 import Button from '@/components/ui/Button';
-import {ConfirmCodeFn} from '@/service/auth';
+import {ConfirmCodeFn, LoginFn} from '@/service/auth';
 import jwt_decode from 'jwt-decode';
 import Cookies from 'js-cookie';
 import {useMutation} from '@tanstack/react-query';
 import React from 'react';
 import {useRouter} from 'next/navigation';
+import {toast} from 'react-hot-toast';
 interface token {
   userId: string;
   role: string;
@@ -31,6 +32,19 @@ function ConfirmCode() {
     },
   });
 
+  const {mutate: loginMutate, isLoading: Loginloading} = useMutation(() => LoginFn({phone}), {
+    onSuccess: () => {
+      toast.success('کد با موفقیت ارسال شد');
+      // Set the email sent state to true
+      setIsEmailSent(true);
+      // Reset the resend countdown to 60 seconds
+      setResendCountdown(120);
+    },
+  });
+  const handleResendCode = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    loginMutate();
+  };
   const sendCode = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     mutate();
@@ -104,7 +118,16 @@ function ConfirmCode() {
                 {error && error instanceof Error ? error.message : null}
               </p>
             </div>
-            <p className='my-6 text-center text-xs font-normal'>{resendCountdown} ثانیه تا دریافت مجدد کد</p>
+
+            {isEmailSent ? (
+              <p className='my-6 text-center text-xs font-normal'>{resendCountdown} ثانیه تا دریافت مجدد کد</p>
+            ) : (
+              <div className='flex justify-center'>
+                <Button variant='outline' isLoading={Loginloading} onClick={handleResendCode}>
+                  ارسال مجدد
+                </Button>
+              </div>
+            )}
           </div>
         </div>
         <div className='relative left-80 hidden md:inline'>
