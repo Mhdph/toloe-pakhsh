@@ -1,6 +1,7 @@
 'use client';
 import {persianNumeralToNumber} from '@/helpers/PersianToEnglish';
 import useGetCart from '@/service/cart/useGetCart';
+import usePayment from '@/service/payment/usePayment';
 import useProductStore from '@/store/zustand';
 import Cookies from 'js-cookie';
 import React from 'react';
@@ -13,23 +14,44 @@ function Checkout() {
   const products = useProductStore((state) => state.products);
   //backend
   const {data} = useGetCart();
-  const [totalPrice, setTotalPrice] = React.useState<string | undefined>('');
+  const [totalPrice, setTotalPrice] = React.useState<string>('');
+  const [off, setOff] = React.useState<string>('۰');
+
   const token = Cookies.get('token');
 
   React.useEffect(() => {
     if (user !== undefined) {
       if (data && data.data.length > 0) {
-        const sumRows = data.data[0].cartRows.map((cartItem) => persianNumeralToNumber(cartItem.sumRow));
-        const totalSum = sumRows.reduce((total, sumRow) => total + sumRow, 0);
-        setTotalPrice(totalSum.toLocaleString('fa-IR'));
+        const sumRows = data.data[0].sumPrice;
+        setTotalPrice(sumRows);
+        const off = data && data.data[0].sumOff;
+        setOff(off);
       }
     } else {
       const totalPriceFromProducts = products.reduce((total, item) => total + Number(item.totalPrice), 0);
       setTotalPrice(totalPriceFromProducts.toString());
+      if (data && data.data.length > 0) {
+        const off = data && data.data[0].sumOff;
+
+        setOff(off);
+      }
     }
   }, [user, products, data]);
 
   // data backend
+  const cartId = data && data.data[0].id;
+  const {mutate} = usePayment();
+
+  const payment = () => {
+    mutate({
+      cartId,
+    });
+  };
+
+  const totalPriceNum = persianNumeralToNumber(totalPrice);
+  console.log(totalPriceNum);
+  const offNum = persianNumeralToNumber(off);
+  console.log(offNum);
 
   return (
     <div className='h-[412px] md:rounded-3xl md:border md:border-red-500'>
@@ -48,15 +70,15 @@ function Checkout() {
         <div className='flex items-center justify-between'>
           <p className='text-xs font-semibold  text-black-items'>تخفیف:</p>
           <div className='flex items-center'>
-            <p className='text-base font-semibold'>۱</p>
-            <span className='mr-1 text-xs font-normal opacity-60'>بسته</span>
+            <p className='text-base font-semibold'>{off}</p>
+            <span className='mr-1 text-xs font-normal opacity-60'>تومان</span>
           </div>
         </div>
         <hr className=' my-3' />
         <div className='flex items-center justify-between'>
           <p className='text-xs font-semibold  text-black-items'>حمل و نقل:</p>
           <div className='flex items-center'>
-            <p className='text-base font-semibold'>۱۳۸,۰۰۰</p>
+            <p className='text-base font-semibold'>۴۰,۰۰۰</p>
             <span className='mr-1 text-xs font-normal opacity-60'>تومان</span>
           </div>
         </div>
@@ -64,7 +86,7 @@ function Checkout() {
         <div className='flex items-center justify-between text-[#F6622C]'>
           <p className='text-base font-semibold '> مجموع کل:</p>
           <div className='flex items-center'>
-            <p className='text-base font-semibold'>۱۳۶٬۰۰۰</p>
+            <p className='text-base font-semibold'>{(totalPriceNum - offNum + 40000).toLocaleString('fa-ir')}</p>
             <span className='mr-1 text-xs font-normal text-black-items opacity-60'>تومان</span>
           </div>
         </div>
@@ -75,7 +97,7 @@ function Checkout() {
             <p>رای تکمیل خرید خود لطفا وارد شویب</p>د
           </button>
         ) : (
-          <button className='btn_primary h-9 w-full text-xs font-extrabold'>
+          <button onClick={payment} className='btn_primary h-9 w-full text-xs font-extrabold'>
             <p>پرداخت</p>
           </button>
         )}
