@@ -18,10 +18,10 @@ function ConfirmCode() {
   const [isEmailSent, setIsEmailSent] = React.useState(true);
   const [resendCountdown, setResendCountdown] = React.useState(120);
   const [code, setCode] = React.useState('');
-  const userId = +Cookies.get('userId')!;
+  const phone = Cookies.get('phoneNumber')!;
   const router = useRouter();
 
-  const {mutate, isLoading, error} = useMutation(() => ConfirmCodeFn({code, userId}), {
+  const {mutate, isLoading, error} = useMutation(() => ConfirmCodeFn({code, phone}), {
     onSuccess: (data) => {
       Cookies.set('token', data.token);
       Cookies.set('token', data.token);
