@@ -4,6 +4,7 @@ import ShoppingCard from '@/components/ShoppingCard';
 import Checkout from '@/components/shoppingBasket/Checkout';
 import OffCode from '@/components/shoppingBasket/OffCode';
 import BackgroundTitle from '@/components/ui/BackgroundTitle';
+import {Skeleton} from '@/components/ui/Skeleton';
 import useGetCart from '@/service/cart/useGetCart';
 import useProductStore from '@/store/zustand';
 import Link from 'next/link';
@@ -12,10 +13,9 @@ function ShopingBasket() {
   const products = useProductStore((state) => state.products);
   const {data, isLoading} = useGetCart();
 
-  if (isLoading) return <p>loading</p>;
   return (
     <div>
-      {products.length > 0 || (data && data.data.length > 0) ? (
+      {products.length > 0 || data?.data.length !== undefined ? (
         <>
           <BackgroundTitle name='سبد خرید' />
           <div className='md:flex'>

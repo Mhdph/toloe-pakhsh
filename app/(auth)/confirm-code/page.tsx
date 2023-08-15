@@ -10,6 +10,10 @@ import {useMutation} from '@tanstack/react-query';
 import React from 'react';
 import {useRouter} from 'next/navigation';
 import {toast} from 'react-hot-toast';
+import useProductStore from '@/store/zustand';
+import useAddCartList from '@/service/cart/useAddCartList';
+import axios from 'axios';
+import {baseUrl} from '@/lib/config';
 interface token {
   userId: string;
   role: string;
@@ -21,14 +25,32 @@ function ConfirmCode() {
   const [code, setCode] = React.useState('');
   const phone = Cookies.get('phoneNumber')!;
   const router = useRouter();
-
+  const products = useProductStore((state) => state.products);
+  const {mutate: addList} = useAddCartList();
+  const cartDataToSend = products.map((item) => ({
+    productId: item.id,
+    count: item.quantity,
+  }));
   const {mutate, isLoading, error} = useMutation(() => ConfirmCodeFn({code, phone}), {
     onSuccess: (data) => {
       Cookies.set('token', data.token);
       Cookies.set('token', data.token);
       const decoded: token = jwt_decode(data.token);
       Cookies.set('userId', decoded.userId);
-      router.push('/full-details');
+      if (products.length > 0) {
+        try {
+          axios.post(`${baseUrl}/cart-row/addList/`, cartDataToSend, {
+            headers: {
+              authorization: 'Bearer ' + `${data.token}`,
+            },
+          });
+          router.push('/');
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        router.push('/full-details');
+      }
     },
   });
 

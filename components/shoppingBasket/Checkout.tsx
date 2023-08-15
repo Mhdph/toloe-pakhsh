@@ -4,9 +4,11 @@ import useGetCart from '@/service/cart/useGetCart';
 import usePayment from '@/service/payment/usePayment';
 import useProductStore from '@/store/zustand';
 import Cookies from 'js-cookie';
+import {useRouter} from 'next/navigation';
 import React from 'react';
 
 function Checkout() {
+  const router = useRouter();
   // user login or not
   const user = Cookies.get('token');
 
@@ -49,9 +51,14 @@ function Checkout() {
   };
 
   const totalPriceNum = persianNumeralToNumber(totalPrice);
-  console.log(totalPriceNum);
   const offNum = persianNumeralToNumber(off);
-  console.log(offNum);
+
+  console.log(products);
+
+  //login
+  const pushLogin = () => {
+    router.push('/login');
+  };
 
   return (
     <div className='h-[412px] md:rounded-3xl md:border md:border-red-500'>
@@ -93,8 +100,8 @@ function Checkout() {
       </div>
       <div className='mt-16 flex justify-center px-4 text-white md:justify-end'>
         {token === undefined ? (
-          <button className='btn_primary h-9 w-full text-xs font-extrabold'>
-            <p>رای تکمیل خرید خود لطفا وارد شویب</p>د
+          <button onClick={pushLogin} className='btn_primary h-9 w-full text-xs font-extrabold'>
+            <p>وارد شدن</p>
           </button>
         ) : (
           <button onClick={payment} className='btn_primary h-9 w-full text-xs font-extrabold'>

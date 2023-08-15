@@ -2,16 +2,17 @@
 import LoginLeftBg from '@/assets/svg/LoginLeftBg';
 import LoginRightBg from '@/assets/svg/LoginRightBg';
 import ContactUs from '@/components/ContactUs';
+import Button from '@/components/ui/Button';
 import {LoginFn} from '@/service/auth';
 import {useMutation} from '@tanstack/react-query';
-import Link from 'next/link';
-import React, {useState} from 'react';
-import {useRouter} from 'next/navigation';
 import Cookies from 'js-cookie';
-import Button from '@/components/ui/Button';
+import Link from 'next/link';
+import {useRouter} from 'next/navigation';
+import React, {useState} from 'react';
 
 function Login() {
   const [phone, setPhone] = useState('');
+
   const router = useRouter();
   const {mutate, isLoading} = useMutation(() => LoginFn({phone}), {
     onSuccess: () => {

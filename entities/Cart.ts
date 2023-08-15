@@ -6,6 +6,10 @@ export interface AddCart {
   count: number;
   price: number;
 }
+export interface AddCartList {
+  productId: number;
+  count: number;
+}
 
 export interface Cart {
   id: number;

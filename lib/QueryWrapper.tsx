@@ -5,7 +5,13 @@ import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import {AppProgressBar as ProgressBar} from 'next-nprogress-bar';
 import {Toaster} from 'react-hot-toast';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 0,
+    },
+  },
+});
 
 interface Props {
   children?: ReactNode;
