@@ -54,8 +54,13 @@ export const ProfileLinkListItem = [
     url: '/account',
   },
 ];
-
-export const FilterList = ['پربازدید', 'جدید', 'پرفروش', 'ارزان ترین', 'گران ترین'];
+export const FilterList = [
+  {name: 'پربازدید', value: 'fetchCount'},
+  {name: 'جدید', value: 'dateCreate'},
+  {name: 'پرفروش', value: 'sale'},
+  {name: 'ارزان ترین', value: 'price'},
+  {name: 'گران ترین', value: 'price'},
+];
 
 export const sidebar = [
   {name: 'سفارشات', url: '/dashboard/orders'},

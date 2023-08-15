@@ -7,17 +7,19 @@ import SearchBrand from '@/components/search/SearchBrand';
 import Card from '@/components/ui/Card';
 import {Switch} from '@/components/ui/Switch';
 import {FilterList} from '@/constant/List';
-import useGetCategoriesAndChilds from '@/service/category/useGetCategoriesandChilds';
 import useProducts from '@/service/product/useProducts';
+import useSameProduct from '@/service/product/useSameProduct';
 import useProductQueryStore from '@/store/search';
 import {useParams} from 'next/navigation';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
+import ListItems from './ListItems';
+import SameProduct from './search/SameProduct';
 
 function SearchPage() {
-  const {setEndPrice, setOff, setExist, setStartPrice, setCategoryName} = useProductQueryStore();
+  const {setEndPrice, setOff, setExist, setStartPrice, setCategoryName, setSortName} = useProductQueryStore();
+  const [sort, setSort] = useState<number>(1);
   const gameQuery = useProductQueryStore((s) => s.productQuery);
   console.log(gameQuery);
-  const {data: categoryData} = useGetCategoriesAndChilds();
   const searchParams = useParams();
   useEffect(() => {
     const search = decodeURIComponent(searchParams.category || '');
@@ -38,8 +40,13 @@ function SearchPage() {
   const handleOnExistChange = (checked: boolean) => {
     setExist(checked);
   };
+  const handleSortChange = (value: string) => {
+    setSortName(value, sort);
+    console.log(value);
+  };
   const {data} = useProducts();
 
+  console.log(gameQuery.brand);
   return (
     <div>
       <SearchBar />
@@ -95,13 +102,19 @@ function SearchPage() {
           <div className='hidden justify-between md:flex'>
             <div className='flex items-center gap-6'>
               <div className='flex items-center gap-2'>
-                <UpDownIcon />
+                <div onClick={() => setSort(sort === 1 ? -1 : 1)}>
+                  <UpDownIcon />
+                </div>
                 <p className='text-ca font-black'>مرتب سازی</p>
               </div>
 
               {FilterList.map((item) => (
-                <p key={item} className='text-ca font-normal text-black-items'>
-                  {item}
+                <p
+                  key={item.name}
+                  onClick={() => handleSortChange(item.value)}
+                  className='cursor-pointer text-ca font-normal text-black-items'
+                >
+                  {item.name}
                 </p>
               ))}
             </div>
@@ -111,10 +124,43 @@ function SearchPage() {
             </div>
           </div>
           <hr className='my-2 hidden border border-black-items border-opacity-10 md:inline' />
-          <div className='filter_bg_sidebar hidden w-[120px] items-center justify-center gap-3 rounded-xl  px-3 py-1.5 md:flex'>
-            <p className='text-[10px]  font-normal text-black-items'> {gameQuery.categoryName}</p>
-            <CloseIcon />
+          <div className='flex items-center gap-2'>
+            {gameQuery.categoryName !== undefined || gameQuery.categoryName !== '' ? (
+              <div
+                onClick={() => setCategoryName('')}
+                className='filter_bg_sidebar hidden w-[120px] cursor-pointer items-center justify-center gap-3 rounded-xl  px-3 py-1.5 md:flex'
+              >
+                <p className='text-[10px]  font-normal text-black-items'> {gameQuery.categoryName}</p>
+                <CloseIcon />
+              </div>
+            ) : null}
+
+            {gameQuery.brand !== undefined ? (
+              <div className='filter_bg_sidebar hidden w-[120px] cursor-pointer items-center justify-center gap-3 rounded-xl  px-3 py-1.5 md:flex'>
+                <p className='text-[10px]  font-normal text-black-items'> {gameQuery.brand}</p>
+                <CloseIcon />
+              </div>
+            ) : null}
+            {gameQuery.exist ? (
+              <div className='filter_bg_sidebar hidden w-[120px] cursor-pointer items-center justify-center gap-3 rounded-xl  px-3 py-1.5 md:flex'>
+                <p className='text-[10px]  font-normal text-black-items'> موجود در انبار</p>
+                <CloseIcon />
+              </div>
+            ) : null}
+            {gameQuery.off ? (
+              <div className='filter_bg_sidebar hidden w-[120px] cursor-pointer items-center justify-center gap-3 rounded-xl  px-3 py-1.5 md:flex'>
+                <p className='text-[10px]  font-normal text-black-items'>دارای تخفیف</p>
+                <CloseIcon />
+              </div>
+            ) : null}
+            {gameQuery.startPrice !== undefined || gameQuery.endPrice !== undefined ? (
+              <div className='filter_bg_sidebar hidden w-[120px] items-center justify-center gap-3 rounded-xl  px-3 py-1.5 md:flex'>
+                <p className='text-[10px]  font-normal text-black-items'>قیمت</p>
+                <CloseIcon />s
+              </div>
+            ) : null}
           </div>
+
           <div className='mt-6 grid grid-cols-2 gap-y-2 pr-2.5 sm:grid-cols-2 md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5'>
             {data?.data.map((item) => (
               <div key={item.id}>
@@ -125,9 +171,8 @@ function SearchPage() {
         </div>
       </div>
       <hr className='divedr my-10 opacity-25' />
-      {/* <ListItems link="store" title="محصولات مشابه" /> */}
-      <hr className='divedr mb-10 opacity-25' />
-      {/* <ListItems link="store" title="محصولات پیشنهادی" /> */}
+
+      <SameProduct />
       <hr className='divedr mb-4 opacity-0' />
       <ContactUs />
     </div>

@@ -14,6 +14,8 @@ interface ProductQuery {
   brand?: string;
   exist?: boolean;
   off?: boolean;
+  sortName?: string;
+  sort?: number;
 }
 
 const useProducts = () => {
@@ -22,6 +24,7 @@ const useProducts = () => {
   const debouncedStartPrice = useDebounce(gameQuery.startPrice, 3000);
   const debouncedEndPrice = useDebounce(gameQuery.endPrice, 3000);
   const debouncedBrand = useDebounce(gameQuery.brand, 3000);
+
   const params: ProductQuery = {};
 
   if (debouncedCategory) {
@@ -37,6 +40,10 @@ const useProducts = () => {
     params.brand = debouncedBrand;
   }
 
+  if (gameQuery.sortName) {
+    params.sortName = gameQuery.sortName;
+    params.sort = gameQuery.sortDirection;
+  }
   if (gameQuery.exist) {
     params.exist = gameQuery.exist;
   }
