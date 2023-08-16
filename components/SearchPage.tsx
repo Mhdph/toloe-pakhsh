@@ -46,10 +46,9 @@ function SearchPage() {
   };
   const {data} = useProducts();
 
-  console.log(gameQuery.brand);
   return (
     <div>
-      <SearchBar />
+      <SearchBar count={data?.count} />
       <div className='flex md:gap-2  md:px-10 md:pt-10 '>
         <div className='filter_bg_sidebar hidden h-[1108px] min-w-[300px] rounded-3xl bg-red-700 px-3 md:flex md:flex-col'>
           <div className='mt-4 px-4'>
