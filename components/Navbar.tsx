@@ -34,11 +34,11 @@ const Navbar: React.FC<NavbarProps> = () => {
         <Link href='/' className='mt-8 cursor-pointer'>
           <LogoIcon />
         </Link>
-        <div className='navbar_bg_left flex items-center justify-center'>
+        <Link href='/store' className='navbar_bg_left flex items-center justify-center'>
           <div className='cursor-pointer'>
             <StoreActiveIcon />
           </div>
-        </div>
+        </Link>
       </div>
       <div className='hidden lg:inline'>
         <div className='flex items-center  justify-between px-12 py-6'>
