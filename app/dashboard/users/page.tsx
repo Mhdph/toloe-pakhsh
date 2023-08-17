@@ -1,10 +1,15 @@
+'use client';
 import React from 'react';
 import UserCard from '@/components/dashboard/UserCard';
 import SearchBarSvg from '@/assets/svg/SearchBarSvg';
 import Button from '@/components/ui/Button';
 import {Input} from '@/components/ui/Input';
+import {useQuery} from '@tanstack/react-query';
+import useUserSerachStore from '@/store/userSerach';
 
-function page() {
+function Users() {
+  const {setKeyWord} = useUserSerachStore();
+
   return (
     <div>
       <div className='flex items-center gap-3'>
@@ -14,7 +19,6 @@ function page() {
             <SearchBarSvg />
           </div>
         </div>
-        <Button className='w-48'> جست و جو</Button>
       </div>
       <hr className='my-5 border border-main-red opacity-40' />
       <UserCard />
@@ -22,4 +26,4 @@ function page() {
   );
 }
 
-export default page;
+export default Users;
