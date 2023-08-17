@@ -20,7 +20,12 @@ type OffSchema = z.infer<typeof AddOffSchema>;
 
 export function AddOff() {
   let [date, setDate] = React.useState<any>();
-  const form = useForm<OffSchema>({
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: {errors},
+  } = useForm<OffSchema>({
     resolver: zodResolver(AddOffSchema),
   });
   const {data} = useGetCategories();
@@ -28,87 +33,68 @@ export function AddOff() {
   const {mutate, isLoading} = useAddDiscount();
 
   const addDiscount: SubmitHandler<OffSchema> = (data) => {
-    mutate(data, date);
+    mutate({
+      category: data.category,
+      expireTime: date.toString(),
+      name: data.name,
+      password: data.password,
+      percentage: data.percentage,
+    });
   };
 
-  console.log(data);
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button variant='destructive'> افزودن تخفیف</Button>
       </DialogTrigger>
       <DialogContent className='sm:max-w-[425px] '>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(addDiscount)}>
-            <div className='flex flex-col gap-3 pt-4'>
-              <FormField
-                control={form.control}
-                name='name'
-                render={({field}) => (
-                  <FormItem>
-                    <FormLabel>کد تخفیف</FormLabel>
-                    <FormControl>
-                      <Input placeholder='کد' {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name='percentage'
-                render={({field}) => (
-                  <FormItem>
-                    <FormLabel>درصد تخفیف</FormLabel>
-                    <FormControl>
-                      <Input type='number' placeholder='20' {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name='category'
-                render={({field}) => (
-                  <FormItem>
-                    <FormLabel>دسته بندی</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder='انتخاب دسته بندی' />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectGroup>
-                          {data?.data.map((item) => (
-                            <SelectItem key={item.id} value={item.name}>
-                              {item.name}
-                            </SelectItem>
-                          ))}
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <div className='flex flex-col gap-1'>
-                <Label>تاریخ انقضا</Label>
-                <DatePicker
-                  className='font-Yekan'
-                  inputClass='bg-background flex h-10 w-full rounded-md border border-input px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50'
-                  calendar={persian}
-                  onChange={setDate}
-                  locale={persian_fa}
-                />
-              </div>
-            </div>
-            <DialogFooter className='mt-4'>
-              <Button type='submit'>ذخیره تغییرات</Button>
-            </DialogFooter>
-          </form>
-        </Form>
+        <form className='mt-2 flex flex-col gap-3' onSubmit={handleSubmit(addDiscount)}>
+          <div className='flex flex-col gap-1'>
+            <Label>نام:</Label>
+            <Input type='text' {...register('name')} />
+            {errors.name && <p>{errors.name.message}</p>}
+          </div>
+          <div className='flex flex-col gap-1'>
+            <Label>درصد:</Label>
+            <Input type='number' placeholder='20' {...register('percentage', {valueAsNumber: true})} />
+            {errors.percentage && <p>{errors.percentage.message}</p>}
+          </div>
+          <div className='flex flex-col gap-1'>
+            <Label>کد تخفیف:</Label>
+            <Input type='password' {...register('password')} />
+            {errors.password && <p>{errors.password.message}</p>}
+          </div>
+          <div className='flex flex-col gap-1'>
+            <Label>دسته بندی:</Label>
+            <select
+              className='flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50'
+              {...register('category')}
+            >
+              <option value='all'>تمام محصولات</option>
+              {data?.data.map((item) => (
+                <option key={item.id} value={item.name}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+            {errors.category && <p>{errors.category.message}</p>}
+          </div>
+          <div className='flex flex-col gap-1'>
+            <Label>تاریخ انقضا</Label>
+            <DatePicker
+              className='font-Yekan'
+              inputClass='bg-background flex h-10 w-full rounded-md border border-input px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50'
+              calendar={persian}
+              onChange={setDate}
+              locale={persian_fa}
+            />
+          </div>
+          <DialogFooter className='mt-4'>
+            <Button isLoading={isLoading} type='submit'>
+              ذخیره تغییرات
+            </Button>
+          </DialogFooter>
+        </form>
       </DialogContent>
     </Dialog>
   );
