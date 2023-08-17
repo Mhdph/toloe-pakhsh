@@ -7,6 +7,10 @@ import React, {SetStateAction} from 'react';
 import useGetCategory from '@/service/category/useGetCategory';
 import {baseUrl} from '@/lib/config';
 import {CloseIcon} from '@/assets/Icons';
+import useUpdateCategory from '@/service/category/useUpdateCategory';
+import Cookies from 'js-cookie';
+import axios from 'axios';
+import {toast} from 'react-hot-toast';
 
 interface EditCategoriesProps {
   id: number;
@@ -14,13 +18,58 @@ interface EditCategoriesProps {
   closeModal: React.Dispatch<SetStateAction<number | null>>;
 }
 
+export interface UpdateCategory {
+  name: string;
+  picture?: string;
+}
+
 export function EditCategories({id, showModal, closeModal}: EditCategoriesProps) {
   const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const [name, setName] = React.useState('');
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     setSelectedFile(file || null);
+    if (file) {
+      const token = Cookies.get('token');
+      const formData = new FormData();
+      formData.append('file', file);
+      try {
+        const res = await axios.post(`${baseUrl}/upload`, formData, {
+          headers: {
+            Authorization: 'Bearer ' + token,
+          },
+        });
+        Cookies.set('picture', res.data.data.imagePath);
+      } catch (err: any) {
+        toast.error(err.message);
+      }
+    }
   };
   const {data} = useGetCategory(id);
+
+  const {mutate} = useUpdateCategory();
+
+  const updateCategory = () => {
+    if (selectedFile === null) {
+      const updateCat: UpdateCategory = {
+        name,
+      };
+      mutate({
+        id,
+        data: updateCat,
+      });
+    } else {
+      const updateCat: UpdateCategory = {
+        picture: Cookies.get('picture')!,
+        name,
+      };
+      mutate({
+        id,
+        data: updateCat,
+      });
+    }
+  };
+
   return (
     <div>
       <div className='fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden outline-none focus:outline-none'>
@@ -60,11 +109,18 @@ export function EditCategories({id, showModal, closeModal}: EditCategoriesProps)
               <Label htmlFor='name' className='text-right'>
                 نام دسته بندی
               </Label>
-              <Input id='name' placeholder='نام' className='col-span-3' />
+              <Input
+                id='name'
+                placeholder={data?.name}
+                onChange={(e) => setName(e.target.value)}
+                className='col-span-3'
+              />
             </div>
           </div>
           <div className='flex items-center gap-2'>
-            <Button type='submit'>ذخیره تغییرات</Button>
+            <Button onClick={updateCategory} type='submit'>
+              ذخیره تغییرات
+            </Button>
           </div>
         </div>
       </div>
