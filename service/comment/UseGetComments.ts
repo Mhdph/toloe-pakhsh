@@ -8,7 +8,7 @@ const apiClient = new APIClient<Comment>('/comment');
 const UseGetComments = () =>
   useQuery({
     queryKey: [CACHE_KEY_COMMENT],
-    queryFn: () => apiClient.getAll,
+    queryFn: apiClient.getAll,
   });
 
 export default UseGetComments;

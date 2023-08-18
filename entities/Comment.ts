@@ -5,6 +5,7 @@ export interface Comment {
   comment: string;
   date: string;
   star: string;
+  id: number;
 }
 export interface AddComment {
   star: number;

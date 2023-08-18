@@ -11,7 +11,6 @@ const useUpdateCart = () => {
 
   return useMutation<UpdateCart, Error, {id: number; data: UpdateCart}>(({id, data}) => apiClient.update(id, data), {
     onSuccess: () => {
-      console.log('hello');
       queryClient.invalidateQueries({
         queryKey: [CACHE_KEY_CART],
       });
