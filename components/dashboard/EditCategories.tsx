@@ -69,6 +69,7 @@ export function EditCategories({id, showModal, closeModal}: EditCategoriesProps)
       });
     }
   };
+  console.log(data?.data.picture);
 
   return (
     <div>
@@ -83,7 +84,7 @@ export function EditCategories({id, showModal, closeModal}: EditCategoriesProps)
               {selectedFile ? (
                 <div>
                   <Image
-                    src={selectedFile === null ? baseUrl + data?.picture : URL.createObjectURL(selectedFile)}
+                    src={selectedFile === null ? baseUrl + data?.data.picture : URL.createObjectURL(selectedFile)}
                     alt='Uploaded'
                     width={300}
                     height={300}
@@ -91,7 +92,13 @@ export function EditCategories({id, showModal, closeModal}: EditCategoriesProps)
                   />
                 </div>
               ) : (
-                <div className='h-[300px] w-[300px] rounded-md bg-gray-300'></div>
+                <Image
+                  src={baseUrl + data?.data.picture}
+                  alt='Uploaded'
+                  width={300}
+                  height={300}
+                  className='rounded-md'
+                />
               )}
               <div className='relative mt-1'>
                 <input onChange={handleFileChange} type='file' id='file-upload' className='hidden' />
@@ -105,16 +112,11 @@ export function EditCategories({id, showModal, closeModal}: EditCategoriesProps)
                 </label>
               </div>
             </div>
-            <div className='grid grid-cols-4 items-center gap-4'>
+            <div className='flex flex-col gap-2'>
               <Label htmlFor='name' className='text-right'>
                 نام دسته بندی
               </Label>
-              <Input
-                id='name'
-                placeholder={data?.name}
-                onChange={(e) => setName(e.target.value)}
-                className='col-span-3'
-              />
+              <Input id='name' onChange={(e) => setName(e.target.value)} className='col-span-3' />
             </div>
           </div>
           <div className='flex items-center gap-2'>
