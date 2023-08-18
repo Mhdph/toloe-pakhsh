@@ -3,7 +3,7 @@ import React from 'react';
 import {Textarea} from './ui/TextArea';
 import Button from './ui/Button';
 import {useParams} from 'next/navigation';
-import {useMutation} from '@tanstack/react-query';
+import {useMutation, useQuery} from '@tanstack/react-query';
 import axios from 'axios';
 import {baseUrl} from '@/lib/config';
 import Rectangl from '@/assets/tempImages/Rectangl.png';
@@ -31,6 +31,17 @@ function Comments() {
     },
   });
 
+  const {data} = useQuery({
+    queryKey: ['todos', id],
+    queryFn: async () => {
+      const response = await fetch(`${baseUrl}/comment/product/` + id);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    },
+  });
+
   const addComment = () => {
     mutate({
       text,
@@ -40,26 +51,31 @@ function Comments() {
   const ratingChanged = (newRating: number) => {
     setStar(newRating);
   };
+
+  console.log(data);
+
   return (
-    <div className=''>
-      <div className='pl-8 pr-2'>
-        <Textarea onChange={(e) => setText(e.target.value)} className='w-full' />
-        <ReactStars count={5} onChange={ratingChanged} size={24} color2={'#F34834'} />
-        <Button onClick={addComment} className='mt-4 w-28 rounded-md'>
-          ثبت
-        </Button>
-      </div>
-      <div className='mt-6 flex flex-col gap-y-3 border-b border-black border-opacity-10 px-2'>
-        <div className='flex flex-row-reverse items-center gap-2'>
-          <Image src={Rectangl} alt='' className='h-9 w-9 rounded-full' />
-          <p className='text-sm'>مهدی پریوش</p>
-          <p className='text-xs text-slate-500'>دو هفته پیش</p>
+    <>
+      <div className=''>
+        <div className='pl-8 pr-2'>
+          <Textarea onChange={(e) => setText(e.target.value)} className='w-full' />
+          <ReactStars count={5} onChange={ratingChanged} size={24} color2={'#F34834'} />
+          <Button onClick={addComment} className='mt-4 w-28 rounded-md'>
+            ثبت
+          </Button>
         </div>
-        <p className='flex flex-row-reverse text-sm text-black-items'>
-          لورم یاسنگسنمتبسن سنبس گسن س منصضثگضن زضنثمض زن گضثننش ثضنثم ضنصثنضث ن نضصثمضنثنضمث{' '}
-        </p>
+        <div className='mt-6 flex flex-col gap-y-3 border-b border-black border-opacity-10 px-2'>
+          <div className='flex flex-row-reverse items-center gap-2'>
+            <Image src={Rectangl} alt='' className='h-9 w-9 rounded-full' />
+            <p className='text-sm'>مهدی پریوش</p>
+            <p className='text-xs text-slate-500'>دو هفته پیش</p>
+          </div>
+          <p className='flex flex-row-reverse text-sm text-black-items'>
+            لورم یاسنگسنمتبسن سنبس گسن س منصضثگضن زضنثمض زن گضثننش ثضنثم ضنصثنضث ن نضصثمضنثنضمث{' '}
+          </p>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
