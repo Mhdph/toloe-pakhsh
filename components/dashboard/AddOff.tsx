@@ -3,7 +3,6 @@ import Button from '@/components/ui/Button';
 import {Dialog, DialogContent, DialogFooter, DialogTrigger} from '@/components/ui/Dialog';
 import {Input} from '@/components/ui/Input';
 import {Label} from '@/components/ui/Label';
-import {Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue} from '@/components/ui/Select';
 import useAddDiscount from '@/service/discount/useAddDiscount';
 import {AddOffSchema} from '@/validation/off';
 import {zodResolver} from '@hookform/resolvers/zod';
@@ -13,8 +12,8 @@ import persian_fa from 'react-date-object/locales/persian_fa';
 import {SubmitHandler, useForm} from 'react-hook-form';
 import DatePicker from 'react-multi-date-picker';
 import {z} from 'zod';
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from '../ui/Form';
 import useGetCategories from '@/service/category/useGetCategories';
+import {persianNumeralToNumber} from '@/helpers/PersianToEnglish';
 
 type OffSchema = z.infer<typeof AddOffSchema>;
 
@@ -34,10 +33,10 @@ export function AddOff() {
 
   const addDiscount: SubmitHandler<OffSchema> = (data) => {
     mutate({
-      category: data.category,
-      expireTime: date.toString(),
+      categoryId: data.category,
+      expireTime: persianNumeralToNumber(date.toString()).toString(),
       name: data.name,
-      password: data.password,
+      code: data.password,
       percentage: data.percentage,
     });
   };
@@ -61,7 +60,7 @@ export function AddOff() {
           </div>
           <div className='flex flex-col gap-1'>
             <Label>کد تخفیف:</Label>
-            <Input type='password' {...register('password')} />
+            <Input type='text' {...register('password')} />
             {errors.password && <p>{errors.password.message}</p>}
           </div>
           <div className='flex flex-col gap-1'>

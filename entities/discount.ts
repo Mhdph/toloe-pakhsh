@@ -7,8 +7,8 @@ export interface Discount {
 }
 export interface DiscountAdd {
   name?: string;
-  expireTime?: Date;
+  expireTime?: string;
   percentage?: number;
-  password?: string;
-  category: string;
+  code?: string;
+  categoryId: string;
 }
