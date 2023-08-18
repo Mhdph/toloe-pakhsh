@@ -1,16 +1,15 @@
-import {Product} from '@/entities/product';
+import {AddProduct, Product} from '@/entities/product';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {toast} from 'react-hot-toast';
 import APIClient from '../api-client';
 import {CACHE_KEY_PRODUCT} from '../constants';
 
-const apiClient = new APIClient<Product>('product/update');
+const apiClient = new APIClient<AddProduct>('product/update');
 
-const useUpdateProduct = (id: string, data: Product) => {
+const useUpdateProduct = () => {
   const queryClient = useQueryClient();
 
-  return useMutation<Product, Error, Product>({
-    mutationFn: () => apiClient.update(id, data),
+  return useMutation<AddProduct, Error, {id: number; data: AddProduct}>(({data, id}) => apiClient.update(id, data), {
     onSuccess: () => {
       queryClient.refetchQueries(CACHE_KEY_PRODUCT);
       toast.success('محصول با موفقیت اپدیت شد');
