@@ -1,12 +1,19 @@
 export interface Comment {
-  user: string;
-  name: string;
-  brand: string;
-  comment: string;
-  date: string;
-  star: string;
   id: number;
+  userId: number;
+  productId: number;
+  date: string;
+  star: number;
+  text: string;
+  verify: boolean;
+  replay: any;
+  productName: string;
+  productPicture: string;
+  productDescription: any;
+  productUnit: string;
+  productUnitCount: string;
 }
+
 export interface AddComment {
   star: number;
   text: string;

@@ -1,13 +1,19 @@
 'use client';
-import React from 'react';
-import {Controller, SubmitHandler, useFieldArray, useForm} from 'react-hook-form';
+import useAddProduct from '@/service/product/useAddProduct';
+import {zodResolver} from '@hookform/resolvers/zod';
+import Cookies from 'js-cookie';
+import {Plus, Trash2} from 'lucide-react';
+import {SubmitHandler, useFieldArray, useForm} from 'react-hook-form';
+import {z} from 'zod';
+import Button from '../ui/Button';
 import {Input} from '../ui/Input';
 import {Label} from '../ui/Label';
-import {z} from 'zod';
-import {zodResolver} from '@hookform/resolvers/zod';
-import Button from '../ui/Button';
-import {Trash2} from 'lucide-react';
-import {Plus} from 'lucide-react';
+import Image from 'next/image';
+import React from 'react';
+import axios from 'axios';
+import {baseUrl} from '@/lib/config';
+import {toast} from 'react-hot-toast';
+import useGetCategoriesAndChilds from '@/service/category/useGetCategoriesandChilds';
 
 export const propertySchema = z.object({
   key: z.string(),
@@ -42,6 +48,28 @@ const defaultValues = {
 type formDataSchema = z.infer<typeof formDataSchema>;
 
 function AddProduct() {
+  const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
+  const {data} = useGetCategoriesAndChilds();
+
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    setSelectedFile(file || null);
+    if (file) {
+      const token = Cookies.get('token');
+      const formData = new FormData();
+      formData.append('file', file);
+      try {
+        const res = await axios.post(`${baseUrl}/upload`, formData, {
+          headers: {
+            Authorization: 'Bearer ' + token,
+          },
+        });
+        Cookies.set('p-picture', res.data.data.imagePath);
+      } catch (err: any) {
+        toast.error(err.message);
+      }
+    }
+  };
   const {
     register,
     control,
@@ -56,56 +84,105 @@ function AddProduct() {
     name: 'properties',
   });
 
+  const {mutate} = useAddProduct();
+
   const onSubmit: SubmitHandler<formDataSchema> = (data) => {
-    // Here, you can send the data to the backend
-    console.log(data);
+    mutate({
+      brand: data.brand,
+      description: data.description,
+      exist: true,
+      name: data.name,
+      picture: Cookies.get('p-picture')!,
+      price: +data.price,
+      unit: data.unit,
+      unitCount: data.unitCount,
+      properties: data.properties,
+      categoryId: +data.categoryId,
+    });
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className='flex flex-col gap-2' onSubmit={handleSubmit(onSubmit)}>
+      <div className='flex flex-col items-center justify-center gap-3'>
+        {selectedFile ? (
+          <div>
+            <Image
+              src={URL.createObjectURL(selectedFile)}
+              alt='Uploaded'
+              width={300}
+              height={300}
+              className='rounded-md'
+            />
+          </div>
+        ) : (
+          <div className='h-[300px] w-[300px] rounded-md bg-gray-300'></div>
+        )}
+        <div className='relative mt-1'>
+          <input onChange={handleFileChange} type='file' id='file-upload' className='hidden' />
+          <label
+            htmlFor='file-upload'
+            className='z-20 h-full w-full cursor-pointer flex-col-reverse items-center justify-center'
+          >
+            <p className='cursor-pointer rounded-3xl border border-main-red px-4 py-2 text-sm text-main-red'>
+              بارگذاری تصویر
+            </p>
+          </label>
+        </div>
+      </div>
       <div>
-        <Label>Name:</Label>
+        <Label>نام:</Label>
         <Input type='text' {...register('name', {required: true})} />
         {errors.name && <p>This field is required</p>}
       </div>
       <div>
-        <Label>Description:</Label>
+        <Label>توضیحات:</Label>
         <Input type='text' {...register('description', {required: true})} />
         {errors.description && <p>This field is required</p>}
       </div>
       <div>
-        <Label>Unit:</Label>
+        <Label>واحد:</Label>
         <Input type='text' {...register('unit', {required: true})} />
         {errors.unit && <p>This field is required</p>}
       </div>
       <div>
-        <Label>Unit Count:</Label>
+        <Label>تعداد واحد:</Label>
         <Input type='number' {...register('unitCount', {required: true})} />
         {errors.unitCount && <p>This field is required</p>}
       </div>
       <div>
-        <Label>Price:</Label>
+        <Label>قیمت:</Label>
         <Input type='number' {...register('price', {required: true})} />
         {errors.price && <p>This field is required</p>}
       </div>
       <div>
-        <Label>Brand:</Label>
+        <Label>برند:</Label>
         <Input type='text' {...register('brand', {required: true})} />
         {errors.brand && <p>This field is required</p>}
       </div>
-      <div>
-        <Label>Category:</Label>
-        <select {...register('categoryId', {required: true})}>
-          <option value='1'>Category 1</option>
-          <option value='2'>Category 2</option>
-          <option value='3'>Category 3</option>
+      <div className='flex flex-col gap-1'>
+        <Label>دسته بندی:</Label>
+        <select
+          className='h-10 w-full rounded-md border border-input bg-transparent '
+          {...register('categoryId', {required: true})}
+        >
+          {data?.data.map((item) => (
+            <option key={item.id} value={item.id}>
+              {item.name}
+            </option>
+          ))}
         </select>
         {errors.categoryId && <p>This field is required</p>}
       </div>
+      <Label> توضیحات:</Label>
+
       {fields.map((field, index) => {
         return (
-          <div key={field.id} className='flex w-full  gap-4 rounded-md border bg-slate-50 p-4 shadow-md'>
-            <Input {...register(`properties.${index}.key`)} name={`properties.${index}.key`} />
-            <Input {...register(`properties.${index}.value`)} name={`properties.${index}.value`} />
+          <div key={field.id} className='flex w-full  gap-4 rounded-md border  p-4 shadow-md'>
+            <Input placeholder='عنوان' {...register(`properties.${index}.key`)} name={`properties.${index}.key`} />
+            <Input
+              placeholder='توضیحات'
+              {...register(`properties.${index}.value`)}
+              name={`properties.${index}.value`}
+            />
             {fields.length - 1 !== 0 ? (
               <Button type='button' onClick={() => remove(index)}>
                 <Trash2 className='h-4 w-4' />
@@ -114,11 +191,13 @@ function AddProduct() {
           </div>
         );
       })}
-      <Button type='button' onClick={() => append(defaultValues.properties[0])}>
+      <Button variant='outline' type='button' onClick={() => append(defaultValues.properties[0])}>
         <Plus />
         اضافه کردن
       </Button>
-      س<button type='submit'>Submit</button>
+      <Button className='mt-2' type='submit'>
+        ثبت محصول
+      </Button>
     </form>
   );
 }
