@@ -21,7 +21,7 @@ import {toast} from 'react-hot-toast';
 import {z} from 'zod';
 const apiClient = new APIClient<Product>('/product/getbyid');
 
-export const formDataSchema = z.object({
+const formDataSchema = z.object({
   name: z.string(),
   description: z.string(),
   unit: z.string(),
