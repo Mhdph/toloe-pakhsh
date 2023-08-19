@@ -3,12 +3,18 @@ import LoginLeftBg from '@/assets/svg/LoginLeftBg';
 import LoginRightBg from '@/assets/svg/LoginRightBg';
 import ContactUs from '@/components/ContactUs';
 import {zodResolver} from '@hookform/resolvers/zod';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {SubmitHandler, useForm} from 'react-hook-form';
 import {z} from 'zod';
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from '@/components/ui/Form';
 import useFullDetails from '@/service/user/useFullDetails';
 import {Input} from '@/components/ui/Input';
+import Cookies from 'js-cookie';
+import {useQuery} from '@tanstack/react-query';
+import {CACHE_KEY_USER} from '@/service/constants';
+import APIClient from '@/service/api-client';
+import User from '@/entities/user';
+import {useRouter} from 'next/navigation';
 
 const userSchema = z.object({
   firstName: z.string(),
@@ -17,11 +23,32 @@ const userSchema = z.object({
 });
 
 type AdduserSchema = z.infer<typeof userSchema>;
+const apiClient = new APIClient<User>('/user/get');
 
 function FullDetails() {
+  const id = Cookies.get('userId')!;
+  const router = useRouter();
   const form = useForm<AdduserSchema>({
     resolver: zodResolver(userSchema),
   });
+
+  const useUser = (slug: string) =>
+    useQuery({
+      queryKey: [CACHE_KEY_USER, slug],
+      queryFn: () => apiClient.get(slug),
+      onSuccess: (data) => {
+        form.setValue('address', data?.address);
+        form.setValue('firstName', data?.firstName);
+        form.setValue('lastName', data?.lastName);
+      },
+    });
+  const {data} = useUser(id);
+
+  useEffect(() => {
+    if (form.getValues('address') !== '') {
+      router.push('/');
+    }
+  }, [data]);
 
   const {mutate} = useFullDetails();
   const updateUser: SubmitHandler<AdduserSchema> = async (data) => {
