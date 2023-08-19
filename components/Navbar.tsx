@@ -34,7 +34,7 @@ const Navbar: React.FC<NavbarProps> = () => {
         <Link href='/' className='mt-8 cursor-pointer'>
           <LogoIcon />
         </Link>
-        <Link href='/store' className='navbar_bg_left flex items-center justify-center'>
+        <Link href='/shopingbasket' className='navbar_bg_left flex items-center justify-center'>
           <div className='cursor-pointer'>
             <StoreActiveIcon />
           </div>
