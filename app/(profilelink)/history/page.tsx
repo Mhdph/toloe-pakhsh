@@ -1,3 +1,4 @@
+'use client';
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/Tabs';
 import BackgroundTitle from '@/components/ui/BackgroundTitle';
 import React from 'react';
@@ -15,16 +16,16 @@ function History() {
           <TabsTrigger value='sending'>در حال ارسال</TabsTrigger>
         </TabsList>
         <TabsContent value='sending'>
-          <HistoryCard color='primary' />
+          <HistoryCard color='primary' state='SENDING' />
         </TabsContent>
         <TabsContent value='delivered'>
-          <HistoryCard color='delivered' />
+          <HistoryCard color='delivered' state='CLOSE' />
         </TabsContent>
         <TabsContent value='canceled'>
-          <HistoryCard color='canceled' />
+          <HistoryCard color='canceled' state='DECLINE' />
         </TabsContent>
         <TabsContent value='returned'>
-          <HistoryCard color='returned' />
+          <HistoryCard color='returned' state='REJECT' />
         </TabsContent>
       </Tabs>
     </div>

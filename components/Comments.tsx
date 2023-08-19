@@ -31,7 +31,7 @@ function Comments() {
     },
   });
 
-  const {data} = useQuery({
+  const {data, isLoading} = useQuery({
     queryKey: ['todos', id],
     queryFn: async () => {
       const response = await fetch(`${baseUrl}/comment/product/` + id);
@@ -52,28 +52,30 @@ function Comments() {
     setStar(newRating);
   };
 
-  console.log(data);
-
+  if (isLoading) return <p>loading</p>;
   return (
     <>
       <div className=''>
         <div className='pl-8 pr-2'>
           <Textarea onChange={(e) => setText(e.target.value)} className='w-full' />
-          <ReactStars count={5} onChange={ratingChanged} size={24} color2={'#F34834'} />
+          <ReactStars count={5} className='mt-1.5' onChange={ratingChanged} size={24} color2={'#F34834'} />
           <Button onClick={addComment} className='mt-4 w-28 rounded-md'>
             ثبت
           </Button>
         </div>
-        <div className='mt-6 flex flex-col gap-y-3 border-b border-black border-opacity-10 px-2'>
-          <div className='flex flex-row-reverse items-center gap-2'>
-            <Image src={Rectangl} alt='' className='h-9 w-9 rounded-full' />
-            <p className='text-sm'>مهدی پریوش</p>
-            <p className='text-xs text-slate-500'>دو هفته پیش</p>
+        {data.data.map((item: any) => (
+          <div key={item.id} className='mt-6 flex flex-col gap-y-3 border-b border-black border-opacity-10 px-2'>
+            <div className='flex items-center justify-between'>
+              <ReactStars count={5} value={item.star} size={24} color2={'#F34834'} />
+              <div className='flex flex-row-reverse items-center gap-2'>
+                <Image src={Rectangl} alt='' className='h-9 w-9 rounded-full' />
+                <p className='text-sm'>{item.userFirstName + ' ' + item.userLastName}</p>
+                <p className='text-xs text-slate-500'>کاربر</p>
+              </div>
+            </div>
+            <p className='flex flex-row-reverse text-sm text-black-items'>{item.text} </p>
           </div>
-          <p className='flex flex-row-reverse text-sm text-black-items'>
-            لورم یاسنگسنمتبسن سنبس گسن س منصضثگضن زضنثمض زن گضثننش ثضنثم ضنصثنضث ن نضصثمضنثنضمث{' '}
-          </p>
-        </div>
+        ))}
       </div>
     </>
   );
