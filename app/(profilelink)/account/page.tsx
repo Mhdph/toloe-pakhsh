@@ -14,18 +14,14 @@ import {zodResolver} from '@hookform/resolvers/zod';
 import {useQuery} from '@tanstack/react-query';
 import Cookies from 'js-cookie';
 import {SubmitHandler, useForm} from 'react-hook-form';
-import {z} from 'zod';
 
-type AdduserSchema = z.infer<typeof userSchema>;
 const apiClient = new APIClient<User>('/user/get');
 
 function Account() {
   const id = Cookies.get('userId')!;
-  const form = useForm<AdduserSchema>({
-    resolver: zodResolver(userSchema),
-  });
+  const form = useForm();
   const {mutate} = useUpdateUser();
-  const updateUser: SubmitHandler<AdduserSchema> = async (data) => {
+  const updateUser: SubmitHandler<any> = async (data) => {
     mutate(data);
   };
   const useUser = (slug: string) =>
@@ -35,7 +31,7 @@ function Account() {
       onSuccess: (data) => {
         form.setValue('address', data?.address);
         form.setValue('firstName', data?.firstName);
-        form.setValue('birthDate', data?.birthDate);
+        form.setValue('birthDate', data?.birthDate.substring(0, 10));
         form.setValue('email', data?.email);
         form.setValue('lastName', data?.lastName);
         form.setValue('nationalCode', data?.nationalCode);
