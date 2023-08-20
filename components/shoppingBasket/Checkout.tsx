@@ -2,6 +2,7 @@
 import {persianNumeralToNumber} from '@/helpers/PersianToEnglish';
 import useGetCart from '@/service/cart/useGetCart';
 import usePayment from '@/service/payment/usePayment';
+import useDelivery from '@/service/settings/useDelivery';
 import useProductStore from '@/store/zustand';
 import Cookies from 'js-cookie';
 import {useRouter} from 'next/navigation';
@@ -52,8 +53,7 @@ function Checkout() {
 
   const totalPriceNum = persianNumeralToNumber(totalPrice);
   const offNum = persianNumeralToNumber(off);
-
-  console.log(products);
+  const {data: deliveryFee} = useDelivery(1);
 
   //login
   const pushLogin = () => {
