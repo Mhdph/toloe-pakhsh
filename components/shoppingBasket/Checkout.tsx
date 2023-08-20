@@ -53,8 +53,8 @@ function Checkout() {
 
   const totalPriceNum = persianNumeralToNumber(totalPrice);
   const offNum = persianNumeralToNumber(off);
-  const {data: deliveryFee} = useDelivery(1);
-
+  const {data: deliveryFee} = useDelivery();
+  console.log(deliveryFee?.data[0].cost);
   //login
   const pushLogin = () => {
     router.push('/login');
@@ -85,7 +85,7 @@ function Checkout() {
         <div className='flex items-center justify-between'>
           <p className='text-xs font-semibold  text-black-items'>حمل و نقل:</p>
           <div className='flex items-center'>
-            <p className='text-base font-semibold'>۴۰,۰۰۰</p>
+            <p className='text-base font-semibold'>{deliveryFee?.data[0].cost}</p>
             <span className='mr-1 text-xs font-normal opacity-60'>تومان</span>
           </div>
         </div>
