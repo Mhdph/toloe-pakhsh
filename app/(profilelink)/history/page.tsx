@@ -16,16 +16,16 @@ function History() {
           <TabsTrigger value='sending'>در حال ارسال</TabsTrigger>
         </TabsList>
         <TabsContent value='sending'>
-          <HistoryCard color='primary' state='SENDING' />
+          <HistoryCard color='primary' state='SENDING' label='در حال ارسال' />
         </TabsContent>
         <TabsContent value='delivered'>
-          <HistoryCard color='delivered' state='CLOSE' />
+          <HistoryCard color='delivered' state='CLOSE' label='تحویل شده' />
         </TabsContent>
         <TabsContent value='canceled'>
-          <HistoryCard color='canceled' state='DECLINE' />
+          <HistoryCard color='canceled' state='DECLINE' label='لغو شده' />
         </TabsContent>
         <TabsContent value='returned'>
-          <HistoryCard color='returned' state='REJECT' />
+          <HistoryCard color='returned' state='REJECT' label='مرجوع شده' />
         </TabsContent>
       </Tabs>
     </div>
