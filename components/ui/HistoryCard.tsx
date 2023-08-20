@@ -7,6 +7,7 @@ import {baseUrl} from '@/lib/config';
 import {useQuery} from '@tanstack/react-query';
 import Cookies from 'js-cookie';
 import {Cart} from '@/entities/Cart';
+import axios from 'axios';
 type Color = 'primary' | 'delivered' | 'canceled' | 'returned';
 
 type Props = {
@@ -26,19 +27,17 @@ function HistoryCard({color = 'primary', state = '', label = '', className, ...r
   const bgColor = colors[color] ?? colors.primary;
   const classes = `px-5 rounded-xl py-1 md:text-xs ${bgColor} ${className}`;
   const token = Cookies.get('token');
+  const getHistoryCardFn = async () => {
+    const response = await axios.get(`/${baseUrl}/cart/listUserCart?state=${state}`, {
+      headers: {
+        authorization: 'Bearer ' + `${token}`,
+      },
+    });
+    return response.data;
+  };
   const {data, isLoading} = useQuery({
     queryKey: ['history'],
-    queryFn: async () => {
-      const response = await fetch(`${baseUrl}/cart/listUserCart?state=${state}`, {
-        headers: {
-          authorization: 'Bearer ' + `${token}`,
-        },
-      });
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    },
+    queryFn: getHistoryCardFn,
   });
   console.log(data);
   if (isLoading) return <p>loading</p>;

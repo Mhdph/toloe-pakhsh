@@ -30,16 +30,13 @@ function Comments() {
       });
     },
   });
-
+  const getCommentsFn = async () => {
+    const response = await axios.get(`${baseUrl}/comment/product/` + id);
+    return response.data;
+  };
   const {data, isLoading} = useQuery({
-    queryKey: ['todos', id],
-    queryFn: async () => {
-      const response = await fetch(`${baseUrl}/comment/product/` + id);
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    },
+    queryKey: ['comments', id],
+    queryFn: getCommentsFn,
   });
 
   const addComment = () => {

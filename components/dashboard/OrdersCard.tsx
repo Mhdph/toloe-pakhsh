@@ -18,6 +18,7 @@ import Button from '../ui/Button';
 import Cookies from 'js-cookie';
 import {useQuery} from '@tanstack/react-query';
 import {baseUrl} from '@/lib/config';
+import axios from 'axios';
 type UpdateOrderSchema = z.infer<typeof UpdateOrderSchema>;
 
 type Color = 'primary' | 'delivered' | 'canceled' | 'returned';
@@ -49,19 +50,18 @@ function OrdersCard({color = 'primary', state = '', label = '', className, ...re
   const bgColor = colors[color] ?? colors.primary;
   const classes = `text-black ${bgColor} ${className}`;
   const token = Cookies.get('token');
+  const getHistoryUSerCardFn = async () => {
+    const response = await axios.get(`/${baseUrl}/cart/listOrderCarts?state=${state}`, {
+      headers: {
+        authorization: 'Bearer ' + `${token}`,
+      },
+    });
+    return response.data;
+  };
+
   const {data, isLoading} = useQuery({
     queryKey: ['history'],
-    queryFn: async () => {
-      const response = await fetch(`${baseUrl}/cart/listOrderCarts?state=${state}`, {
-        headers: {
-          authorization: 'Bearer ' + `${token}`,
-        },
-      });
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    },
+    queryFn: getHistoryUSerCardFn,
   });
   console.log(data);
   if (isLoading) return <p>loading</p>;
