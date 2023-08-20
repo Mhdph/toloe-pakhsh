@@ -5,3 +5,4 @@ export const CACHE_KEY_CART = ['cart'];
 export const CACHE_KEY_PRODUCT = ['product'];
 export const CACHE_KEY_COMMENT = ['comment'];
 export const CACHE_KEY_ORDER = ['order'];
+export const CACHE_KEY_POST = ['post'];
