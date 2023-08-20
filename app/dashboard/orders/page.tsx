@@ -40,11 +40,25 @@ function page() {
           <TabsTrigger value='all'>تمام سفارشات</TabsTrigger>
         </TabsList>
         <TabsContent value='all'>
-          <OrdersCard />
+          <OrdersCard color='primary' state='' label='تمام سفارشات' />
           <hr className='my-2 md:hidden' />
         </TabsContent>
-        <TabsContent value='comment'></TabsContent>
-        <TabsContent value='compare'></TabsContent>
+        <TabsContent value='delivered'>
+          <OrdersCard color='delivered' label='تحویل شده' state='delivered' />
+          <hr className='my-2 md:hidden' />
+        </TabsContent>
+        <TabsContent value='Posted'>
+          <OrdersCard color='delivered' label='در حال ارسال' state='SENDING' />
+          <hr className='my-2 md:hidden' />
+        </TabsContent>
+        <TabsContent value='canceled'>
+          <OrdersCard color='canceled' label='کنسل شده' state='REJECT' />
+          <hr className='my-2 md:hidden' />
+        </TabsContent>
+        <TabsContent value='returned'>
+          <OrdersCard color='returned' label='مرجوع شده' state='DECLINE' />
+          <hr className='my-2 md:hidden' />
+        </TabsContent>
       </Tabs>
     </div>
   );

@@ -15,9 +15,21 @@ import {SubmitHandler, useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from '@/components/ui/Form';
 import Button from '../ui/Button';
+import Cookies from 'js-cookie';
+import {useQuery} from '@tanstack/react-query';
+import {baseUrl} from '@/lib/config';
 type UpdateOrderSchema = z.infer<typeof UpdateOrderSchema>;
 
-function OrdersCard() {
+type Color = 'primary' | 'delivered' | 'canceled' | 'returned';
+
+interface Props {
+  color: Color;
+  className?: string;
+  state: string;
+  label: string;
+}
+
+function OrdersCard({color = 'primary', state = '', label = '', className, ...rest}: Props) {
   const id = '123';
   const {mutate} = useUpdateOrder(id);
   const form = useForm<UpdateOrderSchema>({
@@ -28,6 +40,31 @@ function OrdersCard() {
       state: data.state,
     });
   };
+  const colors = {
+    primary: 'bg-[#FBF2C0] ',
+    delivered: 'bg-[#C0DFFB] text-[#213664]',
+    canceled: 'bg-[#C0FBD4] text-[#0F2E1A]',
+    returned: 'bg-[#FCC0C0] text-[#7E0707]',
+  };
+  const bgColor = colors[color] ?? colors.primary;
+  const classes = `text-black ${bgColor} ${className}`;
+  const token = Cookies.get('token');
+  const {data, isLoading} = useQuery({
+    queryKey: ['history'],
+    queryFn: async () => {
+      const response = await fetch(`${baseUrl}/cart/listOrderCarts?state=${state}`, {
+        headers: {
+          authorization: 'Bearer ' + `${token}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    },
+  });
+  console.log(data);
+  if (isLoading) return <p>loading</p>;
 
   return (
     <div className='rounded-xl border border-main-red px-6 text-black-items'>
@@ -38,7 +75,7 @@ function OrdersCard() {
             <p>۱۴۸۴۴۳۸۰۲</p>
             <p>:کد سفارش</p>
           </div>
-          <Badge className='bg-[#FBF2C0] text-black'>Badge</Badge>
+          <Badge className={classes}>{label}</Badge>
         </div>
         <hr className='my-4 border-b border-b-black-items border-opacity-10' />
         <div className='flex flex-row-reverse justify-between'>
