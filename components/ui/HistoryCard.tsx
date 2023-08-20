@@ -28,7 +28,7 @@ function HistoryCard({color = 'primary', state = '', label = '', className, ...r
   const classes = `px-5 rounded-xl py-1 md:text-xs ${bgColor} ${className}`;
   const token = Cookies.get('token');
   const getHistoryCardFn = async () => {
-    const response = await axios.get(`/${baseUrl}/cart/listUserCart?state=${state}`, {
+    const response = await axios.get(`${baseUrl}/cart/listUserCart?state=${state}`, {
       headers: {
         authorization: 'Bearer ' + `${token}`,
       },

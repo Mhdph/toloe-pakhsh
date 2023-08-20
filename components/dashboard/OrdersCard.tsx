@@ -19,6 +19,7 @@ import Cookies from 'js-cookie';
 import {useQuery} from '@tanstack/react-query';
 import {baseUrl} from '@/lib/config';
 import axios from 'axios';
+import {Cart} from '@/entities/Cart';
 type UpdateOrderSchema = z.infer<typeof UpdateOrderSchema>;
 
 type Color = 'primary' | 'delivered' | 'canceled' | 'returned';
@@ -51,7 +52,7 @@ function OrdersCard({color = 'primary', state = '', label = '', className, ...re
   const classes = `text-black ${bgColor} ${className}`;
   const token = Cookies.get('token');
   const getHistoryUSerCardFn = async () => {
-    const response = await axios.get(`/${baseUrl}/cart/listOrderCarts?state=${state}`, {
+    const response = await axios.get(`${baseUrl}/cart/listOrderCarts?state=${state}`, {
       headers: {
         authorization: 'Bearer ' + `${token}`,
       },
@@ -67,81 +68,89 @@ function OrdersCard({color = 'primary', state = '', label = '', className, ...re
   if (isLoading) return <p>loading</p>;
 
   return (
-    <div className='rounded-xl border border-main-red px-6 text-black-items'>
-      <div className='py-4'>
-        <div className='flex items-center justify-between'>
-          <p>۱۴۰۲ / ۰۱ / ۲۷</p>
-          <div className='flex items-center gap-1'>
-            <p>۱۴۸۴۴۳۸۰۲</p>
-            <p>:کد سفارش</p>
-          </div>
-          <Badge className={classes}>{label}</Badge>
-        </div>
-        <hr className='my-4 border-b border-b-black-items border-opacity-10' />
-        <div className='flex flex-row-reverse justify-between'>
-          <div className='flex items-center gap-2'>
-            <p className='text-sm'>نام و نام خانوادگی</p>
-            <MiddleIcon>
-              <AvatarBlackIcon />
-            </MiddleIcon>
-          </div>
-          <div className='flex items-center gap-2'>
-            <PhoneBlackIcon />
-            <p className='text-sm font-normal'> +۹۸ ۹۲۳ ۲۵۳ ۲۹ ۱۳ </p>
-          </div>
-        </div>
-        <hr className='my-4 border-b border-b-black-items border-opacity-10' />
-        <div className='flex flex-row-reverse items-center gap-2'>
-          <Image src={shokolat} className='h-20 w-20' alt='product photo' />
-          <Image src={ProductImage} className='h-20 w-20' alt='product photo' />
-        </div>
-        <hr className='my-4 border-b border-b-black-items border-opacity-10' />
-        <Accordion type='multiple'>
-          <AccordionItem className='border-none' value='item-1'>
-            <AccordionTrigger> تومان ۱۰۸,۰۰۰</AccordionTrigger>
-            <AccordionContent>
-              <OrdersItem />
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-        <hr className='my-4 border-b border-b-black-items border-opacity-10' />
-
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(updateOrder)} className='grid w-full grid-cols-4'>
-            <div className='col-span-1 w-full'>
-              <Button type='submit' className='w-40'>
-                ثبت
-              </Button>
+    <div>
+      {data.data.map((item: Cart) => (
+        <div key={item.id} className='rounded-xl border border-main-red px-6 text-black-items'>
+          <div className='py-4'>
+            <div className='flex items-center justify-between'>
+              <p>{item.date}</p>
+              <div className='flex items-center gap-1'>
+                <p>{item.payId}</p>
+                <p>:کد سفارش</p>
+              </div>
+              <Badge className={classes}>{label}</Badge>
             </div>
-
-            <div className='col-span-3 w-full'>
-              <FormField
-                control={form.control}
-                name='state'
-                render={({field}) => (
-                  <FormItem>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder='مشخص کردن وضعیت سفارش' />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value='SENDING'>در حال ارسال</SelectItem>
-                        <SelectItem value='SENDED'>ارسال شده</SelectItem>
-                        <SelectItem value='CLOSE'>تحویل شده</SelectItem>
-                        <SelectItem value='REJECT'> لفو شده</SelectItem>
-                        <SelectItem value='DECLINE'> مرجوع شده</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            <hr className='my-4 border-b border-b-black-items border-opacity-10' />
+            <div className='flex flex-row-reverse justify-between'>
+              <div className='flex items-center gap-2'>
+                <p className='text-sm'>نام و نام خانوادگی</p>
+                <MiddleIcon>
+                  <AvatarBlackIcon />
+                </MiddleIcon>
+              </div>
+              <div className='flex items-center gap-2'>
+                <PhoneBlackIcon />
+                <p className='text-sm font-normal'> +۹۸ ۹۲۳ ۲۵۳ ۲۹ ۱۳ </p>
+              </div>
             </div>
-          </form>
-        </Form>
-      </div>
+            <hr className='my-4 border-b border-b-black-items border-opacity-10' />
+            <div className='flex flex-row-reverse items-center gap-2'>
+              {item.cartRows.map((item) => (
+                <img
+                  key={item.cartRowId}
+                  src={baseUrl + item.productPicture}
+                  className='h-20 w-20'
+                  alt='product photo'
+                />
+              ))}
+            </div>
+            <hr className='my-4 border-b border-b-black-items border-opacity-10' />
+            <Accordion type='multiple'>
+              <AccordionItem className='border-none' value='item-1'>
+                <AccordionTrigger> تومان {item.sumPrice}</AccordionTrigger>
+                <AccordionContent>
+                  <OrdersItem data={item} />
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+            <hr className='my-4 border-b border-b-black-items border-opacity-10' />
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(updateOrder)} className='grid w-full grid-cols-4'>
+                <div className='col-span-1 w-full'>
+                  <Button type='submit' className='w-40'>
+                    ثبت
+                  </Button>
+                </div>
+                <div className='col-span-3 w-full'>
+                  <FormField
+                    control={form.control}
+                    name='state'
+                    render={({field}) => (
+                      <FormItem>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder='مشخص کردن وضعیت سفارش' />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value='SENDING'>در حال ارسال</SelectItem>
+                            <SelectItem value='SENDED'>ارسال شده</SelectItem>
+                            <SelectItem value='CLOSE'>تحویل شده</SelectItem>
+                            <SelectItem value='REJECT'> لفو شده</SelectItem>
+                            <SelectItem value='DECLINE'> مرجوع شده</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+              </form>
+            </Form>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }

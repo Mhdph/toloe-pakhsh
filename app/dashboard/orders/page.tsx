@@ -22,7 +22,7 @@ function page() {
           جست و جو
         </button>
       </div>
-      <Tabs defaultValue='all' className='mt-4'>
+      <Tabs defaultValue='sending' className='mt-4'>
         <TabsList className=' flex justify-between gap-2 border-t border-main-red border-opacity-70'>
           <TabsTrigger value='returned'> مرجوع شده</TabsTrigger>
           <hr className='h-6 border-l border-main-red border-opacity-40' />
@@ -35,20 +35,14 @@ function page() {
 
           <hr className='h-6 border-l border-main-red border-opacity-40' />
           <TabsTrigger value='sending'>در حال ارسال</TabsTrigger>
-
-          <hr className='h-6 border-l border-main-red border-opacity-40' />
-          <TabsTrigger value='all'>تمام سفارشات</TabsTrigger>
         </TabsList>
-        <TabsContent value='all'>
-          <OrdersCard color='primary' state='' label='تمام سفارشات' />
-          <hr className='my-2 md:hidden' />
-        </TabsContent>
-        <TabsContent value='delivered'>
-          <OrdersCard color='delivered' label='تحویل شده' state='delivered' />
+
+        <TabsContent value='sending'>
+          <OrdersCard color='delivered' label='در حال ارسال' state='SENDING' />
           <hr className='my-2 md:hidden' />
         </TabsContent>
         <TabsContent value='Posted'>
-          <OrdersCard color='delivered' label='در حال ارسال' state='SENDING' />
+          <OrdersCard color='delivered' label='تحویل شده' state='delivered' />
           <hr className='my-2 md:hidden' />
         </TabsContent>
         <TabsContent value='canceled'>

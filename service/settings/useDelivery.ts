@@ -8,10 +8,10 @@ interface Delivery {
 
 const apiClient = new APIClient<Delivery>('/post');
 
-const useDelivery = (slug: number) =>
+const useDelivery = () =>
   useQuery({
     queryKey: [CACHE_KEY_POST],
-    queryFn: () => apiClient.get(slug),
+    queryFn: apiClient.getAll,
   });
 
 export default useDelivery;
