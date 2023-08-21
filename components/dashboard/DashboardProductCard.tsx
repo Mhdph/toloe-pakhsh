@@ -1,5 +1,7 @@
+'use client';
 import React from 'react';
 import Button from '../ui/Button';
+import {useRouter} from 'next/navigation';
 
 interface dataItem {
   data: {
@@ -16,6 +18,12 @@ interface dataItem {
 }
 
 function DashboardProductCard({data: {brand, picture, name, unitCount, unit, price, id, off}}: dataItem) {
+  const navigate = useRouter();
+
+  const push = (id: number) => {
+    navigate.push(`/dashboard/products/edit/${id}`);
+  };
+
   return (
     <div className='  w-48 rounded-xl border border-black-items border-opacity-40'>
       <div className='flex flex-col justify-center p-2'>
@@ -39,7 +47,7 @@ function DashboardProductCard({data: {brand, picture, name, unitCount, unit, pri
             <span className='mr-1 text-[10px] font-normal opacity-60 md:text-xs'>تومان</span>
           </div>
         </div>
-        <div className='mt-2 flex items-center gap-2 md:mt-3 md:justify-center'>
+        <div onClick={() => push(id)} className='mt-2 flex items-center gap-2 md:mt-3 md:justify-center'>
           <Button>ویرایش</Button>
         </div>
       </div>
