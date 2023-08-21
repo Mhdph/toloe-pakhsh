@@ -54,7 +54,7 @@ function Checkout() {
   const totalPriceNum = persianNumeralToNumber(totalPrice);
   const offNum = persianNumeralToNumber(off);
   const {data: deliveryFee} = useDelivery();
-  console.log(deliveryFee?.data[0].cost);
+
   //login
   const pushLogin = () => {
     router.push('/login');
@@ -93,7 +93,9 @@ function Checkout() {
         <div className='flex items-center justify-between text-[#F6622C]'>
           <p className='text-base font-semibold '> مجموع کل:</p>
           <div className='flex items-center'>
-            <p className='text-base font-semibold'>{(totalPriceNum - offNum + 40000).toLocaleString('fa-ir')}</p>
+            <p className='text-base font-semibold'>
+              {(totalPriceNum - offNum + persianNumeralToNumber(deliveryFee?.data[0].cost!)).toLocaleString('fa-ir')}
+            </p>
             <span className='mr-1 text-xs font-normal text-black-items opacity-60'>تومان</span>
           </div>
         </div>

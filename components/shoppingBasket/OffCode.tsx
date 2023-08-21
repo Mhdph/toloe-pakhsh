@@ -24,6 +24,7 @@ function OffCode() {
           className='h-10 w-full rounded border border-solid border-gray-300 outline-none'
         />
         <Button
+          variant='secondary'
           isLoading={isLoading}
           onClick={addDiscount}
           className='w-full rounded-3xl bg-white py-1.5 text-[#F6622C]'
