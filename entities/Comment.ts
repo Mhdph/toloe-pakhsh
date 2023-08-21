@@ -12,6 +12,8 @@ export interface Comment {
   productDescription: any;
   productUnit: string;
   productUnitCount: string;
+  userFirstName: string;
+  userLastName: string;
 }
 
 export interface AddComment {
