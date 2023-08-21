@@ -3,12 +3,12 @@ import {toast} from 'react-hot-toast';
 import APIClient from '../api-client';
 import {CACHE_KEY_COMPONENT} from '../constants';
 
-const apiClient = new APIClient<ComponentSetting>('/component-front');
+const apiClient = new APIClient<AddComponentSetting>('/component-front');
 
-const useAddProduct = () => {
+const useAddSlider = () => {
   const queryClient = useQueryClient();
 
-  return useMutation<ComponentSetting, Error, ComponentSetting>((data) => apiClient.post(data), {
+  return useMutation<AddComponentSetting, Error, AddComponentSetting>((data) => apiClient.post(data), {
     onSuccess: () => {
       queryClient.refetchQueries(CACHE_KEY_COMPONENT);
       toast.success('کامپوننت با موفقیت اضافه شد');
@@ -19,4 +19,4 @@ const useAddProduct = () => {
   });
 };
 
-export default useAddProduct;
+export default useAddSlider;
