@@ -1,21 +1,64 @@
-import {CloseWhiteIcon, FilterIcon, UpDownIcon} from '@/assets/Icons';
+'use client';
+import {UpDownIcon} from '@/assets/Icons';
 import SearchBarSvg from '@/assets/svg/SearchBarSvg';
-import React from 'react';
 import SearchPopOver from './search/SearchPopOver';
-
+import React from 'react';
+import axios from 'axios';
+import {baseUrl} from '@/lib/config';
+import useDebounce from '@/hooks/useDebounce';
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+  CommandShortcut,
+} from '@/components/ui/Command';
+import {Product} from '@/entities/product';
 interface SearchBarProps {
   count: number | undefined;
 }
 
 function SearchBar({count}: SearchBarProps) {
+  const [data, setData] = React.useState([]);
+  const [name, setName] = React.useState('');
+  const debouncedValue = useDebounce(name, 3000);
+  const getProduct = async () => {
+    try {
+      const res = await axios.get(`${baseUrl}/product?productName=${name}`);
+      setData(res.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  React.useEffect(() => {
+    getProduct();
+  }, [debouncedValue]);
   return (
     <div className='pt-16 md:hidden'>
       <div className='serach_bar h-[142px] w-full rounded-b-3xl px-4'>
         <div className='relative w-full pt-4'>
-          <input type='text' id='voice-search' className='bg-whit w-full rounded-[18px] py-1.5 pr-10 outline-none' />
-          <div className='pointer-events-none absolute inset-y-0 right-3 mt-3 flex items-center pr-4'>
+          <Command>
+            <CommandInput onValueChange={(e) => setName(e)} />
+            <CommandList>
+              <CommandGroup>
+                {name !== '' ? (
+                  <>
+                    {data.slice(0, 5).map((item: Product) => (
+                      <CommandItem key={item.id}>{item.name}</CommandItem>
+                    ))}
+                  </>
+                ) : null}
+              </CommandGroup>
+            </CommandList>
+          </Command>
+          {/* <input type='text' id='voice-search' className='bg-whit w-full rounded-[18px] py-1.5 pr-10 outline-none' /> */}
+          {/* <div className='pointer-events-none absolute inset-y-0 right-3 mt-3 flex items-center pr-4'>
             <SearchBarSvg />
-          </div>
+          </div> */}
         </div>
         <div className='mt-4 flex items-center justify-between'>
           <SearchPopOver />
