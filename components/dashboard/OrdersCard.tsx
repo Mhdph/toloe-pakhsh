@@ -1,25 +1,22 @@
 'use client';
 import {AvatarBlackIcon, PhoneBlackIcon} from '@/assets/Icons';
-import {Badge} from '../ui/Badge';
-import MiddleIcon from '../ui/MiddleIcon';
-import ProductImage from '@/assets/tempImages/Product Photo.png';
-import shokolat from '@/assets/tempImages/shokolat.png';
-import Image from 'next/image';
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from '@/components/ui/Accordion';
+import {Form, FormControl, FormField, FormItem, FormMessage} from '@/components/ui/Form';
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from '@/components/ui/Select';
-import OrdersItem from './OrdersItem';
-import useUpdateOrder from '@/service/order/useUpdateOrder';
-import {z} from 'zod';
-import {UpdateOrderSchema} from '@/validation/orders';
-import {SubmitHandler, useForm} from 'react-hook-form';
-import {zodResolver} from '@hookform/resolvers/zod';
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from '@/components/ui/Form';
-import Button from '../ui/Button';
-import Cookies from 'js-cookie';
-import {useQuery} from '@tanstack/react-query';
-import {baseUrl} from '@/lib/config';
-import axios from 'axios';
 import {Cart} from '@/entities/Cart';
+import {baseUrl} from '@/lib/config';
+import useUpdateOrder from '@/service/order/useUpdateOrder';
+import {UpdateOrderSchema} from '@/validation/orders';
+import {zodResolver} from '@hookform/resolvers/zod';
+import {useQuery} from '@tanstack/react-query';
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import {SubmitHandler, useForm} from 'react-hook-form';
+import {z} from 'zod';
+import {Badge} from '../ui/Badge';
+import Button from '../ui/Button';
+import MiddleIcon from '../ui/MiddleIcon';
+import OrdersItem from './OrdersItem';
 type UpdateOrderSchema = z.infer<typeof UpdateOrderSchema>;
 
 type Color = 'primary' | 'delivered' | 'canceled' | 'returned';
@@ -96,6 +93,7 @@ function OrdersCard({color = 'primary', state = '', label = '', className, ...re
             <hr className='my-4 border-b border-b-black-items border-opacity-10' />
             <div className='flex flex-row-reverse items-center gap-2'>
               {item.cartRows.map((item) => (
+                // eslint-disable-next-line @next/next/no-img-element
                 <img
                   key={item.cartRowId}
                   src={baseUrl + item.productPicture}
