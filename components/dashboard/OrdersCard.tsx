@@ -70,7 +70,7 @@ function OrdersCard({color = 'primary', state = '', label = '', className, ...re
         <div key={item.id} className='rounded-xl border border-main-red px-6 text-black-items'>
           <div className='py-4'>
             <div className='flex items-center justify-between'>
-              <p>{item.date}</p>
+              <p>{item.FaDate}</p>
               <div className='flex items-center gap-1'>
                 <p>{item.payId}</p>
                 <p>:کد سفارش</p>
@@ -80,7 +80,7 @@ function OrdersCard({color = 'primary', state = '', label = '', className, ...re
             <hr className='my-4 border-b border-b-black-items border-opacity-10' />
             <div className='flex flex-row-reverse justify-between'>
               <div className='flex items-center gap-2'>
-                <p className='text-sm'>نام و نام خانوادگی</p>
+                <p className='text-sm'>{item.firstName + ' ' + item.lastName}</p>
                 <MiddleIcon>
                   <AvatarBlackIcon />
                 </MiddleIcon>

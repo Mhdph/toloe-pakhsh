@@ -23,6 +23,9 @@ export interface Cart {
   description: any;
   codeCart: string;
   date: string;
+  lastName: string;
+  firstName: string;
+  FaDate: string;
 }
 
 export interface CartRow {
