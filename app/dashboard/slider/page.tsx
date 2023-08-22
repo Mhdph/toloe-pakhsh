@@ -4,6 +4,7 @@ import Button from '@/components/ui/Button';
 import {Input} from '@/components/ui/Input';
 import {baseUrl} from '@/lib/config';
 import useComponents from '@/service/settings/useComponents';
+import useDeleteSlider from '@/service/settings/useDeleteSlider';
 import useUpdateDelivery from '@/service/settings/useUpdateDelivery';
 import {Label} from '@radix-ui/react-label';
 import React from 'react';
@@ -17,7 +18,10 @@ function Slider() {
     });
   };
   const {data} = useComponents();
-  console.log(data);
+  const {mutate: mutateDelete} = useDeleteSlider();
+  const deleteFn = (id: string | number) => {
+    mutateDelete(id);
+  };
   return (
     <div>
       <div className='flex h-24 items-center justify-between rounded-t-3xl bg-[#253031] px-4 text-white'>
@@ -34,7 +38,9 @@ function Slider() {
           <div className='rounded-3xl border border-black-items border-opacity-20 bg-white px-8 py-4'>
             <div className='mb-4 flex items-center justify-between'>
               <p className='text-lg font-semibold'>اسلایدر شماره {item.id}</p>
-              <Button variant='outline'>حذف اسلایدر</Button>
+              <Button onClick={() => deleteFn(item.id)} variant='outline'>
+                حذف اسلایدر
+              </Button>
             </div>
             <div className='mb-6 flex items-center justify-center'>
               <img src={baseUrl + item.picture} className='w-full' alt='' />
