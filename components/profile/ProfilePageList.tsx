@@ -28,7 +28,7 @@ function ProfilePageList() {
         <p className='text-base font-semibold text-black-items'>خروج </p>
         <ArrowOrangeIcon />
       </div>
-      <hr className='my-4 border border-solid border-[#F6602D] opacity-50' />
+      <hr className='my-4 mt-14 border border-solid border-[#F6602D] opacity-50' />
     </div>
   );
 }

@@ -48,7 +48,13 @@ function ProductDetails() {
   return (
     <div className='md:mt-7 md:grid md:grid-cols-3 md:px-10'>
       <div className='md:col-span-1'>
-        <img src={baseUrl + data?.picture} alt={data?.name!} width={390} height={200} className='h-[200px]' />
+        <img
+          src={baseUrl + data?.picture}
+          alt={data?.name!}
+          width={390}
+          height={200}
+          className='h-[200px] pt-10 md:pt-0'
+        />
       </div>
       <div className='flex flex-col px-4 font-semibold md:col-span-2 md:rounded-3xl md:bg-white md:p-4 md:shadow-2xl'>
         <div className='flex items-center justify-between'>
