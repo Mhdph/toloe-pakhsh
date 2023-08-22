@@ -17,7 +17,9 @@ function Checkout() {
   const products = useProductStore((state) => state.products);
   //backend
   const {data} = useGetCart();
+  const {data: deliveryFee} = useDelivery();
   const [totalPrice, setTotalPrice] = React.useState<string>('');
+  const [delivery, setDelivery] = React.useState<string>('');
   const [off, setOff] = React.useState<string>('۰');
 
   const token = Cookies.get('token');
@@ -35,9 +37,13 @@ function Checkout() {
       setTotalPrice(totalPriceFromProducts.toString());
       if (data && data.data.length > 0) {
         const off = data && data.data[0].sumOff;
-
         setOff(off);
       }
+    }
+    if (deliveryFee && deliveryFee.data.length > 0) {
+      setDelivery(deliveryFee?.data[0].cost);
+    } else {
+      setDelivery('۴۰۰۰');
     }
   }, [user, products, data]);
 
@@ -53,7 +59,7 @@ function Checkout() {
 
   const totalPriceNum = persianNumeralToNumber(totalPrice);
   const offNum = persianNumeralToNumber(off);
-  const {data: deliveryFee} = useDelivery();
+  const deliveryNum = persianNumeralToNumber(delivery);
 
   //login
   const pushLogin = () => {
@@ -93,9 +99,7 @@ function Checkout() {
         <div className='flex items-center justify-between text-[#F6622C]'>
           <p className='text-base font-semibold '> مجموع کل:</p>
           <div className='flex items-center'>
-            <p className='text-base font-semibold'>
-              {(totalPriceNum - offNum + persianNumeralToNumber(deliveryFee?.data[0].cost!)).toLocaleString('fa-ir')}
-            </p>
+            <p className='text-base font-semibold'>{(totalPriceNum - offNum + deliveryNum).toLocaleString('fa-ir')}</p>
             <span className='mr-1 text-xs font-normal text-black-items opacity-60'>تومان</span>
           </div>
         </div>
