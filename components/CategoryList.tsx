@@ -1,15 +1,11 @@
+import {CategoryandChilds} from '@/entities/category';
 import {baseUrl} from '@/lib/config';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
 interface CategoryListProps {
-  data: [
-    {
-      name: string;
-      picture: string;
-    },
-  ];
+  data: CategoryandChilds[] | undefined;
 }
 
 const CategoryList: React.FC<CategoryListProps> = ({data}) => {
@@ -17,7 +13,7 @@ const CategoryList: React.FC<CategoryListProps> = ({data}) => {
     <div className='mt-4 flex flex-col items-center justify-center'>
       <p className='mb-1 text-2xl font-normal text-black-items lg:mb-3'>دسته بندی محصولات</p>
       <div className='flex flex-wrap items-center justify-center gap-2'>
-        {data.map((item) => (
+        {data?.map((item) => (
           <div key={item.name} className='category_card'>
             <Link href={`/product-category/${item.name}`}>
               <Image

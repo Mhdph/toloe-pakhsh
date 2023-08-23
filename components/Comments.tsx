@@ -10,6 +10,7 @@ import Rectangl from '@/assets/tempImages/Rectangl.png';
 import Image from 'next/image';
 import ReactStars from 'react-stars';
 import Cookies from 'js-cookie';
+import Loading from './ui/Loading';
 
 interface AddComment {
   star: number;
@@ -49,7 +50,7 @@ function Comments() {
     setStar(newRating);
   };
 
-  if (isLoading) return <p>loading</p>;
+  if (isLoading) return <Loading />;
   return (
     <>
       <div className=''>

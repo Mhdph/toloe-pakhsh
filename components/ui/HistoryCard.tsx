@@ -8,6 +8,7 @@ import {useQuery} from '@tanstack/react-query';
 import Cookies from 'js-cookie';
 import {Cart} from '@/entities/Cart';
 import axios from 'axios';
+import Loading from './Loading';
 type Color = 'primary' | 'delivered' | 'canceled' | 'returned';
 
 type Props = {
@@ -40,7 +41,7 @@ function HistoryCard({color = 'primary', state = '', label = '', className, ...r
     queryFn: getHistoryCardFn,
   });
   console.log(data);
-  if (isLoading) return <p>loading</p>;
+  if (isLoading) return <Loading />;
   return (
     <div>
       {data.data.map((item: Cart) => (

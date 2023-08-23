@@ -11,7 +11,7 @@ const axiosInstance = axios.create({
   baseURL: 'https://tolouapi.iran.liara.run',
 });
 
-const token = Cookies.get('token');
+const token = localStorage.getItem('token');
 axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
 class APIClient<T> {

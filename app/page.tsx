@@ -1,26 +1,25 @@
-'use client';
-import HeroSection from '@/components/HeroSection';
-import CategoryList from '@/components/CategoryList';
-import ListItems from '@/components/ListItems';
-import SpecialOffer from '@/components/SpecialOffer';
 import AboutUs from '@/components/AboutUs';
+import CategoryList from '@/components/CategoryList';
 import ContactUs from '@/components/ContactUs';
+import HeroSection from '@/components/HeroSection';
+import ListItems from '@/components/ListItems';
 import OfferHero from '@/components/OfferHero';
-import {getAllProduct, getAllOffProduct} from '@/service/product';
+import SpecialOffer from '@/components/SpecialOffer';
 import {getAllCategory} from '@/service/category';
+import {getAllOffProduct, getAllProduct} from '@/service/product';
 
-export default function Home() {
-  // const data = await getAllProduct();
-  // const dataOff = await getAllOffProduct();
+export default async function Home() {
+  const data = await getAllProduct();
+  const dataOff = await getAllOffProduct();
 
-  // const categoryData = await getAllCategory();
+  const categoryData = await getAllCategory();
   return (
     <main className='flex flex-col'>
       <HeroSection />
-      {/* <CategoryList data={categoryData.data} /> */}
+      <CategoryList data={categoryData.data} />
       <OfferHero />
-      {/* <ListItems data={data.data} link='' title='آخرین محصولات' />
-      <SpecialOffer data={dataOff.data} /> */}
+      <ListItems data={data.data} link='' title='آخرین محصولات' />
+      <SpecialOffer data={dataOff.data} />
       <AboutUs />
       <ContactUs />
     </main>

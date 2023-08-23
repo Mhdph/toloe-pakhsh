@@ -36,6 +36,7 @@ function ConfirmCode() {
       Cookies.set('token', data.token);
       Cookies.set('token', data.token);
       const decoded: token = jwt_decode(data.token);
+      localStorage.setItem('token', data.token);
       Cookies.set('userId', decoded.userId);
       if (products.length > 0) {
         try {
@@ -44,12 +45,12 @@ function ConfirmCode() {
               authorization: 'Bearer ' + `${data.token}`,
             },
           });
-          router.push('/');
+          window.location.href = '/';
         } catch (error) {
           console.log(error);
         }
       } else {
-        router.push('/full-details');
+        window.location.href = '/full-details';
       }
     },
   });
@@ -130,12 +131,15 @@ function ConfirmCode() {
                 <p className='text-xs font-normal'>مرا به خاطر بسپار</p>
               </div>
 
-              <div className='md:flex md:items-end md:justify-between'>
+              <div className='hidden  md:flex md:items-end md:justify-between'>
                 <div className='hidden md:inline'></div>
-                <Button isLoading={isLoading} onClick={sendCode} className='w-40'>
-                  ادامه
+                <Button onClick={sendCode} isLoading={isLoading}>
+                  ادامه{' '}
                 </Button>
               </div>
+              <Button className='my-3 md:hidden' onClick={sendCode} isLoading={isLoading}>
+                ادامه{' '}
+              </Button>
               <p className='text-center text-base font-semibold text-red-500'>
                 {error && error instanceof Error ? error.message : null}
               </p>

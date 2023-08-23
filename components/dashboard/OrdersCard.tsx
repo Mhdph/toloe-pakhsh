@@ -17,6 +17,7 @@ import {Badge} from '../ui/Badge';
 import Button from '../ui/Button';
 import MiddleIcon from '../ui/MiddleIcon';
 import OrdersItem from './OrdersItem';
+import Loading from '../ui/Loading';
 type UpdateOrderSchema = z.infer<typeof UpdateOrderSchema>;
 
 type Color = 'primary' | 'delivered' | 'canceled' | 'returned';
@@ -62,7 +63,8 @@ function OrdersCard({color = 'primary', state = '', label = '', className, ...re
     queryFn: getHistoryUSerCardFn,
   });
   console.log(data);
-  if (isLoading) return <p>loading</p>;
+
+  if (isLoading) return <Loading />;
 
   return (
     <div>

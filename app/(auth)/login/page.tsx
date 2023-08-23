@@ -31,7 +31,7 @@ function Login() {
         <div className='relative right-80 hidden md:inline'>
           <LoginRightBg />
         </div>
-        <div className='z-50 bg-white md:mb-4 md:h-[600px] md:min-w-[412px] md:rounded-3xl md:border md:border-[#F34535]'>
+        <div className='z-50 bg-white md:mb-4 md:h-[580px] md:min-w-[412px] md:rounded-3xl md:border md:border-[#F34535]'>
           <div>
             <p className='text-center text-4xl font-semibold md:mt-28 md:text-[32px]'>ورود به حساب</p>
             <p className='mt-4 text-center text-xs md:text-sm'>لطفا شماره موبایل خود را وارد کنید.</p>
@@ -49,12 +49,15 @@ function Login() {
                 <input type='checkbox' className='rounded-2xl border-black' />
                 <p className='text-xs font-normal md:text-sm'>مرا به خاطر بسپار</p>
               </div>
-              <div className='md:flex md:items-end md:justify-between'>
+              <div className='hidden  md:flex md:items-end md:justify-between'>
                 <div className='hidden md:inline'></div>
                 <Button onClick={loginForm} isLoading={isLoading}>
                   ارسال کد تایید
                 </Button>
               </div>
+              <Button className='mt-3 md:hidden' onClick={loginForm} isLoading={isLoading}>
+                ارسال کد تایید
+              </Button>
             </div>
             <hr className='mb-6 mt-14 border-[0.5px] border-solid md:hidden' />
             <div className='login_bg flex flex-col items-center gap-4 bg-gradient-to-r md:mt-20 md:rounded-b-3xl md:py-6'>
