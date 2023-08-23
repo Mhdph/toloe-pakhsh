@@ -32,6 +32,7 @@ specifiers:
   postcss: 8.4.24
   prettier: ^2.8.8
   prettier-plugin-tailwindcss: ^0.3.0
+  rc-pagination: ^3.6.1
   rc-slider: ^10.2.0
   react: 18.2.0
   react-dom: 18.2.0
@@ -74,6 +75,7 @@ dependencies:
   next: 13.4.4_biqbaboplfbrettd7655fr4n2y
   next-nprogress-bar: 2.0.3
   postcss: 8.4.24
+  rc-pagination: 3.6.1_biqbaboplfbrettd7655fr4n2y
   rc-slider: 10.2.0_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -3356,6 +3358,19 @@ packages:
 
   /queue-microtask/1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
+    dev: false
+
+  /rc-pagination/3.6.1_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-R/sUnKKXx1Nm4kZfUKS3YKa7yEPF1ZkVB/AynQaHt+nMER7h9wPTfliDJFdYo+RM/nk2JD4Yc5QpUq8fIQHeug==}
+    peerDependencies:
+      react: '>=16.9.0'
+      react-dom: '>=16.9.0'
+    dependencies:
+      '@babel/runtime': 7.22.5
+      classnames: 2.3.2
+      rc-util: 5.33.1_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /rc-slider/10.2.0_biqbaboplfbrettd7655fr4n2y:
