@@ -14,6 +14,7 @@ import {useParams} from 'next/navigation';
 import {useEffect, useState} from 'react';
 import ListItems from './ListItems';
 import SameProduct from './search/SameProduct';
+import Loading from './ui/Loading';
 
 function SearchPage() {
   const {setEndPrice, setOff, setExist, setStartPrice, setCategoryName, setSortName} = useProductQueryStore();
@@ -44,8 +45,8 @@ function SearchPage() {
     setSortName(value, sort);
     console.log(value);
   };
-  const {data} = useProducts();
-
+  const {data, isLoading} = useProducts();
+  if (isLoading) return <Loading />;
   return (
     <div>
       <SearchBar count={data?.count} />
