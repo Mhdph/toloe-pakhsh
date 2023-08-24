@@ -15,9 +15,11 @@ import {useEffect, useState} from 'react';
 import ListItems from './ListItems';
 import SameProduct from './search/SameProduct';
 import Loading from './ui/Loading';
+import {PaginationList} from './ui/Pagination';
 
 function SearchPage() {
-  const {setEndPrice, setOff, setExist, setStartPrice, setCategoryName, setSortName} = useProductQueryStore();
+  const {setEndPrice, setOff, setExist, setStartPrice, setCategoryName, setSortName, setSkip} = useProductQueryStore();
+  const [page, setPage] = useState(1);
   const [sort, setSort] = useState<number>(1);
   const gameQuery = useProductQueryStore((s) => s.productQuery);
   console.log(gameQuery);
@@ -44,6 +46,11 @@ function SearchPage() {
   const handleSortChange = (value: string) => {
     setSortName(value, sort);
     console.log(value);
+  };
+
+  const onPageChange = (page: number) => {
+    setPage(page);
+    setSkip(page * 10);
   };
   const {data, isLoading} = useProducts();
   if (isLoading) return <Loading />;
@@ -167,6 +174,9 @@ function SearchPage() {
                 <Card data={item} />
               </div>
             ))}
+          </div>
+          <div className='mt-2 flex flex-row-reverse justify-center'>
+            <PaginationList onPageChange={onPageChange} page={page} pageCount={data?.count} />
           </div>
         </div>
       </div>

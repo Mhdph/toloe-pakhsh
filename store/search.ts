@@ -9,6 +9,7 @@ interface ProductQuery {
   off?: boolean;
   sortName?: string;
   sortDirection?: number;
+  skip?: number;
 }
 
 interface ProductQueryStore {
@@ -20,6 +21,7 @@ interface ProductQueryStore {
   setExist: (exist: boolean | undefined) => void;
   setOff: (off: boolean | undefined) => void;
   setSortName: (sortName: string | undefined, sortDirection: number) => void;
+  setSkip: (skip: number | undefined) => void;
 }
 
 const useProductQueryStore = create<ProductQueryStore>((set) => ({
@@ -32,6 +34,7 @@ const useProductQueryStore = create<ProductQueryStore>((set) => ({
   setBrand: (brand) => set((state) => ({productQuery: {...state.productQuery, brand}})),
   setExist: (exist) => set((state) => ({productQuery: {...state.productQuery, exist}})),
   setOff: (off) => set((state) => ({productQuery: {...state.productQuery, off}})),
+  setSkip: (skip) => set((state) => ({productQuery: {...state.productQuery, skip}})),
 }));
 
 export default useProductQueryStore;

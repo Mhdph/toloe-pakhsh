@@ -16,6 +16,7 @@ interface ProductQuery {
   off?: boolean;
   sortName?: string;
   sort?: number;
+  skip?: number;
 }
 
 const useProducts = () => {
@@ -50,6 +51,9 @@ const useProducts = () => {
 
   if (gameQuery.off) {
     params.off = gameQuery.off;
+  }
+  if (gameQuery.skip) {
+    params.skip = gameQuery.skip;
   }
 
   return useQuery({
