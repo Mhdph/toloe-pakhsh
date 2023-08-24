@@ -10,6 +10,7 @@ export interface Product {
   off: number;
   description: string;
   categoryId: number;
+  star: number;
 }
 
 export interface AddProduct {

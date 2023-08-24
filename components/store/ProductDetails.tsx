@@ -13,6 +13,8 @@ import useAddFavouriteProduct from '@/service/product/useAddFavouriteProduct';
 import Cookies from 'js-cookie';
 import Loading from '../ui/Loading';
 import Image from 'next/image';
+import page from '@/app/dashboard/orders/page';
+import ReactStars from 'react-stars';
 
 function ProductDetails() {
   const [count, setCount] = useState(1);
@@ -47,6 +49,14 @@ function ProductDetails() {
       favorite: [+id],
     });
   };
+
+  const increaseCount = () => {
+    setCount((count) => count + 1);
+  };
+  const decreaseCount = () => {
+    setCount((count) => count - 1);
+  };
+
   if (loading) return <Loading />;
   return (
     <div>
@@ -58,7 +68,7 @@ function ProductDetails() {
           <div className='flex flex-col px-4 font-semibold md:col-span-2 md:rounded-3xl md:bg-white md:p-4 md:shadow-2xl'>
             <div className='flex items-center justify-between'>
               <p className=' text-4xl md:text-5xl '>{data?.name}</p>
-              <StarSvg />
+              <ReactStars value={data.star} size={20} color2={'#F34834'} />
             </div>
             <p className='mt-3 text-base md:text-xl'>{data?.description}</p>
             <hr className='my-2' />
@@ -78,13 +88,17 @@ function ProductDetails() {
             <div className='flex items-center justify-between'>
               <p className='text-base md:text-xl'>تعداد:</p>
               <div className='flex items-center gap-2'>
-                <MiddleIcon>
-                  <MinusIcon />
-                </MiddleIcon>
+                <div onClick={() => decreaseCount()}>
+                  <MiddleIcon>
+                    <MinusIcon />
+                  </MiddleIcon>
+                </div>
                 <div className='numberItemBg flex h-9 w-[74px] items-center justify-center '>{count}</div>
-                <MiddleIcon>
-                  <PlusIcon />
-                </MiddleIcon>
+                <div onClick={() => increaseCount()}>
+                  <MiddleIcon>
+                    <PlusIcon />
+                  </MiddleIcon>
+                </div>
               </div>
             </div>
             <hr className='my-2' />
