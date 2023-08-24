@@ -12,7 +12,7 @@ function SearchBrand() {
         <AccordionTrigger className='text-main-red'> برند</AccordionTrigger>
         {data?.data.map((item) => (
           <AccordionContent className='cursor-pointer  border-gray-300 pt-1' key={item}>
-            <p onClick={() => setBrand(item.name)}>{item}</p>
+            <p onClick={() => setBrand(item)}>{item}</p>
           </AccordionContent>
         ))}
       </AccordionItem>
