@@ -18,7 +18,8 @@ import Loading from './ui/Loading';
 import {PaginationList} from './ui/Pagination';
 
 function SearchPage() {
-  const {setEndPrice, setOff, setExist, setStartPrice, setCategoryName, setSortName, setSkip} = useProductQueryStore();
+  const {setEndPrice, setOff, setExist, setStartPrice, setCategoryName, setSortName, setSkip, setDirection} =
+    useProductQueryStore();
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState<number>(1);
   const gameQuery = useProductQueryStore((s) => s.productQuery);
@@ -108,7 +109,7 @@ function SearchPage() {
           <div className='hidden justify-between md:flex'>
             <div className='flex items-center gap-6'>
               <div className='flex items-center gap-2'>
-                <div onClick={() => setSort(sort === 1 ? -1 : 1)}>
+                <div onClick={() => setDirection(sort === 1 ? -1 : 1)}>
                   <UpDownIcon />
                 </div>
                 <p className='text-ca font-black'>مرتب سازی</p>
@@ -126,7 +127,10 @@ function SearchPage() {
             </div>
             <div className='flex gap-6 text-ca font-normal text-black-items'>
               <p>{data?.count} نتیجه یافت شد</p>
-              <p className='tracking-widest'> صفحه ۱ / ۱۶</p>
+              <p className='tracking-widest'>
+                {' '}
+                صفحه {page} / {data?.count! / 10}
+              </p>
             </div>
           </div>
           <hr className='my-2 hidden border border-black-items border-opacity-10 md:inline' />
