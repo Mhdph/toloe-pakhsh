@@ -96,12 +96,12 @@ function SearchPage() {
             <hr className='mb-4 mt-1 border-b-[0.1px] border-black-items border-opacity-10' />
             <div className='flex items-center justify-between'>
               <p className='text-sm font-black text-[#F13739]'> موجود در انبار</p>
-              <Switch onCheckedChange={handleOnSaleChange} />
+              <Switch onCheckedChange={handleOnExistChange} />
             </div>{' '}
             <hr className='my-4 border-b-[0.1px] border-black-items border-opacity-10' />
             <div className='flex items-center justify-between'>
               <p className='text-sm font-black text-[#F13739]'> دارای تخفیف</p>
-              <Switch onCheckedChange={handleOnExistChange} />
+              <Switch onCheckedChange={handleOnSaleChange} />
             </div>
           </div>
         </div>
