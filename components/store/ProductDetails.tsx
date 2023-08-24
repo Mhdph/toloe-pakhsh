@@ -15,12 +15,23 @@ import Loading from '../ui/Loading';
 import Image from 'next/image';
 import page from '@/app/dashboard/orders/page';
 import ReactStars from 'react-stars';
+import axios from 'axios';
+import {useQuery} from '@tanstack/react-query';
 
 function ProductDetails() {
   const [count, setCount] = useState(1);
   const user = Cookies.get('token');
   const {id} = useParams();
-  const {data, isLoading: loading} = useProduct(+id);
+
+  const getProductDetails = async () => {
+    const response = await axios.get(`${baseUrl}/product/getbyid/${id}`);
+    return response.data;
+  };
+  const {data, isLoading: loading} = useQuery({
+    queryKey: ['product-single', id],
+    queryFn: getProductDetails,
+  });
+
   const addProduct = useProductStore((state) => state.addProduct);
   const {mutate: addtoFavourite} = useAddFavouriteProduct();
   const {mutate, isLoading} = useAddCart();
@@ -60,66 +71,64 @@ function ProductDetails() {
   if (loading) return <Loading />;
   return (
     <div>
-      {data && (
-        <div className='md:mt-7 md:grid md:grid-cols-3 md:px-10'>
-          <div className='flex items-center justify-center md:col-span-1'>
-            <img src={baseUrl + data.picture} alt={data?.name!} className='h-[200px] pt-20 md:pt-0' />
+      <div className='md:mt-7 md:grid md:grid-cols-3 md:px-10'>
+        <div className='flex items-center justify-center md:col-span-1'>
+          <img src={baseUrl + data.picture} alt={data.name} className='h-[200px] pt-20 md:pt-0' />
+        </div>
+        <div className='flex flex-col px-4 font-semibold md:col-span-2 md:rounded-3xl md:bg-white md:p-4 md:shadow-2xl'>
+          <div className='flex items-center justify-between'>
+            <p className=' text-4xl md:text-5xl '>{data.name}</p>
+            <ReactStars value={data.star} size={20} color2={'#F34834'} />
           </div>
-          <div className='flex flex-col px-4 font-semibold md:col-span-2 md:rounded-3xl md:bg-white md:p-4 md:shadow-2xl'>
-            <div className='flex items-center justify-between'>
-              <p className=' text-4xl md:text-5xl '>{data?.name}</p>
-              <ReactStars value={data.star} size={20} color2={'#F34834'} />
+          <p className='mt-3 text-base md:text-xl'>{data.description}</p>
+          <hr className='my-2' />
+          <div className='flex items-center justify-between'>
+            <p className='text-base'>برند:</p>
+            <p className='text-xs font-normal text-black-items'>{data.brand}</p>
+          </div>
+          <hr className='my-2' />
+          <div className='flex items-center justify-between'>
+            <p className='text-base md:text-xl'>قیمت:</p>
+            <div className='flex items-center'>
+              <p className='text-xs font-black md:text-ca'>{data.price}</p>
+              <span className='mr-1 text-[10px] font-normal opacity-60 md:text-xs'>تومان</span>
             </div>
-            <p className='mt-3 text-base md:text-xl'>{data?.description}</p>
-            <hr className='my-2' />
-            <div className='flex items-center justify-between'>
-              <p className='text-base'>برند:</p>
-              <p className='text-xs font-normal text-black-items'>{data?.brand}</p>
-            </div>
-            <hr className='my-2' />
-            <div className='flex items-center justify-between'>
-              <p className='text-base md:text-xl'>قیمت:</p>
-              <div className='flex items-center'>
-                <p className='text-xs font-black md:text-ca'>{data?.price}</p>
-                <span className='mr-1 text-[10px] font-normal opacity-60 md:text-xs'>تومان</span>
+          </div>
+          <hr className='my-2' />
+          <div className='flex items-center justify-between'>
+            <p className='text-base md:text-xl'>تعداد:</p>
+            <div className='flex items-center gap-2'>
+              <div onClick={() => decreaseCount()}>
+                <MiddleIcon>
+                  <MinusIcon />
+                </MiddleIcon>
+              </div>
+              <div className='numberItemBg flex h-9 w-[74px] items-center justify-center '>{count}</div>
+              <div onClick={() => increaseCount()}>
+                <MiddleIcon>
+                  <PlusIcon />
+                </MiddleIcon>
               </div>
             </div>
-            <hr className='my-2' />
-            <div className='flex items-center justify-between'>
-              <p className='text-base md:text-xl'>تعداد:</p>
-              <div className='flex items-center gap-2'>
-                <div onClick={() => decreaseCount()}>
-                  <MiddleIcon>
-                    <MinusIcon />
-                  </MiddleIcon>
-                </div>
-                <div className='numberItemBg flex h-9 w-[74px] items-center justify-center '>{count}</div>
-                <div onClick={() => increaseCount()}>
-                  <MiddleIcon>
-                    <PlusIcon />
-                  </MiddleIcon>
-                </div>
+          </div>
+          <hr className='my-2' />
+          <div className='flex items-center justify-center gap-2 md:justify-start'>
+            <MiddleIcon>
+              <ShareIcon />
+            </MiddleIcon>
+            <MiddleIcon>
+              <div onClick={addFavourite}>
+                <FavouriteIcon />
               </div>
-            </div>
-            <hr className='my-2' />
-            <div className='flex items-center justify-center gap-2 md:justify-start'>
-              <MiddleIcon>
-                <ShareIcon />
-              </MiddleIcon>
-              <MiddleIcon>
-                <div onClick={addFavourite}>
-                  <FavouriteIcon />
-                </div>
-              </MiddleIcon>
-              <MiddleIcon>
-                <div onClick={user === undefined ? handleAddToCart : addCardRow}>
-                  <MiniBucketIcon />
-                </div>
-              </MiddleIcon>
-            </div>
+            </MiddleIcon>
+            <MiddleIcon>
+              <div onClick={user === undefined ? handleAddToCart : addCardRow}>
+                <MiniBucketIcon />
+              </div>
+            </MiddleIcon>
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }
