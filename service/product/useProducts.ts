@@ -65,7 +65,9 @@ const useProducts = () => {
       debouncedEndPrice,
       gameQuery.off,
       gameQuery.exist,
-      gameQuery.skip
+      gameQuery.skip,
+      gameQuery.sortName,
+      gameQuery.sortDirection,
     ],
     queryFn: () =>
       apiClient.getAll({
