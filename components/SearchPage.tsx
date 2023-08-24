@@ -53,7 +53,6 @@ function SearchPage() {
     setSkip(page * 10);
   };
   const {data, isLoading} = useProducts();
-  if (isLoading) return <Loading />;
   return (
     <div>
       <SearchBar count={data?.count} />
@@ -168,13 +167,17 @@ function SearchPage() {
             ) : null}
           </div>
 
-          <div className='mt-6 grid grid-cols-2 gap-y-2 pr-2.5 sm:grid-cols-2 md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5'>
-            {data?.data.map((item) => (
-              <div key={item.id}>
-                <Card data={item} />
-              </div>
-            ))}
-          </div>
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <div className='mt-6 grid grid-cols-2 gap-y-2 pr-2.5 sm:grid-cols-2 md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5'>
+              {data?.data.map((item) => (
+                <div key={item.id}>
+                  <Card data={item} />
+                </div>
+              ))}
+            </div>
+          )}
           <div className='mt-2 flex flex-row-reverse justify-center'>
             <PaginationList onPageChange={onPageChange} page={page} pageCount={data?.count} />
           </div>
