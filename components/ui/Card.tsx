@@ -3,6 +3,10 @@ import {baseUrl} from '@/lib/config';
 import Image from 'next/image';
 import Link from 'next/link';
 import Button from './Button';
+import Cookies from 'js-cookie';
+import useProductStore from '@/store/zustand';
+import useAddFavouriteProduct from '@/service/product/useAddFavouriteProduct';
+import useAddCart from '@/service/cart/useAddCart';
 
 interface dataItem {
   data: {
@@ -17,8 +21,50 @@ interface dataItem {
     off: number;
   };
 }
+export interface ProductProps {
+  name: string;
+  id: number;
+  quantity: number;
+  brand: string;
+  unit: string;
+  unitCount: string;
+  price: number;
+  picture: string;
+}
 
 function Card({data: {brand, picture, name, unitCount, unit, price, id, off}}: dataItem) {
+  const addProduct = useProductStore((state) => state.addProduct);
+  const {mutate: addtoFavourite} = useAddFavouriteProduct();
+  const user = Cookies.get('token');
+  const quantity = 1;
+  const {mutate, isLoading} = useAddCart();
+  const handleAddToCart = () => {
+    const product: ProductProps = {
+      name,
+      id,
+      quantity,
+      unit,
+      unitCount,
+      brand,
+      price,
+      picture,
+    };
+    console.log(product);
+    addProduct(product);
+  };
+  const addCardRow = () => {
+    mutate({
+      price,
+      productId: id,
+      count: quantity,
+    });
+  };
+  const addFavourite = (id: number) => {
+    addtoFavourite({
+      favorite: [id],
+    });
+  };
+
   return (
     <div className=' min-w-[175px] max-w-[180px] rounded-3xl border border-black-items border-opacity-40 bg-white md:h-[300px] md:min-w-[223px] md:max-w-[223px]'>
       <Link href={`/store/${id}`} className=' flex justify-center'>
@@ -63,16 +109,21 @@ function Card({data: {brand, picture, name, unitCount, unit, price, id, off}}: d
           </div>
         </Link>
         <div className='mt-2 flex items-center gap-2 md:mt-3 md:justify-center'>
-          <div className='flex h-9 w-9 items-center justify-center rounded-full border border-[#F6602D] md:h-10 md:w-10'>
+          <div
+            onClick={() => addFavourite(id)}
+            className='flex h-9 w-9 items-center justify-center rounded-full border border-[#F6602D] md:h-10 md:w-10'
+          >
             <div className=''>
               <HeartIcon />
             </div>
           </div>
-          <button className='btn_primary flex w-[110px] items-center justify-around rounded-[18px] py-1 text-xs font-extrabold text-white md:w-[157px] md:py-2'>
-            {' '}
-            افزودن
-            <StoreActiveIcon />
-          </button>
+          <Button
+            onClick={user === undefined ? handleAddToCart : addCardRow}
+            isLoading={isLoading}
+            className='flex w-[110px] items-center justify-around  md:w-[140px]'
+          >
+            افزودن <StoreActiveIcon />
+          </Button>
         </div>
       </div>
     </div>
