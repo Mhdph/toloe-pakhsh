@@ -5,10 +5,14 @@ import {ProfileLinkListItem} from '@/constant/List';
 import Link from 'next/link';
 import React from 'react';
 import Cookies from 'js-cookie';
+import {useRouter} from 'next/navigation';
 
 function ProfilePageList() {
+  const router = useRouter();
+
   const logOut = () => {
     Cookies.remove('token');
+    router.push('/login');
   };
 
   return (
@@ -28,7 +32,7 @@ function ProfilePageList() {
         <p className='text-base font-semibold text-black-items'>خروج </p>
         <ArrowOrangeIcon />
       </div>
-      <hr className='my-4 mt-14 border border-solid border-[#F6602D] opacity-50' />
+      <hr className='my-4 mt-14 border border-solid border-[#F6602D] opacity-50 md:mt-4' />
     </div>
   );
 }
