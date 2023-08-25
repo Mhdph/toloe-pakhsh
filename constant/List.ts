@@ -55,11 +55,11 @@ export const ProfileLinkListItem = [
   },
 ];
 export const FilterList = [
-  {name: 'پربازدید', value: 'fetchCount'},
-  {name: 'جدید', value: 'dateCreate'},
-  {name: 'پرفروش', value: 'sale'},
-  {name: 'ارزان ترین', value: 'price'},
-  {name: 'گران ترین', value: 'price'},
+  {name: 'پربازدید', value: 'fetchCount', sortDirection: 1},
+  {name: 'جدید', value: 'dateCreate', sortDirection: 1},
+  {name: 'پرفروش', value: 'sale', sortDirection: 1},
+  {name: 'ارزان ترین', value: 'price', sortDirection: -1},
+  {name: 'گران ترین', value: 'price', sortDirection: 1},
 ];
 
 export const sidebar = [

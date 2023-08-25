@@ -44,9 +44,10 @@ function SearchPage() {
   const handleOnExistChange = (checked: boolean) => {
     setExist(checked);
   };
-  const handleSortChange = (value: string) => {
+  const handleSortChange = (value: string, direction: number) => {
     setSortName(value, sort);
     console.log(value);
+    setDirection(direction);
   };
 
   const onPageChange = (page: number) => {
@@ -54,6 +55,7 @@ function SearchPage() {
     setSkip(page * 10);
   };
   const {data, isLoading} = useProducts();
+
   return (
     <div>
       <SearchBar count={data?.count} />
@@ -109,7 +111,7 @@ function SearchPage() {
           <div className='hidden justify-between md:flex'>
             <div className='flex items-center gap-6'>
               <div className='flex items-center gap-2'>
-                <div onClick={() => setDirection(sort === 1 ? -1 : 1)}>
+                <div className='cursor-pointer' onClick={() => setDirection(sort === 1 ? -1 : 1)}>
                   <UpDownIcon />
                 </div>
                 <p className='text-ca font-black'>مرتب سازی</p>
@@ -118,7 +120,7 @@ function SearchPage() {
               {FilterList.map((item) => (
                 <p
                   key={item.name}
-                  onClick={() => handleSortChange(item.value)}
+                  onClick={() => handleSortChange(item.value, item.sortDirection)}
                   className='cursor-pointer text-ca font-normal text-black-items'
                 >
                   {item.name}
@@ -129,13 +131,13 @@ function SearchPage() {
               <p>{data?.count} نتیجه یافت شد</p>
               <p className='tracking-widest'>
                 {' '}
-                صفحه {page} / {data?.count! / 10}
+                صفحه {page} / {Math.ceil(data?.count! / 10)}
               </p>
             </div>
           </div>
           <hr className='my-2 hidden border border-black-items border-opacity-10 md:inline' />
           <div className='flex items-center gap-2'>
-            {gameQuery.categoryName !== undefined || gameQuery.categoryName !== '' ? (
+            {gameQuery.categoryName !== undefined && gameQuery.categoryName !== '' ? (
               <div
                 onClick={() => setCategoryName('')}
                 className='filter_bg_sidebar hidden w-[120px] cursor-pointer items-center justify-center gap-3 rounded-xl  px-3 py-1.5 md:flex'
@@ -171,7 +173,7 @@ function SearchPage() {
             ) : null}
           </div>
 
-          {isLoading ? (
+          {/* {isLoading ? (
             <Loading />
           ) : (
             <div className='mt-6 grid grid-cols-2 gap-y-2 pr-2.5 sm:grid-cols-2 md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5'>
@@ -181,7 +183,7 @@ function SearchPage() {
                 </div>
               ))}
             </div>
-          )}
+          )} */}
           <div className='mt-2 flex flex-row-reverse justify-center'>
             <PaginationList onPageChange={onPageChange} page={page} pageCount={data?.count} />
           </div>
