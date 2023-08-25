@@ -6,17 +6,10 @@ import React from 'react';
 import axios from 'axios';
 import {baseUrl} from '@/lib/config';
 import useDebounce from '@/hooks/useDebounce';
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-  CommandSeparator,
-  CommandShortcut,
-} from '@/components/ui/Command';
+import {Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList} from '@/components/ui/Command';
 import {Product} from '@/entities/product';
+import {useRouter} from 'next/navigation';
+import Link from 'next/link';
 interface SearchBarProps {
   count: number | undefined;
 }
@@ -24,6 +17,7 @@ interface SearchBarProps {
 function SearchBar({count}: SearchBarProps) {
   const [data, setData] = React.useState([]);
   const [name, setName] = React.useState('');
+  const router = useRouter();
   const debouncedValue = useDebounce(name, 3000);
   const getProduct = async () => {
     try {
@@ -48,7 +42,11 @@ function SearchBar({count}: SearchBarProps) {
                 {name !== '' ? (
                   <>
                     {data.slice(0, 5).map((item: Product) => (
-                      <CommandItem key={item.id}>{item.name}</CommandItem>
+                      <CommandItem onClick={() => router.push(`/store/${item.id}`)} key={item.id}>
+                        <Link onClick={() => setName('')} href={`/store/${item.id}`}>
+                          {item.name}
+                        </Link>{' '}
+                      </CommandItem>
                     ))}
                   </>
                 ) : null}
