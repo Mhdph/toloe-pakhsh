@@ -31,7 +31,7 @@ function Account() {
       onSuccess: (data) => {
         form.setValue('address', data?.address);
         form.setValue('firstName', data?.firstName);
-        form.setValue('birthDate', data?.birthDate.substring(0, 10));
+        form.setValue('birthDate', data?.birthDate ? data.birthDate.substring(0, 10) : data.birthDate);
         form.setValue('email', data?.email);
         form.setValue('lastName', data?.lastName);
         form.setValue('nationalCode', data?.nationalCode);
