@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 import {CloseIcon, MinusIcon, PlusIcon, StarIcon} from '@/assets/Icons';
 import {UpdateCart} from '@/entities/Cart';
@@ -12,6 +13,7 @@ import MiddleIcon from './ui/MiddleIcon';
 import {persianNumeralToNumber} from '@/helpers/PersianToEnglish';
 import {Loader2} from 'lucide-react';
 import useDeleteCartRow from '@/service/cart/useDeleteCartRow';
+import Loading from './ui/Loading';
 
 function ShoppingCard() {
   // user login or not
@@ -40,7 +42,7 @@ function ShoppingCard() {
   const {mutate, isLoading} = useUpdateCart();
 
   // data backend
-  const {data} = useGetCart();
+  const {data, isLoading: dataLoading} = useGetCart();
   const handleIncreaseData = (quantity: string, id: number) => {
     const numericQuantity = persianNumeralToNumber(quantity);
     const updatedCart: UpdateCart = {
@@ -69,6 +71,8 @@ function ShoppingCard() {
     deleteRow(id);
   };
 
+  if (dataLoading) return <Loading />;
+
   return (
     <>
       {user !== undefined ? (
@@ -85,13 +89,9 @@ function ShoppingCard() {
                 >
                   <CloseIcon />
                 </div>
-                <Image
-                  src={baseUrl + cartItem.productPicture}
-                  width={100}
-                  height={140}
-                  alt='product image'
-                  className='h-full md:pr-2'
-                />
+                <div className='flex h-[184px] w-[140px] items-center justify-center '>
+                  <img src={baseUrl + cartItem.productPicture} alt='product image' className=' md:pr-2' />
+                </div>
               </div>
               <div className='h-full flex-1 px-2 pt-6 md:grid md:grid-cols-2 md:pt-0'>
                 <div className='border-l-black-items border-opacity-10  md:flex md:flex-col md:gap-y-3 md:border-l md:py-4 md:pl-3'>
