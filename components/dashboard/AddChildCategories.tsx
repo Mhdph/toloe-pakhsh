@@ -26,8 +26,8 @@ export function AddChildCategories() {
 
   const addCategory: SubmitHandler<CategorySchema> = async (data) => {
     mutate({
-      chaildCategoryId: data.chaildCategoryId,
-      parentCategoryId: data.parentCategoryId,
+      chaildCategoryId: +data.chaildCategoryId,
+      parentCategoryId: +data.parentCategoryId,
     });
   };
   return (
