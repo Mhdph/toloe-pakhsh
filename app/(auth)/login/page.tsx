@@ -3,26 +3,52 @@ import LoginLeftBg from '@/assets/svg/LoginLeftBg';
 import LoginRightBg from '@/assets/svg/LoginRightBg';
 import ContactUs from '@/components/ContactUs';
 import Button from '@/components/ui/Button';
+import {persianNumeralToNumber} from '@/helpers/PersianToEnglish';
+import {baseUrl} from '@/lib/config';
 import {LoginFn} from '@/service/auth';
+import {zodResolver} from '@hookform/resolvers/zod';
 import {useMutation} from '@tanstack/react-query';
+import axios from 'axios';
 import Cookies from 'js-cookie';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import React, {useState} from 'react';
+import {SubmitHandler, useForm} from 'react-hook-form';
+import {toast} from 'react-hot-toast';
+import {z} from 'zod';
+import {digitsFaToEn} from '@persian-tools/persian-tools';
+const formSchema = z.object({
+  phone: z.string().refine((value) => value.length === 11, {
+    message: 'شماره تماس باید ۱۱ رقم باشد',
+  }),
+});
+
+type FormSchemaType = z.infer<typeof formSchema>;
 
 function Login() {
-  const [phone, setPhone] = useState('');
-
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  const {mutate, isLoading} = useMutation(() => LoginFn({phone}), {
-    onSuccess: () => {
-      Cookies.set('phoneNumber', phone);
-      router.push('/confirm-code');
-    },
+  const {
+    register,
+    handleSubmit,
+    formState: {errors, isSubmitting},
+  } = useForm<FormSchemaType>({
+    resolver: zodResolver(formSchema),
   });
-  const loginForm = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    mutate();
+
+  const onSubmit: SubmitHandler<FormSchemaType> = (data) => {
+    setIsLoading(true);
+    const phone = digitsFaToEn(data.phone);
+    try {
+      axios.post(`${baseUrl}/one-code/add`, {phone});
+      Cookies.set('phoneNumber', data.phone);
+      router.push('/confirm-code');
+      setIsLoading(false);
+    } catch (error) {
+      toast.error('مشکلی پیش امده دوباره امتحان کنید');
+      setIsLoading(false);
+    }
+    console.log('0' + persianNumeralToNumber(data.phone));
   };
   return (
     <div>
@@ -35,7 +61,7 @@ function Login() {
           <div>
             <p className='text-center text-4xl font-semibold md:mt-28 md:text-[32px]'>ورود به حساب</p>
             <p className='mt-4 text-center text-xs md:text-sm'>لطفا شماره موبایل خود را وارد کنید.</p>
-            <div className='mt-12 flex flex-col px-4'>
+            <form onSubmit={handleSubmit(onSubmit)} className='mt-12 flex flex-col px-4'>
               <label className='mb-1 text-xs font-black md:text-sm' htmlFor=''>
                 شماره تلفن
               </label>
@@ -43,22 +69,21 @@ function Login() {
                 className='w-full rounded border border-gray-300 py-1.5 text-center outline-none'
                 type='text'
                 placeholder='-- -- --- --۰۹'
-                onChange={(e) => setPhone(e.target.value)}
+                {...register('phone')}
               />
+              {errors.phone && <span className='mt-2 block text-red-800'>{errors.phone?.message}</span>}
               <div className='mt-6 flex items-center gap-1'>
                 <input type='checkbox' className='rounded-2xl border-black' />
                 <p className='text-xs font-normal md:text-sm'>مرا به خاطر بسپار</p>
               </div>
               <div className='hidden  md:flex md:items-end md:justify-between'>
                 <div className='hidden md:inline'></div>
-                <Button onClick={loginForm} isLoading={isLoading}>
-                  ارسال کد تایید
-                </Button>
+                <Button isLoading={isLoading}>ارسال کد تایید</Button>
               </div>
-              <Button className='mt-3 md:hidden' onClick={loginForm} isLoading={isLoading}>
+              <Button className='mt-3 md:hidden' isLoading={isLoading}>
                 ارسال کد تایید
               </Button>
-            </div>
+            </form>
             <hr className='mb-6 mt-14 border-[0.5px] border-solid md:hidden' />
             <div className='login_bg flex flex-col items-center gap-4 bg-gradient-to-r md:mt-20 md:rounded-b-3xl md:py-6'>
               <p className='text-center text-base font-semibold md:text-white'>آیا حساب کاربری ندارید؟</p>
