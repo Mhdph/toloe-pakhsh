@@ -7,6 +7,7 @@ import Cookies from 'js-cookie';
 import useProductStore from '@/store/zustand';
 import useAddFavouriteProduct from '@/service/product/useAddFavouriteProduct';
 import useAddCart from '@/service/cart/useAddCart';
+import ReactStars from 'react-stars';
 
 interface dataItem {
   data: {
@@ -19,6 +20,8 @@ interface dataItem {
     brand: string;
     exist: boolean;
     off: number;
+    FaPrice: number;
+    star: number;
   };
 }
 export interface ProductProps {
@@ -32,7 +35,7 @@ export interface ProductProps {
   picture: string;
 }
 
-function Card({data: {brand, picture, name, unitCount, unit, price, id, off}}: dataItem) {
+function Card({data: {brand, picture, name, unitCount, unit, price, id, off, FaPrice, star}}: dataItem) {
   const addProduct = useProductStore((state) => state.addProduct);
   const {mutate: addtoFavourite} = useAddFavouriteProduct();
   const user = Cookies.get('token');
@@ -88,7 +91,7 @@ function Card({data: {brand, picture, name, unitCount, unit, price, id, off}}: d
         <Link href={`/store/${id}`}>
           <div className='flex items-center justify-between '>
             <p className='w-1/2 truncate text-xs font-black md:text-ca'>{name}</p>
-            <StarIcon />
+            <ReactStars count={5} value={star} size={16} color2={'#F34834'} />
           </div>
           <p className='mt-1 text-[10px] font-normal md:mt-2 md:text-xs'>{brand}</p>
           <hr className=' my-1 md:my-2' />
@@ -103,7 +106,7 @@ function Card({data: {brand, picture, name, unitCount, unit, price, id, off}}: d
           <div className='flex items-center justify-between'>
             <p className='text-xs text-black-items md:text-ca'>قیمت:</p>
             <div className='flex items-center'>
-              <p className='text-xs font-black md:text-ca'>{price}</p>
+              <p className='text-xs font-black md:text-ca'>{FaPrice}</p>
               <span className='mr-1 text-[10px] font-normal opacity-60 md:text-xs'>تومان</span>
             </div>
           </div>

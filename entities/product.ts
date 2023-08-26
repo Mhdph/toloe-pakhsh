@@ -11,6 +11,7 @@ export interface Product {
   description: string;
   categoryId: number;
   star: number;
+  FaPrice: number;
 }
 
 export interface AddProduct {
