@@ -12,6 +12,7 @@ const useAddCart = () => {
   return useMutation<AddCart, Error, AddCart>((data) => apiClient.post(data), {
     onSuccess: () => {
       queryClient.refetchQueries(CACHE_KEY_CART);
+      toast.success('محصول به سبد شما اضافه شد');
     },
     onError: (error) => {
       toast.error(error.message);

@@ -69,7 +69,6 @@ function Checkout() {
   return (
     <div className='h-[412px] md:rounded-3xl md:border md:border-red-500'>
       <p className='mt-12 text-center text-4xl font-semibold'> صورت حساب </p>
-
       <div className='mt-8 px-5'>
         <hr className=' my-3' />
         <div className='flex items-center justify-between'>
@@ -106,15 +105,20 @@ function Checkout() {
       </div>
       <div className='mt-16 flex justify-center px-4 text-white md:justify-end'>
         {token === undefined ? (
-          <button onClick={pushLogin} className='btn_primary h-9 w-full text-xs font-extrabold'>
-            <p>وارد شدن</p>
-          </button>
+          <>
+            <button onClick={pushLogin} className='btn_primary h-9 w-full text-xs font-extrabold'>
+              وارد شدن
+            </button>
+          </>
         ) : (
-          <button onClick={payment} className='btn_primary h-9 w-full text-xs font-extrabold'>
-            <p>پرداخت</p>
-          </button>
+          <>
+            <button onClick={payment} className='btn_primary h-9 w-full text-xs font-extrabold'>
+              پرداخت
+            </button>
+          </>
         )}
       </div>
+      ‍‍‍‍‍‍
     </div>
   );
 }
