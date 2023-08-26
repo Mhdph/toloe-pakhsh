@@ -57,7 +57,7 @@ export const ProfileLinkListItem = [
 export const FilterList = [
   {name: 'پربازدید', value: 'fetchCount', sortDirection: 1},
   {name: 'جدید', value: 'dateCreate', sortDirection: 1},
-  {name: 'پرفروش', value: 'sale', sortDirection: 1},
+  {name: 'پرفروش', value: 'countSale', sortDirection: 1},
   {name: 'ارزان ترین', value: 'price', sortDirection: -1},
   {name: 'گران ترین', value: 'price', sortDirection: 1},
 ];
