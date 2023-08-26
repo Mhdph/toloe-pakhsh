@@ -36,7 +36,7 @@ function DashboardCategories() {
         <div key={item.id} className='bg-[#EAEBEB] p-4 text-black-items'>
           <div className='grid grid-cols-3 rounded-3xl border border-black-items border-opacity-20 bg-white'>
             <div className='col-span-1 flex flex-col items-center justify-center py-3'>
-              <Image src={baseUrl + item.picture} alt='category photo' height={220} width={220} />
+              <img src={baseUrl + item.picture} alt='category photo' className='h-[220px] w-[220px]' />
             </div>
             <div className='col-span-2 flex flex-col px-4 py-4'>
               <p className='mt-2 text-3xl'>{item.name}</p>
