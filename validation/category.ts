@@ -5,6 +5,6 @@ export const addCategorySchema = z.object({
 });
 
 export const addChildCategorySchema = z.object({
-  parentCategoryId: z.number().min(2),
-  chaildCategoryId: z.number().min(2),
+  parentCategoryId: z.string().min(1),
+  chaildCategoryId: z.string().min(1),
 });
