@@ -11,6 +11,7 @@ import Link from 'next/link';
 import {Dialog, DialogContent, DialogFooter, DialogTrigger} from '@/components/ui/Dialog';
 import {useRouter} from 'next/navigation';
 import Button from '@/components/ui/Button';
+import Loading from '@/components/ui/Loading';
 
 function ShopingBasket() {
   const products = useProductStore((state) => state.products);
@@ -22,6 +23,7 @@ function ShopingBasket() {
     navigate.push('/login');
   };
 
+  if (isLoading) return <Loading />;
   return (
     <div>
       <>
