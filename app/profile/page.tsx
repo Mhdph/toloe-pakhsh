@@ -1,3 +1,4 @@
+'use client';
 import Myorder from '@/components/profile/MyOrder';
 import ProfileInfo from '@/components/profile/ProfileInfo';
 import ProfilePageList from '@/components/profile/ProfilePageList';
