@@ -8,7 +8,7 @@ export interface Product {
   brand: string;
   exist: boolean;
   off: number;
-  description: string;
+  description: Property[];
   categoryId: number;
   star: number;
   FaPrice: number;
