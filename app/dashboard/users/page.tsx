@@ -10,11 +10,19 @@ import useUserSerachStore from '@/store/userSerach';
 function Users() {
   const {setKeyWord} = useUserSerachStore();
 
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setKeyWord(event.target.value);
+  };
+
   return (
     <div>
       <div className='flex items-center gap-3'>
         <div className='relative w-full '>
-          <Input className='rounded-[18px] bg-gray-200 py-1.5 pr-10' placeholder=' نام یا شماره همراه' />
+          <Input
+            onChange={handleNameChange}
+            className='rounded-[18px] bg-gray-200 py-1.5 pr-10'
+            placeholder=' نام یا شماره همراه'
+          />
           <div className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 outline-none'>
             <SearchBarSvg />
           </div>

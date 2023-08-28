@@ -13,16 +13,16 @@ interface UserQuery {
 
 const useUsers = () => {
   const userQuery = useUserSerachStore((s) => s.userQuery);
-  const debouncedCategory = useDebounce(userQuery.keyword, 3000);
+  const debouncedName = useDebounce(userQuery.keyword, 3000);
 
   const params: UserQuery = {};
 
-  if (debouncedCategory) {
-    params.keyword = debouncedCategory;
+  if (debouncedName) {
+    params.keyword = debouncedName;
   }
 
   return useQuery({
-    queryKey: [CACHE_KEY_USER, userQuery.keyword],
+    queryKey: [CACHE_KEY_USER, debouncedName],
     queryFn: () =>
       apiClient.getAll({
         params,
