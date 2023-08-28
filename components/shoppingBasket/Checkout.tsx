@@ -1,14 +1,33 @@
 'use client';
+import User from '@/entities/user';
 import {persianNumeralToNumber} from '@/helpers/PersianToEnglish';
+import APIClient from '@/service/api-client';
 import useGetCart from '@/service/cart/useGetCart';
+import {CACHE_KEY_USER} from '@/service/constants';
 import usePayment from '@/service/payment/usePayment';
 import useDelivery from '@/service/settings/useDelivery';
 import useProductStore from '@/store/zustand';
+import {useQuery} from '@tanstack/react-query';
 import Cookies from 'js-cookie';
 import {useRouter} from 'next/navigation';
 import React from 'react';
 
+const apiClient = new APIClient<User>('/user/get');
+
 function Checkout() {
+  // check user add address
+  const [haveAddress, setHaveAddress] = React.useState(false);
+  const id = Cookies.get('userId')!;
+  const useUser = (slug: string) =>
+    useQuery({
+      queryKey: [CACHE_KEY_USER, slug],
+      queryFn: () => apiClient.get(slug),
+      onSuccess: (data) => {
+        setHaveAddress(data.address.length > 0);
+      },
+    });
+  useUser(id);
+
   const router = useRouter();
   // user login or not
   const user = Cookies.get('token');
@@ -21,7 +40,6 @@ function Checkout() {
   const [totalPrice, setTotalPrice] = React.useState<string>('');
   const [delivery, setDelivery] = React.useState<string>('');
   const [off, setOff] = React.useState<string>('۰');
-
   const token = Cookies.get('token');
 
   React.useEffect(() => {
@@ -65,7 +83,9 @@ function Checkout() {
   const pushLogin = () => {
     router.push('/login');
   };
-
+  const pushEditInfo = () => {
+    router.push('/account');
+  };
   return (
     <div className='h-[412px] md:rounded-3xl md:border md:border-red-500'>
       <p className='mt-12 text-center text-4xl font-semibold'> صورت حساب </p>
@@ -112,9 +132,15 @@ function Checkout() {
           </>
         ) : (
           <>
-            <button onClick={payment} className='btn_primary h-9 w-full text-xs font-extrabold'>
-              پرداخت
-            </button>
+            {haveAddress ? (
+              <button onClick={payment} className='btn_primary h-9 w-full text-xs font-extrabold'>
+                پرداخت
+              </button>
+            ) : (
+              <button onClick={pushEditInfo} className='btn_primary h-9 w-full text-xs font-extrabold'>
+                برای خرید ابتدا باید اطلاعات کاربری خود را وارد کنید
+              </button>
+            )}
           </>
         )}
       </div>
