@@ -13,16 +13,37 @@ import {
 } from '@/assets/Icons';
 import SearchBarSvg from '@/assets/svg/SearchBarSvg';
 import DesktopLogo from '@/assets/svg/LogoSvg';
-import {usePathname} from 'next/navigation';
-import React from 'react';
+import {usePathname, useRouter} from 'next/navigation';
 import Link from 'next/link';
 import {cn} from '@/lib/cn';
 import {SearchIcon} from 'lucide-react';
+import {Combobox, Transition} from '@headlessui/react';
+import React, {Fragment, useEffect} from 'react';
+import useDebounce from '@/hooks/useDebounce';
+import axios from 'axios';
+import {baseUrl} from '@/lib/config';
+import {Product} from '@/entities/product';
 
 type NavbarProps = {};
 
 const Navbar: React.FC<NavbarProps> = () => {
+  const [data, setData] = React.useState([]);
+  const [name, setName] = React.useState('');
   const pathName = usePathname();
+  const router = useRouter();
+  const debouncedValue = useDebounce(name, 3000);
+  const getProduct = async () => {
+    try {
+      const res = await axios.get(`${baseUrl}/product?productName=${name}`);
+      setData(res.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  React.useEffect(() => {
+    getProduct();
+  }, [debouncedValue]);
   return (
     <div>
       <div className='navbar_shadow fixed z-50 flex h-[72px] w-full items-center justify-between bg-white pb-2 lg:hidden'>
@@ -51,7 +72,7 @@ const Navbar: React.FC<NavbarProps> = () => {
             <Link href='/'>سیستم کسب درامد</Link>
           </div>
           <div className='flex items-center gap-4'>
-            <div className='relative  '>
+            {/* <div className='relative  '>
               <input
                 type='text'
                 id='voice-search'
@@ -61,7 +82,69 @@ const Navbar: React.FC<NavbarProps> = () => {
               <div className='pointer-events-none absolute inset-y-0  right-0 flex items-center pr-3'>
                 <SearchBarSvg />
               </div>
-            </div>
+            </div> */}
+            <Combobox>
+              <div className='relative mt-1'>
+                <div className='relative  '>
+                  <Combobox.Input
+                    className='w-[352px] rounded-[18px] bg-gray-200 py-1.5 pr-10 outline-none'
+                    displayValue={() => name}
+                    onChange={(event) => setName(() => event.target.value)}
+                    placeholder='جستجو'
+                  />
+                  <div className='pointer-events-none absolute inset-y-0  right-0 flex items-center pr-3'>
+                    <SearchBarSvg />
+                  </div>
+                </div>
+                <Transition
+                  as={Fragment}
+                  leave='transition ease-in duration-100'
+                  leaveFrom='opacity-100'
+                  leaveTo='opacity-0'
+                  afterLeave={() => setName('')}
+                >
+                  <Combobox.Options className='absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
+                    {name !== '' && data.length === 0 ? (
+                      <div className='relative cursor-default select-none px-4 py-2 text-gray-700'>
+                        در حال یافتن محصول
+                      </div>
+                    ) : (
+                      data.map((item: Product) => (
+                        <Combobox.Option
+                          key={item.id}
+                          className={({active}) =>
+                            `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                              active ? 'bg-main-red text-white' : 'text-black-items'
+                            }`
+                          }
+                          value={item.name}
+                        >
+                          {({selected, active}) => (
+                            <>
+                              <Link
+                                onClick={() => setName('')}
+                                href={`/store/${item.id}`}
+                                className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}
+                              >
+                                <span>{item.name}</span>
+                              </Link>
+                              {selected ? (
+                                <span
+                                  className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
+                                    active ? 'text-white' : 'text-teal-600'
+                                  }`}
+                                ></span>
+                              ) : null}
+                            </>
+                          )}
+                        </Combobox.Option>
+                      ))
+                    )}
+                  </Combobox.Options>
+                </Transition>
+              </div>
+            </Combobox>
+
             <div className='contact_us flex h-10 w-10 items-center justify-center rounded-full bg-red-700'>
               <Link href='/shopingbasket'>
                 <BucketIcon />
