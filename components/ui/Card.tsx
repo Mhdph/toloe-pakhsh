@@ -1,4 +1,4 @@
-import {HeartIcon, StarIcon, StoreActiveIcon} from '@/assets/Icons';
+import {HeartIcon, HeartRedIcon, StarIcon, StoreActiveIcon} from '@/assets/Icons';
 import {baseUrl} from '@/lib/config';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -37,7 +37,7 @@ export interface ProductProps {
 
 function Card({data: {brand, picture, name, unitCount, unit, price, id, off, FaPrice, star}}: dataItem) {
   const addProduct = useProductStore((state) => state.addProduct);
-  const {mutate: addtoFavourite} = useAddFavouriteProduct();
+  const {mutate: addtoFavourite, isLoading: loading} = useAddFavouriteProduct();
   const user = Cookies.get('token');
   const quantity = 1;
   const {mutate, isLoading} = useAddCart();
@@ -112,14 +112,14 @@ function Card({data: {brand, picture, name, unitCount, unit, price, id, off, FaP
           </div>
         </Link>
         <div className='mt-2 flex items-center gap-2 md:mt-3 md:justify-center'>
-          <div
+          <Button
+            disabled={isLoading}
+            variant='outline'
             onClick={() => addFavourite(id)}
-            className='flex h-9 w-9 items-center justify-center rounded-full border border-[#F6602D] md:h-10 md:w-10'
+            className='flex h-9 w-9 items-center justify-center rounded-full border border-[#F6602D] bg-white md:h-10 md:w-10'
           >
-            <div className=''>
-              <HeartIcon />
-            </div>
-          </div>
+            <div className=''>{loading ? <HeartRedIcon /> : <HeartIcon />}</div>
+          </Button>
           <Button
             onClick={user === undefined ? handleAddToCart : addCardRow}
             isLoading={isLoading}
