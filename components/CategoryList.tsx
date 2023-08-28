@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import {CategoryandChilds} from '@/entities/category';
 import {baseUrl} from '@/lib/config';
 import Image from 'next/image';
@@ -16,9 +17,7 @@ const CategoryList: React.FC<CategoryListProps> = ({data}) => {
         {data?.map((item) => (
           <div key={item.name} className='category_card'>
             <Link href={`/product-category/${item.name}`}>
-              <Image
-                height={110}
-                width={110}
+              <img
                 src={baseUrl + item.picture}
                 className='max-h-[110px] min-h-[110px] min-w-[110px] max-w-[110px] rounded-t-3xl '
                 alt={item.name}
