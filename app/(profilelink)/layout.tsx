@@ -11,7 +11,6 @@ interface ProfileLayoutProps {
 function ProfileLayout({children}: ProfileLayoutProps) {
   return (
     <div>
-      111
       <div className='flex w-full flex-col  md:grid md:grid-cols-4 md:gap-6 md:rounded-3xl md:px-10'>
         <div className='col-span-1 hidden md:inline'>
           <ProfileInfo />
