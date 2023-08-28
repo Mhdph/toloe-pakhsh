@@ -39,3 +39,4 @@ export {default as InstagramDesktopIcon} from './InstagramDesktopIcon';
 export {default as TelegramDesktopIcon} from './TelegramDesktopIcon';
 export {default as PhoneBlackIcon} from './PhoneBlackIcon';
 export {default as AvatarBlackIcon} from './AvatarBlackIcon';
+export {default as HeartRedIcon} from './HeartRedIcon';
