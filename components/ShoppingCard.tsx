@@ -22,17 +22,17 @@ function ShoppingCard() {
   // zustand
 
   const products = useProductStore((state) => state.products);
-  const {updateProductQuantity, removeProduct} = useProductStore(); // Destructure the updateProductQuantity function from the store
+  const {updateProductQuantity, removeProduct} = useProductStore();
   const handleIncrease = (quantity: number, id: number) => {
     const newQuantity = quantity + 1;
     console.log('new', newQuantity);
-    updateProductQuantity(id, newQuantity); // Call the updateProductQuantity function with the productId and updated quantity
+    updateProductQuantity(id, newQuantity);
   };
 
   const handleDecrease = (quantity: number, id: number) => {
     if (quantity > 1) {
       const newQuantity = quantity - 1;
-      updateProductQuantity(id, newQuantity); // Call the updateProductQuantity function with the productId and updated quantity
+      updateProductQuantity(id, newQuantity);
     } else if (quantity == 1) {
       removeProduct(id);
     }
@@ -46,8 +46,7 @@ function ShoppingCard() {
   const handleIncreaseData = (quantity: string, id: number) => {
     const numericQuantity = persianNumeralToNumber(quantity);
     const updatedCart: UpdateCart = {
-      count: +numericQuantity + 1, // The updated quantity
-      // Other properties of UpdateCart if needed
+      count: +numericQuantity + 1,
     };
 
     mutate({id, data: updatedCart});
@@ -56,10 +55,9 @@ function ShoppingCard() {
   const handleDecreaseData = (quantity: string, id: number) => {
     if (+quantity > 1) {
       const updatedCart: UpdateCart = {
-        count: +quantity - 1, // The updated quantity
-        // Other properties of UpdateCart if needed
+        count: +quantity - 1,
       };
-      mutate({id, data: updatedCart}); // Call the updateProductQuantity function with the productId and updated quantity
+      mutate({id, data: updatedCart});
     } else if (+quantity === 1) {
       removeProduct(id);
     }
@@ -77,76 +75,78 @@ function ShoppingCard() {
     <>
       {user !== undefined ? (
         <>
-          {data?.data[0].cartRows.map((cartItem) => (
-            <div
-              key={cartItem.cartRowId}
-              className='flex h-[184px] w-full items-center rounded-3xl border border-black-items border-opacity-40 bg-white md:h-[148px]'
-            >
-              <div className='relative'>
-                <div
-                  onClick={() => deleteCardRow(cartItem.cartRowId)}
-                  className='absolute right-4 top-4 cursor-pointer md:top-6'
-                >
-                  <CloseIcon />
+          {data?.data.map((cartItem) => {
+            cartItem.cartRows.map((item) => (
+              <div
+                key={item.cartRowId}
+                className='flex h-[184px] w-full items-center rounded-3xl border border-black-items border-opacity-40 bg-white md:h-[148px]'
+              >
+                <div className='relative'>
+                  <div
+                    onClick={() => deleteCardRow(item.cartRowId)}
+                    className='absolute right-4 top-4 cursor-pointer md:top-6'
+                  >
+                    <CloseIcon />
+                  </div>
+                  <div className='flex h-[184px] w-[140px] items-center justify-center '>
+                    <img src={baseUrl + item.productPicture} alt='product image' className=' md:pr-2' />
+                  </div>
                 </div>
-                <div className='flex h-[184px] w-[140px] items-center justify-center '>
-                  <img src={baseUrl + cartItem.productPicture} alt='product image' className=' md:pr-2' />
+                <div className='h-full flex-1 px-2 pt-6 md:grid md:grid-cols-2 md:pt-0'>
+                  <div className='border-l-black-items border-opacity-10  md:flex md:flex-col md:gap-y-3 md:border-l md:py-4 md:pl-3'>
+                    <div className='flex items-center justify-between'>
+                      <p className='text-xs font-black md:text-sm'>{item.productName}</p>
+                      <StarIcon />
+                    </div>
+                    {/* <p className='mt-1 text-[10px] font-normal md:text-xs'>{item.}</p> */}
+                    <div className='hidden items-center justify-between md:mt-4 md:flex md:justify-center'>
+                      <div className='flex items-center justify-center gap-2'>
+                        <div onClick={() => handleDecreaseData(item.count, item.cartRowId)}>
+                          <MiddleIcon>
+                            <MinusIcon />
+                          </MiddleIcon>
+                        </div>
+                        <div className='numberItemBg flex h-9 w-[74px] items-center justify-center '>
+                          {isLoading ? <Loader2 className='mr-2 h-4 w-4 animate-spin' /> : item.count}
+                        </div>
+                        <div onClick={() => handleIncreaseData(item.count, item.cartRowId)}>
+                          <MiddleIcon>
+                            <PlusIcon />
+                          </MiddleIcon>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className='md:flex md:flex-col md:gap-y-3 md:py-3 md:pr-3'>
+                    <hr className=' my-1 md:hidden' />
+                    <div className='flex items-center justify-between'>
+                      <p className='text-xs text-black-items md:text-sm'>واحد:</p>
+                      <div className='flex items-center'>
+                        <p className='text-xs font-black md:text-sm'>۱</p>
+                        <span className='mr-1 text-[10px] font-normal opacity-60 md:text-xs'>{item.productUnit}</span>
+                      </div>
+                    </div>
+                    <hr className=' my-1' />
+                    <div className='flex items-center justify-between'>
+                      <p className='text-xs text-black-items md:text-sm'>قیمت:</p>
+                      <div className='flex items-center'>
+                        <p className='text-xs font-black md:text-sm'>{item.faPrice}</p>
+                        <span className='mr-1 text-[10px] font-normal opacity-60 md:text-xs'>تومان</span>
+                      </div>
+                    </div>
+                    <hr className=' my-1' />
+                    <div className='flex items-center justify-between text-[#F6622C]'>
+                      <p className='text-xs'>جمع خرید:</p>
+                      <div className='flex items-center'>
+                        <p className='text-base font-black'>{item.sumRow}</p>
+                        <span className='mr-1 text-[10px] font-normal text-black-items opacity-60'>تومان</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className='h-full flex-1 px-2 pt-6 md:grid md:grid-cols-2 md:pt-0'>
-                <div className='border-l-black-items border-opacity-10  md:flex md:flex-col md:gap-y-3 md:border-l md:py-4 md:pl-3'>
-                  <div className='flex items-center justify-between'>
-                    <p className='text-xs font-black md:text-sm'>{cartItem.productName}</p>
-                    <StarIcon />
-                  </div>
-                  {/* <p className='mt-1 text-[10px] font-normal md:text-xs'>{item.}</p> */}
-                  <div className='hidden items-center justify-between md:mt-4 md:flex md:justify-center'>
-                    <div className='flex items-center justify-center gap-2'>
-                      <div onClick={() => handleDecreaseData(cartItem.count, cartItem.cartRowId)}>
-                        <MiddleIcon>
-                          <MinusIcon />
-                        </MiddleIcon>
-                      </div>
-                      <div className='numberItemBg flex h-9 w-[74px] items-center justify-center '>
-                        {isLoading ? <Loader2 className='mr-2 h-4 w-4 animate-spin' /> : cartItem.count}
-                      </div>
-                      <div onClick={() => handleIncreaseData(cartItem.count, cartItem.cartRowId)}>
-                        <MiddleIcon>
-                          <PlusIcon />
-                        </MiddleIcon>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className='md:flex md:flex-col md:gap-y-3 md:py-3 md:pr-3'>
-                  <hr className=' my-1 md:hidden' />
-                  <div className='flex items-center justify-between'>
-                    <p className='text-xs text-black-items md:text-sm'>واحد:</p>
-                    <div className='flex items-center'>
-                      <p className='text-xs font-black md:text-sm'>۱</p>
-                      <span className='mr-1 text-[10px] font-normal opacity-60 md:text-xs'>{cartItem.productUnit}</span>
-                    </div>
-                  </div>
-                  <hr className=' my-1' />
-                  <div className='flex items-center justify-between'>
-                    <p className='text-xs text-black-items md:text-sm'>قیمت:</p>
-                    <div className='flex items-center'>
-                      <p className='text-xs font-black md:text-sm'>{cartItem.faPrice}</p>
-                      <span className='mr-1 text-[10px] font-normal opacity-60 md:text-xs'>تومان</span>
-                    </div>
-                  </div>
-                  <hr className=' my-1' />
-                  <div className='flex items-center justify-between text-[#F6622C]'>
-                    <p className='text-xs'>جمع خرید:</p>
-                    <div className='flex items-center'>
-                      <p className='text-base font-black'>{cartItem.sumRow}</p>
-                      <span className='mr-1 text-[10px] font-normal text-black-items opacity-60'>تومان</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
+            ));
+          })}
         </>
       ) : (
         <>
