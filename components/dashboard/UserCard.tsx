@@ -38,7 +38,7 @@ function UserCard() {
                 <hr className=' my-1' />
                 <div className='flex items-center justify-between text-[#F6622C]'>
                   <p className='text-xs'>تاریخ تولد</p>
-                  <p className='text-xs font-normal md:text-sm'>{item.birthDate}</p>
+                  <p className='text-xs font-normal md:text-sm'>{item.faBirthDate}</p>
                 </div>
               </div>
             </div>

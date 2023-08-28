@@ -16,6 +16,7 @@ export default interface User {
   oneCodeId: string;
   favorite: string[];
   lastView: string[];
+  faBirthDate: string;
 }
 
 export type UpdateUser = {

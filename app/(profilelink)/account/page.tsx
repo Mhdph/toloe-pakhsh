@@ -31,7 +31,7 @@ function Account() {
       onSuccess: (data) => {
         form.setValue('address', data?.address);
         form.setValue('firstName', data?.firstName);
-        form.setValue('birthDate', data?.birthDate ? data.birthDate.substring(0, 10) : data.birthDate);
+        form.setValue('birthDate', data?.faBirthDate ? data.faBirthDate.substring(0, 10) : data.faBirthDate);
         form.setValue('email', data?.email);
         form.setValue('lastName', data?.lastName);
         form.setValue('nationalCode', data?.nationalCode);
@@ -92,7 +92,7 @@ function Account() {
             />
             <FormField
               control={form.control}
-              name='birthDate'
+              name='faBirthDate'
               render={({field}) => (
                 <FormItem>
                   <FormLabel>تاریخ تولد </FormLabel>
