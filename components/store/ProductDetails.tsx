@@ -90,7 +90,7 @@ function ProductDetails() {
           <div className='flex items-center justify-between'>
             <p className='text-base md:text-xl'>قیمت:</p>
             <div className='flex items-center'>
-              <p className='text-xs font-black md:text-ca'>{data.price}</p>
+              <p className='text-xs font-black md:text-ca'>{data.FaPrice}</p>
               <span className='mr-1 text-[10px] font-normal opacity-60 md:text-xs'>تومان</span>
             </div>
           </div>
