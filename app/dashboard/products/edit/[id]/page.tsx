@@ -95,6 +95,8 @@ function SingleProduct() {
       onSuccess(data) {
         setValue('brand', data.brand);
         setValue('description', data.description);
+        setValue('properties', data.properties);
+
         setValue('unitCount', data.unitCount);
         setValue('name', data.name);
         setValue('price', data.price.toString());

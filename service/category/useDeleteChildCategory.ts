@@ -6,11 +6,10 @@ import {AddCategoryChild} from '@/entities/category';
 
 const apiClient = new APIClient<AddCategoryChild>('/parent-category/delete');
 
-const useDeleteChildCategory = (id: string) => {
+const useDeleteChildCategory = () => {
   const queryClient = useQueryClient();
 
-  return useMutation<AddCategoryChild, Error, AddCategoryChild>({
-    mutationFn: () => apiClient.delete(id),
+  return useMutation<AddCategoryChild, Error, AddCategoryChild>((data) => apiClient.patch(data), {
     onSuccess: () => {
       queryClient.refetchQueries(CACHE_KEY_CATEGORY);
       toast.success('کتگوری زیر شاخه با موفقیت حذف شد');
