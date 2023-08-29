@@ -9,13 +9,15 @@ import Button from '@/components/ui/Button';
 import {AddChildCategories} from '@/components/dashboard/AddChildCategories';
 import useDeleteCategory from '@/service/category/useDeleteCategory';
 import DeleteModal from '@/components/dashboard/DeleteModal';
+import useDeleteChildCategory from '@/service/category/useDeleteChildCategory';
+import {CloseIcon} from '@/assets/Icons';
 
 function DashboardCategories() {
   const {data} = useGetCategoriesAndChilds();
   const [selectedCategory, setSelectedCategory] = React.useState<number | null>(null);
   const [showModal, setShowModal] = React.useState<boolean>(false);
   const {mutate} = useDeleteCategory();
-
+  const {mutate: deleteChild} = useDeleteChildCategory();
   const openModal = (id: number) => {
     setShowModal(true);
     setSelectedCategory(id);
@@ -23,6 +25,13 @@ function DashboardCategories() {
 
   const handleRemove = (id: number | string) => {
     mutate(id);
+  };
+
+  const handleRemoveChild = (id: number, parentId: number) => {
+    deleteChild({
+      chaildCategoryId: id,
+      parentCategoryId: parentId,
+    });
   };
 
   return (
@@ -43,9 +52,13 @@ function DashboardCategories() {
               <hr className='my-4 border-b border-b-black-items border-opacity-10' />
               <p className='mb-4 text-xl font-semibold'>زیر مجموعه ها</p>
               <div className='flex flex-wrap items-center gap-x-2 gap-y-6 text-sm font-extrabold'>
-                {item.chailds.map((item) => (
-                  <div key={item.id} className='w-2/5 rounded-lg border-b'>
-                    {item.name}
+                {item.chailds.map((child) => (
+                  <div key={child.id} className='flex w-2/5 items-center gap-1 rounded-lg border-b'>
+                    {child.name}
+                    {/* <DeleteModal deleteFn={() => handleRemoveChild(child.id, item.id)} /> */}
+                    <div onClick={() => handleRemoveChild(child.id, item.id)}>
+                      <CloseIcon />
+                    </div>
                   </div>
                 ))}
               </div>

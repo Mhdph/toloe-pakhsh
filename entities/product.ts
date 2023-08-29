@@ -8,10 +8,11 @@ export interface Product {
   brand: string;
   exist: boolean;
   off: number;
-  description: Property[];
+  description: string;
   categoryId: number;
   star: number;
   FaPrice: number;
+  properties: Property[];
 }
 
 export interface AddProduct {
