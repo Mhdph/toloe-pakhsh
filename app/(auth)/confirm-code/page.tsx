@@ -14,6 +14,8 @@ import useProductStore from '@/store/zustand';
 import useAddCartList from '@/service/cart/useAddCartList';
 import axios from 'axios';
 import {baseUrl} from '@/lib/config';
+import {digitsFaToEn} from '@persian-tools/persian-tools';
+
 interface token {
   userId: string;
   role: string;
@@ -31,7 +33,7 @@ function ConfirmCode() {
     productId: item.id,
     count: item.quantity,
   }));
-  const {mutate, isLoading, error} = useMutation(() => ConfirmCodeFn({code, phone}), {
+  const {mutate, isLoading, error} = useMutation(() => ConfirmCodeFn({code: digitsFaToEn(code), phone}), {
     onSuccess: (data) => {
       Cookies.set('token', data.token);
       Cookies.set('token', data.token);
