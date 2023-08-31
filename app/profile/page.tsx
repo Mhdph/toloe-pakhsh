@@ -10,7 +10,7 @@ import Link from 'next/link';
 import Loading from '@/components/ui/Loading';
 import useProductStore from '@/store/zustand';
 import useGetCart from '@/service/cart/useGetCart';
-import {useRouter} from 'next/router';
+import {useRouter} from 'next/navigation';
 
 function Profile() {
   const products = useProductStore((state) => state.products);
