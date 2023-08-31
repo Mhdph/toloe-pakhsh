@@ -94,7 +94,7 @@ function ShoppingCard() {
       {user !== undefined ? (
         <>
           {data.data.map((cartItem: Cart) => {
-            cartItem.cartRows.map((item) => (
+            return cartItem.cartRows.map((item) => (
               <div
                 key={item.cartRowId}
                 className='flex h-[184px] w-full items-center rounded-3xl border border-black-items border-opacity-40 bg-white md:h-[148px]'
