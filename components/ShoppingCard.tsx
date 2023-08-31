@@ -75,7 +75,7 @@ function ShoppingCard() {
     <>
       {user !== undefined ? (
         <>
-          {data?.data.map((cartItem) => {
+          {data && data.data && data.data.map((cartItem) => {
             cartItem.cartRows.map((item) => (
               <div
                 key={item.cartRowId}
