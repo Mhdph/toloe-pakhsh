@@ -10,10 +10,13 @@ const useDeleteCartRow = () => {
   const queryClient = useQueryClient();
 
   return useMutation<string | number, Error, string | number>((data) => apiClient.delete(data), {
-    onSuccess: (data) => {
-      queryClient.refetchQueries(CACHE_KEY_CART);
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [CACHE_KEY_CART],
+      });
       toast.success('اطلاعات با موفقیت به روز رسانی شد');
     },
+
     onError: (error) => {
       toast.error(error.message);
     },
