@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 import {CloseIcon, MinusIcon, PlusIcon, StarIcon} from '@/assets/Icons';
-import {UpdateCart} from '@/entities/Cart';
+import {Cart, UpdateCart} from '@/entities/Cart';
 import {baseUrl} from '@/lib/config';
 import useGetCart from '@/service/cart/useGetCart';
 import useUpdateCart from '@/service/cart/useUpdateCart';
 import useProductStore from '@/store/zustand';
-import {useQueryClient} from '@tanstack/react-query';
+import {useQuery, useQueryClient} from '@tanstack/react-query';
 import Cookies from 'js-cookie';
 import Image from 'next/image';
 import MiddleIcon from './ui/MiddleIcon';
@@ -14,6 +14,8 @@ import {persianNumeralToNumber} from '@/helpers/PersianToEnglish';
 import {Loader2} from 'lucide-react';
 import useDeleteCartRow from '@/service/cart/useDeleteCartRow';
 import Loading from './ui/Loading';
+import axios from 'axios';
+import {CACHE_KEY_CART} from '@/service/constants';
 
 function ShoppingCard() {
   // user login or not
@@ -42,7 +44,23 @@ function ShoppingCard() {
   const {mutate, isLoading} = useUpdateCart();
 
   // data backend
-  const {data, isLoading: dataLoading} = useGetCart();
+
+  const getCardFn = async () => {
+    const response = await axios.get(`${baseUrl}/cart/listUserCart?state=OPEN`, {
+      headers: {
+        authorization: 'Bearer ' + `${user}`,
+      },
+    });
+    return response.data;
+  };
+
+  const {data, isLoading: dataLoading} = useQuery({
+    queryKey: CACHE_KEY_CART,
+    queryFn: getCardFn,
+  });
+
+  // const {data, isLoading: dataLoading} = useGetCart();
+
   const handleIncreaseData = (quantity: string, id: number) => {
     const numericQuantity = persianNumeralToNumber(quantity);
     const updatedCart: UpdateCart = {
@@ -75,7 +93,7 @@ function ShoppingCard() {
     <>
       {user !== undefined ? (
         <>
-          {data && data.data && data.data.map((cartItem) => {
+          {data.data.map((cartItem: Cart) => {
             cartItem.cartRows.map((item) => (
               <div
                 key={item.cartRowId}
