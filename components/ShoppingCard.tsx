@@ -45,21 +45,21 @@ function ShoppingCard() {
 
   // data backend
 
-  const getCardFn = async () => {
-    const response = await axios.get(`${baseUrl}/cart/listUserCart?state=OPEN`, {
-      headers: {
-        authorization: 'Bearer ' + `${user}`,
-      },
-    });
-    return response.data;
-  };
+  // const getCardFn = async () => {
+  //   const response = await axios.get(`${baseUrl}/cart/listUserCart?state=OPEN`, {
+  //     headers: {
+  //       authorization: 'Bearer ' + `${user}`,
+  //     },
+  //   });
+  //   return response.data;
+  // };
 
-  const {data, isLoading: dataLoading} = useQuery({
-    queryKey: CACHE_KEY_CART,
-    queryFn: getCardFn,
-  });
+  // const {data, isLoading: dataLoading} = useQuery({
+  //   queryKey: [CACHE_KEY_CART],
+  //   queryFn: getCardFn,
+  // });
 
-  // const {data, isLoading: dataLoading} = useGetCart();
+  const {data, isLoading: dataLoading} = useGetCart();
 
   const handleIncreaseData = (quantity: string, id: number) => {
     const numericQuantity = persianNumeralToNumber(quantity);
@@ -71,14 +71,12 @@ function ShoppingCard() {
   };
 
   const handleDecreaseData = (quantity: string, id: number) => {
-    if (+quantity > 1) {
-      const updatedCart: UpdateCart = {
-        count: +quantity - 1,
-      };
-      mutate({id, data: updatedCart});
-    } else if (+quantity === 1) {
-      removeProduct(id);
-    }
+    const numericQuantity = persianNumeralToNumber(quantity);
+    const updatedCart: UpdateCart = {
+      count: +numericQuantity + 1,
+    };
+
+    mutate({id, data: updatedCart});
   };
 
   const {mutate: deleteRow} = useDeleteCartRow();
@@ -93,7 +91,7 @@ function ShoppingCard() {
     <>
       {user !== undefined ? (
         <>
-          {data.data.map((cartItem: Cart) => {
+          {data?.data.map((cartItem: Cart) => {
             return cartItem.cartRows.map((item) => (
               <div
                 key={item.cartRowId}

@@ -50,7 +50,7 @@ function ShopingBasket() {
           </>
         ) : (
           <div>
-            {products.length > 0 || data?.data.length !== undefined ? (
+            {products.length > 0 || (data && data.data.length > 0) ? (
               <>
                 <BackgroundTitle name='سبد خرید' />
                 <div className='md:flex'>
