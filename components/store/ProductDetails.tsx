@@ -4,7 +4,6 @@ import StarSvg from '@/assets/Icons/StarIcon';
 import React, {useState} from 'react';
 import MiddleIcon from '@/components/ui/MiddleIcon';
 import {FavouriteIcon, MiniBucketIcon, MinusIcon, PlusIcon, ShareIcon} from '@/assets/Icons';
-import useProduct from '@/service/product/useProduct';
 import {useParams} from 'next/navigation';
 import {baseUrl} from '@/lib/config';
 import useAddCart from '@/service/cart/useAddCart';
@@ -12,8 +11,7 @@ import useProductStore from '@/store/zustand';
 import useAddFavouriteProduct from '@/service/product/useAddFavouriteProduct';
 import Cookies from 'js-cookie';
 import Loading from '../ui/Loading';
-import Image from 'next/image';
-import page from '@/app/dashboard/orders/page';
+
 import ReactStars from 'react-stars';
 import axios from 'axios';
 import {useQuery} from '@tanstack/react-query';
@@ -24,7 +22,11 @@ function ProductDetails() {
   const {id} = useParams();
 
   const getProductDetails = async () => {
-    const response = await axios.get(`${baseUrl}/product/getbyid/${id}`);
+    const response = await axios.get(`${baseUrl}/product/getbyid/${id}`, {
+      headers: {
+        authorization: 'Bearer ' + `${user}`,
+      },
+    });
     return response.data;
   };
   const {data, isLoading: loading} = useQuery({
