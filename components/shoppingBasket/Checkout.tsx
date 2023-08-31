@@ -66,10 +66,10 @@ function Checkout() {
   }, [user, products, data]);
 
   // data backend
-  const cartId = data && data.data[0].id;
   const {mutate} = usePayment();
 
   const payment = () => {
+    const cartId = data && data.data[0].id;
     mutate({
       cartId,
     });
