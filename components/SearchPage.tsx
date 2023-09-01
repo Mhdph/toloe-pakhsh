@@ -18,7 +18,7 @@ import Loading from './ui/Loading';
 import {PaginationList} from './ui/Pagination';
 
 function SearchPage() {
-  const {setEndPrice, setOff, setExist, setStartPrice, setCategoryName, setSortName, setSkip, setDirection} =
+  const {setEndPrice, setOff, setExist, setStartPrice, setCategoryName, setSortName, setSkip, setDirection, setBrand} =
     useProductQueryStore();
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState<number>(1);
@@ -147,26 +147,38 @@ function SearchPage() {
               </div>
             ) : null}
 
-            {gameQuery.brand !== undefined ? (
-              <div className='filter_bg_sidebar hidden w-[120px] cursor-pointer items-center justify-center gap-3 rounded-xl  px-3 py-1.5 md:flex'>
+            {gameQuery.brand !== undefined && gameQuery.brand !== '' ? (
+              <div
+                onClick={() => setBrand('')}
+                className='filter_bg_sidebar hidden w-[120px] cursor-pointer items-center justify-center gap-3 rounded-xl  px-3 py-1.5 md:flex'
+              >
                 <p className='text-[10px]  font-normal text-black-items'> {gameQuery.brand}</p>
                 <CloseIcon />
               </div>
             ) : null}
             {gameQuery.exist ? (
-              <div className='filter_bg_sidebar hidden w-[120px] cursor-pointer items-center justify-center gap-3 rounded-xl  px-3 py-1.5 md:flex'>
+              <div
+                onClick={() => setExist(false)}
+                className='filter_bg_sidebar hidden w-[120px] cursor-pointer items-center justify-center gap-3 rounded-xl  px-3 py-1.5 md:flex'
+              >
                 <p className='text-[10px]  font-normal text-black-items'> موجود در انبار</p>
                 <CloseIcon />
               </div>
             ) : null}
             {gameQuery.off ? (
-              <div className='filter_bg_sidebar hidden w-[120px] cursor-pointer items-center justify-center gap-3 rounded-xl  px-3 py-1.5 md:flex'>
+              <div
+                onClick={() => setOff(false)}
+                className='filter_bg_sidebar hidden w-[120px] cursor-pointer items-center justify-center gap-3 rounded-xl  px-3 py-1.5 md:flex'
+              >
                 <p className='text-[10px]  font-normal text-black-items'>دارای تخفیف</p>
                 <CloseIcon />
               </div>
             ) : null}
             {gameQuery.startPrice !== undefined || gameQuery.endPrice !== undefined ? (
-              <div className='filter_bg_sidebar hidden w-[120px] items-center justify-center gap-3 rounded-xl  px-3 py-1.5 md:flex'>
+              <div
+                onClick={() => setEndPrice('')}
+                className='filter_bg_sidebar hidden w-[120px] items-center justify-center gap-3 rounded-xl  px-3 py-1.5 md:flex'
+              >
                 <p className='text-[10px]  font-normal text-black-items'>قیمت</p>
                 <CloseIcon />s
               </div>
