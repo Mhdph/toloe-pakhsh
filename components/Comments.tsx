@@ -11,6 +11,7 @@ import Image from 'next/image';
 import ReactStars from 'react-stars';
 import Cookies from 'js-cookie';
 import Loading from './ui/Loading';
+import {toast} from 'react-hot-toast';
 
 interface AddComment {
   star: number;
@@ -38,6 +39,9 @@ function Comments() {
   const {data, isLoading} = useQuery({
     queryKey: ['comments', id],
     queryFn: getCommentsFn,
+    onSuccess(data) {
+      toast.success('نظر شما با موفقیت ثبت شد و پس از تایید نمایش داده خواهد شد');
+    },
   });
 
   const addComment = () => {
