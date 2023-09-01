@@ -18,6 +18,7 @@ import {persianNumeralToNumber} from '@/helpers/PersianToEnglish';
 type OffSchema = z.infer<typeof AddOffSchema>;
 
 export function AddOff() {
+  const [open, setOpen] = React.useState(false);
   let [date, setDate] = React.useState<any>();
   const {
     register,
@@ -42,7 +43,7 @@ export function AddOff() {
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant='destructive'> افزودن تخفیف</Button>
       </DialogTrigger>

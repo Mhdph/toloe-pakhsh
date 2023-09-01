@@ -19,6 +19,7 @@ import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from '..
 type CategorySchema = z.infer<typeof addCategorySchema>;
 
 export function AddCategories() {
+  const [open, setOpen] = React.useState(false);
   const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -51,10 +52,11 @@ export function AddCategories() {
       name: data.name,
       picture: Cookies.get('picture')!,
     });
+    setOpen(false);
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant='destructive'> افزودن دسته بندی</Button>
       </DialogTrigger>

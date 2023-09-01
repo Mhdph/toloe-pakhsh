@@ -12,10 +12,12 @@ import {z} from 'zod';
 import {Form, FormControl, FormField, FormItem, FormMessage} from '../ui/Form';
 import useGetCategoriesAndChilds from '@/service/category/useGetCategoriesandChilds';
 import useAddChildCategory from '@/service/category/useAddChildCategory';
+import React from 'react';
 
 type CategorySchema = z.infer<typeof addChildCategorySchema>;
 
 export function AddChildCategories() {
+  const [open, setOpen] = React.useState(false);
   const {data} = useGetCategoriesAndChilds();
 
   const form = useForm<CategorySchema>({
@@ -29,9 +31,10 @@ export function AddChildCategories() {
       chaildCategoryId: +data.chaildCategoryId,
       parentCategoryId: +data.parentCategoryId,
     });
+    setOpen(false);
   };
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant='destructive'> افزودن زیر مجموعه دسته بندی</Button>
       </DialogTrigger>
