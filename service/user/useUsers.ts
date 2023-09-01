@@ -9,6 +9,7 @@ const apiClient = new APIClient<User>('/user/searchUser');
 
 interface UserQuery {
   keyword?: string;
+  skip?: number;
 }
 
 const useUsers = () => {
@@ -20,9 +21,12 @@ const useUsers = () => {
   if (debouncedName) {
     params.keyword = debouncedName;
   }
+  if (userQuery.skip) {
+    params.skip = userQuery.skip;
+  }
 
   return useQuery({
-    queryKey: [CACHE_KEY_USER, debouncedName],
+    queryKey: [CACHE_KEY_USER, debouncedName, userQuery.skip],
     queryFn: () =>
       apiClient.getAll({
         params,
