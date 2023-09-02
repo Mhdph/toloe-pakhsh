@@ -45,7 +45,7 @@ function Comments() {
             </div>
             <p className='text-sm font-normal'>{item.text}</p>
             <div className='flex justify-end'>
-              <p>{item.date}</p>
+              <p>{item.faDate}</p>
             </div>
           </div>
           <div className='col-span-2 flex flex-col items-center justify-center gap-2 border-x border-x-main-red border-opacity-40 text-center'>

@@ -14,6 +14,7 @@ export interface Comment {
   productUnitCount: string;
   userFirstName: string;
   userLastName: string;
+  faDate: string;
 }
 
 export interface AddComment {
