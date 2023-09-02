@@ -13,8 +13,6 @@ import {SubmitHandler, useForm} from 'react-hook-form';
 import DatePicker from 'react-multi-date-picker';
 import {z} from 'zod';
 import useGetCategories from '@/service/category/useGetCategories';
-import {persianNumeralToNumber} from '@/helpers/PersianToEnglish';
-
 type OffSchema = z.infer<typeof AddOffSchema>;
 
 export function AddOff() {
@@ -35,11 +33,12 @@ export function AddOff() {
   const addDiscount: SubmitHandler<OffSchema> = (data) => {
     mutate({
       categoryId: data.category,
-      expireTime: persianNumeralToNumber(date.toString()).toString(),
+      expireTime: date.toString(),
       name: data.name,
       code: data.password,
       percentage: data.percentage,
     });
+    setOpen(false);
   };
 
   return (
@@ -72,7 +71,7 @@ export function AddOff() {
             >
               <option value='all'>تمام محصولات</option>
               {data?.data.map((item) => (
-                <option key={item.id} value={item.name}>
+                <option key={item.id} value={item.id}>
                   {item.name}
                 </option>
               ))}
