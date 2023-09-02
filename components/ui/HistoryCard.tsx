@@ -1,13 +1,10 @@
 'use client';
 import {ArrowDownIcon} from '@/assets/Icons';
-import React from 'react';
-import bassteshokolat from '@/assets/tempImages/bassteshokolat.png';
-import Image from 'next/image';
+import {Cart} from '@/entities/Cart';
 import {baseUrl} from '@/lib/config';
 import {useQuery} from '@tanstack/react-query';
-import Cookies from 'js-cookie';
-import {Cart} from '@/entities/Cart';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import Loading from './Loading';
 type Color = 'primary' | 'delivered' | 'canceled' | 'returned';
 

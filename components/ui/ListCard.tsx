@@ -1,8 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 import {HeartIcon, HeartRedIcon, StarIcon, StoreActiveIcon} from '@/assets/Icons';
 import {baseUrl} from '@/lib/config';
 import useProductStore from '@/store/zustand';
-import Image from 'next/image';
 import Link from 'next/link';
 import useAddCart from '@/service/cart/useAddCart';
 import Cookies from 'js-cookie';
@@ -77,12 +77,10 @@ function ListCard({data: {brand, picture, name, unitCount, unit, price, id, off,
               {off}%
             </div>
           ) : null}
-          <Image
+          <img
             src={baseUrl + picture}
             alt='product image'
             className='h-[120px] w-[170px] rounded-t-3xl border-b md:w-[153px]'
-            width={170}
-            height={120}
           />
         </div>
       </Link>

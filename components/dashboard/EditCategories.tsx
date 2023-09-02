@@ -1,15 +1,15 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
+import {CloseIcon} from '@/assets/Icons';
 import Button from '@/components/ui/Button';
 import {Input} from '@/components/ui/Input';
 import {Label} from '@/components/ui/Label';
-import Image from 'next/image';
-import React, {SetStateAction} from 'react';
-import useGetCategory from '@/service/category/useGetCategory';
 import {baseUrl} from '@/lib/config';
-import {CloseIcon} from '@/assets/Icons';
+import useGetCategory from '@/service/category/useGetCategory';
 import useUpdateCategory from '@/service/category/useUpdateCategory';
-import Cookies from 'js-cookie';
 import axios from 'axios';
+import Cookies from 'js-cookie';
+import React, {SetStateAction} from 'react';
 import {toast} from 'react-hot-toast';
 
 interface EditCategoriesProps {
@@ -83,22 +83,14 @@ export function EditCategories({id, showModal, closeModal}: EditCategoriesProps)
             <div className='flex flex-col items-center justify-center gap-3'>
               {selectedFile ? (
                 <div>
-                  <Image
+                  <img
                     src={selectedFile === null ? baseUrl + data?.data.picture : URL.createObjectURL(selectedFile)}
                     alt='Uploaded'
-                    width={300}
-                    height={300}
-                    className='rounded-md'
+                    className='h-[300px] w-[300px] rounded-md'
                   />
                 </div>
               ) : (
-                <Image
-                  src={baseUrl + data?.data.picture}
-                  alt='Uploaded'
-                  width={300}
-                  height={300}
-                  className='rounded-md'
-                />
+                <img src={baseUrl + data?.data.picture} alt='Uploaded' className='h-[300px] w-[300px] rounded-md' />
               )}
               <div className='relative mt-1'>
                 <input onChange={handleFileChange} type='file' id='file-upload' className='hidden' />

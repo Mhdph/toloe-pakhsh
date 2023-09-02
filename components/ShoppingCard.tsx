@@ -175,13 +175,7 @@ function ShoppingCard() {
                 <div onClick={() => removeProduct(item.id)} className='absolute right-4 top-4 cursor-pointer md:top-6'>
                   <CloseIcon />
                 </div>
-                <Image
-                  src={baseUrl + item.picture}
-                  width={100}
-                  height={140}
-                  alt='product image'
-                  className='h-full md:pr-2'
-                />
+                <img src={baseUrl + item.picture} alt='product image' className=' h-[140px] w-[100px] md:pr-2' />
               </div>
               <div className='h-full flex-1 px-2 pt-6 md:grid md:grid-cols-2 md:pt-0'>
                 <div className='border-l-black-items border-opacity-10  md:flex md:flex-col md:gap-y-3 md:border-l md:py-4 md:pl-3'>

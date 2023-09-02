@@ -1,6 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 import {HeartIcon, HeartRedIcon, StarIcon, StoreActiveIcon} from '@/assets/Icons';
 import {baseUrl} from '@/lib/config';
-import Image from 'next/image';
 import Link from 'next/link';
 import Button from './Button';
 import Cookies from 'js-cookie';
@@ -77,13 +77,7 @@ function Card({data: {brand, picture, name, unitCount, unit, price, id, off, FaP
               {off}%
             </div>
           ) : null}
-          <Image
-            src={baseUrl + picture}
-            alt='product image'
-            className='h-[120px]  rounded-t-3xl border-b'
-            width={170}
-            height={120}
-          />
+          <img src={baseUrl + picture} alt='product image' className='h-[120px]  rounded-t-3xl border-b' />
         </div>
       </Link>
 
