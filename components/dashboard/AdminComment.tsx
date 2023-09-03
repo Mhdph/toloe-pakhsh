@@ -13,17 +13,15 @@ interface AdminCommentsProps {
   id: number;
 }
 interface AddComment {
-  star: number;
-  text: string;
+  replay: string;
 }
 
 function AdminComment({id}: AdminCommentsProps) {
-  const [text, setText] = React.useState('');
-  const [star, setStar] = React.useState(5);
+  const [replay, setReplay] = React.useState('');
   const token = Cookies.get('token');
   const {mutate} = useMutation({
     mutationFn: (data: AddComment) => {
-      return axios.post(`${baseUrl}/comment/add/${id}`, data, {
+      return axios.patch(`${baseUrl}/comment/update/${id}`, data, {
         headers: {
           authorization: 'Bearer ' + `${token}`,
         },
@@ -33,8 +31,7 @@ function AdminComment({id}: AdminCommentsProps) {
 
   const addComment = () => {
     mutate({
-      text,
-      star,
+      replay,
     });
   };
 
@@ -50,7 +47,7 @@ function AdminComment({id}: AdminCommentsProps) {
           <Label htmlFor='name' className='text-right'>
             پاسخ شما{' '}
           </Label>
-          <Textarea id='name' placeholder='پاسخ' />
+          <Textarea onChange={(e) => setReplay(e.target.value)} id='name' placeholder='پاسخ' />
         </div>
         <DialogFooter>
           <Button onClick={addComment} type='submit'>
