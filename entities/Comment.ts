@@ -6,7 +6,7 @@ export interface Comment {
   star: number;
   text: string;
   verify: boolean;
-  replay: any;
+  replay: string;
   productName: string;
   productPicture: string;
   productDescription: any;

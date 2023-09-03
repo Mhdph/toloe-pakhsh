@@ -31,6 +31,9 @@ function Comments() {
         },
       });
     },
+    onSuccess(data) {
+      toast.success('نظر شما با موفقیت ثبت شد و پس از تایید نمایش داده خواهد شد');
+    },
   });
   const getCommentsFn = async () => {
     const response = await axios.get(`${baseUrl}/comment/product/` + id);
@@ -39,9 +42,6 @@ function Comments() {
   const {data, isLoading} = useQuery({
     queryKey: ['comments', id],
     queryFn: getCommentsFn,
-    onSuccess(data) {
-      toast.success('نظر شما با موفقیت ثبت شد و پس از تایید نمایش داده خواهد شد');
-    },
   });
 
   const addComment = () => {
@@ -76,6 +76,16 @@ function Comments() {
               </div>
             </div>
             <p className='flex flex-row-reverse text-sm text-black-items'>{item.text} </p>
+            <div className='mt-4 pr-20'>
+              <div className='flex items-center justify-between'>
+                <div></div>{' '}
+                <div className='flex flex-row-reverse items-center gap-2'>
+                  <Image src={Rectangl} alt='' className='h-9 w-9 rounded-full' />
+                  <p className='text-sm'>ادمین</p>
+                </div>
+              </div>
+              <p className='mr-2 mt-3 flex flex-row-reverse text-sm text-black-items'>{item.replay} </p>
+            </div>
           </div>
         ))}
       </div>
