@@ -13,6 +13,7 @@ import {SubmitHandler, useForm} from 'react-hook-form';
 import DatePicker from 'react-multi-date-picker';
 import {z} from 'zod';
 import useGetCategories from '@/service/category/useGetCategories';
+import {digitsFaToEn} from '@persian-tools/persian-tools';
 type OffSchema = z.infer<typeof AddOffSchema>;
 
 export function AddOff() {
@@ -33,7 +34,7 @@ export function AddOff() {
   const addDiscount: SubmitHandler<OffSchema> = (data) => {
     mutate({
       categoryId: data.category,
-      expireTime: date.toString(),
+      expireTime: digitsFaToEn(date.toString()),
       name: data.name,
       code: data.password,
       percentage: data.percentage,
