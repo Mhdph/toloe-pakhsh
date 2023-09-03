@@ -5,7 +5,7 @@ import {Cart} from '@/entities/Cart';
 
 type CartArray = Cart; // Array type based on the Cart interface
 
-const apiClient = new APIClient<CartArray>('/cart/listUserCart?state=OPEN');
+const apiClient = new APIClient<CartArray>('/cart/listUserCart?state=open');
 
 const useGetCart = () =>
   useQuery({

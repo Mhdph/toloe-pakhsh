@@ -38,7 +38,7 @@ function page() {
         </TabsList>
 
         <TabsContent value='sending'>
-          <OrdersCard color='delivered' label='در حال ارسال' state='SENDING' />
+          <OrdersCard color='delivered' label='در حال ارسال' state='sending' />
           <hr className='my-2 md:hidden' />
         </TabsContent>
         <TabsContent value='Posted'>
@@ -46,11 +46,11 @@ function page() {
           <hr className='my-2 md:hidden' />
         </TabsContent>
         <TabsContent value='canceled'>
-          <OrdersCard color='canceled' label='کنسل شده' state='REJECT' />
+          <OrdersCard color='canceled' label='کنسل شده' state='canceled' />
           <hr className='my-2 md:hidden' />
         </TabsContent>
         <TabsContent value='returned'>
-          <OrdersCard color='returned' label='مرجوع شده' state='DECLINE' />
+          <OrdersCard color='returned' label='مرجوع شده' state='returned' />
           <hr className='my-2 md:hidden' />
         </TabsContent>
       </Tabs>
