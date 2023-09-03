@@ -54,9 +54,11 @@ function Comments() {
             <p className='pb-2 text-sm font-normal'>{item.productDescription}</p>
           </div>
           <div className='col-span-1 flex flex-col items-center justify-between py-3'>
-            <Button onClick={() => confirmComment(item.id)} className='w-28'>
-              تایید دیدگاه
-            </Button>
+            {item.verify ? null : (
+              <Button onClick={() => confirmComment(item.id)} className='w-28'>
+                تایید دیدگاه
+              </Button>
+            )}
             <AdminComment id={item.id} />
           </div>
         </div>
