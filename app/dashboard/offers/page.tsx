@@ -11,8 +11,14 @@ import persian_fa from 'react-date-object/locales/persian_fa';
 import {ShareIcon} from '@/assets/Icons';
 import {AddOff} from '@/components/dashboard/AddOff';
 import useDiscount from '@/service/discount/useDiscount';
+import useDeleteDiscount from '@/service/discount/useDeleteDiscount';
+import DeleteModal from '@/components/dashboard/DeleteModal';
 function Offers() {
-  let [date, setDate] = React.useState<any>();
+  const {mutate} = useDeleteDiscount();
+
+  const deleteDiscount = (id: string | number) => {
+    mutate(id);
+  };
 
   const {data} = useDiscount();
   console.log(data);
@@ -56,7 +62,7 @@ function Offers() {
               <MiddleIcon>
                 <ShareIcon />
               </MiddleIcon>
-              <Button className='w-40'>ویرایش</Button>
+              <DeleteModal deleteFn={() => deleteDiscount(item.id)} />
             </div>
           </div>
         </div>
