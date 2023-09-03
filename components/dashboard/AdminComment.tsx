@@ -18,8 +18,9 @@ interface AddComment {
 
 function AdminComment({id}: AdminCommentsProps) {
   const [replay, setReplay] = React.useState('');
+  const [open, setOpen] = React.useState(false);
   const token = Cookies.get('token');
-  const {mutate} = useMutation({
+  const {mutate, isLoading} = useMutation({
     mutationFn: (data: AddComment) => {
       return axios.patch(`${baseUrl}/comment/update/${id}`, data, {
         headers: {
@@ -33,10 +34,11 @@ function AdminComment({id}: AdminCommentsProps) {
     mutate({
       replay,
     });
+    setOpen(false);
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button className='w-28' variant='outline'>
           پاسخ دادن
@@ -50,7 +52,7 @@ function AdminComment({id}: AdminCommentsProps) {
           <Textarea onChange={(e) => setReplay(e.target.value)} id='name' placeholder='پاسخ' />
         </div>
         <DialogFooter>
-          <Button onClick={addComment} type='submit'>
+          <Button isLoading={isLoading} onClick={addComment} type='submit'>
             ذخیره تغییرات
           </Button>
         </DialogFooter>

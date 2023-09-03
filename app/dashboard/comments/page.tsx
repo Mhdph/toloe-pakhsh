@@ -16,7 +16,7 @@ interface ConfirmComments {
 }
 
 function Comments() {
-  const {mutate} = useConfirmComments();
+  const {mutate, isLoading} = useConfirmComments();
   const {data} = UseGetComments();
   const confirmComment = (id: number) => {
     const updatedComments: ConfirmComments = {
@@ -55,7 +55,7 @@ function Comments() {
           </div>
           <div className='col-span-1 flex flex-col items-center justify-between py-3'>
             {item.verify ? null : (
-              <Button onClick={() => confirmComment(item.id)} className='w-28'>
+              <Button isLoading={isLoading} onClick={() => confirmComment(item.id)} className='w-28'>
                 تایید دیدگاه
               </Button>
             )}
