@@ -29,9 +29,13 @@ function ProductDetails() {
     });
     return response.data;
   };
+  const getProductDetailsWithoutToken = async () => {
+    const response = await axios.get(`${baseUrl}/product/getbyid/${id}`);
+    return response.data;
+  };
   const {data, isLoading: loading} = useQuery({
     queryKey: ['product-single', id],
-    queryFn: getProductDetails,
+    queryFn: user === undefined ? getProductDetailsWithoutToken : getProductDetails,
   });
 
   const addProduct = useProductStore((state) => state.addProduct);
