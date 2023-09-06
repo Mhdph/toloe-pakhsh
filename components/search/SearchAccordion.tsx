@@ -27,11 +27,13 @@ function SearchAccordion() {
               <div key={item.id}>
                 <Accordion className='px-4' type='multiple'>
                   <AccordionItem value='item-1'>
-                    <AccordionTrigger onClick={() => handleCategorySearch(item.name)}>{item.name}</AccordionTrigger>
+                    <AccordionTrigger onClick={() => handleCategorySearch(item.englishName)}>
+                      {item.name}
+                    </AccordionTrigger>
                     {item.chailds.length > 0 ? (
                       <AccordionContent className='cursor-pointer'>
                         {item.chailds.map((sub) => (
-                          <p key={sub.id} onClick={() => handleSubCategorySearch(item.name, sub.name)}>
+                          <p key={sub.id} onClick={() => handleSubCategorySearch(item.englishName, sub.englishName)}>
                             {sub.name}
                           </p>
                         ))}
