@@ -13,12 +13,20 @@ import {Form, FormControl, FormField, FormItem, FormMessage} from '../ui/Form';
 import useGetCategoriesAndChilds from '@/service/category/useGetCategoriesandChilds';
 import useAddChildCategory from '@/service/category/useAddChildCategory';
 import React from 'react';
+import useGetCategories from '@/service/category/useGetCategories';
+import useCategoryStore from '@/store/category';
 
 type CategorySchema = z.infer<typeof addChildCategorySchema>;
 
 export function AddChildCategories() {
   const [open, setOpen] = React.useState(false);
-  const {data} = useGetCategoriesAndChilds();
+  const {setTake} = useCategoryStore();
+
+  React.useEffect(() => {
+    setTake(50);
+  }, []);
+
+  const {data} = useGetCategories();
 
   const form = useForm<CategorySchema>({
     resolver: zodResolver(addChildCategorySchema),
@@ -32,6 +40,7 @@ export function AddChildCategories() {
       parentCategoryId: +data.parentCategoryId,
     });
     setOpen(false);
+    setTake(10);
   };
   return (
     <Dialog open={open} onOpenChange={setOpen}>
