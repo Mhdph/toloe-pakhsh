@@ -11,11 +11,21 @@ import useDeleteCategory from '@/service/category/useDeleteCategory';
 import DeleteModal from '@/components/dashboard/DeleteModal';
 import useDeleteChildCategory from '@/service/category/useDeleteChildCategory';
 import {CloseIcon} from '@/assets/Icons';
+import {PaginationList} from '@/components/ui/Pagination';
+import useCategoryStore from '@/store/category';
 
 function DashboardCategories() {
   const {data} = useGetCategoriesAndChilds();
   const [selectedCategory, setSelectedCategory] = React.useState<number | null>(null);
   const [showModal, setShowModal] = React.useState<boolean>(false);
+  const {setSkip} = useCategoryStore();
+
+  const [page, setPage] = React.useState(1);
+
+  const onPageChange = (page: number) => {
+    setPage(page);
+    setSkip(page * 10);
+  };
   const {mutate} = useDeleteCategory();
   const {mutate: deleteChild} = useDeleteChildCategory();
   const openModal = (id: number) => {
@@ -56,7 +66,7 @@ function DashboardCategories() {
                   <div key={child.id} className='flex w-2/5 items-center gap-1 rounded-lg border-b'>
                     {child.name}
                     {/* <DeleteModal deleteFn={() => handleRemoveChild(child.id, item.id)} /> */}
-                    <div onClick={() => handleRemoveChild(child.id, item.id)}>
+                    <div className='cursor-pointer' onClick={() => handleRemoveChild(child.id, item.id)}>
                       <CloseIcon />
                     </div>
                   </div>
@@ -73,6 +83,9 @@ function DashboardCategories() {
       {selectedCategory !== null && (
         <EditCategories showModal={showModal} closeModal={setSelectedCategory} id={selectedCategory} />
       )}
+      <div className='mt-2 flex flex-row-reverse justify-center'>
+        <PaginationList onPageChange={onPageChange} page={page} pageCount={data?.count} />
+      </div>
     </div>
   );
 }
