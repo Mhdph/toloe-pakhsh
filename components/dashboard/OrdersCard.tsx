@@ -18,6 +18,8 @@ import Button from '../ui/Button';
 import MiddleIcon from '../ui/MiddleIcon';
 import OrdersItem from './OrdersItem';
 import Loading from '../ui/Loading';
+import React from 'react';
+import {PaginationList} from '../ui/Pagination';
 type UpdateOrderSchema = z.infer<typeof UpdateOrderSchema>;
 
 type Color = 'primary' | 'delivered' | 'canceled' | 'returned';
@@ -31,6 +33,7 @@ interface Props {
 
 function OrdersCard({color = 'primary', state = '', label = '', className, ...rest}: Props) {
   const id = '123';
+  const [page, setPage] = React.useState(1);
   const {mutate} = useUpdateOrder(id);
   const form = useForm<UpdateOrderSchema>({
     resolver: zodResolver(UpdateOrderSchema),
@@ -50,16 +53,18 @@ function OrdersCard({color = 'primary', state = '', label = '', className, ...re
   const classes = `text-black ${bgColor} ${className}`;
   const token = Cookies.get('token');
   const getHistoryUSerCardFn = async () => {
-    const response = await axios.get(`${baseUrl}/cart/listOrderCarts?state=${state}`, {
+    const response = await axios.get(`${baseUrl}/cart/listOrderCarts?state=${state}&page=${page}`, {
       headers: {
         authorization: 'Bearer ' + `${token}`,
       },
     });
     return response.data;
   };
-
+  const onPageChange = (page: number) => {
+    setPage(page);
+  };
   const {data, isLoading} = useQuery({
-    queryKey: ['history'],
+    queryKey: ['history', page],
     queryFn: getHistoryUSerCardFn,
   });
   console.log(data);
@@ -151,6 +156,9 @@ function OrdersCard({color = 'primary', state = '', label = '', className, ...re
           </div>
         </div>
       ))}
+      <div className='mt-2 flex flex-row-reverse justify-center'>
+        <PaginationList onPageChange={onPageChange} page={page} pageCount={data?.count} />
+      </div>
     </div>
   );
 }
