@@ -70,7 +70,7 @@ function ListCard({data: {brand, picture, name, unitCount, unit, price, id, off,
 
   return (
     <div className='h-[264px] min-w-[170px] max-w-[170px] rounded-3xl border border-black-items border-opacity-40 bg-white md:h-[300px] md:min-w-[196px] md:max-w-[196px]'>
-      <Link href={`/store/${id}`} className=' flex justify-center'>
+      <Link href={`/product/${id}`} className=' flex justify-center'>
         <div className='relative'>
           {off !== 0 ? (
             <div className='absolute left-2 top-1 flex h-9 w-9 items-center justify-center rounded-full bg-red-500 p-2 text-sm font-extrabold  text-white'>
@@ -86,7 +86,7 @@ function ListCard({data: {brand, picture, name, unitCount, unit, price, id, off,
       </Link>
 
       <div className='mt-2 px-2'>
-        <Link href={`/store/${id}`}>
+        <Link href={`/product/${id}`}>
           <div className='flex items-center justify-between '>
             <p className='w-1/2 truncate text-xs font-black md:text-ca'>{name}</p>
             <ReactStars count={5} value={star} size={16} color2={'#F34834'} />

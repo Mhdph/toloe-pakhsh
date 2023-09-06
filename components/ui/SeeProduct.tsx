@@ -1,15 +1,15 @@
-import Link from "next/link";
-import React from "react";
+import Link from 'next/link';
+import React from 'react';
 
 interface SeeProductProps {
   link: string;
 }
 
-function SeeProduct({ link }: SeeProductProps) {
+function SeeProduct({link}: SeeProductProps) {
   return (
-    <div className="flex justify-center md:justify-end text-white">
-      <button className="btn_primary h-9 w-[350px] md:w-[196px] mt-48 mb-16 text-xs font-extrabold">
-        <Link href={`store?q=${link}`}>مشاهده محصولات</Link>
+    <div className='flex justify-center text-white md:justify-end'>
+      <button className='btn_primary mb-16 mt-48 h-9 w-[350px] text-xs font-extrabold md:w-[196px]'>
+        <Link href={`shop?q=${link}`}>مشاهده محصولات</Link>
       </button>
     </div>
   );
