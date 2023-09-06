@@ -23,6 +23,7 @@ import useDebounce from '@/hooks/useDebounce';
 import axios from 'axios';
 import {baseUrl} from '@/lib/config';
 import {Product} from '@/entities/product';
+import {MobileMenu} from './MobileMenu';
 
 type NavbarProps = {};
 
@@ -49,9 +50,9 @@ const Navbar: React.FC<NavbarProps> = () => {
       <div className='navbar_shadow fixed z-50 flex h-[72px] w-full items-center justify-between bg-white pb-2 lg:hidden'>
         <div className='navbar_bg_right flex items-center justify-center'>
           <div className='cursor-pointer'>
-            <MenuIcon />
+            <MobileMenu />
           </div>
-        </div>
+        </div>{' '}
         <Link href='/' className='mt-8 cursor-pointer'>
           <LogoIcon />
         </Link>
