@@ -123,7 +123,7 @@ const Navbar: React.FC<NavbarProps> = () => {
                             <>
                               <Link
                                 onClick={() => setName('')}
-                                href={`/store/${item.id}`}
+                                href={`/product/${item.id}`}
                                 className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}
                               >
                                 <span>{item.name}</span>
@@ -167,15 +167,15 @@ const Navbar: React.FC<NavbarProps> = () => {
           </Link>
 
           <Link
-            href='/store'
+            href='/shop'
             className={cn(
-              pathName === '/store'
+              pathName === '/shop'
                 ? 'rounded-t-3xl border-t  border-t-[#F6622C] bg-white text-[#F6622C]'
                 : 'text-black-items',
               'flex items-center gap-3 px-24 text-[14px] font-extrabold',
             )}
           >
-            {pathName == '/store' ? <StoreIcon /> : <BucketBlackIcon />}
+            {pathName == '/shop' ? <StoreIcon /> : <BucketBlackIcon />}
             <span className='py-2 text-xs font-black'>فروشگاه</span>
           </Link>
           <Link

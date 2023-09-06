@@ -38,7 +38,7 @@ function AboutUs() {
             </p>
             <div className='my-2 flex flex-row-reverse md:hidden'>
               <button className='btn_Primary_small text-xs font-extrabold text-white '>
-                <Link href='/store'>مشاهده محصولات</Link>
+                <Link href='/shop'>مشاهده محصولات</Link>
               </button>
             </div>
           </div>

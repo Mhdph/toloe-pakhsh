@@ -8,7 +8,7 @@ function SameProduct() {
   return (
     <div>
       {' '}
-      <ListItems data={product?.data} link='store' title='محصولات مشابه' />
+      <ListItems data={product?.data} link='shop' title='محصولات مشابه' />
     </div>
   );
 }

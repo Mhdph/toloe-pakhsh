@@ -42,8 +42,8 @@ function SearchBar({count}: SearchBarProps) {
                 {name !== '' ? (
                   <>
                     {data.slice(0, 5).map((item: Product) => (
-                      <CommandItem onClick={() => router.push(`/store/${item.id}`)} key={item.id}>
-                        <Link onClick={() => setName('')} href={`/store/${item.id}`}>
+                      <CommandItem onClick={() => router.push(`/product/${item.id}`)} key={item.id}>
+                        <Link onClick={() => setName('')} href={`/product/${item.id}`}>
                           {item.name}
                         </Link>{' '}
                       </CommandItem>
