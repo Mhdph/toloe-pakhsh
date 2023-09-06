@@ -10,14 +10,20 @@ import useConfirmComments from '@/service/comment/useConfirmComments';
 import UseGetComments from '@/service/comment/UseGetComments';
 import {baseUrl} from '@/lib/config';
 import ReactStars from 'react-stars';
+import {PaginationList} from '@/components/ui/Pagination';
+import useCommentStore from '@/store/comment';
 
 interface ConfirmComments {
   verify: boolean;
 }
 
 function Comments() {
+  const [page, setPage] = React.useState(1);
+
   const {mutate, isLoading} = useConfirmComments();
   const {data} = UseGetComments();
+  const {setSkip} = useCommentStore();
+
   const confirmComment = (id: number) => {
     const updatedComments: ConfirmComments = {
       verify: true,
@@ -26,6 +32,11 @@ function Comments() {
       id,
       data: updatedComments,
     });
+  };
+
+  const onPageChange = (page: number) => {
+    setPage(page);
+    setSkip(page * 10);
   };
 
   return (
@@ -63,6 +74,9 @@ function Comments() {
           </div>
         </div>
       ))}
+      <div className='mt-2 flex flex-row-reverse justify-center'>
+        <PaginationList onPageChange={onPageChange} page={page} pageCount={data?.count} />
+      </div>
     </div>
   );
 }
