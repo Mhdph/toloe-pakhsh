@@ -51,6 +51,7 @@ export function AddCategories() {
     mutate({
       name: data.name,
       picture: Cookies.get('picture')!,
+      englishName: data.englishName,
     });
     setOpen(false);
   };
@@ -97,6 +98,19 @@ export function AddCategories() {
                 render={({field}) => (
                   <FormItem>
                     <FormLabel>نام دسته بندی</FormLabel>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name='englishName'
+                render={({field}) => (
+                  <FormItem>
+                    <FormLabel>نام انگلیسی دسته بندی</FormLabel>
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
