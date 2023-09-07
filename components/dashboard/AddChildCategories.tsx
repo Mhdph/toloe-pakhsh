@@ -23,7 +23,7 @@ export function AddChildCategories() {
   const {setTake} = useCategoryStore();
 
   React.useEffect(() => {
-    setTake(50);
+    setTake(100);
   }, []);
 
   const {data} = useGetCategories();

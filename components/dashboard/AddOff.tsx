@@ -14,6 +14,7 @@ import DatePicker from 'react-multi-date-picker';
 import {z} from 'zod';
 import useGetCategories from '@/service/category/useGetCategories';
 import {digitsFaToEn} from '@persian-tools/persian-tools';
+import useCategoryStore from '@/store/category';
 type OffSchema = z.infer<typeof AddOffSchema>;
 
 export function AddOff() {
@@ -27,6 +28,13 @@ export function AddOff() {
   } = useForm<OffSchema>({
     resolver: zodResolver(AddOffSchema),
   });
+
+  const {setTake} = useCategoryStore();
+
+  React.useEffect(() => {
+    setTake(100);
+  }, []);
+
   const {data} = useGetCategories();
 
   const {mutate, isLoading} = useAddDiscount();
