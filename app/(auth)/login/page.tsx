@@ -41,7 +41,7 @@ function Login() {
     const phone = digitsFaToEn(data.phone);
     try {
       axios.post(`${baseUrl}/one-code/add`, {phone});
-      Cookies.set('phoneNumber', data.phone);
+      Cookies.set('phoneNumber', phone);
       router.push('/confirm-code');
       setIsLoading(false);
     } catch (error) {
