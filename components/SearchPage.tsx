@@ -32,6 +32,31 @@ function SearchPage() {
     }
   }, []);
 
+  // useEffect(() => {
+  //   (function () {
+  //     var i = 'Bmul43',
+  //       a = window,
+  //       d = document;
+  //     function g() {
+  //       var g = d.createElement('script'),
+  //         s = 'https://www.goftino.com/widget/' + i,
+  //         l = localStorage.getItem('goftino_' + i);
+  //       g.async = !0;
+  //       g.src = l ? s + '?o=' + l : s;
+  //       d.getElementsByTagName('head')[0].appendChild(g);
+  //     }
+
+  //     if (d.readyState === 'complete') {
+  //       g();
+  //     } else {
+  //       if (a.addEventListener) {
+  //         a.addEventListener('load', g, false);
+  //       } else if (a.attachEvent) {
+  //         a.attachEvent('onload', g);
+  //       }
+  //     }
+  //   })();
+  // }, []); // Ensure the useEffect runs only once (on mount)
   const handleStartChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setStartPrice(event.target.value);
   };
