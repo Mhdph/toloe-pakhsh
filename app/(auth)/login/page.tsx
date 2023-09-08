@@ -48,7 +48,6 @@ function Login() {
       toast.error('مشکلی پیش امده دوباره امتحان کنید');
       setIsLoading(false);
     }
-    console.log('0' + persianNumeralToNumber(data.phone));
   };
   return (
     <div>

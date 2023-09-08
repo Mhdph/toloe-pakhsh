@@ -17,6 +17,7 @@ interface ProductQuery {
   sortName?: string;
   sort?: number;
   skip?: number;
+  productName?: string;
 }
 
 const useProducts = () => {
@@ -25,6 +26,7 @@ const useProducts = () => {
   const debouncedStartPrice = useDebounce(gameQuery.startPrice, 3000);
   const debouncedEndPrice = useDebounce(gameQuery.endPrice, 3000);
   const debouncedBrand = useDebounce(gameQuery.brand, 3000);
+  const debouncedKeyWord = useDebounce(gameQuery.keyword, 3000);
 
   const params: ProductQuery = {};
 
@@ -39,6 +41,9 @@ const useProducts = () => {
   }
   if (debouncedBrand) {
     params.brand = debouncedBrand;
+  }
+  if (debouncedKeyWord) {
+    params.productName = debouncedKeyWord;
   }
 
   if (gameQuery.sortName) {
@@ -63,6 +68,7 @@ const useProducts = () => {
       debouncedStartPrice,
       debouncedBrand,
       debouncedEndPrice,
+      debouncedKeyWord,
       gameQuery.off,
       gameQuery.exist,
       gameQuery.skip,

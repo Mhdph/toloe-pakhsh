@@ -12,7 +12,7 @@ import React from 'react';
 function Products() {
   const {data} = useProducts();
   const [page, setPage] = React.useState(1);
-  const {setSkip} = useProductQueryStore();
+  const {setSkip, setKeyWord} = useProductQueryStore();
 
   const onPageChange = (page: number) => {
     setPage(page);
@@ -22,7 +22,11 @@ function Products() {
     <div>
       <div className='flex items-center gap-3'>
         <div className='relative w-full '>
-          <Input className='rounded-[18px] bg-gray-200 py-1.5 pr-10' placeholder=' نام یا شماره همراه' />
+          <Input
+            onChange={(e) => setKeyWord(e.target.value)}
+            className='rounded-[18px] bg-gray-200 py-1.5 pr-10'
+            placeholder=' نام یا شماره همراه'
+          />
           <div className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 outline-none'>
             <SearchBarSvg />
           </div>
