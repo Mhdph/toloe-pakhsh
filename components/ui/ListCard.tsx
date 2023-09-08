@@ -10,6 +10,7 @@ import Button from './Button';
 import useAddFavouriteProduct from '@/service/product/useAddFavouriteProduct';
 import React from 'react';
 import ReactStars from 'react-stars';
+import {toast} from 'react-hot-toast';
 interface dataItem {
   data: {
     id: number;
@@ -52,7 +53,7 @@ function ListCard({data: {brand, picture, name, unitCount, unit, price, id, off,
       price,
       picture,
     };
-    console.log(product);
+    toast.success('محصول به سبد اضافه شد');
     addProduct(product);
   };
   const addCardRow = () => {

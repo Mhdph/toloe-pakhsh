@@ -8,6 +8,7 @@ import useProductStore from '@/store/zustand';
 import useAddFavouriteProduct from '@/service/product/useAddFavouriteProduct';
 import useAddCart from '@/service/cart/useAddCart';
 import ReactStars from 'react-stars';
+import {toast} from 'react-hot-toast';
 
 interface dataItem {
   data: {
@@ -52,8 +53,8 @@ function Card({data: {brand, picture, name, unitCount, unit, price, id, off, FaP
       price,
       picture,
     };
-    console.log(product);
     addProduct(product);
+    toast.success('محصول به سبد اضافه شد');
   };
   const addCardRow = () => {
     mutate({
