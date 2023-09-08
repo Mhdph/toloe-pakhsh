@@ -7,6 +7,7 @@ import {CACHE_KEY_USER} from '@/service/constants';
 import usePayment from '@/service/payment/usePayment';
 import useDelivery from '@/service/settings/useDelivery';
 import useProductStore from '@/store/zustand';
+import {digitsEnToFa} from '@persian-tools/persian-tools';
 import {useQuery} from '@tanstack/react-query';
 import Cookies from 'js-cookie';
 import {useRouter} from 'next/navigation';
@@ -94,7 +95,7 @@ function Checkout() {
         <div className='flex items-center justify-between'>
           <p className='text-xs font-semibold text-black-items'>مجموع محصولات:</p>
           <div className='flex items-center'>
-            <p className='text-base font-semibold'>{totalPrice}</p>
+            <p className='text-base font-semibold'>{digitsEnToFa(totalPrice)}</p>
             <span className='mr-1 text-xs font-normal opacity-60'>تومان</span>
           </div>
         </div>{' '}

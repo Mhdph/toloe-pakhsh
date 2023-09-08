@@ -16,6 +16,7 @@ import useDeleteCartRow from '@/service/cart/useDeleteCartRow';
 import Loading from './ui/Loading';
 import axios from 'axios';
 import {CACHE_KEY_CART} from '@/service/constants';
+import {digitsEnToFa} from '@persian-tools/persian-tools';
 
 function ShoppingCard() {
   // user login or not
@@ -123,7 +124,7 @@ function ShoppingCard() {
                           </MiddleIcon>
                         </div>
                         <div className='numberItemBg flex h-9 w-[74px] items-center justify-center '>
-                          {isLoading ? <Loader2 className='mr-2 h-4 w-4 animate-spin' /> : item.count}
+                          {isLoading ? <Loader2 className='mr-2 h-4 w-4 animate-spin' /> : digitsEnToFa(item.count)}
                         </div>
                         <div onClick={() => handleIncreaseData(item.count, item.cartRowId)}>
                           <MiddleIcon>
@@ -191,7 +192,9 @@ function ShoppingCard() {
                           <MinusIcon />
                         </MiddleIcon>
                       </div>
-                      <div className='numberItemBg flex h-9 w-[74px] items-center justify-center '>{item.quantity}</div>
+                      <div className='numberItemBg flex h-9 w-[74px] items-center justify-center '>
+                        {digitsEnToFa(item.quantity)}
+                      </div>
                       <div onClick={() => handleIncrease(item.quantity, item.id)}>
                         <MiddleIcon>
                           <PlusIcon />
@@ -213,7 +216,7 @@ function ShoppingCard() {
                   <div className='flex items-center justify-between'>
                     <p className='text-xs text-black-items md:text-sm'>قیمت:</p>
                     <div className='flex items-center'>
-                      <p className='text-xs font-black md:text-sm'>{item.price}</p>
+                      <p className='text-xs font-black md:text-sm'>{digitsEnToFa(item.price)}</p>
                       <span className='mr-1 text-[10px] font-normal opacity-60 md:text-xs'>تومان</span>
                     </div>
                   </div>
@@ -221,7 +224,7 @@ function ShoppingCard() {
                   <div className='flex items-center justify-between text-[#F6622C]'>
                     <p className='text-xs'>جمع خرید:</p>
                     <div className='flex items-center'>
-                      <p className='text-base font-black'>{item.totalPrice}</p>
+                      <p className='text-base font-black'>{digitsEnToFa(item.totalPrice!)}</p>
                       <span className='mr-1 text-[10px] font-normal text-black-items opacity-60'>تومان</span>
                     </div>
                   </div>
