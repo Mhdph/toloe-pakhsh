@@ -2,7 +2,7 @@
 import {UpDownIcon} from '@/assets/Icons';
 import SearchBarSvg from '@/assets/svg/SearchBarSvg';
 import SearchPopOver from './search/SearchPopOver';
-import React from 'react';
+import React, {Fragment} from 'react';
 import axios from 'axios';
 import {baseUrl} from '@/lib/config';
 import useDebounce from '@/hooks/useDebounce';
@@ -10,6 +10,7 @@ import {Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandL
 import {Product} from '@/entities/product';
 import {useRouter} from 'next/navigation';
 import Link from 'next/link';
+import {Combobox, Transition} from '@headlessui/react';
 interface SearchBarProps {
   count: number | undefined;
 }
@@ -35,28 +36,67 @@ function SearchBar({count}: SearchBarProps) {
     <div className='pt-16 md:hidden'>
       <div className='serach_bar h-[142px] w-full rounded-b-3xl px-4'>
         <div className='relative w-full pt-4'>
-          <Command>
-            <CommandInput onValueChange={(e) => setName(e)} />
-            <CommandList>
-              <CommandGroup>
-                {name !== '' ? (
-                  <>
-                    {data.slice(0, 5).map((item: Product) => (
-                      <CommandItem onClick={() => router.push(`/product/${item.id}`)} key={item.id}>
-                        <Link onClick={() => setName('')} href={`/product/${item.id}`}>
-                          {item.name}
-                        </Link>{' '}
-                      </CommandItem>
-                    ))}
-                  </>
-                ) : null}
-              </CommandGroup>
-            </CommandList>
-          </Command>
-          {/* <input type='text' id='voice-search' className='bg-whit w-full rounded-[18px] py-1.5 pr-10 outline-none' /> */}
-          {/* <div className='pointer-events-none absolute inset-y-0 right-3 mt-3 flex items-center pr-4'>
-            <SearchBarSvg />
-          </div> */}
+          <Combobox>
+            <div className='relative mt-1'>
+              <div className='relative  '>
+                <Combobox.Input
+                  className='w-[352px] rounded-[12px] bg-gray-200 py-1.5 pr-10 outline-none'
+                  displayValue={() => name}
+                  onChange={(event) => setName(() => event.target.value)}
+                  placeholder='جستجو'
+                />
+                <div className='pointer-events-none absolute inset-y-0  right-0 flex items-center pr-3'>
+                  <SearchBarSvg />
+                </div>
+              </div>
+              <Transition
+                as={Fragment}
+                leave='transition ease-in duration-100'
+                leaveFrom='opacity-100'
+                leaveTo='opacity-0'
+                afterLeave={() => setName('')}
+              >
+                <Combobox.Options className='absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
+                  {name !== '' && data.length === 0 ? (
+                    <div className='relative cursor-default select-none px-4 py-2 text-gray-700'>
+                      در حال یافتن محصول
+                    </div>
+                  ) : (
+                    data.map((item: Product) => (
+                      <Combobox.Option
+                        key={item.id}
+                        className={({active}) =>
+                          `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                            active ? 'bg-main-red text-white' : 'text-black-items'
+                          }`
+                        }
+                        value={item.name}
+                      >
+                        {({selected, active}) => (
+                          <>
+                            <Link
+                              onClick={() => setName('')}
+                              href={`/product/${item.id}`}
+                              className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}
+                            >
+                              <span>{item.name}</span>
+                            </Link>
+                            {selected ? (
+                              <span
+                                className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
+                                  active ? 'text-white' : 'text-teal-600'
+                                }`}
+                              ></span>
+                            ) : null}
+                          </>
+                        )}
+                      </Combobox.Option>
+                    ))
+                  )}
+                </Combobox.Options>
+              </Transition>
+            </div>
+          </Combobox>
         </div>
         <div className='mt-4 flex items-center justify-between'>
           <SearchPopOver />
