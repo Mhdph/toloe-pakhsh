@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -20,6 +20,32 @@ const SliderImage: React.FC<SliderProps> = ({images}) => {
     autoplaySpeed: 2000, // Set autoplay speed in milliseconds
     beforeChange: (oldIndex: any, newIndex: any) => setCurrentSlide(newIndex), // Handle slide change
   };
+
+  useEffect(() => {
+    (function () {
+      var i = 'Bmul43',
+        a: any = window,
+        d = document;
+      function g() {
+        var g = d.createElement('script'),
+          s = 'https://www.goftino.com/widget/' + i,
+          l = localStorage.getItem('goftino_' + i);
+        g.async = !0;
+        g.src = l ? s + '?o=' + l : s;
+        d.getElementsByTagName('head')[0].appendChild(g);
+      }
+
+      if (d.readyState === 'complete') {
+        g();
+      } else {
+        if (a.addEventListener) {
+          a.addEventListener('load', g, false);
+        } else if (a.attachEvent) {
+          a.attachEvent('onload', g);
+        }
+      }
+    })();
+  }, []); // Ensure the useEffect runs only once (on mount)
 
   return (
     <div className='mt-20 md:mt-0 2xl:px-10' style={{maxWidth: '100%', overflowX: 'hidden'}}>
