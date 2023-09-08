@@ -18,6 +18,7 @@ specifiers:
   '@types/node': 20.2.6
   '@types/react': 18.2.9
   '@types/react-dom': 18.2.4
+  '@types/react-slick': ^0.23.10
   '@types/react-stars': ^2.2.1
   autoprefixer: 10.4.14
   axios: ^1.4.0
@@ -41,7 +42,9 @@ specifiers:
   react-hook-form: ^7.45.2
   react-hot-toast: ^2.4.1
   react-multi-date-picker: ^4.1.2
+  react-slick: ^0.29.0
   react-stars: ^2.2.5
+  slick-carousel: ^1.8.1
   tailwind-merge: ^1.13.1
   tailwind-scrollbar: ^3.0.4
   tailwindcss: 3.3.2
@@ -86,7 +89,9 @@ dependencies:
   react-hook-form: 7.45.2_react@18.2.0
   react-hot-toast: 2.4.1_biqbaboplfbrettd7655fr4n2y
   react-multi-date-picker: 4.1.2_biqbaboplfbrettd7655fr4n2y
+  react-slick: 0.29.0_biqbaboplfbrettd7655fr4n2y
   react-stars: 2.2.5
+  slick-carousel: 1.8.1
   tailwind-merge: 1.13.1
   tailwind-scrollbar: 3.0.4_tailwindcss@3.3.2
   tailwindcss: 3.3.2
@@ -96,6 +101,7 @@ dependencies:
 
 devDependencies:
   '@types/js-cookie': 3.0.3
+  '@types/react-slick': 0.23.10
   '@types/react-stars': 2.2.1
   prettier: 2.8.8
   prettier-plugin-tailwindcss: 0.3.0_prettier@2.8.8
@@ -1327,6 +1333,12 @@ packages:
       '@types/react': 18.2.9
     dev: false
 
+  /@types/react-slick/0.23.10:
+    resolution: {integrity: sha512-ZiqdencANDZy6sWOWJ54LDvebuXFEhDlHtXU9FFipQR2BcYU2QJxZhvJPW6YK7cocibUiNn+YvDTbt1HtCIBVA==}
+    dependencies:
+      '@types/react': 18.2.9
+    dev: true
+
   /@types/react-stars/2.2.1:
     resolution: {integrity: sha512-x0Z7+OsImFfBbHpLm/o3Z/q9qbapQbaSbKkozSIJXs6OAkFW5keA4Qw4MOjocdmhPPUYI6DDVSB0NOm0QmY+Xg==}
     dependencies:
@@ -1881,6 +1893,10 @@ packages:
     dependencies:
       graceful-fs: 4.2.11
       tapable: 2.2.1
+    dev: false
+
+  /enquire.js/2.1.6:
+    resolution: {integrity: sha512-/KujNpO+PT63F7Hlpu4h3pE3TokKRHN26JYmQpPyjkRD/N57R7bPDNojMXdi7uveAKjYB7yQnartCxZnFWr0Xw==}
     dev: false
 
   /es-abstract/1.21.2:
@@ -2814,6 +2830,12 @@ packages:
     resolution: {integrity: sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==}
     dev: false
 
+  /json2mq/0.2.0:
+    resolution: {integrity: sha512-SzoRg7ux5DWTII9J2qkrZrqV1gt+rTaoufMxEzXbS26Uid0NwaJd123HcoB80TgubEppxxIGdNxCx50fEoEWQA==}
+    dependencies:
+      string-convert: 0.2.1
+    dev: false
+
   /json5/1.0.2:
     resolution: {integrity: sha512-g1MWMLBiz8FKi1e4w0UyVL3w+iJceWAFBAaBnnGKOpNa5f8TLktkbre1+s6oICydWAm+HRUGTmI+//xv2hvXYA==}
     hasBin: true
@@ -2865,6 +2887,10 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       p-locate: 5.0.0
+    dev: false
+
+  /lodash.debounce/4.0.8:
+    resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
     dev: false
 
   /lodash.merge/4.6.2:
@@ -3544,6 +3570,21 @@ packages:
       use-sidecar: 1.1.2_xomkljxbsahfbuzbqqeyw47ndm
     dev: false
 
+  /react-slick/0.29.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-TGdOKE+ZkJHHeC4aaoH85m8RnFyWqdqRfAGkhd6dirmATXMZWAxOpTLmw2Ll/jPTQ3eEG7ercFr/sbzdeYCJXA==}
+    peerDependencies:
+      react: ^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      classnames: 2.3.2
+      enquire.js: 2.1.6
+      json2mq: 0.2.0
+      lodash.debounce: 4.0.8
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      resize-observer-polyfill: 1.5.1
+    dev: false
+
   /react-stars/2.2.5:
     resolution: {integrity: sha512-O//KS6Z9RZnUOU/r+3+wxCzNalVn/wEWIcbAQFRV3dw8WbV+ys/kgcpBPijqTiNpHGrcwZdtb/7wF/UVem20CQ==}
     dev: false
@@ -3596,6 +3637,10 @@ packages:
       call-bind: 1.0.2
       define-properties: 1.2.0
       functions-have-names: 1.2.3
+    dev: false
+
+  /resize-observer-polyfill/1.5.1:
+    resolution: {integrity: sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==}
     dev: false
 
   /resolve-from/4.0.0:
@@ -3711,6 +3756,12 @@ packages:
     engines: {node: '>=12'}
     dev: false
 
+  /slick-carousel/1.8.1:
+    resolution: {integrity: sha512-XB9Ftrf2EEKfzoQXt3Nitrt/IPbT+f1fgqBdoxO3W/+JYvtEOW6EgxnWfr9GH6nmULv7Y2tPmEX3koxThVmebA==}
+    peerDependencies:
+      jquery: '>=1.8.0'
+    dev: false
+
   /source-map-js/1.0.2:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}
     engines: {node: '>=0.10.0'}
@@ -3719,6 +3770,10 @@ packages:
   /streamsearch/1.1.0:
     resolution: {integrity: sha512-Mcc5wHehp9aXz1ax6bZUyY5afg9u2rv5cqQI3mRrYkGC8rW2hM02jWuwjtL++LS5qinSyhj2QfLyNsuc+VsExg==}
     engines: {node: '>=10.0.0'}
+    dev: false
+
+  /string-convert/0.2.1:
+    resolution: {integrity: sha512-u/1tdPl4yQnPBjnVrmdLo9gtuLvELKsAoRapekWggdiQNvvvum+jYF329d84NAa660KQw7pB2n36KrIKVoXa3A==}
     dev: false
 
   /string.prototype.matchall/4.0.8:
