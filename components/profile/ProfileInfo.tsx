@@ -13,7 +13,11 @@ function ProfileInfo() {
       <div className='serach_bar flex h-full items-center gap-4 rounded-t-3xl px-5 py-4 md:flex-col'>
         <AvatarIcon />
         <div className='flex-1 text-xs font-normal text-white md:text-center'>
-          <p className='font-black'>{data?.firstName + ' ' + data?.lastName}</p>
+          {data?.firstName === undefined ? (
+            <p>کاربر مهمان</p>
+          ) : (
+            <p className='font-black'>{data?.firstName + ' ' + data?.lastName}</p>
+          )}{' '}
           <hr className='borde my-1 border-solid border-white opacity-20' />
           <p>{data?.phone}</p>
           <hr className='borde my-1 border-solid border-white opacity-20' />
