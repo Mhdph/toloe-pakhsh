@@ -15,6 +15,7 @@ import Loading from '../ui/Loading';
 import ReactStars from 'react-stars';
 import axios from 'axios';
 import {useQuery} from '@tanstack/react-query';
+import {addCommas, digitsEnToFa} from '@persian-tools/persian-tools';
 
 function ProductDetails() {
   const [count, setCount] = useState(1);
@@ -79,7 +80,14 @@ function ProductDetails() {
     <div>
       <div className='md:mt-7 md:grid md:grid-cols-3 md:px-10'>
         <div className='flex items-center justify-center md:col-span-1'>
-          <img src={baseUrl + data.picture} alt={data.name} className='h-[200px] pt-20 md:pt-0' />
+          <div className='relative'>
+            {data.off !== 0 ? (
+              <div className='absolute left-2 top-1 flex h-9 w-9 items-center justify-center rounded-full bg-red-500 p-2 text-sm font-extrabold  text-white'>
+                {data.off}%
+              </div>
+            ) : null}
+            <img src={baseUrl + data.picture} alt={data.name} className='h-[200px] pt-20 md:pt-0' />
+          </div>
         </div>
         <div className='flex flex-col px-4 font-semibold md:col-span-2 md:rounded-3xl md:bg-white md:p-4 md:shadow-2xl'>
           <div className='flex items-center justify-between'>
@@ -96,7 +104,7 @@ function ProductDetails() {
           <div className='flex items-center justify-between'>
             <p className='text-base md:text-xl'>قیمت:</p>
             <div className='flex items-center'>
-              <p className='text-xs font-black md:text-ca'>{data.FaPrice}</p>
+              <p className='text-xs font-black md:text-ca'>{digitsEnToFa(addCommas(data.FaPrice))}</p>
               <span className='mr-1 text-[10px] font-normal opacity-60 md:text-xs'>تومان</span>
             </div>
           </div>

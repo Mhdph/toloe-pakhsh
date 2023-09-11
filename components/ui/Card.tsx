@@ -9,6 +9,7 @@ import useAddFavouriteProduct from '@/service/product/useAddFavouriteProduct';
 import useAddCart from '@/service/cart/useAddCart';
 import ReactStars from 'react-stars';
 import {toast} from 'react-hot-toast';
+import {digitsEnToFa, addCommas} from '@persian-tools/persian-tools';
 
 interface dataItem {
   data: {
@@ -101,7 +102,7 @@ function Card({data: {brand, picture, name, unitCount, unit, price, id, off, FaP
           <div className='flex items-center justify-between'>
             <p className='text-xs text-black-items md:text-ca'>قیمت:</p>
             <div className='flex items-center'>
-              <p className='text-xs font-black md:text-ca'>{FaPrice}</p>
+              <p className='text-xs font-black md:text-ca'>{digitsEnToFa(addCommas(FaPrice))}</p>
               <span className='mr-1 text-[10px] font-normal opacity-60 md:text-xs'>تومان</span>
             </div>
           </div>

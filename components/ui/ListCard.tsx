@@ -11,6 +11,7 @@ import useAddFavouriteProduct from '@/service/product/useAddFavouriteProduct';
 import React from 'react';
 import ReactStars from 'react-stars';
 import {toast} from 'react-hot-toast';
+import {addCommas, digitsEnToFa} from '@persian-tools/persian-tools';
 interface dataItem {
   data: {
     id: number;
@@ -70,7 +71,7 @@ function ListCard({data: {brand, picture, name, unitCount, unit, price, id, off,
   };
 
   return (
-    <div className='h-[264px] min-w-[170px] max-w-[170px] rounded-3xl border border-black-items border-opacity-40 bg-white md:h-[300px] md:min-w-[196px] md:max-w-[196px]'>
+    <div className='h-[274px] min-w-[170px] max-w-[170px] rounded-3xl border border-black-items border-opacity-40 bg-white md:h-[300px] md:min-w-[196px] md:max-w-[196px]'>
       <Link href={`/product/${id}`} className=' flex justify-center'>
         <div className='relative'>
           {off !== 0 ? (
@@ -105,7 +106,7 @@ function ListCard({data: {brand, picture, name, unitCount, unit, price, id, off,
           <div className='flex items-center justify-between'>
             <p className='text-xs text-black-items md:text-ca'>قیمت:</p>
             <div className='flex items-center'>
-              <p className='text-xs font-black md:text-ca'>{FaPrice}</p>
+              <p className='text-xs font-black md:text-ca'>{digitsEnToFa(addCommas(FaPrice))}</p>
               <span className='mr-1 text-[10px] font-normal opacity-60 md:text-xs'>تومان</span>
             </div>
           </div>

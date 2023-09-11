@@ -16,7 +16,7 @@ import useDeleteCartRow from '@/service/cart/useDeleteCartRow';
 import Loading from './ui/Loading';
 import axios from 'axios';
 import {CACHE_KEY_CART} from '@/service/constants';
-import {digitsEnToFa} from '@persian-tools/persian-tools';
+import {digitsEnToFa, addCommas} from '@persian-tools/persian-tools';
 
 function ShoppingCard() {
   // user login or not
@@ -74,7 +74,7 @@ function ShoppingCard() {
   const handleDecreaseData = (quantity: string, id: number) => {
     const numericQuantity = persianNumeralToNumber(quantity);
     const updatedCart: UpdateCart = {
-      count: +numericQuantity + 1,
+      count: +numericQuantity - 1,
     };
 
     mutate({id, data: updatedCart});
@@ -88,9 +88,11 @@ function ShoppingCard() {
 
   if (dataLoading) return <Loading />;
 
+  console.log(user);
+
   return (
     <>
-      {user !== undefined ? (
+      {user !== undefined && data ? (
         <>
           {data?.data.map((cartItem: Cart) => {
             return cartItem.cartRows.map((item) => (
@@ -101,12 +103,19 @@ function ShoppingCard() {
                 <div className='relative'>
                   <div
                     onClick={() => deleteCardRow(item.cartRowId)}
-                    className='absolute right-4 top-4 cursor-pointer md:top-6'
+                    className='absolute right-4 top-4 z-50 cursor-pointer md:top-6'
                   >
                     <CloseIcon />
                   </div>
-                  <div className='flex h-[184px] w-[140px] items-center justify-center '>
-                    <img src={baseUrl + item.productPicture} alt='product image' className=' md:pr-2' />
+                  <div className='relative'>
+                    {item.productOff !== 0 ? (
+                      <div className='absolute left-2 top-6 flex h-9 w-9 items-center justify-center rounded-full bg-red-500 p-2 text-sm font-extrabold  text-white'>
+                        {digitsEnToFa(item.productOff / 100)}%
+                      </div>
+                    ) : null}
+                    <div className='flex h-[184px] w-[140px] items-center justify-center '>
+                      <img src={baseUrl + item.productPicture} alt='product image' className=' md:pr-2' />
+                    </div>
                   </div>
                 </div>
                 <div className='h-full flex-1 px-2 pt-6 md:grid md:grid-cols-2 md:pt-0'>
@@ -147,7 +156,7 @@ function ShoppingCard() {
                     <div className='flex items-center justify-between'>
                       <p className='text-xs text-black-items md:text-sm'>قیمت:</p>
                       <div className='flex items-center'>
-                        <p className='text-xs font-black md:text-sm'>{item.faPrice}</p>
+                        <p className='text-xs font-black md:text-sm'>{digitsEnToFa(addCommas(item.faPrice))}</p>
                         <span className='mr-1 text-[10px] font-normal opacity-60 md:text-xs'>تومان</span>
                       </div>
                     </div>
@@ -155,7 +164,7 @@ function ShoppingCard() {
                     <div className='flex items-center justify-between text-[#F6622C]'>
                       <p className='text-xs'>جمع خرید:</p>
                       <div className='flex items-center'>
-                        <p className='text-base font-black'>{item.sumRow}</p>
+                        <p className='text-base font-black'>{digitsEnToFa(addCommas(item.sumRow))}</p>
                         <span className='mr-1 text-[10px] font-normal text-black-items opacity-60'>تومان</span>
                       </div>
                     </div>
@@ -216,7 +225,7 @@ function ShoppingCard() {
                   <div className='flex items-center justify-between'>
                     <p className='text-xs text-black-items md:text-sm'>قیمت:</p>
                     <div className='flex items-center'>
-                      <p className='text-xs font-black md:text-sm'>{digitsEnToFa(item.price)}</p>
+                      <p className='text-xs font-black md:text-sm'>{digitsEnToFa(addCommas(item.price))}</p>
                       <span className='mr-1 text-[10px] font-normal opacity-60 md:text-xs'>تومان</span>
                     </div>
                   </div>
@@ -224,7 +233,7 @@ function ShoppingCard() {
                   <div className='flex items-center justify-between text-[#F6622C]'>
                     <p className='text-xs'>جمع خرید:</p>
                     <div className='flex items-center'>
-                      <p className='text-base font-black'>{digitsEnToFa(item.totalPrice!)}</p>
+                      <p className='text-base font-black'>{digitsEnToFa(addCommas(item.totalPrice!))}</p>
                       <span className='mr-1 text-[10px] font-normal text-black-items opacity-60'>تومان</span>
                     </div>
                   </div>
