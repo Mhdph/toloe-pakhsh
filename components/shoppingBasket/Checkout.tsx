@@ -1,13 +1,12 @@
 'use client';
 import User from '@/entities/user';
-import {persianNumeralToNumber} from '@/helpers/PersianToEnglish';
 import APIClient from '@/service/api-client';
 import useGetCart from '@/service/cart/useGetCart';
 import {CACHE_KEY_USER} from '@/service/constants';
 import usePayment from '@/service/payment/usePayment';
 import useDelivery from '@/service/settings/useDelivery';
 import useProductStore from '@/store/zustand';
-import {digitsEnToFa, addCommas} from '@persian-tools/persian-tools';
+import {digitsEnToFa, addCommas, digitsFaToEn} from '@persian-tools/persian-tools';
 import {useQuery} from '@tanstack/react-query';
 import Cookies from 'js-cookie';
 import {useRouter} from 'next/navigation';
@@ -76,9 +75,10 @@ function Checkout() {
     });
   };
 
-  const totalPriceNum = persianNumeralToNumber(totalPrice);
-  const offNum = persianNumeralToNumber(off);
-  const deliveryNum = persianNumeralToNumber(delivery);
+  const offNum = off !== undefined ? digitsFaToEn(off) : 0;
+  const deliveryNum = digitsFaToEn(delivery);
+
+  const totalPriceEn = +totalPrice + +deliveryNum + +offNum;
 
   //login
   const pushLogin = () => {
@@ -119,7 +119,7 @@ function Checkout() {
         <div className='flex items-center justify-between text-[#F6622C]'>
           <p className='text-base font-semibold '> مجموع کل:</p>
           <div className='flex items-center'>
-            <p className='text-base font-semibold'>{(totalPriceNum - offNum + deliveryNum).toLocaleString('fa-ir')}</p>
+            <p className='text-base font-semibold'>{digitsEnToFa(addCommas(totalPriceEn))}</p>
             <span className='mr-1 text-xs font-normal text-black-items opacity-60'>تومان</span>
           </div>
         </div>

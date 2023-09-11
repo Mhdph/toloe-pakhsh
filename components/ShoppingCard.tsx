@@ -10,13 +10,12 @@ import {useQuery, useQueryClient} from '@tanstack/react-query';
 import Cookies from 'js-cookie';
 import Image from 'next/image';
 import MiddleIcon from './ui/MiddleIcon';
-import {persianNumeralToNumber} from '@/helpers/PersianToEnglish';
 import {Loader2} from 'lucide-react';
 import useDeleteCartRow from '@/service/cart/useDeleteCartRow';
 import Loading from './ui/Loading';
 import axios from 'axios';
 import {CACHE_KEY_CART} from '@/service/constants';
-import {digitsEnToFa, addCommas} from '@persian-tools/persian-tools';
+import {digitsEnToFa, addCommas, digitsFaToEn} from '@persian-tools/persian-tools';
 
 function ShoppingCard() {
   // user login or not
@@ -63,7 +62,7 @@ function ShoppingCard() {
   const {data, isLoading: dataLoading} = useGetCart();
 
   const handleIncreaseData = (quantity: string, id: number) => {
-    const numericQuantity = persianNumeralToNumber(quantity);
+    const numericQuantity = digitsFaToEn(quantity);
     const updatedCart: UpdateCart = {
       count: +numericQuantity + 1,
     };
@@ -72,7 +71,7 @@ function ShoppingCard() {
   };
 
   const handleDecreaseData = (quantity: string, id: number) => {
-    const numericQuantity = persianNumeralToNumber(quantity);
+    const numericQuantity = digitsFaToEn(quantity);
     const updatedCart: UpdateCart = {
       count: +numericQuantity - 1,
     };
