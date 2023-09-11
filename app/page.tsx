@@ -16,7 +16,7 @@ export default async function Home() {
 
   const categoryData = await getAllCategory();
   return (
-    <main className='                                    flex-col'>
+    <main className='flex-col pt-1 md:pt-0'>
       <SliderImage images={images} />
       <CategoryList data={categoryData.data} />
       <OfferHero />
