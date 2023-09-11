@@ -17,7 +17,6 @@ function ShopingBasket() {
   const products = useProductStore((state) => state.products);
   const {data, isLoading} = useGetCart();
 
-  if (isLoading) return <Loading />;
   return (
     <div>
       {products.length > 0 || (data && data.data.length > 0) ? (
