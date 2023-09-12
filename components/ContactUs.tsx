@@ -44,7 +44,7 @@ function ContactUs() {
             </div>
             <div className='card_shadow flex flex-col items-center rounded-3xl bg-white px-8 py-4'>
               <TelegramIcon />
-              <a href='https://telegram.me/TolouPakhsh/' className='text mt-3 text-center font-extrabold'>
+              <a href='https://telegram.me/toloupakhsh_iran/' className='text mt-3 text-center font-extrabold'>
                 TolouPakhsh@
               </a>
             </div>
@@ -79,7 +79,7 @@ function ContactUs() {
                 <p>(مراجعه فقط با هماهنگی)</p>
                 <div className='mt-10 flex items-center justify-center gap-4'>
                   <div className='flex h-12 w-12 items-center justify-center rounded-full bg-white'>
-                    <a href='https://www.telegram.me/TolouPakhsh/'>
+                    <a href='https://www.telegram.me/@toloupakhsh_iran/'>
                       <TelegramDesktopIcon />
                     </a>
                   </div>
