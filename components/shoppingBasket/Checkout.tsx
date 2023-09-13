@@ -77,8 +77,11 @@ function Checkout() {
 
   const offNum = off !== undefined ? digitsFaToEn(off) : 0;
   const deliveryNum = digitsFaToEn(delivery);
+  const totalPriceEnglish = digitsFaToEn(totalPrice);
 
-  const totalPriceEn = +totalPrice + +deliveryNum + +offNum;
+  console.log(totalPrice);
+
+  const totalPriceEn = +totalPriceEnglish + +deliveryNum - +offNum;
 
   //login
   const pushLogin = () => {

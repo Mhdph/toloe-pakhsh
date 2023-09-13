@@ -167,6 +167,24 @@ function ShoppingCard() {
                         <span className='mr-1 text-[10px] font-normal text-black-items opacity-60'>تومان</span>
                       </div>
                     </div>
+
+                    <div className='mt-3 items-center justify-between   md:hidden md:justify-center'>
+                      <div className='flex items-center justify-center gap-2'>
+                        <div onClick={() => handleIncreaseData(item.count, item.cartRowId)}>
+                          <MiddleIcon>
+                            <PlusIcon />
+                          </MiddleIcon>
+                        </div>
+                        <div className='numberItemBg flex h-9 w-[74px] items-center justify-center '>
+                          {isLoading ? <Loader2 className='mr-2 h-4 w-4 animate-spin' /> : digitsEnToFa(item.count)}
+                        </div>
+                        <div onClick={() => handleDecreaseData(item.count, item.cartRowId)}>
+                          <MiddleIcon>
+                            <MinusIcon />
+                          </MiddleIcon>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

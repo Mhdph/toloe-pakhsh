@@ -7,3 +7,4 @@ export const CACHE_KEY_COMMENT = ['comment'];
 export const CACHE_KEY_ORDER = ['order'];
 export const CACHE_KEY_POST = ['post'];
 export const CACHE_KEY_COMPONENT = ['component'];
+export const CACHE_KEY_SHOP = ['shop'];

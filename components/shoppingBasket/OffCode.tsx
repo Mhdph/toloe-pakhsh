@@ -21,7 +21,7 @@ function OffCode() {
         <input
           onChange={(e) => setCode(e.target.value)}
           type='text'
-          className='h-10 w-full rounded border border-solid border-gray-300 outline-none'
+          className='h-10 w-full rounded border border-solid border-gray-300 text-center text-black outline-none'
         />
         <Button
           variant='secondary'
