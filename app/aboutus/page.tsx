@@ -5,8 +5,10 @@ import Logo from '@/assets/images/Logo.png';
 import Player from '@/assets/tempImages/Video Player.png';
 import Footer from '@/components/Footer';
 import ContactUs from '@/components/ContactUs';
+import {baseUrl} from '@/lib/config';
 
 function AboutUs() {
+  const videoUrl = baseUrl + '/tizer.mp4';
   return (
     <div className=''>
       <div className='pt-[74px] md:hidden'>
@@ -22,7 +24,10 @@ function AboutUs() {
       </div>
       <div className='mt-6 px-4'>
         <div className='flex items-center justify-center'>
-          <Image src={Player} alt='video player ' className='mb-6 w-full md:w-[1276px]' />
+          <video controls className='mb-6 w-full md:h-[600px] md:w-[1276px]'>
+            <source src={videoUrl} type='video/mp4' />
+            Your browser does not support the video tag.
+          </video>
         </div>
         <div className='flex flex-col md:items-center'>
           <p className='hidden text-4xl font-semibold text-black-items md:inline  md:text-center'>درباره ما</p>
