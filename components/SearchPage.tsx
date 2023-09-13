@@ -8,11 +8,9 @@ import Card from '@/components/ui/Card';
 import {Switch} from '@/components/ui/Switch';
 import {FilterList} from '@/constant/List';
 import useProducts from '@/service/product/useProducts';
-import useSameProduct from '@/service/product/useSameProduct';
 import useProductQueryStore from '@/store/search';
 import {useParams} from 'next/navigation';
 import {useEffect, useState} from 'react';
-import ListItems from './ListItems';
 import SameProduct from './search/SameProduct';
 import Loading from './ui/Loading';
 import {PaginationList} from './ui/Pagination';
@@ -25,28 +23,41 @@ function SearchPage() {
   const gameQuery = useProductQueryStore((s) => s.productQuery);
   console.log(gameQuery);
   const searchParams = useParams();
+  console.log(searchParams);
   useEffect(() => {
     const search = decodeURIComponent(searchParams.category || '');
-    if (search) {
+    const subCategory = decodeURIComponent(searchParams.subcategory || '');
+
+    if (subCategory) {
+      setCategoryName(subCategory);
+    } else if (search) {
       setCategoryName(search);
     }
-  }, []);
+  }, [searchParams.category, searchParams.subcategory]);
 
   const handleStartChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPage(1);
+
     setStartPrice(event.target.value);
   };
   const handleEndChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPage(1);
+
     setEndPrice(event.target.value);
   };
   const handleOnSaleChange = (checked: boolean) => {
+    setPage(1);
+
     setOff(checked);
   };
   const handleOnExistChange = (checked: boolean) => {
+    setPage(1);
+
     setExist(checked);
   };
   const handleSortChange = (value: string, direction: number) => {
+    setPage(1);
     setSortName(value, sort);
-    console.log(value);
     setDirection(direction);
   };
 
@@ -180,7 +191,7 @@ function SearchPage() {
                 className='filter_bg_sidebar hidden w-[120px] items-center justify-center gap-3 rounded-xl  px-3 py-1.5 md:flex'
               >
                 <p className='text-[10px]  font-normal text-black-items'>قیمت</p>
-                <CloseIcon />s
+                <CloseIcon />
               </div>
             ) : null}
           </div>
