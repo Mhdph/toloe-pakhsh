@@ -14,6 +14,7 @@ import {useEffect, useState} from 'react';
 import SameProduct from './search/SameProduct';
 import Loading from './ui/Loading';
 import {PaginationList} from './ui/Pagination';
+import useGetCategoriesAndChilds from '@/service/category/useGetCategoriesandChilds';
 
 function SearchPage() {
   const {setEndPrice, setOff, setExist, setStartPrice, setCategoryName, setSortName, setSkip, setDirection, setBrand} =
@@ -21,9 +22,9 @@ function SearchPage() {
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState<number>(1);
   const gameQuery = useProductQueryStore((s) => s.productQuery);
-  console.log(gameQuery);
   const searchParams = useParams();
-  console.log(searchParams);
+  const {data: categoryData} = useGetCategoriesAndChilds();
+
   useEffect(() => {
     const search = decodeURIComponent(searchParams.category || '');
     const subCategory = decodeURIComponent(searchParams.subcategory || '');
@@ -31,7 +32,13 @@ function SearchPage() {
     if (subCategory) {
       setCategoryName(subCategory);
     } else if (search) {
-      setCategoryName(search);
+      const matchingData = categoryData?.data.find((item) => item.englishName === search);
+      if (matchingData) {
+        setCategoryName(matchingData.name);
+      } else {
+        // Handle the case where no matching data is found
+        setCategoryName(search);
+      }
     }
   }, [searchParams.category, searchParams.subcategory]);
 
