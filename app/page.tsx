@@ -12,12 +12,11 @@ import {getAllOffProduct, getAllProduct} from '@/service/product';
 export default async function Home() {
   const data = await getAllProduct();
   const dataOff = await getAllOffProduct();
-  const images = ['https://tolouapi.iran.liara.run/Ajil.png', 'https://tolouapi.iran.liara.run/Property1=Variant4.png'];
 
   const categoryData = await getAllCategory();
   return (
     <main className='flex-col pt-1 md:pt-0'>
-      <SliderImage images={images} />
+      <SliderImage />
       <CategoryList data={categoryData.data} />
       <OfferHero />
       <ListItems data={data.data} link='' title='آخرین محصولات' />

@@ -4,13 +4,17 @@ import React, {useEffect, useState} from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-interface SliderProps {
-  images: string[];
-}
+import APIClient from '@/service/api-client';
+import {CACHE_KEY_COMPONENT} from '@/service/constants';
+import {useQuery} from '@tanstack/react-query';
+import {baseUrl} from '@/lib/config';
+import {useRouter} from 'next/navigation';
+interface SliderProps {}
+const apiClient = new APIClient<ComponentSetting>('/component-front');
 
-const SliderImage: React.FC<SliderProps> = ({images}) => {
+const SliderImage: React.FC<SliderProps> = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-
+  const [images, setImages] = useState<string[]>([]);
   const settings = {
     infinite: true,
     speed: 500,
@@ -20,7 +24,7 @@ const SliderImage: React.FC<SliderProps> = ({images}) => {
     autoplaySpeed: 2000, // Set autoplay speed in milliseconds
     beforeChange: (oldIndex: any, newIndex: any) => setCurrentSlide(newIndex), // Handle slide change
   };
-
+  const router = useRouter();
   useEffect(() => {
     (function () {
       var i = 'Bmul43',
@@ -47,12 +51,23 @@ const SliderImage: React.FC<SliderProps> = ({images}) => {
     })();
   }, []); // Ensure the useEffect runs only once (on mount)
 
+  const useComponents = () =>
+    useQuery({
+      queryKey: CACHE_KEY_COMPONENT,
+      queryFn: apiClient.getAll,
+      onSuccess: (data) => {
+        setImages(data.data.map((item) => baseUrl + item.picture));
+      },
+    });
+
+  const {data} = useComponents();
+
   return (
     <div className='mt-20 md:mt-0 2xl:px-10' style={{maxWidth: '100%', overflowX: 'hidden'}}>
       <Slider {...settings}>
-        {images.map((image, index) => (
-          <div key={index}>
-            <img src={image} className='md:w-[1276px] 2xl:w-full' alt={`Slide ${index}`} />
+        {data?.data.map((image, index) => (
+          <div onClick={() => router.push(image.url)} key={index} className='cursor-pointer'>
+            <img src={baseUrl + image.picture} className='md:w-[1276px] 2xl:w-full' alt={`Slide ${index}`} />
           </div>
         ))}
       </Slider>
