@@ -21,11 +21,14 @@ interface EditCategoriesProps {
 export interface UpdateCategory {
   name: string;
   picture?: string;
+  englishName: string;
 }
 
 export function EditCategories({id, showModal, closeModal}: EditCategoriesProps) {
   const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
   const [name, setName] = React.useState('');
+  const [englishName, setenglishName] = React.useState('');
+
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     setSelectedFile(file || null);
@@ -53,6 +56,7 @@ export function EditCategories({id, showModal, closeModal}: EditCategoriesProps)
     if (selectedFile === null) {
       const updateCat: UpdateCategory = {
         name,
+        englishName,
       };
       mutate({
         id,
@@ -62,6 +66,7 @@ export function EditCategories({id, showModal, closeModal}: EditCategoriesProps)
       const updateCat: UpdateCategory = {
         picture: Cookies.get('picture')!,
         name,
+        englishName,
       };
       mutate({
         id,
@@ -109,6 +114,12 @@ export function EditCategories({id, showModal, closeModal}: EditCategoriesProps)
                 نام دسته بندی
               </Label>
               <Input id='name' onChange={(e) => setName(e.target.value)} className='col-span-3' />
+            </div>
+            <div className='flex flex-col gap-2'>
+              <Label htmlFor='name' className='text-right'>
+                نام انگلیسی دسته بندی
+              </Label>
+              <Input id='name' onChange={(e) => setenglishName(e.target.value)} className='col-span-3' />
             </div>
           </div>
           <div className='flex items-center gap-2'>

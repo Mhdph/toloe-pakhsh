@@ -6,6 +6,7 @@ import {toast} from 'react-hot-toast';
 export interface UpdateCategory {
   name: string;
   picture?: string;
+  englishName: string;
 }
 
 const apiClient = new APIClient<UpdateCategory>('/category/update');
