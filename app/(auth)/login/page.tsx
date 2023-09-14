@@ -36,17 +36,17 @@ function Login() {
     resolver: zodResolver(formSchema),
   });
 
-  const onSubmit: SubmitHandler<FormSchemaType> = (data) => {
+  const onSubmit: SubmitHandler<FormSchemaType> = async (data) => {
     setIsLoading(true);
     const phone = digitsFaToEn(data.phone);
     try {
-      axios.post(`${baseUrl}/one-code/add`, {phone});
+      await axios.post(`${baseUrl}/one-code/add`, {phone});
       Cookies.set('phoneNumber', phone);
       router.push('/confirm-code');
-      setIsLoading(false);
     } catch (error) {
       toast.error('مشکلی پیش امده دوباره امتحان کنید');
-      setIsLoading(false);
+    } finally {
+      setIsLoading(false); // Make sure to set isLoading to false, even if there's an error
     }
   };
   return (
