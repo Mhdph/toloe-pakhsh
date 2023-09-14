@@ -12,6 +12,8 @@ function ProfilePageList() {
 
   const logOut = () => {
     Cookies.remove('token');
+    Cookies.remove('userId');
+    Cookies.remove('phoneNumber');
     router.push('/login');
   };
 
@@ -28,7 +30,7 @@ function ProfilePageList() {
           <hr className='my-4 border border-solid border-[#F6602D] opacity-50' />
         </div>
       ))}
-      <div onClick={() => logOut()} className='flex items-center justify-between px-3'>
+      <div onClick={() => logOut()} className='flex cursor-pointer items-center justify-between px-3'>
         <p className='text-base font-semibold text-black-items'>خروج </p>
         <ArrowOrangeIcon />
       </div>

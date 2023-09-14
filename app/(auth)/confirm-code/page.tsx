@@ -38,7 +38,6 @@ function ConfirmCode() {
       Cookies.set('token', data.token);
       Cookies.set('token', data.token);
       const decoded: token = jwt_decode(data.token);
-      localStorage.setItem('token', data.token);
       Cookies.set('userId', decoded.userId);
       if (products.length > 0) {
         try {
