@@ -34,7 +34,8 @@ const formDataSchema = z.object({
       key: z.string(),
       value: z.string(),
     })
-    .array(),
+    .array()
+    .optional(),
 });
 
 const defaultValues = {
@@ -124,6 +125,8 @@ function SingleProduct() {
     mutate({id: newId, data: updatedCart});
   };
 
+  console.log(errors);
+
   return (
     <div className='py-4'>
       <form className='flex flex-col gap-2' onSubmit={handleSubmit(onSubmit)}>
@@ -156,32 +159,32 @@ function SingleProduct() {
         <div>
           <Label>نام:</Label>
           <Input type='text' {...register('name', {required: true})} />
-          {errors.name && <p>This field is required</p>}
+          {errors.name && <p>این فیلد الزامی است</p>}
         </div>
         <div>
           <Label>توضیحات:</Label>
           <Input type='text' {...register('description', {required: true})} />
-          {errors.description && <p>This field is required</p>}
+          {errors.description && <p>این فیلد الزامی است</p>}
         </div>
         <div>
           <Label>واحد:</Label>
           <Input type='text' {...register('unit', {required: true})} />
-          {errors.unit && <p>This field is required</p>}
+          {errors.unit && <p>این فیلد الزامی است</p>}
         </div>
         <div>
           <Label>تعداد واحد:</Label>
           <Input type='number' {...register('unitCount', {required: true})} />
-          {errors.unitCount && <p>This field is required</p>}
+          {errors.unitCount && <p>این فیلد الزامی است</p>}
         </div>
         <div>
           <Label>قیمت:</Label>
           <Input type='number' {...register('price', {required: true})} />
-          {errors.price && <p>This field is required</p>}
+          {errors.price && <p>این فیلد الزامی است</p>}
         </div>
         <div>
           <Label>برند:</Label>
           <Input type='text' {...register('brand', {required: true})} />
-          {errors.brand && <p>This field is required</p>}
+          {errors.brand && <p>این فیلد الزامی است</p>}
         </div>
         <div className='flex flex-col gap-1'>
           <Label>دسته بندی:</Label>
@@ -195,7 +198,7 @@ function SingleProduct() {
               </option>
             ))}
           </select>
-          {errors.categoryId && <p>This field is required</p>}
+          {errors.categoryId && <p>این فیلد الزامی است</p>}
         </div>
         <Label> توضیحات:</Label>
 
@@ -216,6 +219,8 @@ function SingleProduct() {
             </div>
           );
         })}
+        {errors.properties && <p>این فیلد الزامی است</p>}
+
         <Button variant='outline' type='button' onClick={() => append(defaultValues.properties[0])}>
           <Plus />
           اضافه کردن
