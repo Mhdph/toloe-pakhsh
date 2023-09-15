@@ -7,7 +7,7 @@ import {useSearchParams} from 'next/navigation';
 function Payment() {
   const [data, setData] = React.useState<any>('');
   const searchParams = useSearchParams();
-  const authority = searchParams.get('authority');
+  const authority = searchParams.get('Authority');
   console.log(authority);
   const check = () => {
     const res = axios.get(`${baseUrl}/pay/check?authority=${authority}`);

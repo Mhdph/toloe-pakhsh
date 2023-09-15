@@ -72,11 +72,16 @@ function ShoppingCard() {
 
   const handleDecreaseData = (quantity: string, id: number) => {
     const numericQuantity = digitsFaToEn(quantity);
-    const updatedCart: UpdateCart = {
-      count: +numericQuantity - 1,
-    };
 
-    mutate({id, data: updatedCart});
+    if (+numericQuantity > 1) {
+      const updatedCart: UpdateCart = {
+        count: +numericQuantity - 1,
+      };
+
+      mutate({id, data: updatedCart});
+    } else {
+      deleteRow(id);
+    }
   };
 
   const {mutate: deleteRow} = useDeleteCartRow();
