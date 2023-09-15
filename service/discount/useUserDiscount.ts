@@ -14,7 +14,9 @@ const useUserDiscount = () => {
 
   return useMutation<AddDiscount, Error, AddDiscount>((data) => apiClient.post(data), {
     onSuccess: () => {
-      queryClient.refetchQueries(CACHE_KEY_SHOP);
+      queryClient.invalidateQueries({
+        queryKey: [CACHE_KEY_SHOP],
+      });
       toast.success('تخفیف با موفقیت اعمال شد');
     },
     onError: (error) => {
