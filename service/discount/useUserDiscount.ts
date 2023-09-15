@@ -1,8 +1,7 @@
 import {useMutation, useQueryClient} from '@tanstack/react-query';
-import APIClient from '../api-client';
-import {DiscountAdd, Discount} from '@/entities/discount';
-import {CACHE_KEY_CART, CACHE_KEY_DISCOUNT} from '../constants';
 import {toast} from 'react-hot-toast';
+import APIClient from '../api-client';
+import {CACHE_KEY_SHOP} from '../constants';
 
 interface AddDiscount {
   code: string;
@@ -15,7 +14,7 @@ const useUserDiscount = () => {
 
   return useMutation<AddDiscount, Error, AddDiscount>((data) => apiClient.post(data), {
     onSuccess: () => {
-      queryClient.refetchQueries(CACHE_KEY_CART);
+      queryClient.refetchQueries(CACHE_KEY_SHOP);
       toast.success('تخفیف با موفقیت اعمال شد');
     },
     onError: (error) => {
