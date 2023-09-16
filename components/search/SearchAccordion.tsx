@@ -10,11 +10,9 @@ function SearchAccordion() {
   const router = useRouter();
 
   const handleCategorySearch = (item: string) => {
-    setCategoryName(item);
     router.push(`/product-category/${item}`);
   };
   const handleSubCategorySearch = (item: string, sub: string) => {
-    setCategoryName(sub);
     router.push(`/product-category/${item}/${sub}`);
   };
   return (
