@@ -1,18 +1,10 @@
-import {MenuIcon} from '@/assets/Icons';
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/Drawer';
+'use client';
+import {Sheet, SheetClose, SheetContent, SheetFooter, SheetTrigger} from '@/components/ui/Drawer';
 import {Menu} from 'lucide-react';
-import Link from 'next/link';
+import {useRouter} from 'next/navigation';
 
 export function MobileMenu() {
+  const navigate = useRouter();
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -21,27 +13,25 @@ export function MobileMenu() {
         </div>
       </SheetTrigger>
       <SheetContent className='contact_us flex flex-col justify-center rounded-l-3xl text-center text-white'>
-        <div className='border-t border-t-gray-100 border-opacity-40'>
-          <div className='pt-3'>
-            <Link href='' className='text-center text-base font-semibold'>
-              وبلاگ
-            </Link>
-          </div>
-        </div>
-        <div className='border-y border-y-gray-100 border-opacity-40'>
-          <div className='py-3'>
-            <Link href='/aboutus' className='py-3 text-center text-base font-semibold'>
-              درباره ما
-            </Link>
-          </div>
-        </div>
-        <div className='border-b border-b-gray-100 border-opacity-40'>
-          <div className='pb-3'>
-            <Link href='' className='py-3 text-center text-base font-semibold'>
-              سیستم کسب درامد
-            </Link>
-          </div>
-        </div>
+        <SheetClose asChild className='border-t border-t-gray-100 border-opacity-40'>
+          <button onClick={() => navigate.push('/')} className='py-3 text-center text-base font-semibold' type='submit'>
+            وبلاگ
+          </button>
+        </SheetClose>
+        <SheetClose asChild className='border-y border-y-gray-100 border-opacity-40'>
+          <button
+            onClick={() => navigate.push('/aboutus')}
+            className='py-3  text-center text-base font-semibold'
+            type='submit'
+          >
+            درباره ما
+          </button>
+        </SheetClose>
+        <SheetClose asChild className='border-b border-b-gray-100 border-opacity-40'>
+          <button onClick={() => navigate.push('/')} className='py-3 text-center text-base font-semibold' type='submit'>
+            سیستم کسب درامد
+          </button>
+        </SheetClose>
         <SheetFooter></SheetFooter>
       </SheetContent>
     </Sheet>
