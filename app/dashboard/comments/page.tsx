@@ -55,9 +55,14 @@ function Comments() {
               <ReactStars count={item.star} value={item.star} size={20} color2={'#F34834'} />
             </div>
             <p className='text-sm font-normal'>{item.text}</p>
+
             <div className='flex justify-end'>
               <p>{item.faDate}</p>
             </div>
+            <hr className='border border-gray-500' />
+            {item.replay !== '' ? <p className='text-lg font-semibold text-red-500'>پاسخ ادمین</p> : null}
+
+            <p className='text-sm font-normal'>{item.replay}</p>
           </div>
           <div className='col-span-2 flex flex-col items-center justify-center gap-2 border-x border-x-main-red border-opacity-40 text-center'>
             <img src={baseUrl + item.productPicture} className='h-20 w-20' alt='' />
