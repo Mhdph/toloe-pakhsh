@@ -24,7 +24,7 @@ export interface AddProduct {
   brand: string;
   exist: boolean;
   description: string;
-  properties: Property[];
+  properties?: Property[];
   categoryId: number;
 }
 export interface Property {

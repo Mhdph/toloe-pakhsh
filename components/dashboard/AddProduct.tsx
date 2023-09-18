@@ -33,7 +33,8 @@ export const formDataSchema = z.object({
       key: z.string(),
       value: z.string(),
     })
-    .array(),
+    .array()
+    .optional(),
 });
 
 const defaultValues = {
@@ -172,7 +173,7 @@ function AddProduct() {
         </select>
         {errors.categoryId && <p>This field is required</p>}
       </div>
-      <Label> توضیحات:</Label>
+      <Label> ویژگی:</Label>
 
       {fields.map((field, index) => {
         return (

@@ -96,7 +96,7 @@ function SingleProduct() {
       onSuccess(data) {
         setValue('brand', data.brand);
         setValue('description', data.description);
-        setValue('properties', data.properties);
+        setValue('properties', data.properties !== null ? data.properties : []);
 
         setValue('unitCount', data.unitCount);
         setValue('name', data.name);
@@ -200,7 +200,7 @@ function SingleProduct() {
           </select>
           {errors.categoryId && <p>این فیلد الزامی است</p>}
         </div>
-        <Label> توضیحات:</Label>
+        <Label> ویژگی:</Label>
 
         {fields.map((field, index) => {
           return (
