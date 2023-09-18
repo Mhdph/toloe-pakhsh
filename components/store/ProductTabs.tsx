@@ -31,12 +31,14 @@ function ProductTabs() {
           <TabsTrigger value='product details'>مشخصات محصول</TabsTrigger>
         </TabsList>
         <TabsContent className='justify-start md:flex md:flex-row md:justify-between' value='product details'>
-          {/* {data.properties.map((item: any, index: any) => (
-            <div key={index} className='flex items-center justify-between md:flex-col-reverse'>
-              <p className='text-xs font-normal text-black-items opacity-60 md:text-sm'>{item.value} توضیحات</p>
-              <p className='text-base md:text-xl'>{item.key}: عنوان</p>
-            </div>
-          ))} */}
+          {data.properties !== null
+            ? data.properties.map((item: any, index: any) => (
+                <div key={index} className='flex items-center justify-between md:flex-col-reverse'>
+                  <p className='text-xs font-normal text-black-items opacity-60 md:text-sm'>{item.value} توضیحات</p>
+                  <p className='text-base md:text-xl'>{item.key}: عنوان</p>
+                </div>
+              ))
+            : null}
           <hr className='my-2' />
         </TabsContent>
         <TabsContent value='comment'>
