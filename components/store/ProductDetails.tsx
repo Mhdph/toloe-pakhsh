@@ -16,6 +16,7 @@ import ReactStars from 'react-stars';
 import axios from 'axios';
 import {useQuery} from '@tanstack/react-query';
 import {addCommas, digitsEnToFa} from '@persian-tools/persian-tools';
+import {toast} from 'react-hot-toast';
 
 function ProductDetails() {
   const [count, setCount] = useState(1);
@@ -54,6 +55,7 @@ function ProductDetails() {
       picture: data?.picture ?? 'default-picture.jpg',
     };
     addProduct(product);
+    toast.success('محصول با موفقیت به سبد اضافه شد');
   };
   const addCardRow = () => {
     mutate({
@@ -72,7 +74,9 @@ function ProductDetails() {
     setCount((count) => count + 1);
   };
   const decreaseCount = () => {
-    setCount((count) => count - 1);
+    if (count > 1) {
+      setCount((count) => count - 1);
+    }
   };
 
   if (loading) return <Loading />;
