@@ -1,16 +1,15 @@
 'use client';
-import {UpDownIcon} from '@/assets/Icons';
+import {CloseWhiteIcon, UpDownIcon} from '@/assets/Icons';
 import SearchBarSvg from '@/assets/svg/SearchBarSvg';
-import SearchPopOver from './search/SearchPopOver';
-import React, {Fragment} from 'react';
-import axios from 'axios';
-import {baseUrl} from '@/lib/config';
-import useDebounce from '@/hooks/useDebounce';
-import {Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList} from '@/components/ui/Command';
 import {Product} from '@/entities/product';
-import {useRouter} from 'next/navigation';
-import Link from 'next/link';
+import useDebounce from '@/hooks/useDebounce';
+import {baseUrl} from '@/lib/config';
+import useProductQueryStore from '@/store/search';
 import {Combobox, Transition} from '@headlessui/react';
+import axios from 'axios';
+import Link from 'next/link';
+import React, {Fragment} from 'react';
+import SearchPopOver from './search/SearchPopOver';
 interface SearchBarProps {
   count: number | undefined;
 }
@@ -18,7 +17,9 @@ interface SearchBarProps {
 function SearchBar({count}: SearchBarProps) {
   const [data, setData] = React.useState([]);
   const [name, setName] = React.useState('');
-  const router = useRouter();
+  const gameQuery = useProductQueryStore((s) => s.productQuery);
+  const {setEndPrice, setOff, setExist, setStartPrice, setCategoryName, setSortName, setSkip, setDirection, setBrand} =
+    useProductQueryStore();
   const debouncedValue = useDebounce(name, 3000);
   const getProduct = async () => {
     try {
@@ -34,7 +35,7 @@ function SearchBar({count}: SearchBarProps) {
   }, [debouncedValue]);
   return (
     <div className='pt-16 md:hidden'>
-      <div className='serach_bar h-[142px] w-full rounded-b-3xl px-4'>
+      <div className='serach_bar h-[162px] w-full rounded-b-3xl px-4'>
         <div className='relative w-full pt-4'>
           <Combobox>
             <div className='relative mt-1'>
@@ -105,11 +106,69 @@ function SearchBar({count}: SearchBarProps) {
             <UpDownIcon />
           </div>
         </div>
-        {/* <hr className='mb-2 mt-3   opacity-25' />
-        <div className='filter_background flex w-[90px] items-center gap-2  rounded-xl px-2 py-1'>
+        <hr className='mb-2 mt-3   opacity-25' />
+        {/* <div className='filter_background flex w-[90px] items-center gap-2  rounded-xl px-2 py-1'>
           <p className='text-[10px]  font-normal text-white'>موجود در انبار</p>
           <CloseWhiteIcon />
         </div> */}
+
+        <div className='flex items-center gap-2'>
+          {gameQuery.categoryName !== undefined && gameQuery.categoryName !== '' ? (
+            <div
+              onClick={() => setCategoryName('')}
+              className='filter_background flex w-[90px] items-center gap-2  rounded-xl px-2 py-1'
+            >
+              <p className='text-[10px]  font-normal text-white'> {gameQuery.categoryName}</p>
+              <CloseWhiteIcon />
+            </div>
+          ) : null}
+
+          {gameQuery.brand !== undefined && gameQuery.brand !== '' ? (
+            <div
+              onClick={() => setBrand('')}
+              className='filter_background flex w-[90px] items-center gap-2  rounded-xl px-2 py-1'
+            >
+              <p className='text-[10px]  font-normal text-white'> {gameQuery.brand}</p>
+              <CloseWhiteIcon />
+            </div>
+          ) : null}
+          {gameQuery.exist ? (
+            <div
+              onClick={() => setExist(false)}
+              className='filter_background flex w-[90px] items-center gap-2  rounded-xl px-2 py-1'
+            >
+              <p className='text-[10px]  font-normal text-white'> موجود در انبار</p>
+              <CloseWhiteIcon />
+            </div>
+          ) : null}
+          {gameQuery.off ? (
+            <div
+              onClick={() => setOff(false)}
+              className='filter_background flex w-[90px] items-center gap-2  rounded-xl px-2 py-1'
+            >
+              <p className='text-[10px]  font-normal text-white'>دارای تخفیف</p>
+              <CloseWhiteIcon />
+            </div>
+          ) : null}
+          {gameQuery.startPrice !== undefined && gameQuery.startPrice !== '' ? (
+            <div
+              onClick={() => setStartPrice('')}
+              className='filter_background flex w-[90px] items-center gap-2  rounded-xl px-2 py-1'
+            >
+              <p className='text-[10px]  font-normal text-white'>قیمت ابتدایی</p>
+              <CloseWhiteIcon />
+            </div>
+          ) : null}
+          {gameQuery.startPrice !== undefined && gameQuery.startPrice !== '' ? (
+            <div
+              onClick={() => setEndPrice('')}
+              className='filter_background flex w-[90px] items-center gap-2  rounded-xl px-2 py-1'
+            >
+              <p className='text-[10px]  font-normal text-white'>قیمت نهایی</p>
+              <CloseWhiteIcon />
+            </div>
+          ) : null}
+        </div>
       </div>
     </div>
   );
