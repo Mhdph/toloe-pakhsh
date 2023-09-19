@@ -20,6 +20,7 @@ import OrdersItem from './OrdersItem';
 import Loading from '../ui/Loading';
 import React from 'react';
 import {PaginationList} from '../ui/Pagination';
+import {digitsEnToFa} from '@persian-tools/persian-tools';
 type UpdateOrderSchema = z.infer<typeof UpdateOrderSchema>;
 
 type Color = 'primary' | 'delivered' | 'canceled' | 'returned';
@@ -79,7 +80,7 @@ function OrdersCard({color = 'primary', state = '', label = '', className, ...re
             <div className='flex items-center justify-between'>
               <p>{item.FaDate}</p>
               <div className='flex items-center gap-1'>
-                <p>{item.payId}</p>
+                <p>{item.codeCart}</p>
                 <p>:کد سفارش</p>
               </div>
               <Badge className={classes}>{label}</Badge>
@@ -112,7 +113,10 @@ function OrdersCard({color = 'primary', state = '', label = '', className, ...re
             <hr className='my-4 border-b border-b-black-items border-opacity-10' />
             <Accordion type='multiple'>
               <AccordionItem className='border-none' value='item-1'>
-                <AccordionTrigger> تومان {item.sumPrice}</AccordionTrigger>
+                <AccordionTrigger>
+                  {/* <p className='text-xs text-black-items md:text-sm'>تومان</p> */}
+                  <p className='text-xs font-black md:text-sm'>تومان {digitsEnToFa(+item.sumPrice - +item.sumOff)}</p>
+                </AccordionTrigger>
                 <AccordionContent>
                   <OrdersItem data={item} />
                 </AccordionContent>

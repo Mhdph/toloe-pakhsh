@@ -2,6 +2,7 @@
 import {StarIcon} from '@/assets/Icons';
 import {CartRow} from '@/entities/Cart';
 import {baseUrl} from '@/lib/config';
+import {digitsEnToFa, digitsFaToEn} from '@persian-tools/persian-tools';
 
 function OrdersItem({data}: any) {
   return (
@@ -35,7 +36,7 @@ function OrdersItem({data}: any) {
               <div className='flex items-center justify-between text-[#F6622C]'>
                 <div className='flex items-center'>
                   <span className='mr-1 text-[10px] font-normal text-black-items opacity-60'>تومان</span>
-                  <p className='text-base font-black'>{data.sumRow}</p>
+                  <p className='text-base font-black'>{digitsEnToFa(+digitsFaToEn(data.sumRow) - +data.sumRowOff)}</p>
                 </div>
                 <p className='text-xs'>:جمع خرید</p>
               </div>
