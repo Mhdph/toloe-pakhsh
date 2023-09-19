@@ -72,8 +72,9 @@ function SearchPage() {
     setPage(page);
     setSkip(page * 10);
   };
-  const {data, isLoading} = useProducts();
 
+  const {data, isLoading} = useProducts();
+  console.log(gameQuery.startPrice);
   return (
     <div>
       <SearchBar count={data?.count} />
@@ -192,12 +193,21 @@ function SearchPage() {
                 <CloseIcon />
               </div>
             ) : null}
-            {gameQuery.startPrice !== undefined || gameQuery.endPrice !== undefined ? (
+            {gameQuery.startPrice !== undefined && gameQuery.startPrice !== '' ? (
+              <div
+                onClick={() => setStartPrice('')}
+                className='filter_bg_sidebar hidden w-[120px] cursor-pointer items-center justify-center gap-3 rounded-xl  px-3 py-1.5 md:flex'
+              >
+                <p className='text-[10px]  font-normal text-black-items'>قیمت ابتدایی</p>
+                <CloseIcon />
+              </div>
+            ) : null}
+            {gameQuery.startPrice !== undefined && gameQuery.startPrice !== '' ? (
               <div
                 onClick={() => setEndPrice('')}
-                className='filter_bg_sidebar hidden w-[120px] items-center justify-center gap-3 rounded-xl  px-3 py-1.5 md:flex'
+                className='filter_bg_sidebar hidden w-[120px] cursor-pointer items-center justify-center gap-3 rounded-xl  px-3 py-1.5 md:flex'
               >
-                <p className='text-[10px]  font-normal text-black-items'>قیمت</p>
+                <p className='text-[10px]  font-normal text-black-items'>قیمت نهایی</p>
                 <CloseIcon />
               </div>
             ) : null}
