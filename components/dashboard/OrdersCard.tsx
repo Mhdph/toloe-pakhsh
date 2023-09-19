@@ -30,9 +30,10 @@ interface Props {
   className?: string;
   state: string;
   label: string;
+  keyWord: string;
 }
 
-function OrdersCard({color = 'primary', state = '', label = '', className, ...rest}: Props) {
+function OrdersCard({color = 'primary', keyWord, state = '', label = '', className, ...rest}: Props) {
   const id = '123';
   const [page, setPage] = React.useState(1);
   const {mutate} = useUpdateOrder(id);
@@ -54,7 +55,7 @@ function OrdersCard({color = 'primary', state = '', label = '', className, ...re
   const classes = `text-black ${bgColor} ${className}`;
   const token = Cookies.get('token');
   const getHistoryUSerCardFn = async () => {
-    const response = await axios.get(`${baseUrl}/cart/listOrderCarts?state=${state}&page=${page}`, {
+    const response = await axios.get(`${baseUrl}/cart/listOrderCarts?state=${state}&page=${page}&codeCart=${keyWord}`, {
       headers: {
         authorization: 'Bearer ' + `${token}`,
       },
@@ -80,7 +81,7 @@ function OrdersCard({color = 'primary', state = '', label = '', className, ...re
             <div className='flex items-center justify-between'>
               <p>{item.FaDate}</p>
               <div className='flex items-center gap-1'>
-                <p>{item.codeCart}</p>
+                <p>{digitsEnToFa(item.codeCart)}</p>
                 <p>:کد سفارش</p>
               </div>
               <Badge className={classes}>{label}</Badge>

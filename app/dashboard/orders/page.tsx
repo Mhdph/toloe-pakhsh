@@ -1,9 +1,14 @@
+'use client';
 import SearchBarSvg from '@/assets/svg/SearchBarSvg';
 import React from 'react';
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/Tabs';
 import OrdersCard from '@/components/dashboard/OrdersCard';
+import useDebounce from '@/hooks/useDebounce';
 
-function page() {
+function Order() {
+  const [keyWord, setKeyWord] = React.useState('');
+  const debouncedKeyWord = useDebounce(keyWord, 3000);
+
   return (
     <div className='mt-4'>
       <div className='flex items-center gap-3'>
@@ -13,14 +18,12 @@ function page() {
             id='voice-search'
             className='w-full rounded-[18px] bg-gray-200 py-1.5 pr-10 outline-none'
             placeholder='کد سفارش'
+            onChange={(e) => setKeyWord(e.target.value)}
           />
           <div className='pointer-events-none absolute inset-y-0  right-0 flex items-center pr-3'>
             <SearchBarSvg />
           </div>
         </div>
-        <button className='bg_primary w-40 rounded-3xl py-2.5 text-xs font-extrabold text-white md:w-48'>
-          جست و جو
-        </button>
       </div>
       <Tabs defaultValue='sending' className='mt-4'>
         <TabsList className=' flex justify-between gap-2 border-t border-main-red border-opacity-70'>
@@ -38,19 +41,19 @@ function page() {
         </TabsList>
 
         <TabsContent value='sending'>
-          <OrdersCard color='delivered' label='در حال ارسال' state='sending' />
+          <OrdersCard keyWord={debouncedKeyWord} color='delivered' label='در حال ارسال' state='sending' />
           <hr className='my-2 md:hidden' />
         </TabsContent>
         <TabsContent value='Posted'>
-          <OrdersCard color='delivered' label='تحویل شده' state='delivered' />
+          <OrdersCard keyWord={debouncedKeyWord} color='delivered' label='تحویل شده' state='delivered' />
           <hr className='my-2 md:hidden' />
         </TabsContent>
         <TabsContent value='canceled'>
-          <OrdersCard color='canceled' label='کنسل شده' state='canceled' />
+          <OrdersCard keyWord={debouncedKeyWord} color='canceled' label='کنسل شده' state='canceled' />
           <hr className='my-2 md:hidden' />
         </TabsContent>
         <TabsContent value='returned'>
-          <OrdersCard color='returned' label='مرجوع شده' state='returned' />
+          <OrdersCard keyWord={debouncedKeyWord} color='returned' label='مرجوع شده' state='returned' />
           <hr className='my-2 md:hidden' />
         </TabsContent>
       </Tabs>
@@ -58,4 +61,4 @@ function page() {
   );
 }
 
-export default page;
+export default Order;
