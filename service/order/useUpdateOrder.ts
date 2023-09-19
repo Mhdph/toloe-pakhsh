@@ -3,7 +3,7 @@ import APIClient from '../api-client';
 import {CACHE_KEY_CATEGORY} from '../constants';
 import {toast} from 'react-hot-toast';
 
-const apiClient = new APIClient<UpdateOrder>('/cart-row/update');
+const apiClient = new APIClient<UpdateOrder>('/cart/update');
 
 const useUpdateOrder = (id: string) => {
   const queryClient = useQueryClient();
