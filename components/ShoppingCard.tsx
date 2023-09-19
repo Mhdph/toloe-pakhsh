@@ -114,7 +114,7 @@ function ShoppingCard() {
                   <div className='relative'>
                     {item.productOff !== 0 ? (
                       <div className='absolute left-2 top-6 flex h-9 w-9 items-center justify-center rounded-full bg-red-500 p-2 text-sm font-extrabold  text-white'>
-                        {digitsEnToFa(item.productOff / 100)}%
+                        {digitsEnToFa((100 * item.productOff) / item.price)}%
                       </div>
                     ) : null}
                     <div className='flex h-[184px] w-[140px] items-center justify-center '>
@@ -207,7 +207,16 @@ function ShoppingCard() {
                 <div onClick={() => removeProduct(item.id)} className='absolute right-4 top-4 cursor-pointer md:top-6'>
                   <CloseIcon />
                 </div>
-                <img src={baseUrl + item.picture} alt='product image' className=' h-[140px] w-[100px] md:pr-2' />
+                <div className='relative'>
+                  {item.off !== 0 ? (
+                    <div className='absolute left-2 top-6 flex h-9 w-9 items-center justify-center rounded-full bg-red-500 p-2 text-sm font-extrabold  text-white'>
+                      {digitsEnToFa(item.off)}%
+                    </div>
+                  ) : null}
+                  <div className='flex h-[184px] w-[140px] items-center justify-center '>
+                    <img src={baseUrl + item.picture} alt='product image' className=' h-[140px] w-[100px] md:pr-2' />
+                  </div>
+                </div>
               </div>
               <div className='h-full flex-1 px-2 pt-6 md:grid md:grid-cols-2 md:pt-0'>
                 <div className='border-l-black-items border-opacity-10  md:flex md:flex-col md:gap-y-3 md:border-l md:py-4 md:pl-3'>

@@ -36,6 +36,7 @@ export interface ProductProps {
   unitCount: string;
   price: number;
   picture: string;
+  off: number;
 }
 function ListCard({data: {brand, picture, name, unitCount, unit, price, id, off, FaPrice, star}}: dataItem) {
   const addProduct = useProductStore((state) => state.addProduct);
@@ -53,6 +54,7 @@ function ListCard({data: {brand, picture, name, unitCount, unit, price, id, off,
       brand,
       price,
       picture,
+      off,
     };
     toast.success('محصول به سبد اضافه شد');
     addProduct(product);

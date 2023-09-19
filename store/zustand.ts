@@ -11,6 +11,7 @@ interface Product {
   price: number;
   picture: string;
   totalPrice?: number; // Add totalPrice property to the Product type
+  off: number;
 }
 
 interface ProductStore {
