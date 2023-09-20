@@ -52,6 +52,7 @@ function ProductDetails() {
       unitCount: data?.unitCount ?? '0',
       brand: data?.brand ?? 'Default Brand',
       price: data?.price ?? 0,
+      off: data?.off ?? 0,
       picture: data?.picture ?? 'default-picture.jpg',
     };
     addProduct(product);
