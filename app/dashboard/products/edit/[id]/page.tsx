@@ -4,9 +4,11 @@ import {Input} from '@/components/ui/Input';
 import {Product} from '@/entities/product';
 import {baseUrl} from '@/lib/config';
 import APIClient from '@/service/api-client';
+import useGetCategories from '@/service/category/useGetCategories';
 import useGetCategoriesAndChilds from '@/service/category/useGetCategoriesandChilds';
 import {CACHE_KEY_PRODUCT} from '@/service/constants';
 import useUpdateProduct from '@/service/product/useUpdateProduct';
+import useCategoryStore from '@/store/category';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {Label} from '@radix-ui/react-label';
 import {useQuery} from '@tanstack/react-query';
@@ -52,7 +54,14 @@ type formDataSchema = z.infer<typeof formDataSchema>;
 function SingleProduct() {
   const {id} = useParams();
   const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
-  const {data: categortData} = useGetCategoriesAndChilds();
+
+  const {setTake} = useCategoryStore();
+
+  React.useEffect(() => {
+    setTake(100);
+  }, []);
+
+  const {data: categortData} = useGetCategories();
   const newId = +id;
   const {
     register,

@@ -14,6 +14,8 @@ import axios from 'axios';
 import {baseUrl} from '@/lib/config';
 import {toast} from 'react-hot-toast';
 import useGetCategoriesAndChilds from '@/service/category/useGetCategoriesandChilds';
+import useGetCategories from '@/service/category/useGetCategories';
+import useCategoryStore from '@/store/category';
 
 export const propertySchema = z.object({
   key: z.string(),
@@ -50,7 +52,12 @@ type formDataSchema = z.infer<typeof formDataSchema>;
 
 function AddProduct() {
   const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
-  const {data} = useGetCategoriesAndChilds();
+  const {setTake} = useCategoryStore();
+
+  React.useEffect(() => {
+    setTake(100);
+  }, []);
+  const {data} = useGetCategories();
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
