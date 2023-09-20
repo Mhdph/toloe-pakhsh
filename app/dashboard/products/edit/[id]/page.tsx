@@ -82,7 +82,7 @@ function SingleProduct() {
             Authorization: 'Bearer ' + token,
           },
         });
-        Cookies.set('p-picture', res.data.data.imagePath);
+        Cookies.set('u-picture', res.data.data.imagePath);
       } catch (err: any) {
         toast.error(err.message);
       }
@@ -115,7 +115,7 @@ function SingleProduct() {
       description: data.description,
       exist: true,
       name: data.name,
-      picture: Cookies.get('p-picture')!,
+      picture: selectedFile ? Cookies.get('u-picture')! : Cookies.get('p-picture')!,
       price: +data.price,
       unit: data.unit,
       unitCount: data.unitCount,
