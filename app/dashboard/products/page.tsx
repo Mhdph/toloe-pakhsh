@@ -25,7 +25,7 @@ function Products() {
           <Input
             onChange={(e) => setKeyWord(e.target.value)}
             className='rounded-[18px] bg-gray-200 py-1.5 pr-10'
-            placeholder=' نام یا شماره همراه'
+            placeholder='جست و جو محصول'
           />
           <div className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 outline-none'>
             <SearchBarSvg />

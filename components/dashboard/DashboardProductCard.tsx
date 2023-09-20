@@ -2,6 +2,13 @@
 import React from 'react';
 import Button from '../ui/Button';
 import {useRouter} from 'next/navigation';
+import {addCommas, digitsEnToFa} from '@persian-tools/persian-tools';
+import DeleteModal from './DeleteModal';
+import axios from 'axios';
+import {baseUrl} from '@/lib/config';
+import {toast} from 'react-hot-toast';
+import {CACHE_KEY_PRODUCT} from '@/service/constants';
+import {useQueryClient} from '@tanstack/react-query';
 
 interface dataItem {
   data: {
@@ -19,9 +26,20 @@ interface dataItem {
 
 function DashboardProductCard({data: {brand, picture, name, unitCount, unit, price, id, off}}: dataItem) {
   const navigate = useRouter();
+  const queryClient = useQueryClient();
 
   const push = (id: number) => {
     navigate.push(`/dashboard/products/edit/${id}`);
+  };
+
+  const deleteProduct = (id: number) => {
+    try {
+      axios.delete(`${baseUrl}/product/delete/${id}`);
+      toast.success('محصول با موفقیت حذف شد');
+      queryClient.refetchQueries(CACHE_KEY_PRODUCT);
+    } catch (error: any) {
+      toast.error(error);
+    }
   };
 
   return (
@@ -43,12 +61,17 @@ function DashboardProductCard({data: {brand, picture, name, unitCount, unit, pri
         <div className='flex items-center justify-between'>
           <p className='text-xs text-black-items md:text-ca'>قیمت:</p>
           <div className='flex items-center'>
-            <p className='text-xs font-black md:text-ca'>{price}</p>
+            <p className='text-xs font-black md:text-ca'>{digitsEnToFa(addCommas(price))}</p>
             <span className='mr-1 text-[10px] font-normal opacity-60 md:text-xs'>تومان</span>
           </div>
         </div>
-        <div onClick={() => push(id)} className='mt-2 flex items-center gap-2 md:mt-3 md:justify-center'>
-          <Button>ویرایش</Button>
+        <div className='flex items-center gap-2'>
+          <div onClick={() => push(id)} className='mt-2 flex items-center gap-2 md:mt-3 md:justify-center'>
+            <Button>ویرایش</Button>
+          </div>
+          <div className='mt-3'>
+            <DeleteModal deleteFn={() => deleteProduct(id)} />
+          </div>
         </div>
       </div>
     </div>
