@@ -26,6 +26,7 @@ export interface Cart {
   lastName: string;
   firstName: string;
   FaDate: string;
+  faDate: string;
 }
 
 export interface CartRow {

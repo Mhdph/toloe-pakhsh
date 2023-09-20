@@ -6,6 +6,7 @@ import {useQuery} from '@tanstack/react-query';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import Loading from './Loading';
+import {digitsEnToFa} from '@persian-tools/persian-tools';
 type Color = 'primary' | 'delivered' | 'canceled' | 'returned';
 
 type Props = {
@@ -45,7 +46,7 @@ function HistoryCard({color = 'primary', state = '', label = '', className, ...r
         <div key={item.id} className='h-[152px] rounded-3xl bg-white px-4 shadow-ca md:h-[260px]'>
           <div className='flex items-center justify-between pt-2'>
             <p className={classes}> {label}</p>
-            <p className='text-[10px] font-normal tracking-wider text-black-items md:text-xs'>{item.date}</p>
+            <p className='text-[10px] font-normal tracking-wider text-black-items md:text-xs'>{item.faDate}</p>
           </div>
           <hr className=' my-2' />
           <div className='flex w-full items-center gap-2'>
@@ -56,7 +57,7 @@ function HistoryCard({color = 'primary', state = '', label = '', className, ...r
             ))}
           </div>
           <div className='flex items-center justify-between pt-2'>
-            <p className='text-xs font-normal text-black-items md:text-sm'>{item.payId}کد سفارش:</p>
+            <p className='text-xs font-normal text-black-items md:text-sm'>{digitsEnToFa(item.codeCart)}کد سفارش:</p>
             <p className='text-base font-semibold  text-black-items md:text-xl'>
               {item.sumPrice}
               <span className='mr-1 text-xs font-normal md:text-sm'>تومان</span>
