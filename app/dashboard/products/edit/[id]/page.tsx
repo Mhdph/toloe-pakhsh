@@ -31,6 +31,7 @@ const formDataSchema = z.object({
   price: z.string(),
   brand: z.string(),
   categoryId: z.string(),
+  off: z.number().optional(),
   properties: z
     .object({
       key: z.string(),
@@ -47,6 +48,7 @@ const defaultValues = {
       value: '',
     },
   ],
+  off: 0,
 };
 
 type formDataSchema = z.infer<typeof formDataSchema>;
@@ -106,7 +108,7 @@ function SingleProduct() {
         setValue('brand', data.brand);
         setValue('description', data.description);
         setValue('properties', data.properties !== null ? data.properties : []);
-
+        setValue('off', data.off);
         setValue('unitCount', data.unitCount);
         setValue('name', data.name);
         setValue('price', data.price.toString());
@@ -189,6 +191,11 @@ function SingleProduct() {
           <Label>قیمت:</Label>
           <Input type='number' {...register('price', {required: true})} />
           {errors.price && <p>این فیلد الزامی است</p>}
+        </div>
+        <div>
+          <Label>تخفیف:</Label>
+          <Input type='number' {...register('off', {required: true})} />
+          {errors.off && <p>این فیلد الزامی است</p>}
         </div>
         <div>
           <Label>برند:</Label>

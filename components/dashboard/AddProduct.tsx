@@ -29,6 +29,7 @@ export const formDataSchema = z.object({
   unitCount: z.string(),
   price: z.string(),
   brand: z.string(),
+  off: z.number().optional(),
   categoryId: z.string(),
   properties: z
     .object({
@@ -46,6 +47,7 @@ const defaultValues = {
       value: '',
     },
   ],
+  off: 0,
 };
 
 type formDataSchema = z.infer<typeof formDataSchema>;
@@ -160,6 +162,11 @@ function AddProduct() {
         <Label>قیمت:</Label>
         <Input type='number' {...register('price', {required: true})} />
         {errors.price && <p>This field is required</p>}
+      </div>
+      <div>
+        <Label>تخفیف:</Label>
+        <Input type='number' {...register('off', {required: true})} />
+        {errors.off && <p>This field is required</p>}
       </div>
       <div>
         <Label>برند:</Label>
