@@ -9,6 +9,7 @@ import {baseUrl} from '@/lib/config';
 import {toast} from 'react-hot-toast';
 import {CACHE_KEY_PRODUCT} from '@/service/constants';
 import {useQueryClient} from '@tanstack/react-query';
+import Cookies from 'js-cookie';
 
 interface dataItem {
   data: {
@@ -27,6 +28,7 @@ interface dataItem {
 function DashboardProductCard({data: {brand, picture, name, unitCount, unit, price, id, off}}: dataItem) {
   const navigate = useRouter();
   const queryClient = useQueryClient();
+  const token = Cookies.get('token');
 
   const push = (id: number) => {
     navigate.push(`/dashboard/products/edit/${id}`);
@@ -34,7 +36,11 @@ function DashboardProductCard({data: {brand, picture, name, unitCount, unit, pri
 
   const deleteProduct = (id: number) => {
     try {
-      axios.delete(`${baseUrl}/product/delete/${id}`);
+      axios.delete(`${baseUrl}/product/delete/${id}`, {
+        headers: {
+          authorization: 'Bearer ' + `${token}`,
+        },
+      });
       toast.success('محصول با موفقیت حذف شد');
       queryClient.refetchQueries(CACHE_KEY_PRODUCT);
     } catch (error: any) {
