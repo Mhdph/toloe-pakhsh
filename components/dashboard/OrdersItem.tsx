@@ -2,7 +2,8 @@
 import {StarIcon} from '@/assets/Icons';
 import {CartRow} from '@/entities/Cart';
 import {baseUrl} from '@/lib/config';
-import {digitsEnToFa, digitsFaToEn} from '@persian-tools/persian-tools';
+import {addCommas, digitsEnToFa, digitsFaToEn} from '@persian-tools/persian-tools';
+import ReactStars from 'react-stars';
 
 function OrdersItem({data}: any) {
   return (
@@ -28,7 +29,7 @@ function OrdersItem({data}: any) {
               <div className='flex  items-center justify-between'>
                 <div className='flex items-center'>
                   <span className='mr-1 text-[10px] font-normal opacity-60 md:text-xs'>تومان</span>
-                  <p className='text-xs font-black md:text-sm'>{data.price}</p>
+                  <p className='text-xs font-black md:text-sm'>{digitsEnToFa(addCommas(data.price))}</p>
                 </div>
                 <p className='text-xs text-black-items md:text-sm'>:قیمت</p>
               </div>
@@ -36,14 +37,17 @@ function OrdersItem({data}: any) {
               <div className='flex items-center justify-between text-[#F6622C]'>
                 <div className='flex items-center'>
                   <span className='mr-1 text-[10px] font-normal text-black-items opacity-60'>تومان</span>
-                  <p className='text-base font-black'>{digitsEnToFa(+digitsFaToEn(data.sumRow) - +data.sumRowOff)}</p>
+                  <p className='text-base font-black'>
+                    {digitsEnToFa(addCommas(+digitsFaToEn(data.sumRow) - +digitsFaToEn(data.sumRowOff)))}{' '}
+                  </p>
                 </div>
                 <p className='text-xs'>:جمع خرید</p>
               </div>
             </div>
             <div className='border-l-black-items border-opacity-10  md:flex md:flex-col md:gap-y-3 md:border-l md:py-4 md:pl-3'>
               <div className='flex items-center justify-between'>
-                <StarIcon />
+                {/* <ReactStars count={5} value={data.} size={20} color2={'#F34834'} /> */}
+                <div></div>
                 <p className='text-xs font-black md:text-sm'>{data.productName}</p>
               </div>
               <div className='flex items-center justify-between'>
