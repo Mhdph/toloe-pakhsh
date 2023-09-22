@@ -15,6 +15,9 @@ import SameProduct from './search/SameProduct';
 import Loading from './ui/Loading';
 import {PaginationList} from './ui/Pagination';
 import useGetCategoriesAndChilds from '@/service/category/useGetCategoriesandChilds';
+import Link from 'next/link';
+import Image from 'next/image';
+import {baseUrl} from '@/lib/config';
 
 function SearchPage() {
   const {setEndPrice, setOff, setExist, setStartPrice, setCategoryName, setSortName, setSkip, setDirection, setBrand} =
@@ -74,9 +77,49 @@ function SearchPage() {
   };
 
   const {data, isLoading} = useProducts();
-  console.log(gameQuery.startPrice);
+  console.log(gameQuery.categoryName);
   return (
     <div>
+      {gameQuery.categoryName === undefined ? (
+        <div className='mr-14 hidden flex-wrap gap-2 md:flex'>
+          {categoryData?.data?.map((item) => (
+            <div key={item.name} className='category_card h-[142px] w-[110px] '>
+              <Link href={`/product-category/${item.name}`}>
+                <Image
+                  src={baseUrl + item.picture}
+                  className='max-h-[110px] min-h-[110px] min-w-[110px] max-w-[110px] rounded-t-3xl'
+                  alt={item.name}
+                  width={88}
+                  height={88}
+                />
+                <p className='text-center text-xs font-extrabold text-black-items md:mt-3'>{item.name}</p>
+              </Link>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className='mr-14 hidden flex-wrap gap-2 md:flex'>
+          {categoryData?.data?.map((item) => {
+            if (item.name === gameQuery.categoryName) {
+              return item.chailds.map((sub) => (
+                <div key={sub.id} className='category_card h-[142px] w-[110px] '>
+                  <Link href={`/product-category/${sub.name}`}>
+                    <Image
+                      src={baseUrl + sub.picture}
+                      className='max-h-[110px] min-h-[110px] min-w-[110px] max-w-[110px] rounded-t-3xl'
+                      alt={sub.name}
+                      width={88}
+                      height={88}
+                    />
+                    <p className='text-center text-xs font-extrabold text-black-items md:mt-3'>{sub.name}</p>
+                  </Link>
+                </div>
+              ));
+            }
+            return null; // If the current item doesn't match, return null
+          })}
+        </div>
+      )}
       <SearchBar count={data?.count} />
       <div className='flex md:gap-2  md:px-10 md:pt-10 '>
         <div className='filter_bg_sidebar hidden h-[1108px] min-w-[300px] rounded-3xl bg-red-700 px-3 md:flex md:flex-col'>

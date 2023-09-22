@@ -21,6 +21,8 @@ const CategoryList: React.FC<CategoryListProps> = ({data}) => {
                 src={baseUrl + item.picture}
                 className='md:min-[196px] max-h-[110px] min-h-[110px] min-w-[110px] max-w-[110px] rounded-t-3xl md:max-h-[196px] md:min-w-[196px] md:max-w-[196px] '
                 alt={item.name}
+                width={196}
+                height={110}
               />
               <p className='mt-2 text-center text-xs font-extrabold text-black-items md:mt-3'>{item.name}</p>
             </Link>
