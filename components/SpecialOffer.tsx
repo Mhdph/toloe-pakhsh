@@ -43,7 +43,7 @@ const SpecialOffer: React.FC<SpecialOfferProps> = ({data}) => {
         <div className='w-[1030px] 2xl:w-[1100px]'>
           <div className='flex justify-center text-white md:justify-end'>
             <button className='mb-16 mt-48 h-9 w-[350px] rounded-3xl bg-white text-center text-xs font-extrabold text-[#f02d3c] md:w-[196px]'>
-              <Link href='/shop'>مشاهده محصولات</Link>
+              <Link href='/search'>مشاهده محصولات</Link>
             </button>
           </div>
         </div>
