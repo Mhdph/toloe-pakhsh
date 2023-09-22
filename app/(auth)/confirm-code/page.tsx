@@ -39,6 +39,7 @@ function ConfirmCode() {
       Cookies.set('token', data.token);
       const decoded: token = jwt_decode(data.token);
       Cookies.set('userId', decoded.userId);
+      Cookies.set('role', decoded.role);
       if (products.length > 0) {
         try {
           axios.post(`${baseUrl}/cart-row/addList/`, cartDataToSend, {

@@ -3,7 +3,7 @@ import type {NextRequest} from 'next/server';
 
 export function middleware(request: NextRequest) {
   let token = request.cookies.get('token')?.value;
-  let userRole = request.cookies.get('userRole')?.value;
+  let userRole = request.cookies.get('role')?.value;
   if (!token) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
@@ -13,6 +13,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/profile'],
+  matcher: ['/profile', '/dashboard/:path*'],
 };
-// '/dashboard/:path*';
