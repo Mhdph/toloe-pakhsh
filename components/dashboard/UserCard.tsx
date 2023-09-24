@@ -16,7 +16,8 @@ function UserCard() {
 
   const onPageChange = (page: number) => {
     setPage(page);
-    setSkip(page * 10);
+    const calculate = page - 1;
+    setSkip(calculate * 10);
   };
   return (
     <div className='flex flex-col'>

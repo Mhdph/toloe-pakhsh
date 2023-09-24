@@ -24,7 +24,8 @@ function DashboardCategories() {
 
   const onPageChange = (page: number) => {
     setPage(page);
-    setSkip(page * 10);
+    const calculate = page - 1;
+    setSkip(calculate * 10);
   };
   const {mutate} = useDeleteCategory();
   const {mutate: deleteChild} = useDeleteChildCategory();
