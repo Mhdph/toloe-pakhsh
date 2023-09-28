@@ -108,6 +108,7 @@ function AddProduct() {
       unitCount: data.unitCount,
       properties: data.properties,
       categoryId: +data.categoryId,
+      off: data.off,
     });
   };
   return (

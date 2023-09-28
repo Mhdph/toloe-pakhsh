@@ -26,6 +26,7 @@ export interface AddProduct {
   description: string;
   properties?: Property[];
   categoryId: number;
+  off?: number;
 }
 export interface Property {
   key: string;

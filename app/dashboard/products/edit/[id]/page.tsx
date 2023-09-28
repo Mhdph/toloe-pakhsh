@@ -132,6 +132,7 @@ function SingleProduct() {
       unitCount: data.unitCount,
       properties: data.properties,
       categoryId: +data.categoryId,
+      off: data.off,
     };
     mutate({id: newId, data: updatedCart});
   };
