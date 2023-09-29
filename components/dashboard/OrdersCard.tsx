@@ -1,26 +1,23 @@
 'use client';
 import {AvatarBlackIcon, PhoneBlackIcon} from '@/assets/Icons';
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from '@/components/ui/Accordion';
-import {Form, FormControl, FormField, FormItem, FormMessage} from '@/components/ui/Form';
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from '@/components/ui/Select';
 import {Cart} from '@/entities/Cart';
 import {baseUrl} from '@/lib/config';
 import useUpdateOrder from '@/service/order/useUpdateOrder';
 import {UpdateOrderSchema} from '@/validation/orders';
-import {zodResolver} from '@hookform/resolvers/zod';
+import {digitsEnToFa} from '@persian-tools/persian-tools';
 import {useQuery} from '@tanstack/react-query';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import {SubmitHandler, useForm} from 'react-hook-form';
+import React from 'react';
 import {z} from 'zod';
 import {Badge} from '../ui/Badge';
 import Button from '../ui/Button';
-import MiddleIcon from '../ui/MiddleIcon';
-import OrdersItem from './OrdersItem';
 import Loading from '../ui/Loading';
-import React from 'react';
+import MiddleIcon from '../ui/MiddleIcon';
 import {PaginationList} from '../ui/Pagination';
-import {digitsEnToFa} from '@persian-tools/persian-tools';
+import OrdersItem from './OrdersItem';
+import {Input} from '../ui/Input';
 type UpdateOrderSchema = z.infer<typeof UpdateOrderSchema>;
 
 type Color = 'primary' | 'delivered' | 'canceled' | 'returned';
@@ -34,16 +31,20 @@ interface Props {
 }
 
 function OrdersCard({color = 'primary', keyWord, state = '', label = '', className, ...rest}: Props) {
-  const id = '123';
   const [page, setPage] = React.useState(1);
-  const {mutate} = useUpdateOrder(id);
-  const form = useForm<UpdateOrderSchema>({
-    resolver: zodResolver(UpdateOrderSchema),
-  });
-  const updateOrder: SubmitHandler<UpdateOrderSchema> = async (data) => {
-    mutate({
-      state: data.state,
-    });
+  const [status, setStatus] = React.useState('');
+  const [description, setDescription] = React.useState('');
+
+  const {mutate} = useUpdateOrder();
+
+  const updateOrder = (id: number) => {
+    console.log(status);
+    const updatedCart = {
+      state: status,
+      description,
+    };
+
+    mutate({id, data: updatedCart});
   };
   const colors = {
     primary: 'bg-[#FBF2C0] ',
@@ -66,10 +67,9 @@ function OrdersCard({color = 'primary', keyWord, state = '', label = '', classNa
     setPage(page);
   };
   const {data, isLoading} = useQuery({
-    queryKey: ['history', page],
+    queryKey: ['history', page, keyWord],
     queryFn: getHistoryUSerCardFn,
   });
-  console.log(data);
 
   if (isLoading) return <Loading />;
 
@@ -96,7 +96,7 @@ function OrdersCard({color = 'primary', keyWord, state = '', label = '', classNa
               </div>
               <div className='flex items-center gap-2'>
                 <PhoneBlackIcon />
-                <p className='text-sm font-normal'> +۹۸ ۹۲۳ ۲۵۳ ۲۹ ۱۳ </p>
+                <p className='text-sm font-normal'> {item.phone} </p>
               </div>
             </div>
             <hr className='my-4 border-b border-b-black-items border-opacity-10' />
@@ -124,40 +124,35 @@ function OrdersCard({color = 'primary', keyWord, state = '', label = '', classNa
               </AccordionItem>
             </Accordion>
             <hr className='my-4 border-b border-b-black-items border-opacity-10' />
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(updateOrder)} className='grid w-full grid-cols-4'>
-                <div className='col-span-1 w-full'>
-                  <Button type='submit' className='w-40'>
-                    ثبت
-                  </Button>
+            <div className='grid w-full grid-cols-4'>
+              {item.description !== null && item.description !== '' ? (
+                <div>
+                  <p>توضیحات</p>: <p>{item.description}</p>
                 </div>
-                <div className='col-span-3 w-full'>
-                  <FormField
-                    control={form.control}
-                    name='state'
-                    render={({field}) => (
-                      <FormItem>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder='مشخص کردن وضعیت سفارش' />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value='SENDING'>در حال ارسال</SelectItem>
-                            <SelectItem value='SENDED'>ارسال شده</SelectItem>
-                            <SelectItem value='CLOSE'>تحویل شده</SelectItem>
-                            <SelectItem value='REJECT'> لفو شده</SelectItem>
-                            <SelectItem value='DECLINE'> مرجوع شده</SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-              </form>
-            </Form>
+              ) : null}
+              <div className='col-span-1 w-full'>
+                <Button onClick={() => updateOrder(item.id)} type='submit' className='w-40'>
+                  ثبت
+                </Button>
+              </div>
+              <div className='col-span-3 flex w-full items-center gap-2'>
+                <Input
+                  onChange={(e) => setDescription(e.target.value)}
+                  className='text-right placeholder:text-right'
+                  placeholder='توضیحات'
+                />
+                <select
+                  onChange={(e) => setStatus(e.target.value)}
+                  className='h-10 w-full rounded-md border border-input bg-transparent text-right '
+                >
+                  <option value='SENDING'>در حال ارسال</option>
+                  <option value='SENDED'>ارسال شده</option>
+                  <option value='CLOSE'>تحویل شده</option>
+                  <option value='REJECT'> لفو شده</option>
+                  <option value='DECLINE'> مرجوع شده</option>
+                </select>
+              </div>
+            </div>
           </div>
         </div>
       ))}

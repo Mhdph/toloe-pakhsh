@@ -11,7 +11,7 @@ function OrdersItem({data}: any) {
       {data.cartRows.map((data: CartRow) => (
         <div
           key={data.cartRowId}
-          className='flex h-[184px] w-full flex-row-reverse items-center rounded-3xl  bg-white md:h-[148px]'
+          className='flex h-[184px] w-full flex-row-reverse items-center rounded-3xl  bg-white md:h-[220px]'
         >
           <div>
             <img src={baseUrl + data.productPicture} alt='product image' className='h-24 w-24 md:pr-2' />
@@ -34,6 +34,23 @@ function OrdersItem({data}: any) {
                 <p className='text-xs text-black-items md:text-sm'>:قیمت</p>
               </div>
               <hr className=' my-1' />
+              <div className='flex items-center justify-between text-black-items'>
+                <div className='flex items-center'>
+                  <span className='mr-1 text-[10px] font-normal text-black-items opacity-60'>تومان</span>
+                  <p className='text-base font-black'>{digitsEnToFa(addCommas(+digitsFaToEn(data.sumRow)))} </p>
+                </div>
+                <p className='text-xs'>: مبلغ کل</p>
+              </div>
+              <hr className=' my-1' />
+
+              <div className='flex items-center justify-between text-black-items'>
+                <div className='flex items-center'>
+                  <span className='mr-1 text-[10px] font-normal text-black-items opacity-60'>تومان</span>
+                  <p className='text-base font-black'>{digitsEnToFa(addCommas(+digitsFaToEn(data.sumRowOff)))} </p>
+                </div>
+                <p className='text-xs'>: مجموع تخفیف</p>
+              </div>
+
               <div className='flex items-center justify-between text-[#F6622C]'>
                 <div className='flex items-center'>
                   <span className='mr-1 text-[10px] font-normal text-black-items opacity-60'>تومان</span>
