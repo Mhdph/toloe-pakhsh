@@ -41,10 +41,14 @@ function Order() {
         </TabsList>
 
         <TabsContent value='sending'>
-          <OrdersCard keyWord={debouncedKeyWord} color='delivered' label='در حال ارسال' state='sending' />
+          <OrdersCard keyWord={debouncedKeyWord} color='primary' label='در حال ارسال' state='sending' />
           <hr className='my-2 md:hidden' />
         </TabsContent>
         <TabsContent value='Posted'>
+          <OrdersCard keyWord={debouncedKeyWord} color='delivered' label='ارسال شده' state='posted' />
+          <hr className='my-2 md:hidden' />
+        </TabsContent>
+        <TabsContent value='delivered'>
           <OrdersCard keyWord={debouncedKeyWord} color='delivered' label='تحویل شده' state='delivered' />
           <hr className='my-2 md:hidden' />
         </TabsContent>
