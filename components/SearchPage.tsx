@@ -77,6 +77,15 @@ function SearchPage() {
     setSkip(calculate * 10);
   };
 
+  const resetStartPrice = () => {
+    (document.getElementById('startPrice') as HTMLInputElement).value = '';
+    setStartPrice('');
+  };
+  const resetEndPrice = () => {
+    (document.getElementById('endPrice') as HTMLInputElement).value = '';
+    setStartPrice('');
+  };
+
   const {data, isLoading} = useProducts();
   console.log(gameQuery.categoryName);
   return (
@@ -143,6 +152,7 @@ function SearchPage() {
                   className='w-full rounded border border-[#ACACAC] py-1.5 text-right outline-none  placeholder:pr-1'
                   type='text'
                   onChange={handleStartChange}
+                  id='startPrice'
                 />
                 <p className='text-base font-bold text-[#ACACAC]'>تومان</p>
               </div>
@@ -152,6 +162,7 @@ function SearchPage() {
                   className='w-full rounded border border-[#ACACAC] py-1.5 text-right outline-none  placeholder:pr-1'
                   type='text'
                   onChange={handleEndChange}
+                  id='endPrice'
                 />
                 <p className='text-base font-bold text-[#ACACAC]'>تومان</p>
               </div>
@@ -239,16 +250,16 @@ function SearchPage() {
             ) : null}
             {gameQuery.startPrice !== undefined && gameQuery.startPrice !== '' ? (
               <div
-                onClick={() => setStartPrice('')}
+                onClick={resetStartPrice}
                 className='filter_bg_sidebar hidden w-[120px] cursor-pointer items-center justify-center gap-3 rounded-xl  px-3 py-1.5 md:flex'
               >
                 <p className='text-[10px]  font-normal text-black-items'>قیمت ابتدایی</p>
                 <CloseIcon />
               </div>
             ) : null}
-            {gameQuery.startPrice !== undefined && gameQuery.startPrice !== '' ? (
+            {gameQuery.endPrice !== undefined && gameQuery.endPrice !== '' ? (
               <div
-                onClick={() => setEndPrice('')}
+                onClick={resetEndPrice}
                 className='filter_bg_sidebar hidden w-[120px] cursor-pointer items-center justify-center gap-3 rounded-xl  px-3 py-1.5 md:flex'
               >
                 <p className='text-[10px]  font-normal text-black-items'>قیمت نهایی</p>

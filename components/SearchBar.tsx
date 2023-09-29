@@ -159,7 +159,7 @@ function SearchBar({count}: SearchBarProps) {
               <CloseWhiteIcon />
             </div>
           ) : null}
-          {gameQuery.startPrice !== undefined && gameQuery.startPrice !== '' ? (
+          {gameQuery.endPrice !== undefined && gameQuery.endPrice !== '' ? (
             <div
               onClick={() => setEndPrice('')}
               className='filter_background flex w-[90px] items-center gap-2  rounded-xl px-2 py-1'
