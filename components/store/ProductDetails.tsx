@@ -87,8 +87,8 @@ function ProductDetails() {
         <div className='flex items-center justify-center md:col-span-1'>
           <div className='relative'>
             {data.off !== 0 ? (
-              <div className='absolute left-2 top-1 flex h-9 w-9 items-center justify-center rounded-full bg-red-500 p-2 text-sm font-extrabold  text-white'>
-                {data.off}%
+              <div className='absolute right-24 top-20 flex h-9 w-9 items-center justify-center rounded-full bg-red-500 p-2 text-sm font-extrabold text-white md:left-2  md:top-1'>
+                {digitsEnToFa(data.off)}%
               </div>
             ) : null}
             <img src={baseUrl + data.picture} alt={data.name} className='h-[200px] pt-20 md:pt-0' />
