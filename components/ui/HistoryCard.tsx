@@ -93,7 +93,7 @@ function HistoryCard({color = 'primary', state = '', label = '', className, ...r
                       handleRepeatPurchase(
                         item.cartRows.map((cartItem) => ({
                           productId: cartItem.productId,
-                          count: cartItem.count,
+                          count: +cartItem.count,
                         })),
                       )
                     }
