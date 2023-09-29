@@ -166,7 +166,7 @@ function AddProduct() {
       </div>
       <div>
         <Label>تخفیف:</Label>
-        <Input type='number' {...register('off', {required: true})} />
+        <Input type='number' {...register('off', {required: true, valueAsNumber: true})} />
         {errors.off && <p>This field is required</p>}
       </div>
       <div>

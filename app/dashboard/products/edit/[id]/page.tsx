@@ -195,7 +195,7 @@ function SingleProduct() {
         </div>
         <div>
           <Label>تخفیف:</Label>
-          <Input type='number' {...register('off', {required: true})} />
+          <Input type='number' {...register('off', {required: true, valueAsNumber: true})} />
           {errors.off && <p>این فیلد الزامی است</p>}
         </div>
         <div>
