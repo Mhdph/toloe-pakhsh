@@ -66,7 +66,7 @@ function AboutUs() {
             </p>
             <div className='my-2 flex flex-row-reverse md:hidden'>
               <button className='btn_Primary_small text-xs font-extrabold text-white '>
-                <Link href='/blog'>وبلاگ </Link>
+                <a href='https://toloupakhsh.ir/mag/'>وبلاگ </a>
               </button>
             </div>
           </div>

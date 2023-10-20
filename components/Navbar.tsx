@@ -68,13 +68,13 @@ const Navbar: React.FC<NavbarProps> = () => {
             <DesktopLogo />
           </Link>
           <div className='flex items-center justify-between gap-16 text-[14px]'>
-            <Link href='/blog'>وبلاگ</Link>
+            <a href='https://toloupakhsh.ir/mag/'>وبلاگ</a>
             <Link href='/aboutus'>درباره ما</Link>
             <Link href='/'>سیستم کسب درامد</Link>
           </div>
           <div className='flex items-center gap-4'>
             {/* <div className='relative  '>
-              <input
+              <input  
                 type='text'
                 id='voice-search'
                 className='w-[352px] rounded-[18px] bg-gray-200 py-1.5 pr-10 outline-none'
