@@ -16,7 +16,7 @@ const SpecialOffer: React.FC<SpecialOfferProps> = ({data}) => {
       <p className='absolute right-6 top-1 mt-10 text-right text-2xl font-normal text-white md:right-20 md:top-2'>
         تخفیفات ویژه
       </p>
-      <div className='absolute right-4 top-28 flex items-center gap-3 md:hidden'>
+      {/* <div className='absolute right-4 top-28 flex items-center gap-3 md:hidden'>
         <div className='flex h-[60px] w-[60px] flex-col items-center justify-center rounded-3xl bg-white text-[#F44D32]'>
           <p className='text-sm font-normal'>ثانیه</p>
           <p className='text-base font-semibold'>۴۳</p>
@@ -33,7 +33,7 @@ const SpecialOffer: React.FC<SpecialOfferProps> = ({data}) => {
           <p className='text-sm font-normal'>روز</p>
           <p className='text-base font-semibold'>۰۱</p>
         </div>
-      </div>
+      </div> */}
       <div className='absolute top-0 mt-48 flex w-full items-center gap-3 overflow-x-scroll scroll-smooth whitespace-nowrap px-4 py-2 scrollbar-none md:mt-32 md:justify-center 2xl:gap-8'>
         {data.map((item) => (
           <ListCard key={item.id} data={item} />
