@@ -7,9 +7,10 @@ import {useQuery} from '@tanstack/react-query';
 import Loading from './ui/Loading';
 interface ListStoreProps {
   categoryName: string;
+  urlName: string;
 }
 
-function ListStore({categoryName}: ListStoreProps) {
+function ListStore({categoryName, urlName}: ListStoreProps) {
   const getProductData = async () => {
     const response = await axios.get(`${baseUrl}/product?categoryName=${categoryName}`);
     return response.data;
@@ -20,7 +21,7 @@ function ListStore({categoryName}: ListStoreProps) {
     queryFn: getProductData,
   });
   if (isLoading) return <Loading />;
-  return <ListItems title={categoryName} link={categoryName} data={data.data} />;
+  return <ListItems title={categoryName} link={urlName} data={data.data} />;
 }
 
 export default ListStore;
