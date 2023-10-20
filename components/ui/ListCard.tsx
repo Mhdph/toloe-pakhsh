@@ -84,7 +84,7 @@ function ListCard({data: {brand, picture, name, unitCount, unit, price, id, off,
           <img
             src={baseUrl + picture}
             alt='product image'
-            className='h-[120px] w-[170px] rounded-t-3xl border-b md:w-[153px]'
+            className='h-[120px] w-[170px] rounded-t-3xl border-b md:w-[133px]'
           />
         </div>
       </Link>
