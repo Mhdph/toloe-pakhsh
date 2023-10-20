@@ -18,6 +18,7 @@ import useGetCategoriesAndChilds from '@/service/category/useGetCategoriesandChi
 import Link from 'next/link';
 import Image from 'next/image';
 import {baseUrl} from '@/lib/config';
+import {digitsEnToFa} from '@persian-tools/persian-tools';
 
 function SearchPage() {
   const {setEndPrice, setOff, setExist, setStartPrice, setCategoryName, setSortName, setSkip, setDirection, setBrand} =
@@ -204,8 +205,7 @@ function SearchPage() {
             <div className='flex gap-6 text-ca font-normal text-black-items'>
               <p>{data?.count} نتیجه یافت شد</p>
               <p className='tracking-widest'>
-                {' '}
-                صفحه {page} / {Math.ceil(data?.count! / 10)}
+                صفحه {digitsEnToFa(page)} / {digitsEnToFa(Math.ceil(data?.count! / 10))}
               </p>
             </div>
           </div>
