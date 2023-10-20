@@ -30,9 +30,15 @@ const Footer: React.FC<FooterProps> = () => {
             )}
           >
             {pathName == '/profile' ? <ProfileActiveIcon /> : <ProfileIcon />}
-            {pathName == '/profile' ? (
-              <span className='py-2 text-center text-xs font-black text-white'>حساب کاربری</span>
-            ) : null}
+
+            <span
+              className={cn(
+                pathName == '/profile' ? 'text-white' : 'text-red-500',
+                'py-2 text-center text-xs font-black ',
+              )}
+            >
+              حساب کاربری
+            </span>
           </Link>
 
           <Link
@@ -43,7 +49,15 @@ const Footer: React.FC<FooterProps> = () => {
             )}
           >
             {pathName == '/shop' ? <StoreActiveIcon /> : <StoreIcon />}
-            {pathName == '/shop' ? <span className='py-2 text-xs font-black text-white'>فروشگاه</span> : null}
+
+            <span
+              className={cn(
+                pathName == '/shop' ? 'text-white' : 'text-red-500',
+                'py-2 text-center text-xs font-black ',
+              )}
+            >
+              فروشگاه
+            </span>
           </Link>
           <Link
             href='/search'
@@ -53,9 +67,15 @@ const Footer: React.FC<FooterProps> = () => {
             )}
           >
             {pathName == '/search' ? <SearchActiveIcon /> : <SearchIcon />}
-            {pathName == '/search' ? (
-              <span className='py-2 text-center text-xs font-black text-white'>جست و جو</span>
-            ) : null}
+
+            <span
+              className={cn(
+                pathName == '/search' ? 'text-white' : 'text-red-500',
+                'py-2 text-center text-xs font-black ',
+              )}
+            >
+              جست و جو
+            </span>
           </Link>
           <Link
             href='/'
@@ -65,7 +85,11 @@ const Footer: React.FC<FooterProps> = () => {
             )}
           >
             {pathName == '/' ? <HomeWhiteIcon /> : <HomeActiveIcon />}
-            {pathName == '/' ? <span className='py-2 text-xs font-black text-white'>خانه</span> : null}
+            <span
+              className={cn(pathName == '/' ? 'text-white' : 'text-red-500', 'py-2 text-center text-xs font-black ')}
+            >
+              خانه
+            </span>
           </Link>
         </div>
       </div>
