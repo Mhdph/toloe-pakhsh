@@ -87,7 +87,14 @@ function SearchPage() {
     setStartPrice('');
   };
 
+  const date = new Date().toLocaleDateString('fa-IR');
+
+  useEffect(() => {
+    document.title = `قیمت و خرید ${gameQuery.categoryName} (${date}) | طلوع پخش `;
+  }, [gameQuery.categoryName]);
+
   const {data, isLoading} = useProducts();
+
   console.log(gameQuery.categoryName);
   return (
     <div>
@@ -203,7 +210,7 @@ function SearchPage() {
               ))}
             </div>
             <div className='flex gap-6 text-ca font-normal text-black-items'>
-              <p>{data?.count} نتیجه یافت شد</p>
+              <p>{digitsEnToFa(data?.count!)} نتیجه یافت شد</p>
               <p className='tracking-widest'>
                 صفحه {digitsEnToFa(page)} / {digitsEnToFa(Math.ceil(data?.count! / 10))}
               </p>
