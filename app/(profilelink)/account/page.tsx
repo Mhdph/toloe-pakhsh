@@ -33,9 +33,6 @@ function Account() {
       lastName: data.lastName,
       phone: data.phone,
       birthDate: digitsFaToEn(date.toString()),
-      email: data.email,
-      nationalCode: data.nationalCode,
-      zipCode: data.zipCode,
     });
   };
   const useUser = (slug: string) =>
@@ -46,11 +43,8 @@ function Account() {
         form.setValue('address', data?.address);
         form.setValue('firstName', data?.firstName);
         form.setValue('birthDate', data?.faBirthDate ? data.faBirthDate.substring(0, 10) : data.faBirthDate);
-        form.setValue('email', data?.email);
         form.setValue('lastName', data?.lastName);
-        form.setValue('nationalCode', data?.nationalCode);
         form.setValue('phone', data?.phone);
-        form.setValue('zipCode', data?.zipCode);
         form.setValue('city', data?.city);
       },
     });
@@ -139,10 +133,10 @@ function Account() {
             />
             <FormField
               control={form.control}
-              name='nationalCode'
+              name='city'
               render={({field}) => (
                 <FormItem>
-                  <FormLabel>کد ملی</FormLabel>
+                  <FormLabel>نام شهر</FormLabel>
                   <FormControl>
                     <div className='md:w-[304px]'>
                       <div className='relative'>
@@ -159,10 +153,10 @@ function Account() {
             />
             <FormField
               control={form.control}
-              name='email'
+              name='address'
               render={({field}) => (
                 <FormItem>
-                  <FormLabel>ایمیل</FormLabel>
+                  <FormLabel> آدرس</FormLabel>
                   <FormControl>
                     <div className='md:w-[304px]'>
                       <div className='relative'>
@@ -178,72 +172,8 @@ function Account() {
               )}
             />
           </div>
-          <hr className='my-6 border opacity-50' />
-          <div className='flex flex-col gap-6 md:flex-row md:gap-12'>
-            <div className='flex flex-col items-center gap-6 md:flex-row md:gap-12'>
-              <FormField
-                control={form.control}
-                name='city'
-                render={({field}) => (
-                  <FormItem>
-                    <FormLabel>نام شهر</FormLabel>
-                    <FormControl>
-                      <div className='md:w-[304px]'>
-                        <div className='relative'>
-                          <div className='absolute left-2 top-2 pr-3'>
-                            <EditIcon />
-                          </div>
-                          <Input placeholder={field.value} type='text' {...field} />
-                        </div>
-                      </div>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name='address'
-                render={({field}) => (
-                  <FormItem>
-                    <FormLabel> آدرس</FormLabel>
-                    <FormControl>
-                      <div className='md:w-[304px]'>
-                        <div className='relative'>
-                          <div className='absolute left-2 top-2 pr-3'>
-                            <EditIcon />
-                          </div>
-                          <Input placeholder={field.value} type='text' {...field} />
-                        </div>
-                      </div>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name='zipCode'
-                render={({field}) => (
-                  <FormItem>
-                    <FormLabel>کد پستی</FormLabel>
-                    <FormControl>
-                      <div className='md:w-[304px]'>
-                        <div className='relative'>
-                          <div className='absolute left-2 top-2 pr-3'>
-                            <EditIcon />
-                          </div>
-                          <Input placeholder={field.value} type='text' {...field} />
-                        </div>
-                      </div>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-          </div>
-          <div className='md:flex md:justify-end'>
+
+          <div className='flex justify-center md:flex md:justify-end'>
             <Button>ثبت اطلاعات</Button>
           </div>
         </form>
