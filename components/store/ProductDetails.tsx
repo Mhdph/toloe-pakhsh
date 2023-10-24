@@ -17,6 +17,7 @@ import axios from 'axios';
 import {useQuery} from '@tanstack/react-query';
 import {addCommas, digitsEnToFa} from '@persian-tools/persian-tools';
 import {toast} from 'react-hot-toast';
+import Button from '../ui/Button';
 
 function ProductDetails() {
   const [count, setCount] = useState(1);
@@ -91,12 +92,16 @@ function ProductDetails() {
                 {digitsEnToFa(data.off)}%
               </div>
             ) : null}
-            <img src={baseUrl + data.picture} alt={data.name} className='h-[200px] pt-20 md:pt-0' />
+            <img
+              src={baseUrl + data.picture}
+              alt={data.name}
+              className='h-[300px] w-[250px] pt-20 md:h-[300px] md:w-[300px] md:pt-0'
+            />
           </div>
         </div>
         <div className='flex flex-col px-4 font-semibold md:col-span-2 md:rounded-3xl md:bg-white md:p-4 md:shadow-2xl'>
           <div className='flex items-center justify-between'>
-            <p className=' text-4xl md:text-5xl '>{data.name}</p>
+            <p className=' text-3xl md:text-5xl '>{data.name}</p>
             <ReactStars value={data.star} size={20} color2={'#F34834'} />
           </div>
           <p className='mt-3 text-base md:text-xl'>{data.description}</p>
@@ -122,7 +127,7 @@ function ProductDetails() {
                   <MinusIcon />
                 </MiddleIcon>
               </div>
-              <div className='numberItemBg flex h-9 w-[74px] items-center justify-center '>{count}</div>
+              <div className='numberItemBg flex h-9 w-[74px] items-center justify-center '>{digitsEnToFa(count)}</div>
               <div onClick={() => increaseCount()}>
                 <MiddleIcon>
                   <PlusIcon />
@@ -140,11 +145,9 @@ function ProductDetails() {
                 <FavouriteIcon />
               </div>
             </MiddleIcon>
-            <MiddleIcon>
-              <div onClick={user === undefined ? handleAddToCart : addCardRow}>
-                <MiniBucketIcon />
-              </div>
-            </MiddleIcon>
+            <Button onClick={user === undefined ? handleAddToCart : addCardRow} className='flex items-center gap-2'>
+              افزودن به سبد خرید <MiniBucketIcon />
+            </Button>
           </div>
         </div>
       </div>
