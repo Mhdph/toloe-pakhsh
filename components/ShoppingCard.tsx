@@ -210,7 +210,7 @@ function ShoppingCard() {
                 <div className='relative'>
                   {item.off !== 0 ? (
                     <div className='absolute left-2 top-6 flex h-9 w-9 items-center justify-center rounded-full bg-red-500 p-2 text-sm font-extrabold  text-white'>
-                      {digitsEnToFa(item.off)}%
+                      {item.off}%
                     </div>
                   ) : null}
                   <div className='flex h-[184px] w-[140px] items-center justify-center '>
