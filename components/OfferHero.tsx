@@ -14,11 +14,14 @@ function OfferHero() {
       <div className='absolute'>
         <Image src={isMobile ? shablon : shablondesktop} alt='bg-takhfif' />
       </div>
-      <p className='mt-2 text-4xl font-semibold md:mb-2 md:text-5xl'>پیشنهاد ویژه</p>
-      <p className='text-xs font-black md:text-[14px]'>برای خرید های بالای ۳۰۰ هزار تومان</p>
+      <p className='mt-2 text-4xl font-semibold md:mb-2 md:text-5xl'> قابل توجه خرید اولی ها</p>
+      <p className='text-xs font-black md:text-[14px]'>
+        {' '}
+        کد تخفیف ۲۵ درصد + ۳ لواشک استیکی رایگان با کد تخفیف: toloue1{' '}
+      </p>
       <Link
         className='z-50 cursor-pointer rounded-3xl bg-white px-4 py-1.5 text-xs font-extrabold text-[#F02D3C] md:text-[14px]'
-        href='/shop'
+        href='/search'
       >
         <button>مشاهده محصولات</button>
       </Link>

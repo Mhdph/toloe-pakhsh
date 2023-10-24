@@ -102,12 +102,12 @@ function ShoppingCard() {
             return cartItem.cartRows.map((item) => (
               <div
                 key={item.cartRowId}
-                className='flex h-[184px] w-full items-center rounded-3xl border border-black-items border-opacity-40 bg-white md:h-[148px]'
+                className='flex h-[204px] w-full items-center rounded-3xl border border-black-items border-opacity-40 bg-white md:h-[148px]'
               >
                 <div className='relative'>
                   <div
                     onClick={() => deleteCardRow(item.cartRowId)}
-                    className='absolute right-4 top-4 z-50 cursor-pointer md:top-6'
+                    className='absolute right-5 top-2 z-50 cursor-pointer md:top-6'
                   >
                     <CloseIcon />
                   </div>
@@ -201,10 +201,10 @@ function ShoppingCard() {
           {products.map((item) => (
             <div
               key={item.id}
-              className='flex h-[184px] w-full items-center rounded-3xl border border-black-items border-opacity-40 bg-white md:h-[148px]'
+              className='flex h-[204px] w-full items-center rounded-3xl border border-black-items border-opacity-40 bg-white md:h-[148px]'
             >
               <div className='relative'>
-                <div onClick={() => removeProduct(item.id)} className='absolute right-4 top-4 cursor-pointer md:top-6'>
+                <div onClick={() => removeProduct(item.id)} className='absolute right-5 top-2 cursor-pointer md:top-6'>
                   <CloseIcon />
                 </div>
                 <div className='relative'>
@@ -214,7 +214,7 @@ function ShoppingCard() {
                     </div>
                   ) : null}
                   <div className='flex h-[184px] w-[140px] items-center justify-center '>
-                    <img src={baseUrl + item.picture} alt='product image' className=' h-[140px] w-[100px] md:pr-2' />
+                    <img src={baseUrl + item.picture} alt='product image' className=' h-[140px] w-[140px] md:pr-2' />
                   </div>
                 </div>
               </div>
