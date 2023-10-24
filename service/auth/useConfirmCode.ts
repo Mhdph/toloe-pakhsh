@@ -5,6 +5,7 @@ import {useRouter} from 'next/navigation';
 import {toast} from 'react-hot-toast';
 import APIClient from '../api-client';
 import {ConfirmCode} from '@/entities/auth';
+import axios from 'axios';
 
 interface ConfirmUser {
   token: string;
@@ -37,7 +38,9 @@ const useConfirmCode = () => {
         router.push('/fulldetails');
       },
       onError: (error) => {
-        toast.error(error.message);
+        if (error && axios.isAxiosError(error)) {
+          toast.error(error.response?.data.message);
+        }
       },
     },
   );
