@@ -10,6 +10,8 @@ import {
 import {AbousUsSvgLeft, AboutUsSvgRight} from '@/assets/svg';
 import SubTractSvg from '@/assets/svg/SubTractSvg';
 import React from 'react';
+import enamd from '@/assets/images/eNamad.png';
+import Image from 'next/image';
 
 function ContactUs() {
   return (
@@ -98,10 +100,23 @@ function ContactUs() {
               </div>
             </div>
           </div>
-
           <div className='absolute left-1 pl-10 pt-8 xl:pl-16'>
             <AbousUsSvgLeft />
           </div>
+          <a
+            href='https://trustseal.enamad.ir/?id=294127&amp;code=NNF0HcB9laP1f33ld492'
+            className=' relative top-52 z-50 mb-52'
+            target='_blank'
+            rel='nofollow'
+          >
+            <img
+              width='125'
+              height='136'
+              src='https://toloupakhsh.ir/wp-content/uploads/2023/02/اینماد.png'
+              alt=''
+              loading='lazy'
+            />{' '}
+          </a>
         </div>
       </div>
     </div>
