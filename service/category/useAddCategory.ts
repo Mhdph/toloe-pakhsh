@@ -5,6 +5,7 @@ import APIClient from '../api-client';
 import {CACHE_KEY_CATEGORY} from '../constants';
 import {toast} from 'react-hot-toast';
 import {AddCategory} from '@/entities/category';
+import axios from 'axios';
 
 const apiClient = new APIClient<AddCategory>('/category/add');
 
@@ -17,7 +18,9 @@ const useAddCategory = () => {
       toast.success('کتگوری با موفقیت اضافه شد');
     },
     onError: (error) => {
-      toast.error(error.message);
+      if (error && axios.isAxiosError(error)) {
+        toast.error(error.response?.data.message);
+      }
     },
   });
 };

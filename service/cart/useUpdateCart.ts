@@ -3,6 +3,7 @@ import APIClient from '../api-client';
 import {CACHE_KEY_CART, CACHE_KEY_SHOP} from '../constants';
 import {toast} from 'react-hot-toast';
 import {UpdateCart} from '@/entities/Cart';
+import axios from 'axios';
 
 const apiClient = new APIClient<UpdateCart>('/cart-row/update');
 
@@ -16,7 +17,9 @@ const useUpdateCart = () => {
       });
     },
     onError: (error) => {
-      toast.error(error.message);
+      if (error && axios.isAxiosError(error)) {
+        toast.error(error.response?.data.message);
+      }
     },
   });
 };

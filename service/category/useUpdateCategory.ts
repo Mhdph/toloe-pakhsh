@@ -2,6 +2,7 @@ import {useMutation, useQueryClient} from '@tanstack/react-query';
 import APIClient from '../api-client';
 import {CACHE_KEY_CATEGORY} from '../constants';
 import {toast} from 'react-hot-toast';
+import axios from 'axios';
 
 export interface UpdateCategory {
   name: string;
@@ -22,7 +23,9 @@ const useUpdateCategory = () => {
         toast.success('کتگوری با موفقیت به روز رسانی شد');
       },
       onError: (error) => {
-        toast.error(error.message);
+        if (error && axios.isAxiosError(error)) {
+          toast.error(error.response?.data.message);
+        }
       },
     },
   );

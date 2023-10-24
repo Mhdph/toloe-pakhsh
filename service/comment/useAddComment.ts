@@ -3,6 +3,7 @@ import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {toast} from 'react-hot-toast';
 import APIClient from '../api-client';
 import {CACHE_KEY_COMMENT} from '../constants';
+import axios from 'axios';
 
 const apiClient = new APIClient<AddComment>('/comment/add');
 
@@ -16,7 +17,9 @@ const useAddComment = (data: AddComment) => {
       toast.success('نظر شما ثبت شد پس از تایید نظر شما توسط ادمین  نمایش داده خواهد شد');
     },
     onError: (error) => {
-      toast.error(error.message);
+      if (error && axios.isAxiosError(error)) {
+        toast.error(error.response?.data.message);
+      }
     },
   });
 };

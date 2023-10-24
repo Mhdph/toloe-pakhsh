@@ -143,7 +143,7 @@ function ConfirmCode() {
                 ادامه{' '}
               </Button>
               <p className='text-center text-base font-semibold text-red-500'>
-                {error && error instanceof Error ? error.message : null}
+                {error && error instanceof Error && axios.isAxiosError(error) ? error.response?.data.message : null}
               </p>
             </div>
 

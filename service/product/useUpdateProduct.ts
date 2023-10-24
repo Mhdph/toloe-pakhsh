@@ -3,6 +3,7 @@ import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {toast} from 'react-hot-toast';
 import APIClient from '../api-client';
 import {CACHE_KEY_PRODUCT} from '../constants';
+import axios from 'axios';
 
 const apiClient = new APIClient<AddProduct>('product/update');
 
@@ -15,7 +16,9 @@ const useUpdateProduct = () => {
       toast.success('محصول با موفقیت اپدیت شد');
     },
     onError: (error) => {
-      toast.error(error.message);
+      if (error && axios.isAxiosError(error)) {
+        toast.error(error.response?.data.message);
+      }
     },
   });
 };

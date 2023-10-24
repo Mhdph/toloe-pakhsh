@@ -3,6 +3,7 @@ import APIClient from '../api-client';
 import {toast} from 'react-hot-toast';
 import {CACHE_KEY_CART, CACHE_KEY_SHOP} from '../constants';
 import {Cart} from '@/entities/Cart';
+import axios from 'axios';
 
 const apiClient = new APIClient<string | number>('/cart-row/delete');
 
@@ -18,7 +19,9 @@ const useDeleteCartRow = () => {
     },
 
     onError: (error) => {
-      toast.error(error.message);
+      if (error && axios.isAxiosError(error)) {
+        toast.error(error.response?.data.message);
+      }
     },
   });
 };

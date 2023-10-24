@@ -67,7 +67,7 @@ const SliderImage: React.FC<SliderProps> = () => {
       <Slider {...settings}>
         {data?.data.map((image, index) => (
           <div onClick={() => router.push(image.url)} key={index} className='cursor-pointer'>
-            <img src={baseUrl + image.picture} className='md:w-[1276px] 2xl:w-full' alt={`Slide ${index}`} />
+            <img src={baseUrl + image.picture} className='md:w-full 2xl:w-full' alt={`Slide ${index}`} />
           </div>
         ))}
       </Slider>

@@ -210,7 +210,7 @@ function SearchPage() {
               ))}
             </div>
             <div className='flex gap-6 text-ca font-normal text-black-items'>
-              <p>{digitsEnToFa(data?.count!)} نتیجه یافت شد</p>
+              <p>{data && digitsEnToFa(data.count)} نتیجه یافت شد</p>
               <p className='tracking-widest'>
                 صفحه {digitsEnToFa(page)} / {digitsEnToFa(Math.ceil(data?.count! / 10))}
               </p>

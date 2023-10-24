@@ -3,6 +3,7 @@ import APIClient from '../api-client';
 import {CACHE_KEY_CART} from '../constants';
 import {toast} from 'react-hot-toast';
 import {AddCart} from '@/entities/Cart';
+import axios from 'axios';
 
 const apiClient = new APIClient<AddCart>('/cart-row/add');
 
@@ -15,7 +16,9 @@ const useAddCart = () => {
       toast.success('محصول به سبد شما اضافه شد');
     },
     onError: (error) => {
-      toast.error(error.message);
+      if (error && axios.isAxiosError(error)) {
+        toast.error(error.response?.data.message);
+      }
     },
   });
 };

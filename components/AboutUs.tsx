@@ -8,8 +8,10 @@ function AboutUs() {
         <p className='text-4xl font-semibold text-black-items  md:text-center'>درباره ما</p>
         <hr className='seperator my-4 md:flex md:justify-center' />
         <p className='text-xs font-normal text-black-items md:w-1/2 md:text-center md:text-[14px]'>
-          بنکداری آنلاین طلوع پخش با تکیه بر ۲۰ سال سابقه فعالیت در حوزه تولید و پخش مواد غذایی٬اولین بنکداری آنلاین در
-          ایران را راه اندازی کرده است تا شما عزیزان بتوانید محصولات با کیفیت را با قیمت عمده تهیه کنید.
+          نکداری آنلاین طلوع پخش با تکیه بر ۲۰ سال سابقه فعالیت در حوزه تولید و پخش مواد غذایی٬اولین بنکداری آنلاین در
+          ایران را راه اندازی کرده است تا شما عزیزان بتوانید محصولات با کیفیت را با قیمت عمده تهیه کنید. هرروز دسته های
+          جدیدی از محصولات با کیفیت در حال اضافه شدن به سبد خرید محصولات ما می باشد تا بتوانیم به زودی تمامی نیاز های
+          خانواده شما را از طریق همین سایت فراهم کنیم.
         </p>
         <div className='mt-6 flex flex-row-reverse md:hidden'>
           <button className='btn_Primary_small text-xs font-extrabold text-white '>

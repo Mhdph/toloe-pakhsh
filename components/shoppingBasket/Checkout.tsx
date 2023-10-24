@@ -34,6 +34,7 @@ function Checkout() {
 
   //zustand
   const products = useProductStore((state) => state.products);
+  console.log(products);
   //backend
   const {data} = useGetCart();
   const {data: deliveryFee} = useDelivery();

@@ -3,6 +3,7 @@ import APIClient from '../api-client';
 import {CACHE_KEY_DISCOUNT} from '../constants';
 import {toast} from 'react-hot-toast';
 import User from '@/entities/user';
+import axios from 'axios';
 
 const apiClient = new APIClient<User>('/user/delete');
 
@@ -16,7 +17,9 @@ const useDeleteDiscount = (id: string) => {
       toast.success('کاربر با موفقیت حذف شد');
     },
     onError: (error) => {
-      toast.error(error.message);
+      if (error && axios.isAxiosError(error)) {
+        toast.error(error.response?.data.message);
+      }
     },
   });
 };

@@ -11,7 +11,7 @@ function OrdersItem({data}: any) {
       {data.cartRows.map((data: CartRow) => (
         <div
           key={data.cartRowId}
-          className='flex h-[184px] w-full flex-row-reverse items-center rounded-3xl  bg-white md:h-[220px]'
+          className='flex h-[184px] w-full flex-row-reverse items-center rounded-3xl  bg-white md:h-[240px]'
         >
           <div>
             <img src={baseUrl + data.productPicture} alt='product image' className='h-24 w-24 md:pr-2' />
@@ -19,7 +19,7 @@ function OrdersItem({data}: any) {
           <div className='h-full flex-1 px-2 pt-6 md:grid md:grid-cols-2 md:pt-0'>
             <div className='md:flex md:flex-col md:gap-y-3 md:py-3 md:pr-3'>
               <hr className=' my-1 md:hidden' />
-              <div className='flex items-center justify-between'>
+              <div className=' flex items-center justify-between'>
                 <div className='flex items-center'>
                   <p className='text-xs font-black md:text-sm'>{data.count}</p>
                 </div>
@@ -73,8 +73,8 @@ function OrdersItem({data}: any) {
               </div>
               <div className='flex items-center justify-between'>
                 <div className='flex items-center'>
+                  <p className='mx-1 text-xs font-black md:text-sm'>{data.productUnit}</p>
                   <span className='mr-1 text-[10px] font-normal opacity-60 md:text-xs'>{data.productUnitCount}</span>
-                  <p className='text-xs font-black md:text-sm'>{data.productUnit}</p>
                 </div>
                 <p className='text-xs text-black-items md:text-sm'>:واحد</p>
               </div>

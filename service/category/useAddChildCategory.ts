@@ -3,6 +3,7 @@ import APIClient from '../api-client';
 import {CACHE_KEY_CATEGORY} from '../constants';
 import {toast} from 'react-hot-toast';
 import {AddCategoryChild} from '@/entities/category';
+import axios from 'axios';
 
 const apiClient = new APIClient<AddCategoryChild>('/parent-category/add');
 
@@ -15,7 +16,9 @@ const useAddChildCategory = () => {
       toast.success('کتگوری زیر شاخه با موفقیت اضافه شد');
     },
     onError: (error) => {
-      toast.error(error.message);
+      if (error && axios.isAxiosError(error)) {
+        toast.error(error.response?.data.message);
+      }
     },
   });
 };
