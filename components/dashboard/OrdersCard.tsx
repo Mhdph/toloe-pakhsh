@@ -145,11 +145,11 @@ function OrdersCard({color = 'primary', keyWord, state = '', label = '', classNa
                   onChange={(e) => setStatus(e.target.value)}
                   className='h-10 w-full rounded-md border border-input bg-transparent text-right '
                 >
-                  <option value='SENDING'>در حال ارسال</option>
-                  <option value='SENDED'>ارسال شده</option>
-                  <option value='CLOSE'>تحویل شده</option>
-                  <option value='REJECT'> لفو شده</option>
-                  <option value='DECLINE'> مرجوع شده</option>
+                  <option value='sending'>در حال ارسال</option>
+                  <option value='posted'>ارسال شده</option>
+                  <option value='delivered'>تحویل شده</option>
+                  <option value='canceled'> لفو شده</option>
+                  <option value='returned'> مرجوع شده</option>
                 </select>
               </div>
             </div>
