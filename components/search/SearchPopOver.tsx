@@ -66,11 +66,11 @@ function SearchPopOver() {
             <SearchBrand />
             <div className='flex items-center justify-between'>
               <p className='text-sm font-black text-[#F13739]'> موجود در انبار</p>
-              <Switch onCheckedChange={handleOnSaleChange} />
+              <Switch onCheckedChange={handleOnExistChange} />
             </div>
             <div className='flex items-center justify-between'>
               <p className='text-sm font-black text-[#F13739]'> دارای تخفیف</p>
-              <Switch onCheckedChange={handleOnExistChange} />
+              <Switch onCheckedChange={handleOnSaleChange} />
             </div>
           </div>
         </div>
