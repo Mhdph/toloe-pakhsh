@@ -57,14 +57,15 @@ function Checkout() {
       if (data && data.data.length > 0) {
         const off = data && data.data[0].sumOff;
         setOff(off);
+        console.log(off);
       }
     }
     if (deliveryFee && deliveryFee.data.length > 0) {
       setDelivery(deliveryFee?.data[0].cost);
     } else {
-      setDelivery('۴۰۰۰');
+      setDelivery('۴۰۰۰۰');
     }
-  }, [user, products, data]);
+  }, [user, products, data, deliveryFee]);
 
   // data backend
   const {mutate} = usePayment();
@@ -79,10 +80,6 @@ function Checkout() {
   const offNum = off !== undefined ? digitsFaToEn(off) : 0;
   const deliveryNum = digitsFaToEn(delivery);
   const totalPriceEnglish = digitsFaToEn(totalPrice);
-
-  console.log(totalPrice);
-
-  const totalPriceEn = +totalPriceEnglish + +deliveryNum - +offNum;
 
   //login
   const pushLogin = () => {
@@ -123,7 +120,9 @@ function Checkout() {
         <div className='flex items-center justify-between text-[#F6622C]'>
           <p className='text-base font-semibold '> مجموع کل:</p>
           <div className='flex items-center'>
-            <p className='text-base font-semibold'>{digitsEnToFa(addCommas(totalPriceEn))}</p>
+            <p className='text-base font-semibold'>
+              {digitsEnToFa(addCommas(+totalPriceEnglish + +deliveryNum - +offNum))}
+            </p>
             <span className='mr-1 text-xs font-normal text-black-items opacity-60'>تومان</span>
           </div>
         </div>
