@@ -18,6 +18,7 @@ import {useQuery} from '@tanstack/react-query';
 import {addCommas, digitsEnToFa} from '@persian-tools/persian-tools';
 import {toast} from 'react-hot-toast';
 import Button from '../ui/Button';
+import Head from 'next/head';
 
 function ProductDetails() {
   const [count, setCount] = useState(1);
@@ -80,10 +81,16 @@ function ProductDetails() {
       setCount((count) => count - 1);
     }
   };
-
   if (loading) return <Loading />;
   return (
     <div>
+      <Head>
+        <meta name='product_id' content={id} />
+        <meta name='product_name' content={data.name} />
+        <meta property='og:image' content={baseUrl + data.picture} />
+        <meta name='product_price' content={data.FaPrice} />
+        <meta name='availability' content={data.off ? 'instock' : 'outofstock'} />
+      </Head>
       <div className='md:mt-7 md:grid md:grid-cols-3 md:px-10'>
         <div className='flex items-center justify-center md:col-span-1'>
           <div className='relative'>
@@ -150,6 +157,7 @@ function ProductDetails() {
             </Button>
           </div>
         </div>
+        H
       </div>
     </div>
   );
