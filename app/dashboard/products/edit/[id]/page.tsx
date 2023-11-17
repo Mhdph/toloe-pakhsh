@@ -30,6 +30,7 @@ const formDataSchema = z.object({
   unitCount: z.string(),
   price: z.string(),
   brand: z.string(),
+  exist: z.string(),
   categoryId: z.string(),
   off: z.number().optional(),
   properties: z
@@ -124,7 +125,7 @@ function SingleProduct() {
     const updatedCart: any = {
       brand: data.brand,
       description: data.description,
-      exist: true,
+      exist: data.exist === 'true' ? true : false,
       name: data.name,
       picture: selectedFile ? Cookies.get('u-picture')! : Cookies.get('p-picture')!,
       price: +data.price,
@@ -216,6 +217,17 @@ function SingleProduct() {
             ))}
           </select>
           {errors.categoryId && <p>این فیلد الزامی است</p>}
+        </div>
+        <div className='flex flex-col gap-1'>
+          <Label>موجودی :</Label>
+          <select
+            className='h-10 w-full rounded-md border border-input bg-transparent '
+            {...register('exist', {required: true})}
+          >
+            <option value='true'>موجود است</option>
+            <option value='false'>موجود نیست</option>
+          </select>
+          {errors.exist && <p>این فیلد الزامی است</p>}
         </div>
         <Label> ویژگی:</Label>
 
