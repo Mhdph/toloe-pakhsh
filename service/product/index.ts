@@ -10,6 +10,16 @@ export async function getAllProduct() {
   return res.json();
 }
 
+// get same product
+export async function getSameProduct() {
+  const res = await fetch(`${baseUrl}/cart-row/offerList`, {cache: 'no-cache'});
+  if (!res.ok) {
+    throw new Error('Failed to fetch data');
+  }
+
+  return res.json();
+}
+
 export async function getAllOffProduct() {
   const res = await fetch(`${baseUrl}/product?off=true`, {cache: 'no-cache'});
   if (!res.ok) {

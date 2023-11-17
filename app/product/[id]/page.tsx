@@ -1,26 +1,50 @@
-'use client';
-import React from 'react';
 import ContactUs from '@/components/ContactUs';
 import ListItems from '@/components/ListItems';
-import useSameProduct from '@/service/product/useSameProduct';
 import ProductDetails from '@/components/store/ProductDetails';
 import ProductTabs from '@/components/store/ProductTabs';
+import {baseUrl} from '@/lib/config';
+import {getSameProduct} from '@/service/product';
+import {Beaker} from 'lucide-react';
+import {Metadata, ResolvingMetadata} from 'next';
 
-function SingleProduct() {
-  const {data: product} = useSameProduct();
-  console.log(product?.data);
+type Props = {
+  params: {id: string};
+  searchParams: {[key: string]: string | string[] | undefined};
+};
+
+export async function generateMetadata({params, searchParams}: Props, parent: ResolvingMetadata): Promise<Metadata> {
+  // read route params
+  const id = params.id;
+
+  // fetch data
+  const product = await fetch(`${baseUrl}/product/getbyid/${id}`).then((res) => res.json());
+
+  // optionally access and extend (rather than replace) parent metadata
+  console.log(product.name);
+  return {
+    other: {
+      product_name: product.name,
+      product_id: product.id,
+      'og:image': baseUrl + product.picture,
+      product_price: product.price,
+      availability: product.exist ? 'instock' : 'outofstock',
+    },
+  };
+}
+
+export default async function Page() {
+  const data = await getSameProduct();
+
   return (
     <div>
       <div>
         <ProductDetails />
         <ProductTabs />
       </div>
-      <ListItems data={product?.data} link='/' title='محصولات مشابه' />
+      <ListItems data={data.data} link='/' title='محصولات مشابه' />
       <div className='hidden md:inline'>
         <ContactUs />
       </div>
     </div>
   );
 }
-
-export default SingleProduct;

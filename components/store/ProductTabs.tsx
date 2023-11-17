@@ -46,7 +46,9 @@ function ProductTabs() {
             ? data.properties.map((item: any, index: any) => (
                 <div key={index} className='flex  items-center justify-between md:flex-col-reverse'>
                   <p className='text-xs font-normal text-black-items opacity-60 md:text-sm'>{item.value}</p>
-                  <p className='text-base md:text-xl'>:{item.key}</p>
+                  <p className='text-base md:text-xl'>
+                    {item.value !== '' ? ':' : null} {item.key}
+                  </p>
                 </div>
               ))
             : null}
