@@ -7,6 +7,9 @@ import Head from 'next/head';
 
 export const metadata: Metadata = {
   title: 'طلوع پخش',
+  icons: {
+    icon: '/icon.png',
+  },
 };
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
