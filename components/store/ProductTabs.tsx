@@ -33,15 +33,15 @@ function ProductTabs() {
   if (loading) return <Loading />;
   return (
     <div>
-      <Tabs defaultValue='product details' className='mt-4 md:px-10'>
+      <Tabs defaultValue='comment' className='mt-4 md:px-10'>
         <TabsList className='flex justify-end gap-2'>
           <TabsTrigger value='compare'>مقایسه</TabsTrigger>
           <hr className='h-6 border-l border-black-items border-opacity-25' />
           <TabsTrigger value='comment'>نظر خریداران</TabsTrigger>
-          <hr className='h-6 border-l border-black-items border-opacity-25' />
-          <TabsTrigger value='product details'>مشخصات محصول</TabsTrigger>
+          {/* <hr className='h-6 border-l border-black-items border-opacity-25' /> */}
+          {/* <TabsTrigger value='product details'>مشخصات محصول</TabsTrigger> */}
         </TabsList>
-        <TabsContent className='justify-start md:flex  md:flex-row-reverse md:justify-between' value='product details'>
+        {/* <TabsContent className='justify-start md:flex  md:flex-row-reverse md:justify-between' value='product details'>
           {data.properties !== null
             ? data.properties.map((item: any, index: any) => (
                 <div key={index} className='flex  items-center justify-between md:flex-col-reverse'>
@@ -53,7 +53,7 @@ function ProductTabs() {
               ))
             : null}
           <hr className='my-2' />
-        </TabsContent>
+        </TabsContent> */}
         <TabsContent value='comment'>
           <Comments />
         </TabsContent>
