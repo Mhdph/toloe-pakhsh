@@ -38,7 +38,7 @@ export interface ProductProps {
   off: number;
 }
 
-function Card({data: {brand, picture, name, unitCount, unit, price, id, off, FaPrice, star}}: dataItem) {
+function Card({data: {brand, picture, name, unitCount, unit, price, id, off, FaPrice, star, exist}}: dataItem) {
   const addProduct = useProductStore((state) => state.addProduct);
   const {mutate: addtoFavourite, isLoading: loading} = useAddFavouriteProduct();
   const user = Cookies.get('token');
@@ -76,11 +76,17 @@ function Card({data: {brand, picture, name, unitCount, unit, price, id, off, FaP
     <div className=' min-w-[175px] max-w-[180px] rounded-3xl border border-black-items border-opacity-40 bg-white md:h-[300px] md:min-w-[223px] md:max-w-[223px]'>
       <Link href={`/product/${id}`} className=' flex justify-center'>
         <div className='relative'>
-          {off !== 0 ? (
-            <div className='absolute left-2 top-1 flex h-9 w-9 items-center justify-center rounded-full bg-red-500 p-2 text-sm font-extrabold  text-white'>
-              {off}%
+          {exist ? (
+            off !== 0 ? (
+              <div className='absolute left-2 top-1 flex h-9 w-9 items-center justify-center rounded-full bg-red-500 p-2 text-sm font-extrabold  text-white'>
+                {off}%
+              </div>
+            ) : null
+          ) : (
+            <div className='absolute right-16 top-1 flex h-16 w-16 items-center justify-center rounded-full bg-red-500 p-2 text-center text-xs font-extrabold  text-white '>
+              <p> اتمام موجودی</p>
             </div>
-          ) : null}
+          )}
           <img src={baseUrl + picture} alt='product image' className='h-[120px]  rounded-t-3xl border-b' />
         </div>
       </Link>
@@ -118,9 +124,11 @@ function Card({data: {brand, picture, name, unitCount, unit, price, id, off, FaP
           >
             <div className=''>{loading ? <HeartRedIcon /> : <HeartIcon />}</div>
           </Button>
+
           <Button
             onClick={user === undefined ? handleAddToCart : addCardRow}
             isLoading={isLoading}
+            disabled={exist ? false : true}
             className='flex w-[110px] items-center justify-around  md:w-[140px]'
           >
             افزودن <StoreActiveIcon />

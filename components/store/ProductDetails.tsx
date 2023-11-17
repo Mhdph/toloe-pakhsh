@@ -87,11 +87,17 @@ function ProductDetails() {
       <div className='md:mt-7 md:grid md:grid-cols-3 md:px-10'>
         <div className='flex items-center justify-center md:col-span-1'>
           <div className='relative'>
-            {data.off !== 0 ? (
-              <div className='absolute right-24 top-20 flex h-9 w-9 items-center justify-center rounded-full bg-red-500 p-2 text-sm font-extrabold text-white md:left-2  md:top-1'>
-                {digitsEnToFa(data.off)}%
+            {data.exist ? (
+              data.off !== 0 ? (
+                <div className='absolute left-2 top-1 flex h-9 w-9 items-center justify-center rounded-full bg-red-500 p-2 text-sm font-extrabold  text-white'>
+                  {data.off}%
+                </div>
+              ) : null
+            ) : (
+              <div className='absolute left-2 top-20 flex h-24 w-24 items-center justify-center rounded-full bg-red-500 p-2 text-sm font-extrabold text-white md:top-1  '>
+                اتمام موجودی
               </div>
-            ) : null}
+            )}
             <img
               src={baseUrl + data.picture}
               alt={data.name}
@@ -145,7 +151,11 @@ function ProductDetails() {
                 <FavouriteIcon />
               </div>
             </MiddleIcon>
-            <Button onClick={user === undefined ? handleAddToCart : addCardRow} className='flex items-center gap-2'>
+            <Button
+              disabled={data.exist ? false : true}
+              onClick={user === undefined ? handleAddToCart : addCardRow}
+              className='flex items-center gap-2'
+            >
               افزودن به سبد خرید <MiniBucketIcon />
             </Button>
           </div>
