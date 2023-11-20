@@ -57,6 +57,20 @@ function ContactUs() {
               Contact@TolouPakhsh.com
             </a>
           </div>
+          <div className='flex items-center justify-end gap-4'>
+            <div className='card_shadow flex flex-col items-center rounded-3xl bg-white px-8 py-4'>
+              <div>
+                <a
+                  href='https://trustseal.enamad.ir/?id=294127&amp;code=NNF0HcB9laP1f33ld492'
+                  className=' flex flex-col items-center gap-1'
+                  target='_blank'
+                  rel='nofollow'
+                >
+                  <Image className='mt-3 rounded-2xl' width='60' height='60' src={enamd} alt='' loading='lazy' />{' '}
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div className='hidden md:inline'>
@@ -97,26 +111,23 @@ function ContactUs() {
                 <a href='mailto: Contact@TolouPakhsh.com' className='mt-3  text-center font-extrabold'>
                   Contact@TolouPakhsh.com
                 </a>
+
+                <div className='mt-6'>
+                  <a
+                    href='https://trustseal.enamad.ir/?id=294127&amp;code=NNF0HcB9laP1f33ld492'
+                    className=' flex flex-col items-center gap-1'
+                    target='_blank'
+                    rel='nofollow'
+                  >
+                    <Image className='mt-3 rounded-2xl' width='90' height='90' src={enamd} alt='' loading='lazy' />{' '}
+                  </a>
+                </div>
               </div>
             </div>
           </div>
           <div className='absolute left-1 pl-10 pt-8 xl:pl-16'>
             <AbousUsSvgLeft />
           </div>
-          <a
-            href='https://trustseal.enamad.ir/?id=294127&amp;code=NNF0HcB9laP1f33ld492'
-            className=' relative top-52 z-50 mb-52'
-            target='_blank'
-            rel='nofollow'
-          >
-            <img
-              width='125'
-              height='136'
-              src='https://toloupakhsh.ir/wp-content/uploads/2023/02/اینماد.png'
-              alt=''
-              loading='lazy'
-            />{' '}
-          </a>
         </div>
       </div>
     </div>
