@@ -1,18 +1,15 @@
 'use client';
-import {useRouter} from 'next/navigation';
 import React from 'react';
 
-function DynamicPage(context: any) {
+function DynamicPage() {
   React.useEffect(() => {
     // Get the current URL path
     const currentPath = window.location.pathname;
-    const {res} = context;
     // Split the path and extract the value after "localhost:3000"
     const parts = currentPath.split('/');
     const valueAfterLocalhost = parts[1]; // Index 0 will be an empty string
-    res.writeHead(301, {location: ` https://mag.toloupakhsh.ir/${decodeURIComponent(valueAfterLocalhost)} `});
+    window.location.assign(`https://mag.toloupakhsh.ir/${decodeURIComponent(valueAfterLocalhost)}`);
   }, []);
-
   return <div></div>;
 }
 

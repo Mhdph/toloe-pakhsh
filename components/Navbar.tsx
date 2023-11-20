@@ -68,7 +68,7 @@ const Navbar: React.FC<NavbarProps> = () => {
             <DesktopLogo />
           </Link>
           <div className='flex items-center justify-between gap-16 text-[14px]'>
-            <a href='https://toloupakhsh.ir/mag/'>وبلاگ</a>
+            <a href='https://mag.toloupakhsh.ir/mag/'>وبلاگ</a>
             <Link href='/aboutus'>درباره ما</Link>
             <Link href='/'>سیستم کسب درامد</Link>
           </div>
