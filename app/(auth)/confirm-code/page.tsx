@@ -29,17 +29,18 @@ function ConfirmCode() {
   const router = useRouter();
   const products = useProductStore((state) => state.products);
   const {mutate: addList} = useAddCartList();
+  const nextYear = Date.now() + 360 * 24 * 60 * 60 * 1000;
+  const expireTime = new Date(nextYear);
   const cartDataToSend = products.map((item) => ({
     productId: item.id,
     count: item.quantity,
   }));
   const {mutate, isLoading, error} = useMutation(() => ConfirmCodeFn({code: digitsFaToEn(code), phone}), {
     onSuccess: (data) => {
-      Cookies.set('token', data.token);
-      Cookies.set('token', data.token);
+      Cookies.set('token', data.token, {expires: expireTime});
       const decoded: token = jwt_decode(data.token);
-      Cookies.set('userId', decoded.userId);
-      Cookies.set('role', decoded.role);
+      Cookies.set('userId', decoded.userId, {expires: expireTime});
+      Cookies.set('role', decoded.role, {expires: expireTime});
       if (products.length > 0) {
         try {
           axios.post(`${baseUrl}/cart-row/addList/`, cartDataToSend, {
