@@ -19,6 +19,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import {baseUrl} from '@/lib/config';
 import {digitsEnToFa} from '@persian-tools/persian-tools';
+import {convertNumberFatoEnInStr} from '@/translate';
 
 function SearchPage() {
   const {setEndPrice, setOff, setExist, setStartPrice, setCategoryName, setSortName, setSkip, setDirection, setBrand} =
@@ -90,7 +91,7 @@ function SearchPage() {
   const date = new Date().toLocaleDateString('fa-IR');
 
   useEffect(() => {
-    document.title = `قیمت و خرید ${gameQuery.categoryName} (${date}) | طلوع پخش `;
+    document.title = `قیمت و خرید ${gameQuery.categoryName} (${convertNumberFatoEnInStr(date)}) | طلوع پخش `;
   }, [gameQuery.categoryName]);
 
   const {data, isLoading} = useProducts();
