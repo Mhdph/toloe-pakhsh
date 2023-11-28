@@ -180,15 +180,15 @@ const Navbar: React.FC<NavbarProps> = () => {
             <span className='py-2 text-xs font-black'>فروشگاه</span>
           </Link>
           <Link
-            href='/search'
+            href='/search?page=1'
             className={cn(
-              pathName === '/search'
+              pathName === '/search?page=1'
                 ? 'rounded-t-3xl border-t  border-t-[#F6622C] bg-white text-[#F6622C]'
                 : 'text-black-items',
               'flex items-center gap-3 px-24 text-[14px] font-extrabold',
             )}
           >
-            {pathName == '/search' ? <SearchIcon /> : <SearchBarSvg />}
+            {pathName == '/search?page=1' ? <SearchIcon /> : <SearchBarSvg />}
             <span className='py-2 text-center text-xs font-black'>جست و جو</span>
           </Link>
           <Link

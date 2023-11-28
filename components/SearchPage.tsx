@@ -9,7 +9,7 @@ import {Switch} from '@/components/ui/Switch';
 import {FilterList} from '@/constant/List';
 import useProducts from '@/service/product/useProducts';
 import useProductQueryStore from '@/store/search';
-import {useParams} from 'next/navigation';
+import {useParams, usePathname, useSearchParams, useRouter} from 'next/navigation';
 import {useEffect, useState} from 'react';
 import SameProduct from './search/SameProduct';
 import Loading from './ui/Loading';
@@ -27,12 +27,18 @@ function SearchPage() {
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState<number>(1);
   const gameQuery = useProductQueryStore((s) => s.productQuery);
+  const path = usePathname();
   const searchParams = useParams();
+  const useSearch = useSearchParams();
   const {data: categoryData} = useGetCategoriesAndChilds();
+  const router = useRouter();
 
   useEffect(() => {
     const search = decodeURIComponent(searchParams.category || '');
     const subCategory = decodeURIComponent(searchParams.subcategory || '');
+    const queryPage = useSearch.get('page') || '1';
+
+    onPageChange(parseInt(queryPage));
 
     if (subCategory) {
       setCategoryName(subCategory);
@@ -45,7 +51,7 @@ function SearchPage() {
         setCategoryName(search);
       }
     }
-  }, [searchParams.category, searchParams.subcategory]);
+  }, [searchParams.category, searchParams.subcategory, useSearch.get('page')]);
 
   const handleStartChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPage(1);
@@ -74,6 +80,8 @@ function SearchPage() {
   };
 
   const onPageChange = (page: number) => {
+    router.push(`${path}?page=${page}`);
+    router.refresh();
     setPage(page);
     const calculate = page - 1;
     setSkip(calculate * 10);
