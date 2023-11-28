@@ -1,5 +1,4 @@
 import SearchPage from '@/components/SearchPage';
-import {Metadata, ResolvingMetadata} from 'next';
 import React from 'react';
 //subcategory
 

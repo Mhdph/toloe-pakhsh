@@ -16,8 +16,6 @@ export async function generateMetadata({params, searchParams}: Props) {
   };
 }
 
-export function addCanonical() {}
-
 function Search() {
   return <SearchPage />;
 }
