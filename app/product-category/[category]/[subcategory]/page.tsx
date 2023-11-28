@@ -4,16 +4,16 @@ import React from 'react';
 //subcategory
 
 type Props = {
-  params: {category: string; subcategory: string};
+  params: {subcategory: string};
   searchParams: {[key: string]: string | string[] | undefined};
 };
-//category
-export async function generateMetadata({params, searchParams}: Props, parent: ResolvingMetadata): Promise<Metadata> {
+
+export async function generateMetadata({params, searchParams}: Props) {
+  const siteURL = 'https://toloupakhsh.ir';
+
   return {
-    other: {
-      canonical: `https://toloupakhsh.ir/product-category/${params.category}/${params.subcategory}?page=${
-        searchParams.page || 1
-      }`,
+    alternates: {
+      canonical: `${siteURL}/${params.subcategory}?page=${searchParams.page}`,
     },
   };
 }

@@ -1,18 +1,23 @@
 import SearchPage from '@/components/SearchPage';
-import {Metadata, ResolvingMetadata} from 'next';
 
 type Props = {
-  params: {page: string};
+  params: {id: string};
   searchParams: {[key: string]: string | string[] | undefined};
 };
 
-export async function generateMetadata({params, searchParams}: Props, parent: ResolvingMetadata): Promise<Metadata> {
+export async function generateMetadata({params, searchParams}: Props) {
+  const {page} = searchParams;
+  const siteURL = 'https://toloupakhsh.ir';
+
   return {
-    other: {
-      canonical: `https://toloupakhsh.ir/search?page=${searchParams.page}`,
+    alternates: {
+      canonical: `${siteURL}/search?page=${page}`,
     },
   };
 }
+
+export function addCanonical() {}
+
 function Search() {
   return <SearchPage />;
 }
