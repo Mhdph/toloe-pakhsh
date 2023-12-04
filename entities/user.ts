@@ -22,7 +22,7 @@ export default interface User {
 export type UpdateUser = {
   firstName: string;
   lastName: string;
-  phone: string;
+  // phone: string;
   address: string;
   city: string;
   nationalCode?: string | undefined;
