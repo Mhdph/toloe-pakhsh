@@ -17,7 +17,7 @@ function OfferHero() {
       <p className='mt-2 text-4xl font-semibold md:mb-2 md:text-5xl'> قابل توجه خرید اولی ها</p>
       <p className='text-xs font-black md:text-[14px]'>
         {' '}
-        کد تخفیف ۲۵ درصد + ۳ لواشک استیکی رایگان با کد تخفیف: toloue1 (برای خرید های بالای ۱۰۰هزار تومان)
+        کد تخفیف ۱۵ درصد : toloue1 (برای خرید های بالای ۱۰۰هزار تومان)
       </p>
       <Link
         className='z-50 cursor-pointer rounded-3xl bg-white px-4 py-1.5 text-xs font-extrabold text-[#F02D3C] md:text-[14px]'
