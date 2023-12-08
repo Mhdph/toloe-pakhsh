@@ -4,11 +4,13 @@ import {toast} from 'react-hot-toast';
 import {CACHE_KEY_CART, CACHE_KEY_SHOP} from '../constants';
 import {Cart} from '@/entities/Cart';
 import axios from 'axios';
+import {useCartListCount} from '@/store/zustand';
 
 const apiClient = new APIClient<string | number>('/cart-row/delete');
 
 const useDeleteCartRow = () => {
   const queryClient = useQueryClient();
+  const increaseCountCart = useCartListCount((state) => state.decreaseCount);
 
   return useMutation<string | number, Error, string | number>((data) => apiClient.delete(data), {
     onSuccess: () => {
@@ -16,6 +18,7 @@ const useDeleteCartRow = () => {
         queryKey: [CACHE_KEY_SHOP],
       });
       toast.success('اطلاعات با موفقیت به روز رسانی شد');
+      increaseCountCart(1);
     },
 
     onError: (error) => {

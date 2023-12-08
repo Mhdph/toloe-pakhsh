@@ -24,15 +24,21 @@ import axios from 'axios';
 import {baseUrl} from '@/lib/config';
 import {Product} from '@/entities/product';
 import {MobileMenu} from './MobileMenu';
+import {useProductStore, useCartListCount} from '@/store/zustand';
+import {digitsEnToFa} from '@persian-tools/persian-tools';
 
 type NavbarProps = {};
 
 const Navbar: React.FC<NavbarProps> = () => {
   const [data, setData] = React.useState([]);
+  const [cartRow, setCartRow] = React.useState(0);
   const [name, setName] = React.useState('');
   const pathName = usePathname();
   const router = useRouter();
   const debouncedValue = useDebounce(name, 3000);
+  const unSignCartListCount = useProductStore((state) => state.products).length;
+  const signCartListCount = useCartListCount((state) => state.count);
+
   const getProduct = async () => {
     try {
       const res = await axios.get(`${baseUrl}/product?productName=${name}`);
@@ -41,10 +47,18 @@ const Navbar: React.FC<NavbarProps> = () => {
       console.log(error);
     }
   };
+  const cartListCount = () => {
+    if (signCartListCount != 0) {
+      setCartRow(signCartListCount);
+    } else {
+      setCartRow(unSignCartListCount);
+    }
+  };
 
   React.useEffect(() => {
     getProduct();
-  }, [debouncedValue]);
+    cartListCount();
+  }, [debouncedValue, unSignCartListCount, signCartListCount, data]);
   return (
     <div>
       <div className='navbar_shadow fixed z-50 flex h-[72px] w-full items-center justify-between bg-white pb-2 lg:hidden'>
@@ -57,7 +71,15 @@ const Navbar: React.FC<NavbarProps> = () => {
           <LogoIcon />
         </Link>
         <Link href='/shopingbasket' className='navbar_bg_left flex items-center justify-center'>
-          <div className='cursor-pointer'>
+          <div className=' flex h-8 w-16 cursor-pointer flex-row items-center justify-around  '>
+            {cartRow != 0 ? (
+              <div className=' flex w-6 justify-center rounded-full bg-white  text-red-700'>
+                {digitsEnToFa(cartRow)}
+              </div>
+            ) : (
+              <></>
+            )}
+
             <StoreActiveIcon />
           </div>
         </Link>
@@ -146,11 +168,18 @@ const Navbar: React.FC<NavbarProps> = () => {
               </div>
             </Combobox>
 
-            <div className='contact_us flex h-10 w-10 items-center justify-center rounded-full bg-red-700'>
-              <Link href='/shopingbasket'>
+            <Link href='/shopingbasket'>
+              <div className='contact_us  flex h-8 w-16 flex-row items-center justify-around rounded-[18px] bg-red-700'>
+                {cartRow != 0 ? (
+                  <div className=' flex w-6 justify-center rounded-full bg-white  text-red-700'>
+                    {digitsEnToFa(cartRow)}
+                  </div>
+                ) : (
+                  <></>
+                )}
                 <BucketIcon />
-              </Link>
-            </div>
+              </div>
+            </Link>
           </div>
         </div>
         <div className='flex h-10 w-full flex-row-reverse justify-between bg-[#E9EAEA] px-12'>

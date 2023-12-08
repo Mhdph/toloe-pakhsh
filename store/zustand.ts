@@ -21,7 +21,19 @@ interface ProductStore {
   updateProductQuantity: (productId: number, quantity: number) => void;
 }
 
-const useProductStore = create<ProductStore>()(
+interface cartListCount {
+  count: number;
+  increaseCount: (count: number) => void;
+  decreaseCount: (count: number) => void;
+}
+
+export const useCartListCount = create<cartListCount>()((set) => ({
+  count: 0,
+  increaseCount: () => set((state) => ({count: state.count + 1})),
+  decreaseCount: () => set((state) => ({count: state.count - 1})),
+}));
+
+export const useProductStore = create<ProductStore>()(
   devtools((set) => ({
     products: [],
     addProduct: (product) => {
@@ -60,5 +72,3 @@ const useProductStore = create<ProductStore>()(
     },
   })),
 );
-
-export default useProductStore;

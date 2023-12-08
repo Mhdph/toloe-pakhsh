@@ -5,7 +5,7 @@ import {Cart, UpdateCart} from '@/entities/Cart';
 import {baseUrl} from '@/lib/config';
 import useGetCart from '@/service/cart/useGetCart';
 import useUpdateCart from '@/service/cart/useUpdateCart';
-import useProductStore from '@/store/zustand';
+import {useProductStore} from '@/store/zustand';
 import {useQuery, useQueryClient} from '@tanstack/react-query';
 import Cookies from 'js-cookie';
 import Image from 'next/image';

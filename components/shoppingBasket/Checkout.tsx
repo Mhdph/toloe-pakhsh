@@ -5,7 +5,7 @@ import useGetCart from '@/service/cart/useGetCart';
 import {CACHE_KEY_USER} from '@/service/constants';
 import usePayment from '@/service/payment/usePayment';
 import useDelivery from '@/service/settings/useDelivery';
-import useProductStore from '@/store/zustand';
+import {useProductStore} from '@/store/zustand';
 import {digitsEnToFa, addCommas, digitsFaToEn} from '@persian-tools/persian-tools';
 import {useQuery} from '@tanstack/react-query';
 import Cookies from 'js-cookie';

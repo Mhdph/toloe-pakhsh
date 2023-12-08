@@ -7,7 +7,7 @@ import {FavouriteIcon, MiniBucketIcon, MinusIcon, PlusIcon, ShareIcon} from '@/a
 import {useParams} from 'next/navigation';
 import {baseUrl} from '@/lib/config';
 import useAddCart from '@/service/cart/useAddCart';
-import useProductStore from '@/store/zustand';
+import {useProductStore} from '@/store/zustand';
 import useAddFavouriteProduct from '@/service/product/useAddFavouriteProduct';
 import Cookies from 'js-cookie';
 import Loading from '../ui/Loading';

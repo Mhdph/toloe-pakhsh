@@ -2,7 +2,7 @@
 'use client';
 import {HeartIcon, HeartRedIcon, StarIcon, StoreActiveIcon} from '@/assets/Icons';
 import {baseUrl} from '@/lib/config';
-import useProductStore from '@/store/zustand';
+import {useProductStore} from '@/store/zustand';
 import Link from 'next/link';
 import useAddCart from '@/service/cart/useAddCart';
 import Cookies from 'js-cookie';
