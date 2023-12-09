@@ -58,7 +58,7 @@ const Navbar: React.FC<NavbarProps> = () => {
   React.useEffect(() => {
     getProduct();
     cartListCount();
-  }, [debouncedValue, unSignCartListCount, signCartListCount, data]);
+  }, [debouncedValue, unSignCartListCount, signCartListCount]);
   return (
     <div>
       <div className='navbar_shadow fixed z-50 flex h-[72px] w-full items-center justify-between bg-white pb-2 lg:hidden'>
