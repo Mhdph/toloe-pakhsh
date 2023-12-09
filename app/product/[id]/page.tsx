@@ -20,7 +20,7 @@ export async function generateMetadata({params, searchParams}: Props, parent: Re
   const product = await fetch(`${baseUrl}/product/getbyid/${id}`).then((res) => res.json());
 
   // optionally access and extend (rather than replace) parent metadata
-  console.log(product.name);
+  // console.log(product.name);
   return {
     other: {
       product_name: product.name,
@@ -32,8 +32,10 @@ export async function generateMetadata({params, searchParams}: Props, parent: Re
   };
 }
 
-export default async function Page() {
-  const data = await getSameProduct();
+export default async function Page({params, searchParams}: Props) {
+  const id = params.id;
+  const product = await fetch(`${baseUrl}/product/getbyid/${id}`).then((res) => res.json());
+  const data = await getSameProduct(product.name);
 
   return (
     <div>

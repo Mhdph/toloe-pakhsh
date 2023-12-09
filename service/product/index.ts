@@ -11,8 +11,8 @@ export async function getAllProduct() {
 }
 
 // get same product
-export async function getSameProduct() {
-  const res = await fetch(`${baseUrl}/cart-row/offerList`, {cache: 'no-cache'});
+export async function getSameProduct(productName: string) {
+  const res = await fetch(`${baseUrl}/product/sameProduct?productName=${productName}`, {cache: 'no-cache'});
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }
