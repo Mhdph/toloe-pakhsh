@@ -7,23 +7,20 @@ body {
   font-family: 'Vazirmatn', sans-serif;
   direction: rtl;
 }
-.anim_ready_to_click {
-  animation-name: scale10;
-  animation-duration: 1500ms;
-  animation-iteration-count: infinite;
+.search_btn {
+  background: linear-gradient(270deg, #f02d3c 0%, #f6622c 100%);
+  border-radius: 0px 20px 20px 0px;
+  border-style: outset;
+  border-color: #f02d3c;
 }
 
-@keyframes scale10 {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
-  }
+.search_btn_mob {
+  background: linear-gradient(270deg, #f02d3c 0%, #f6622c 100%);
+  border-radius: 0px 12px 12px 0px;
+  border-style: outset;
+  border-color: #f02d3c;
 }
+
 .footer_bg {
   background: linear-gradient(270deg, #f02d3c 0%, #f6622c 100%);
   box-shadow: inset 0px -2px 4px rgba(0, 0, 0, 0.2);

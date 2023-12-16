@@ -10,7 +10,7 @@ import {FilterList} from '@/constant/List';
 import useProducts from '@/service/product/useProducts';
 import useProductQueryStore from '@/store/search';
 import {useParams, usePathname, useSearchParams, useRouter} from 'next/navigation';
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import SameProduct from './search/SameProduct';
 import Loading from './ui/Loading';
 import {PaginationList} from './ui/Pagination';
@@ -22,23 +22,51 @@ import {digitsEnToFa} from '@persian-tools/persian-tools';
 import {convertNumberFatoEnInStr} from '@/translate';
 
 function SearchPage() {
-  const {setEndPrice, setOff, setExist, setStartPrice, setCategoryName, setSortName, setSkip, setDirection, setBrand} =
-    useProductQueryStore();
-  const [page, setPage] = useState(1);
-  const [sort, setSort] = useState<number>(1);
-  const gameQuery = useProductQueryStore((s) => s.productQuery);
+  const {
+    setEndPrice,
+    setOff,
+    setExist,
+    setStartPrice,
+    setCategoryName,
+    setSortName,
+    setSkip,
+    setDirection,
+    setBrand,
+    setKeyWord,
+    setQuery,
+  } = useProductQueryStore();
+  const router = useRouter();
   const path = usePathname();
   const searchParams = useParams();
   const useSearch = useSearchParams();
+
+  const [page, setPage] = useState(1);
+  const [sort, setSort] = useState<number>(1);
+  const [productName, setProductName] = useState('');
+
+  const queryPage = parseInt(useSearch.get('page') || '1');
+  const queryProductName = useSearch.get('productName') || '';
+  const gameQuery = useProductQueryStore((s) => s.productQuery);
+
   const {data: categoryData} = useGetCategoriesAndChilds();
-  const router = useRouter();
+
+  const createQueryString = useCallback((name: string, value: string) => {
+    const params = new URLSearchParams();
+    params.set(name, value);
+
+    return params.toString();
+  }, []);
 
   useEffect(() => {
     const search = decodeURIComponent(searchParams.category || '');
     const subCategory = decodeURIComponent(searchParams.subcategory || '');
-    const queryPage = useSearch.get('page') || '1';
 
-    onPageChange(parseInt(queryPage));
+    if (queryProductName != '') {
+      setProductName(queryProductName);
+      setPage(queryPage);
+      const calculate = page - 1;
+      setQuery(queryProductName, calculate * 10);
+    }
 
     if (subCategory) {
       setCategoryName(subCategory);
@@ -51,7 +79,7 @@ function SearchPage() {
         setCategoryName(search);
       }
     }
-  }, [searchParams.category, searchParams.subcategory, useSearch.get('page')]);
+  }, [searchParams.category, searchParams.subcategory, queryProductName]);
 
   const handleStartChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPage(1);
@@ -80,11 +108,20 @@ function SearchPage() {
   };
 
   const onPageChange = (page: number) => {
-    router.push(`${path}?page=${page}`);
-    router.refresh();
-    setPage(page);
-    const calculate = page - 1;
-    setSkip(calculate * 10);
+    if (productName != '') {
+      router.push(
+        `${path}` +
+          '?' +
+          createQueryString('productName', productName || '') +
+          '&' +
+          createQueryString('page', page.toString()),
+      );
+    } else {
+      router.push(`${path}` + '?' + createQueryString('page', page.toString()));
+      setPage(page);
+      const calculate = page - 1;
+      setSkip(calculate * 10);
+    }
   };
 
   const resetStartPrice = () => {
@@ -147,7 +184,7 @@ function SearchPage() {
           })}
         </div>
       )}
-      <SearchBar count={data?.count} />
+      <SearchBar count={data?.count} onChangePage={page} />
       <div className='flex md:gap-2  md:px-10 md:pt-10 '>
         <div className='filter_bg_sidebar hidden h-[1108px] min-w-[300px] rounded-3xl bg-red-700 px-3 md:flex md:flex-col'>
           <div className='mt-4 px-4'>

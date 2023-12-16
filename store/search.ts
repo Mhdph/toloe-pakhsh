@@ -25,6 +25,7 @@ interface ProductQueryStore {
   setSkip: (skip: number | undefined) => void;
   setDirection: (sortDirection: number | undefined) => void;
   setKeyWord: (keyword: string | undefined) => void;
+  setQuery: (keyword: string | undefined, skip: number | undefined) => void;
 }
 
 const useProductQueryStore = create<ProductQueryStore>((set) => ({
@@ -40,6 +41,7 @@ const useProductQueryStore = create<ProductQueryStore>((set) => ({
   setSkip: (skip) => set((state) => ({productQuery: {...state.productQuery, skip}})),
   setDirection: (sortDirection) => set((state) => ({productQuery: {...state.productQuery, sortDirection}})),
   setKeyWord: (keyword) => set((state) => ({productQuery: {...state.productQuery, keyword}})),
+  setQuery: (keyword, skip) => set((state) => ({productQuery: {...state.productQuery, keyword, skip}})),
 }));
 
 export default useProductQueryStore;

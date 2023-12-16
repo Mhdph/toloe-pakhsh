@@ -8,18 +8,35 @@ import useProductQueryStore from '@/store/search';
 import {Combobox, Transition} from '@headlessui/react';
 import axios from 'axios';
 import Link from 'next/link';
-import React, {Fragment} from 'react';
+import React, {Fragment, useCallback} from 'react';
 import SearchPopOver from './search/SearchPopOver';
+import {usePathname, useSearchParams, useRouter} from 'next/navigation';
+
 interface SearchBarProps {
   count: number | undefined;
+  onChangePage: number | undefined;
 }
 
-function SearchBar({count}: SearchBarProps) {
+function SearchBar({count, onChangePage}: SearchBarProps) {
   const [data, setData] = React.useState([]);
   const [name, setName] = React.useState('');
+  const path = usePathname();
+  const useSearch = useSearchParams();
+  const page = onChangePage || 1;
   const gameQuery = useProductQueryStore((s) => s.productQuery);
-  const {setEndPrice, setOff, setExist, setStartPrice, setCategoryName, setSortName, setSkip, setDirection, setBrand} =
-    useProductQueryStore();
+  const {
+    setEndPrice,
+    setOff,
+    setExist,
+    setStartPrice,
+    setCategoryName,
+    setSortName,
+    setSkip,
+    setDirection,
+    setBrand,
+    setKeyWord,
+    setQuery,
+  } = useProductQueryStore();
   const debouncedValue = useDebounce(name, 3000);
   const getProduct = async () => {
     try {
@@ -29,6 +46,13 @@ function SearchBar({count}: SearchBarProps) {
       console.log(error);
     }
   };
+
+  const createQueryString = useCallback((name: string, value: string) => {
+    const params = new URLSearchParams();
+    params.set(name, value);
+
+    return params.toString();
+  }, []);
 
   React.useEffect(() => {
     getProduct();
@@ -41,13 +65,37 @@ function SearchBar({count}: SearchBarProps) {
             <div className='relative mt-1'>
               <div className='relative  '>
                 <Combobox.Input
-                  className='w-[352px] rounded-[12px] bg-gray-200 py-1.5 pr-10 outline-none'
+                  className='w-[352px] rounded-[12px] bg-gray-200 py-1.5 pr-20 outline-none'
                   displayValue={() => name}
                   onChange={(event) => setName(() => event.target.value)}
                   placeholder='جستجو'
                 />
-                <div className='pointer-events-none absolute inset-y-0  right-0 flex items-center pr-3'>
-                  <SearchBarSvg />
+                <div
+                  className={
+                    name.length === 0
+                      ? 'pointer-events-none absolute inset-y-0  right-0  flex items-center    pr-3'
+                      : ''
+                  }
+                >
+                  {name.length === 0 ? (
+                    <SearchBarSvg />
+                  ) : (
+                    <Link
+                      className=' search_btn_mob  absolute inset-y-0 z-40 items-center   px-2 py-1.5 text-white'
+                      href={
+                        `${path}` +
+                        '?' +
+                        createQueryString('productName', name || '') +
+                        '&' +
+                        createQueryString('page', page.toString())
+                      }
+                      onClick={() => {
+                        setQuery(name, page);
+                      }}
+                    >
+                      جستجو
+                    </Link>
+                  )}
                 </div>
               </div>
               <Transition

@@ -18,7 +18,7 @@ import Link from 'next/link';
 import {cn} from '@/lib/cn';
 import {SearchIcon} from 'lucide-react';
 import {Combobox, Transition} from '@headlessui/react';
-import React, {Fragment, useEffect} from 'react';
+import React, {Fragment, useCallback} from 'react';
 import useDebounce from '@/hooks/useDebounce';
 import axios from 'axios';
 import {baseUrl} from '@/lib/config';
@@ -56,6 +56,13 @@ const Navbar: React.FC<NavbarProps> = () => {
       setCartRow(unSignCartListCount);
     }
   };
+
+  const createQueryString = useCallback((name: string, value: string) => {
+    const params = new URLSearchParams();
+    params.set(name, value);
+
+    return params.toString();
+  }, []);
 
   React.useEffect(() => {
     getProduct();
@@ -108,83 +115,87 @@ const Navbar: React.FC<NavbarProps> = () => {
                 <SearchBarSvg />
               </div>
             </div> */}
-            <div>
-              {name.length === 0 ? (
-                <></>
-              ) : (
-                <Link
-                  href={`/search?prdouctName=${name}&page=1`}
-                  onClick={() => {
-                    setKeyWord(name);
-                  }}
-                >
-                  <div className='navbar_bg_left anim_ready_to_click border-radius:0px 20px	 0px 0px inset-y-0  z-30  items-center   text-white'>
-                    جستجو کن
+
+            <Combobox>
+              <div className='relative '>
+                <div className='relative z-30 pl-8'>
+                  <Combobox.Input
+                    className='w-[300px] rounded-[18px] bg-gray-200 py-1.5 pr-20 outline-none'
+                    displayValue={() => name}
+                    onChange={(event) => setName(() => event.target.value)}
+                    placeholder='جستجو'
+                  />
+
+                  <div className={name.length === 0 ? ' absolute inset-y-0  right-0  flex items-center pr-3 ' : ''}>
+                    {name.length === 0 ? (
+                      <SearchBarSvg />
+                    ) : (
+                      <Link
+                        className=' search_btn  absolute inset-y-0 z-40 items-center px-2 py-1.5 text-white'
+                        href={
+                          `/search` +
+                          '?' +
+                          createQueryString('productName', name) +
+                          '&' +
+                          createQueryString('page', '1')
+                        }
+                        onClick={() => {
+                          setKeyWord(name);
+                        }}
+                      >
+                        جستجو
+                      </Link>
+                    )}
                   </div>
-                </Link>
-              )}
-              <Combobox>
-                <div className='relative '>
-                  <div className='relative z-40 pl-8'>
-                    <Combobox.Input
-                      className='w-[300px] rounded-[18px] bg-gray-200 py-1.5 pr-10 outline-none'
-                      displayValue={() => name}
-                      onChange={(event) => setName(() => event.target.value)}
-                      placeholder='جستجو'
-                    />
-                    <div className={name.length === 0 ? ' absolute inset-y-0  right-0  flex items-center pr-3 ' : ''}>
-                      {name.length === 0 ? <SearchBarSvg /> : <></>}
-                    </div>
-                  </div>
-                  <Transition
-                    as={Fragment}
-                    leave='transition ease-in duration-100'
-                    leaveFrom='opacity-100'
-                    leaveTo='opacity-0'
-                    afterLeave={() => setName('')}
-                  >
-                    <Combobox.Options className='absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
-                      {name !== '' && data.length === 0 ? (
-                        <div className='relative cursor-default select-none px-4 py-2 text-gray-700'>
-                          در حال یافتن محصول
-                        </div>
-                      ) : (
-                        data.map((item: Product) => (
-                          <Combobox.Option
-                            key={item.id}
-                            className={({active}) =>
-                              `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                                active ? 'bg-main-red text-white' : 'text-black-items'
-                              }`
-                            }
-                            value={item.name}
-                          >
-                            {({selected, active}) => (
-                              <>
-                                <Link
-                                  onClick={() => setName('')}
-                                  href={`/product/${item.id}`}
-                                  className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}
-                                >
-                                  <span>{item.name}</span>
-                                </Link>
-                                {selected ? (
-                                  <span
-                                    className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
-                                      active ? 'text-white' : 'text-teal-600'
-                                    }`}
-                                  ></span>
-                                ) : null}
-                              </>
-                            )}
-                          </Combobox.Option>
-                        ))
-                      )}
-                    </Combobox.Options>
-                  </Transition>
                 </div>
-              </Combobox>
-            </div>
+                <Transition
+                  as={Fragment}
+                  leave='transition ease-in duration-100'
+                  leaveFrom='opacity-100'
+                  leaveTo='opacity-0'
+                  afterLeave={() => setName('')}
+                >
+                  <Combobox.Options className='absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
+                    {name !== '' && data.length === 0 ? (
+                      <div className='relative cursor-default select-none px-4 py-2 text-gray-700'>
+                        در حال یافتن محصول
+                      </div>
+                    ) : (
+                      data.map((item: Product) => (
+                        <Combobox.Option
+                          key={item.id}
+                          className={({active}) =>
+                            `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                              active ? 'bg-main-red text-white' : 'text-black-items'
+                            }`
+                          }
+                          value={item.name}
+                        >
+                          {({selected, active}) => (
+                            <>
+                              <Link
+                                onClick={() => setName('')}
+                                href={`/product/${item.id}`}
+                                className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}
+                              >
+                                <span>{item.name}</span>
+                              </Link>
+                              {selected ? (
+                                <span
+                                  className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
+                                    active ? 'text-white' : 'text-teal-600'
+                                  }`}
+                                ></span>
+                              ) : null}
+                            </>
+                          )}
+                        </Combobox.Option>
+                      ))
+                    )}
+                  </Combobox.Options>
+                </Transition>
+              </div>
+            </Combobox>
             <div className=''></div>
             <Link href='/shopingbasket'>
               <div className='contact_us  flex h-8 w-16 flex-row items-center justify-around rounded-[18px] bg-red-700'>
