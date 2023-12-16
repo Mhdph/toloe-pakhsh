@@ -30,7 +30,16 @@ interface cartListCount {
 export const useCartListCount = create<cartListCount>()((set) => ({
   count: 0,
   increaseCount: () => set((state) => ({count: state.count + 1})),
-  decreaseCount: () => set((state) => ({count: state.count - 1})),
+  decreaseCount: () => {
+    set((state) => {
+      const deCount = state.count - 1;
+      if (deCount < 0) {
+        return {count: 0};
+      } else {
+        return {count: deCount};
+      }
+    });
+  },
 }));
 
 export const useProductStore = create<ProductStore>()(
