@@ -67,7 +67,7 @@ function SearchPage() {
       const calculate = page - 1;
       setQuery(queryProductName, calculate * 10);
     } else {
-      setKeyWord('');
+      setKeyWord(undefined);
     }
 
     if (subCategory) {
@@ -80,6 +80,8 @@ function SearchPage() {
         // Handle the case where no matching data is found
         setCategoryName(search);
       }
+    } else {
+      setCategoryName(undefined);
     }
   }, [searchParams.category, searchParams.subcategory, queryProductName]);
 
