@@ -18,7 +18,7 @@ import Link from 'next/link';
 import {cn} from '@/lib/cn';
 import {SearchIcon} from 'lucide-react';
 import {Combobox, Transition} from '@headlessui/react';
-import React, {Fragment, useCallback} from 'react';
+import React, {Fragment, useCallback, useRef} from 'react';
 import useDebounce from '@/hooks/useDebounce';
 import axios from 'axios';
 import {baseUrl} from '@/lib/config';
@@ -40,6 +40,7 @@ const Navbar: React.FC<NavbarProps> = () => {
   const unSignCartListCount = useProductStore((state) => state.products).length;
   const signCartListCount = useCartListCount((state) => state.count);
   const {setKeyWord} = useProductQueryStore();
+  const inputElement = useRef(null);
 
   const getProduct = async () => {
     try {
@@ -68,6 +69,14 @@ const Navbar: React.FC<NavbarProps> = () => {
     getProduct();
     cartListCount();
   }, [debouncedValue, unSignCartListCount, signCartListCount]);
+
+  const handleKeyPress = (event: any) => {
+    if (event.key == 'Enter') {
+      setKeyWord(name);
+      router.push(`/search` + '?' + createQueryString('productName', name) + '&' + createQueryString('page', '1'));
+    }
+  };
+
   return (
     <div>
       <div className='navbar_shadow fixed z-50 flex h-[72px] w-full items-center justify-between bg-white pb-2 lg:hidden'>
@@ -124,6 +133,7 @@ const Navbar: React.FC<NavbarProps> = () => {
                     displayValue={() => name}
                     onChange={(event) => setName(() => event.target.value)}
                     placeholder='جستجو'
+                    onKeyDown={handleKeyPress}
                   />
 
                   <div className={name.length === 0 ? ' absolute inset-y-0  right-0  flex items-center pr-3 ' : ''}>
@@ -139,6 +149,7 @@ const Navbar: React.FC<NavbarProps> = () => {
                           '&' +
                           createQueryString('page', '1')
                         }
+                        ref={inputElement}
                         onClick={() => {
                           setKeyWord(name);
                         }}
