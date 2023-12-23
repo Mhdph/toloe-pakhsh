@@ -66,6 +66,8 @@ function SearchPage() {
       setPage(queryPage);
       const calculate = page - 1;
       setQuery(queryProductName, calculate * 10);
+    } else {
+      setKeyWord('');
     }
 
     if (subCategory) {
