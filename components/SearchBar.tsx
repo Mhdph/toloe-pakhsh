@@ -37,7 +37,7 @@ function SearchBar({count, onChangePage}: SearchBarProps) {
     setKeyWord,
     setQuery,
   } = useProductQueryStore();
-  const debouncedValue = useDebounce(name, 3000);
+  const debouncedValue = useDebounce(name, 1000);
   const getProduct = async () => {
     try {
       const res = await axios.get(`${baseUrl}/product?productName=${name}`);

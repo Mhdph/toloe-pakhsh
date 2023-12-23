@@ -18,7 +18,7 @@ export default async function Home() {
   return (
     <main className='flex-col pt-1 md:pt-0'>
       <SliderImage />
-      <OfferHero2 />
+      {/* <OfferHero2 /> */}
       <CategoryList data={categoryData.data} />
       <OfferHero />
       <ListItems data={data.data} link='' title='آخرین محصولات' />

@@ -36,7 +36,7 @@ const Navbar: React.FC<NavbarProps> = () => {
   const [name, setName] = React.useState('');
   const pathName = usePathname();
   const router = useRouter();
-  const debouncedValue = useDebounce(name, 3000);
+  const debouncedValue = useDebounce(name, 500);
   const unSignCartListCount = useProductStore((state) => state.products).length;
   const signCartListCount = useCartListCount((state) => state.count);
   const {setKeyWord} = useProductQueryStore();

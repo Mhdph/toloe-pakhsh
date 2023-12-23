@@ -7,7 +7,7 @@ import useDebounce from '@/hooks/useDebounce';
 
 function Order() {
   const [keyWord, setKeyWord] = React.useState('');
-  const debouncedKeyWord = useDebounce(keyWord, 3000);
+  const debouncedKeyWord = useDebounce(keyWord, 1000);
 
   return (
     <div className='mt-4'>

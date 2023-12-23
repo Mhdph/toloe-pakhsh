@@ -22,11 +22,11 @@ interface ProductQuery {
 
 const useProducts = () => {
   const gameQuery = useProductQueryStore((s) => s.productQuery);
-  const debouncedCategory = useDebounce(gameQuery.categoryName, 3000);
-  const debouncedStartPrice = useDebounce(gameQuery.startPrice, 3000);
-  const debouncedEndPrice = useDebounce(gameQuery.endPrice, 3000);
-  const debouncedBrand = useDebounce(gameQuery.brand, 3000);
-  const debouncedKeyWord = useDebounce(gameQuery.keyword, 3000);
+  const debouncedCategory = useDebounce(gameQuery.categoryName, 300);
+  const debouncedStartPrice = useDebounce(gameQuery.startPrice, 300);
+  const debouncedEndPrice = useDebounce(gameQuery.endPrice, 300);
+  const debouncedBrand = useDebounce(gameQuery.brand, 300);
+  const debouncedKeyWord = useDebounce(gameQuery.keyword, 300);
 
   const params: ProductQuery = {};
 
