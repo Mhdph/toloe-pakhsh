@@ -8,7 +8,7 @@ import useProductQueryStore from '@/store/search';
 import {Combobox, Transition} from '@headlessui/react';
 import axios from 'axios';
 import Link from 'next/link';
-import React, {Fragment, useCallback} from 'react';
+import React, {Fragment, useCallback, useRef} from 'react';
 import SearchPopOver from './search/SearchPopOver';
 import {usePathname, useSearchParams, useRouter} from 'next/navigation';
 
@@ -18,6 +18,8 @@ interface SearchBarProps {
 }
 
 function SearchBar({count, onChangePage}: SearchBarProps) {
+  const inputElement = useRef(null);
+  const router = useRouter();
   const [data, setData] = React.useState([]);
   const [name, setName] = React.useState('');
   const path = usePathname();
@@ -57,6 +59,14 @@ function SearchBar({count, onChangePage}: SearchBarProps) {
   React.useEffect(() => {
     getProduct();
   }, [debouncedValue]);
+
+  const handleKeyPress = (event: any) => {
+    if (event.key == 'Enter') {
+      setKeyWord(name);
+      router.push(`/search` + '?' + createQueryString('productName', name) + '&' + createQueryString('page', '1'));
+    }
+  };
+
   return (
     <div className='pt-16 md:hidden'>
       <div className='serach_bar h-[162px] w-full rounded-b-3xl px-4'>
@@ -69,6 +79,7 @@ function SearchBar({count, onChangePage}: SearchBarProps) {
                   displayValue={() => name}
                   onChange={(event) => setName(() => event.target.value)}
                   placeholder='جستجو'
+                  onKeyDown={handleKeyPress}
                 />
                 <div
                   className={
