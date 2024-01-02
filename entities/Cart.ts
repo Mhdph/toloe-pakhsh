@@ -28,6 +28,7 @@ export interface Cart {
   FaDate: string;
   faDate: string;
   phone: string;
+  trackingCode: string;
 }
 
 export interface CartRow {

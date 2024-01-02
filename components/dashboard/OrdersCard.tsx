@@ -33,6 +33,7 @@ interface Props {
 function OrdersCard({color = 'primary', keyWord, state = '', label = '', className, ...rest}: Props) {
   const [page, setPage] = React.useState(1);
   const [status, setStatus] = React.useState('');
+  const [trackingCode, setTrackingCode] = React.useState('');
   const [description, setDescription] = React.useState('');
 
   const {mutate} = useUpdateOrder();
@@ -42,6 +43,7 @@ function OrdersCard({color = 'primary', keyWord, state = '', label = '', classNa
     const updatedCart = {
       state: status,
       description,
+      trackingCode: trackingCode,
     };
 
     mutate({id, data: updatedCart});
@@ -125,25 +127,40 @@ function OrdersCard({color = 'primary', keyWord, state = '', label = '', classNa
             </Accordion>
             <hr className='my-4 border-b border-b-black-items border-opacity-10' />
             <div className='grid w-full grid-cols-4'>
-              {item.description !== null && item.description !== '' ? (
+              {/* depricate  check and remove this comment code*/}
+              {/* #TODO:  if description have value hidden input description line:142*/}
+              {/* {item.description !== null && item.description !== '' ? (
                 <div>
                   <p>توضیحات</p>: <p>{item.description}</p>
                 </div>
-              ) : null}
+              ) : null} */}
+
               <div className='col-span-1 w-full'>
                 <Button onClick={() => updateOrder(item.id)} type='submit' className='w-40'>
                   ثبت
                 </Button>
               </div>
-              <div className='col-span-3 flex w-full items-center gap-2'>
+              <div className='col-span-3 flex w-full items-end gap-2'>
                 <Input
+                  defaultValue={item.description}
                   onChange={(e) => setDescription(e.target.value)}
                   className='text-right placeholder:text-right'
                   placeholder='توضیحات'
                 />
+                <p>:توضیحات</p>
+              </div>
+              <div className='col-span-4 mt-2 flex  w-full  items-center gap-4'>
+                <Input
+                  defaultValue={digitsEnToFa(item.trackingCode)}
+                  onChange={(e) => setTrackingCode(e.target.value)}
+                  className='  text-right placeholder:text-right'
+                  placeholder='کد رهگیری پستی'
+                />
+                <div className='w-1/4'>:کد رهگیری</div>
+
                 <select
                   onChange={(e) => setStatus(e.target.value)}
-                  className='h-10 w-full rounded-md border border-input bg-transparent text-right '
+                  className='h-10 w-1/2 rounded-md border border-input bg-transparent text-right '
                 >
                   <option value='sending'>در حال ارسال</option>
                   <option value='posted'>ارسال شده</option>
