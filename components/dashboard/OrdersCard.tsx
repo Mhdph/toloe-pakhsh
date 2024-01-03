@@ -127,14 +127,6 @@ function OrdersCard({color = 'primary', keyWord, state = '', label = '', classNa
             </Accordion>
             <hr className='my-4 border-b border-b-black-items border-opacity-10' />
             <div className='grid w-full grid-cols-4'>
-              {/* depricate  check and remove this comment code*/}
-              {/* #TODO:  if description have value hidden input description line:142*/}
-              {/* {item.description !== null && item.description !== '' ? (
-                <div>
-                  <p>توضیحات</p>: <p>{item.description}</p>
-                </div>
-              ) : null} */}
-
               <div className='col-span-1 w-full'>
                 <Button onClick={() => updateOrder(item.id)} type='submit' className='w-40'>
                   ثبت
@@ -153,13 +145,21 @@ function OrdersCard({color = 'primary', keyWord, state = '', label = '', classNa
                 <Input
                   defaultValue={digitsEnToFa(item.trackingCode)}
                   onChange={(e) => setTrackingCode(e.target.value)}
-                  className='  text-right placeholder:text-right'
+                  className='text-right placeholder:text-right'
                   placeholder='کد رهگیری پستی'
                 />
                 <div className='w-1/4'>:کد رهگیری</div>
 
                 <select
-                  onChange={(e) => setStatus(e.target.value)}
+                  onChange={(e) => {
+                    setStatus(e.target.value);
+                    if (description == '') {
+                      setDescription(item.description);
+                    }
+                    if (trackingCode === '') {
+                      setTrackingCode(item.trackingCode);
+                    }
+                  }}
                   className='h-10 w-1/2 rounded-md border border-input bg-transparent text-right '
                 >
                   <option value='sending'>در حال ارسال</option>
