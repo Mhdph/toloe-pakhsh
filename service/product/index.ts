@@ -48,23 +48,3 @@ export async function getFavoriteProduct() {
 
   return res.json();
 }
-
-// get all shirini product
-export async function getAllShiriniProduct() {
-  const res = await fetch(`${baseUrl}/product?categoryName=شیرینی جات`, {cache: 'no-cache'});
-  if (!res.ok) {
-    throw new Error('Failed to fetch data');
-  }
-
-  return res.json();
-}
-
-// get all torshi product
-export async function getAllTorshiProduct() {
-  const res = await fetch(`${baseUrl}/product?categoryName=ترشیجات`, {cache: 'no-cache'});
-  if (!res.ok) {
-    throw new Error('Failed to fetch data');
-  }
-
-  return res.json();
-}

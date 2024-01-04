@@ -144,7 +144,10 @@ function SearchPage() {
   }, [gameQuery.categoryName]);
 
   const {data, isLoading} = useProducts();
-
+  if (data?.message == 'category not found') {
+    setCategoryName('');
+    router.push('/not-found');
+  }
   console.log(gameQuery.categoryName);
   return (
     <div>
