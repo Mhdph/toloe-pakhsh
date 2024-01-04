@@ -20,7 +20,7 @@ export default async function Home() {
       <SliderImage />
       {/* <OfferHero2 /> */}
       <CategoryList data={categoryData.data} />
-      <OfferHero />
+      {/* <OfferHero /> */}
       <ListItems data={data.data} link='' title='آخرین محصولات' />
       <SpecialOffer data={dataOff.data} />
       <AboutUs />
