@@ -90,7 +90,9 @@ function SearchPage() {
 
     if (subCategory) {
       setCategoryName(subCategory);
-      setPage(queryPage);
+      setPage(page);
+      const calculate = page - 1;
+      setSkip(calculate);
     } else if (search) {
       const matchingData = categoryData?.data.find((item) => item.englishName === search);
       if (matchingData) {
@@ -99,7 +101,9 @@ function SearchPage() {
         // Handle the case where no matching data is found
         setCategoryName(search);
       }
-      setPage(queryPage);
+      setPage(page);
+      const calculate = page - 1;
+      setSkip(calculate);
     } else {
       setCategoryName(undefined);
     }
