@@ -24,6 +24,7 @@ export async function generateMetadata({params, searchParams}: Props, parent: Re
   return {
     other: {
       product_name: product.name,
+      description: `برای خرید ${product.name} با بالاترین کیفیت و کمترین قیمت میتوانید از سایت طلوع پخش با قیمت روز خریداری کنید .`,
       product_id: product.id,
       'og:image': baseUrl + product.picture,
       product_price: product.price,

@@ -21,6 +21,24 @@ import {baseUrl} from '@/lib/config';
 import {digitsEnToFa} from '@persian-tools/persian-tools';
 import {convertNumberFatoEnInStr} from '@/translate';
 
+type Props = {
+  params: {id: string};
+  searchParams: {[key: string]: string | string[] | undefined};
+};
+
+export async function generateMetadata({params, searchParams}: Props) {
+  const {page, categoryName} = searchParams;
+  const siteURL = 'https://toloupakhsh.ir';
+
+  if (categoryName !== '' || categoryName !== undefined) {
+    return {
+      alternates: {
+        canonical: `${siteURL}/product-category/${categoryName}?page=${page}`,
+      },
+    };
+  }
+}
+
 function SearchPage() {
   const {
     setEndPrice,
@@ -72,6 +90,7 @@ function SearchPage() {
 
     if (subCategory) {
       setCategoryName(subCategory);
+      setPage(queryPage);
     } else if (search) {
       const matchingData = categoryData?.data.find((item) => item.englishName === search);
       if (matchingData) {
@@ -80,6 +99,7 @@ function SearchPage() {
         // Handle the case where no matching data is found
         setCategoryName(search);
       }
+      setPage(queryPage);
     } else {
       setCategoryName(undefined);
     }
@@ -140,8 +160,22 @@ function SearchPage() {
   const date = new Date().toLocaleDateString('fa-IR');
 
   useEffect(() => {
-    document.title = `قیمت و خرید ${gameQuery.categoryName} (${convertNumberFatoEnInStr(date)}) | طلوع پخش `;
-  }, [gameQuery.categoryName]);
+    if (gameQuery.categoryName === undefined || gameQuery.categoryName === '') {
+      if (page === 1) {
+        document.title = `جستجو محصولات | طلوع پخش `;
+      } else {
+        document.title = `جستجو محصولات صفحه  ${page} | طلوع پخش `;
+      }
+    } else {
+      if (page === 1) {
+        document.title = `قیمت و خرید ${gameQuery.categoryName} (${convertNumberFatoEnInStr(date)}) | طلوع پخش `;
+      } else {
+        document.title = `قیمت و خرید ${gameQuery.categoryName} (${convertNumberFatoEnInStr(
+          date,
+        )}) - صفحه ${page} | طلوع پخش `;
+      }
+    }
+  }, [gameQuery.categoryName, page]);
 
   const {data, isLoading} = useProducts();
   if (data?.message == 'category not found') {
@@ -153,6 +187,7 @@ function SearchPage() {
     <div>
       {gameQuery.categoryName === undefined ? (
         <div className='mr-14 hidden flex-wrap gap-2 md:flex'>
+          <h1 className='hidden'>جستجوی محصولات</h1>
           {categoryData?.data?.map((item) => (
             <div key={item.name} className='category_card h-[142px] w-[110px] '>
               <Link href={`/product-category/${item.name}`}>
@@ -276,6 +311,7 @@ function SearchPage() {
                 onClick={() => setCategoryName('')}
                 className='filter_bg_sidebar hidden w-[120px] cursor-pointer items-center justify-center gap-3 rounded-xl  px-3 py-1.5 md:flex'
               >
+                <h1 className='hidden'>خرید {gameQuery.categoryName}</h1>
                 <p className='text-[10px]  font-normal text-black-items'> {gameQuery.categoryName}</p>
                 <CloseIcon />
               </div>
