@@ -86,6 +86,7 @@ function SearchPage() {
       setQuery(queryProductName, calculate * 10);
     } else {
       setKeyWord(undefined);
+      setPage(queryPage);
     }
 
     if (subCategory) {
@@ -162,7 +163,7 @@ function SearchPage() {
   };
 
   const resetKeyword = () => {
-    setKeyWord('');
+    router.push(`${path}` + '?' + createQueryString('page', '1'));
   };
 
   const date = new Date().toLocaleDateString('fa-IR');
