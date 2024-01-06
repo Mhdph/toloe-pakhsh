@@ -1,5 +1,5 @@
 'use client';
-import {AvatarBlackIcon, PhoneBlackIcon} from '@/assets/Icons';
+import {AvatarBlackIcon, HomeIcon, LocationIcon, PhoneBlackIcon} from '@/assets/Icons';
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from '@/components/ui/Accordion';
 import {Cart} from '@/entities/Cart';
 import {baseUrl} from '@/lib/config';
@@ -99,6 +99,14 @@ function OrdersCard({color = 'primary', keyWord, state = '', label = '', classNa
               <div className='flex items-center gap-2'>
                 <PhoneBlackIcon />
                 <p className='text-sm font-normal'> {item.phone} </p>
+              </div>
+            </div>
+            <div className='flex flex-row-reverse justify-between mt-2'>
+              <div className='flex items-center gap-2'>
+                <p className='text-sm font-normal'>{item.address}</p>
+                <MiddleIcon>
+                  <HomeIcon />
+                </MiddleIcon>
               </div>
             </div>
             <hr className='my-4 border-b border-b-black-items border-opacity-10' />
