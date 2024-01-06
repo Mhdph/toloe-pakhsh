@@ -161,6 +161,10 @@ function SearchPage() {
     setStartPrice('');
   };
 
+  const resetKeyword = () => {
+    setKeyWord('');
+  };
+
   const date = new Date().toLocaleDateString('fa-IR');
 
   useEffect(() => {
@@ -363,6 +367,15 @@ function SearchPage() {
                 className='filter_bg_sidebar hidden w-[120px] cursor-pointer items-center justify-center gap-3 rounded-xl  px-3 py-1.5 md:flex'
               >
                 <p className='text-[10px]  font-normal text-black-items'>قیمت نهایی</p>
+                <CloseIcon />
+              </div>
+            ) : null}
+            {gameQuery.keyword !== undefined && gameQuery.keyword !== '' ? (
+              <div
+                onClick={resetKeyword}
+                className='filter_bg_sidebar hidden w-[120px] cursor-pointer items-center justify-center gap-3 rounded-xl  px-3 py-1.5 md:flex'
+              >
+                <p className='text-[10px]  font-normal text-black-items'>نام محصول</p>
                 <CloseIcon />
               </div>
             ) : null}
