@@ -18,11 +18,13 @@ import DatePicker from 'react-multi-date-picker';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
 import {digitsFaToEn} from '@persian-tools/persian-tools';
+import {useRouter} from 'next/navigation';
 const apiClient = new APIClient<User>('/user/get');
 
 function Account() {
   const id = Cookies.get('userId')!;
   let [date, setDate] = React.useState<any>();
+  const router = useRouter();
   const form = useForm();
   const {mutate} = useUpdateUser();
   const nowFa = new Date().toLocaleDateString('fa-IR');
@@ -35,6 +37,9 @@ function Account() {
       // phone: data.phone,
       birthDate: date ? digitsFaToEn(date.toString()) : digitsFaToEn(nowFa.toString()),
     });
+    if (!!mutate) {
+      router.push('/shopingbasket');
+    }
   };
   const useUser = (slug: string) =>
     useQuery({
