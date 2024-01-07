@@ -159,7 +159,7 @@ function SearchPage() {
   };
   const resetEndPrice = () => {
     (document.getElementById('endPrice') as HTMLInputElement).value = '';
-    setStartPrice('');
+    setEndPrice('');
   };
 
   const resetKeyword = () => {
