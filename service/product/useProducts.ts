@@ -9,6 +9,7 @@ const apiClient = new APIClient<Product>('/product');
 
 interface ProductQuery {
   categoryName?: string;
+  categoryEnglishName?: string;
   startPrice?: string;
   endPrice?: string;
   brand?: string;
@@ -23,6 +24,7 @@ interface ProductQuery {
 const useProducts = () => {
   const gameQuery = useProductQueryStore((s) => s.productQuery);
   const debouncedCategory = useDebounce(gameQuery.categoryName, 300);
+  const debouncedEnCategory = useDebounce(gameQuery.categoryEnglishName, 300);
   const debouncedStartPrice = useDebounce(gameQuery.startPrice, 300);
   const debouncedEndPrice = useDebounce(gameQuery.endPrice, 300);
   const debouncedBrand = useDebounce(gameQuery.brand, 300);
@@ -32,6 +34,9 @@ const useProducts = () => {
 
   if (debouncedCategory) {
     params.categoryName = debouncedCategory;
+  }
+  if (debouncedEnCategory) {
+    params.categoryEnglishName = debouncedEnCategory;
   }
   if (debouncedStartPrice) {
     params.startPrice = gameQuery.startPrice;
@@ -65,6 +70,7 @@ const useProducts = () => {
     queryKey: [
       CACHE_KEY_PRODUCT,
       debouncedCategory,
+      debouncedEnCategory,
       debouncedStartPrice,
       debouncedBrand,
       debouncedEndPrice,

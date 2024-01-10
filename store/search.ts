@@ -2,6 +2,7 @@ import {create} from 'zustand';
 
 interface ProductQuery {
   categoryName?: string;
+  categoryEnglishName?: string;
   startPrice?: string;
   endPrice?: string;
   brand?: string;
@@ -16,6 +17,7 @@ interface ProductQuery {
 interface ProductQueryStore {
   productQuery: ProductQuery;
   setCategoryName: (categoryName: string | undefined) => void;
+  setCategoryEnglishName: (categoryEnglishName: string | undefined) => void;
   setStartPrice: (startPrice: string | undefined) => void;
   setEndPrice: (endPrice: string | undefined) => void;
   setBrand: (brand: string | undefined) => void;
@@ -31,6 +33,8 @@ interface ProductQueryStore {
 const useProductQueryStore = create<ProductQueryStore>((set) => ({
   productQuery: {},
   setCategoryName: (categoryName) => set((state) => ({productQuery: {...state.productQuery, categoryName}})),
+  setCategoryEnglishName: (categoryEnglishName) =>
+    set((state) => ({productQuery: {...state.productQuery, categoryEnglishName}})),
   setStartPrice: (startPrice) => set((state) => ({productQuery: {...state.productQuery, startPrice}})),
   setEndPrice: (endPrice) => set((state) => ({productQuery: {...state.productQuery, endPrice}})),
   setSortName: (sortName, sortDirection) =>

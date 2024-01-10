@@ -46,6 +46,7 @@ function SearchPage() {
     setExist,
     setStartPrice,
     setCategoryName,
+    setCategoryEnglishName,
     setSortName,
     setSkip,
     setDirection,
@@ -90,23 +91,23 @@ function SearchPage() {
     }
 
     if (subCategory) {
-      setCategoryName(subCategory);
+      setCategoryEnglishName(subCategory);
       setPage(page);
       const calculate = page - 1;
       setSkip(calculate);
     } else if (search) {
       const matchingData = categoryData?.data.find((item) => item.englishName === search);
       if (matchingData) {
-        setCategoryName(matchingData.name);
+        setCategoryEnglishName(matchingData.name);
       } else {
         // Handle the case where no matching data is found
-        setCategoryName(search);
+        setCategoryEnglishName(search);
       }
       setPage(page);
       const calculate = page - 1;
       setSkip(calculate);
     } else {
-      setCategoryName(undefined);
+      setCategoryEnglishName(undefined);
     }
   }, [searchParams.category, searchParams.subcategory, queryProductName]);
 
@@ -115,6 +116,7 @@ function SearchPage() {
 
     setStartPrice(event.target.value);
   };
+
   const handleEndChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPage(1);
 
@@ -169,7 +171,7 @@ function SearchPage() {
   const date = new Date().toLocaleDateString('fa-IR');
 
   useEffect(() => {
-    if (gameQuery.categoryName === undefined || gameQuery.categoryName === '') {
+    if (gameQuery.categoryEnglishName === undefined || gameQuery.categoryEnglishName === '') {
       if (page === 1) {
         document.title = `جستجو محصولات | طلوع پخش `;
       } else {
@@ -184,22 +186,22 @@ function SearchPage() {
         )}) - صفحه ${page} | طلوع پخش `;
       }
     }
-  }, [gameQuery.categoryName, page]);
+  }, [gameQuery.categoryEnglishName, page]);
 
   const {data, isLoading} = useProducts();
   if (data?.message == 'category not found') {
-    setCategoryName('');
+    setCategoryEnglishName('');
     router.push('/not-found');
   }
   console.log(gameQuery.categoryName);
   return (
     <div>
-      {gameQuery.categoryName === undefined ? (
+      <h1 className='hidden'>جستجوی محصولات</h1>
+      {gameQuery.categoryEnglishName === undefined ? (
         <div className='mr-14 hidden flex-wrap gap-2 md:flex'>
-          <h1 className='hidden'>جستجوی محصولات</h1>
           {categoryData?.data?.map((item) => (
             <div key={item.name} className='category_card h-[142px] w-[110px] '>
-              <Link href={`/product-category/${item.name}`}>
+              <Link href={`/product-category/${item.englishName}`}>
                 <Image
                   src={baseUrl + item.picture}
                   className='max-h-[110px] min-h-[110px] min-w-[110px] max-w-[110px] rounded-t-3xl'
@@ -215,10 +217,10 @@ function SearchPage() {
       ) : (
         <div className='mr-14 hidden flex-wrap gap-2 md:flex'>
           {categoryData?.data?.map((item) => {
-            if (item.name === gameQuery.categoryName) {
+            if (item.englishName === gameQuery.categoryEnglishName) {
               return item.chailds.map((sub) => (
                 <div key={sub.id} className='category_card h-[142px] w-[110px] '>
-                  <Link href={`/product-category/${sub.name}`}>
+                  <Link href={`/product-category/${item.englishName}/${sub.englishName}`}>
                     <Image
                       src={baseUrl + sub.picture}
                       className='max-h-[110px] min-h-[110px] min-w-[110px] max-w-[110px] rounded-t-3xl'
@@ -317,9 +319,10 @@ function SearchPage() {
           <div className='flex items-center gap-2'>
             {gameQuery.categoryName !== undefined && gameQuery.categoryName !== '' ? (
               <div
-                onClick={() => setCategoryName('')}
+                onClick={() => setCategoryEnglishName('')}
                 className='filter_bg_sidebar hidden w-[120px] cursor-pointer items-center justify-center gap-3 rounded-xl  px-3 py-1.5 md:flex'
               >
+                {/* seo config "h1" */}
                 <h1 className='hidden'>خرید {gameQuery.categoryName}</h1>
                 <p className='text-[10px]  font-normal text-black-items'> {gameQuery.categoryName}</p>
                 <CloseIcon />

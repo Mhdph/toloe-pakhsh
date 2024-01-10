@@ -35,7 +35,12 @@ export default async function Store() {
       <SpecialOffer data={dataOff.data} />
       <>
         {categoryData.data.map((item: any) => (
-          <ListStore key={item.id} categoryName={item.name} urlName={`/product-category/${item.name}?page=1`} />
+          <ListStore
+            key={item.id}
+            categoryName={item.name}
+            englishName={item.englishName}
+            urlName={`/product-category/${item.englishName}?page=1`}
+          />
         ))}
       </>
 
