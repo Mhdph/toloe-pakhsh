@@ -1,6 +1,6 @@
 import {useQuery} from '@tanstack/react-query';
 import APIClient from '../api-client';
-import {CACHE_KEY_CATEGORY} from '../constants';
+import {CACHE_KEY_CATEGORY, CACHE_KEY_CATEGORYENGLISHNAME} from '../constants';
 import {CategoryandChilds} from '@/entities/category';
 import useCategoryStore from '@/store/category';
 
@@ -13,7 +13,7 @@ interface categoryQuery {
 
 const useGetCategoriesAndChilds = () => {
   return useQuery({
-    queryKey: [CACHE_KEY_CATEGORY],
+    queryKey: [CACHE_KEY_CATEGORYENGLISHNAME],
     queryFn: apiClient.getAll,
     retry: 3, // Retry the request up to 3 times before considering it failed
     refetchOnMount: true, // Refetch data when the component using this hook mounts

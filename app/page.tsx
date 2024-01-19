@@ -8,6 +8,7 @@ import SpecialOffer from '@/components/SpecialOffer';
 import SliderImage from '@/components/ui/Slider';
 import {getAllCategory} from '@/service/category';
 import {getAllOffProduct, getAllProduct} from '@/service/product';
+import OfferHero2 from '@/components/OfferHero-2';
 
 export default async function Home() {
   const data = await getAllProduct();
@@ -17,8 +18,9 @@ export default async function Home() {
   return (
     <main className='flex-col pt-1 md:pt-0'>
       <SliderImage />
+      {/* <OfferHero2 /> */}
       <CategoryList data={categoryData.data} />
-      <OfferHero />
+      {/* <OfferHero /> */}
       <ListItems data={data.data} link='' title='آخرین محصولات' />
       <SpecialOffer data={dataOff.data} />
       <AboutUs />

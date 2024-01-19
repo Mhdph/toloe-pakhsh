@@ -5,7 +5,7 @@ import useGetCart from '@/service/cart/useGetCart';
 import {CACHE_KEY_USER} from '@/service/constants';
 import usePayment from '@/service/payment/usePayment';
 import useDelivery from '@/service/settings/useDelivery';
-import useProductStore from '@/store/zustand';
+import {useProductStore} from '@/store/zustand';
 import {digitsEnToFa, addCommas, digitsFaToEn} from '@persian-tools/persian-tools';
 import {useQuery} from '@tanstack/react-query';
 import Cookies from 'js-cookie';
@@ -42,6 +42,7 @@ function Checkout() {
   const [delivery, setDelivery] = React.useState<string>('');
   const [off, setOff] = React.useState<string>('۰');
   const token = Cookies.get('token');
+  const productList = data?.data[0].cartRows || [];
 
   React.useEffect(() => {
     if (user !== undefined) {
@@ -65,7 +66,31 @@ function Checkout() {
     } else {
       setDelivery('۴۰۰۰۰');
     }
+    // check yalda pack free delivery
+    checkPostCostFree();
   }, [user, products, data, deliveryFee]);
+
+  const checkPostCostFree = () => {
+    if (productList && productList.length > 0) {
+      for (let item of productList) {
+        console.log(item['productId']);
+        if (item['productId'] === 1) {
+          setDelivery('۰');
+          console.log(`delivery checked: ${delivery} `);
+          break;
+        }
+      }
+    } else {
+      for (let item of products) {
+        console.log(item['id']);
+        if (item['id'] === 1) {
+          setDelivery('۰');
+          console.log(`delivery checked: ${delivery} `);
+          break;
+        }
+      }
+    }
+  };
 
   // data backend
   const {mutate} = usePayment();
@@ -112,7 +137,7 @@ function Checkout() {
         <div className='flex items-center justify-between'>
           <p className='text-xs font-semibold  text-black-items'>حمل و نقل:</p>
           <div className='flex items-center'>
-            <p className='text-base font-semibold'>{digitsEnToFa(addCommas(deliveryFee?.data[0].cost!))}</p>
+            <p className='text-base font-semibold'>{digitsEnToFa(addCommas(deliveryNum))}</p>
             <span className='mr-1 text-xs font-normal opacity-60'>تومان</span>
           </div>
         </div>

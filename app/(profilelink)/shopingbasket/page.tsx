@@ -5,7 +5,7 @@ import Checkout from '@/components/shoppingBasket/Checkout';
 import OffCode from '@/components/shoppingBasket/OffCode';
 import BackgroundTitle from '@/components/ui/BackgroundTitle';
 import useGetCart from '@/service/cart/useGetCart';
-import useProductStore from '@/store/zustand';
+import {useProductStore} from '@/store/zustand';
 import Cookies from 'js-cookie';
 import Link from 'next/link';
 import {Dialog, DialogContent, DialogFooter, DialogTrigger} from '@/components/ui/Dialog';

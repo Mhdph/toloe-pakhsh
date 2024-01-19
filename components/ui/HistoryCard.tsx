@@ -24,6 +24,7 @@ type Props = {
 function HistoryCard({color = 'primary', state = '', label = '', className, ...rest}: Props) {
   const colors = {
     primary: 'bg-[#FBF2C0] ',
+    // #TODO : set color posted
     delivered: 'bg-[#C0DFFB] text-[#213664]',
     canceled: 'bg-[#C0FBD4] text-[#0F2E1A]',
     returned: 'bg-[#FCC0C0] text-[#7E0707]',
@@ -56,7 +57,7 @@ function HistoryCard({color = 'primary', state = '', label = '', className, ...r
   return (
     <div>
       {data.data.map((item: Cart) => (
-        <div key={item.id} className='h-[152px] rounded-3xl bg-white px-4 shadow-ca md:h-full'>
+        <div key={item.id} className='mt-4 h-[152px] rounded-3xl bg-white px-4 shadow-ca md:h-full'>
           <div className='flex items-center justify-between pt-2'>
             <p className={classes}> {label}</p>
             <p className='text-[10px] font-normal tracking-wider text-black-items md:text-xs'>{item.faDate}</p>
@@ -75,6 +76,10 @@ function HistoryCard({color = 'primary', state = '', label = '', className, ...r
               <p className='text-xs font-normal text-black-items md:text-sm'>:کدسفارش</p>
             </div>
             <div className='flex items-center gap-1'>
+              <p className='text-xs font-normal text-black-items md:text-sm'>{digitsEnToFa(item.trackingCode)}</p>
+              <p className='text-xs font-normal text-black-items md:text-sm'>:کد رهگیری پست</p>
+            </div>
+            <div className='flex items-center gap-1'>
               {' '}
               <span className='mr-1 text-xs font-normal md:text-sm'>تومان</span>
               <p className='text-base font-semibold  text-black-items md:text-xl'>
@@ -82,27 +87,27 @@ function HistoryCard({color = 'primary', state = '', label = '', className, ...r
               </p>
             </div>
           </div>
+          <div className='flex items-center justify-between'>
+            <button
+              onClick={() =>
+                handleRepeatPurchase(
+                  item.cartRows.map((cartItem) => ({
+                    productId: cartItem.productId,
+                    count: +digitsFaToEn(cartItem.count),
+                  })),
+                )
+              }
+              className='btn_primary px-12 py-1.5 text-xs font-extrabold text-white'
+            >
+              تکرار خرید
+            </button>
+          </div>
+
           <hr className=' my-2 md:my-4' />
 
           <Accordion type='multiple'>
             <AccordionItem className='border-none' value='item-1'>
-              <AccordionTrigger>
-                <div className='flex items-center justify-between'>
-                  <button
-                    onClick={() =>
-                      handleRepeatPurchase(
-                        item.cartRows.map((cartItem) => ({
-                          productId: cartItem.productId,
-                          count: +digitsFaToEn(cartItem.count),
-                        })),
-                      )
-                    }
-                    className='btn_primary px-12 py-1.5 text-xs font-extrabold text-white'
-                  >
-                    تکرار خرید
-                  </button>
-                </div>
-              </AccordionTrigger>
+              <AccordionTrigger></AccordionTrigger>
               <AccordionContent>
                 <OrdersItem data={item} />
               </AccordionContent>

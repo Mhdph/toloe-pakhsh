@@ -1,5 +1,5 @@
 'use client';
-import {AvatarBlackIcon, PhoneBlackIcon} from '@/assets/Icons';
+import {AvatarBlackIcon, HomeIcon, LocationIcon, PhoneBlackIcon} from '@/assets/Icons';
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from '@/components/ui/Accordion';
 import {Cart} from '@/entities/Cart';
 import {baseUrl} from '@/lib/config';
@@ -33,6 +33,7 @@ interface Props {
 function OrdersCard({color = 'primary', keyWord, state = '', label = '', className, ...rest}: Props) {
   const [page, setPage] = React.useState(1);
   const [status, setStatus] = React.useState('');
+  const [trackingCode, setTrackingCode] = React.useState('');
   const [description, setDescription] = React.useState('');
 
   const {mutate} = useUpdateOrder();
@@ -42,6 +43,7 @@ function OrdersCard({color = 'primary', keyWord, state = '', label = '', classNa
     const updatedCart = {
       state: status,
       description,
+      trackingCode: trackingCode,
     };
 
     mutate({id, data: updatedCart});
@@ -99,6 +101,14 @@ function OrdersCard({color = 'primary', keyWord, state = '', label = '', classNa
                 <p className='text-sm font-normal'> {item.phone} </p>
               </div>
             </div>
+            <div className='flex flex-row-reverse justify-between mt-2'>
+              <div className='flex items-center gap-2'>
+                <p className='text-sm font-normal'>{item.address}</p>
+                <MiddleIcon>
+                  <HomeIcon />
+                </MiddleIcon>
+              </div>
+            </div>
             <hr className='my-4 border-b border-b-black-items border-opacity-10' />
             <div className='flex flex-row-reverse items-center gap-2'>
               {item.cartRows.map((item) => (
@@ -125,25 +135,40 @@ function OrdersCard({color = 'primary', keyWord, state = '', label = '', classNa
             </Accordion>
             <hr className='my-4 border-b border-b-black-items border-opacity-10' />
             <div className='grid w-full grid-cols-4'>
-              {item.description !== null && item.description !== '' ? (
-                <div>
-                  <p>توضیحات</p>: <p>{item.description}</p>
-                </div>
-              ) : null}
               <div className='col-span-1 w-full'>
                 <Button onClick={() => updateOrder(item.id)} type='submit' className='w-40'>
                   ثبت
                 </Button>
               </div>
-              <div className='col-span-3 flex w-full items-center gap-2'>
+              <div className='col-span-3 flex w-full items-end gap-2'>
                 <Input
+                  defaultValue={item.description}
                   onChange={(e) => setDescription(e.target.value)}
                   className='text-right placeholder:text-right'
                   placeholder='توضیحات'
                 />
+                <p>:توضیحات</p>
+              </div>
+              <div className='col-span-4 mt-2 flex  w-full  items-center gap-4'>
+                <Input
+                  defaultValue={digitsEnToFa(item.trackingCode)}
+                  onChange={(e) => setTrackingCode(e.target.value)}
+                  className='text-right placeholder:text-right'
+                  placeholder='کد رهگیری پستی'
+                />
+                <div className='w-1/4'>:کد رهگیری</div>
+
                 <select
-                  onChange={(e) => setStatus(e.target.value)}
-                  className='h-10 w-full rounded-md border border-input bg-transparent text-right '
+                  onChange={(e) => {
+                    setStatus(e.target.value);
+                    if (description == '') {
+                      setDescription(item.description);
+                    }
+                    if (trackingCode === '') {
+                      setTrackingCode(item.trackingCode);
+                    }
+                  }}
+                  className='h-10 w-1/2 rounded-md border border-input bg-transparent text-right '
                 >
                   <option value='sending'>در حال ارسال</option>
                   <option value='posted'>ارسال شده</option>

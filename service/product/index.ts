@@ -11,8 +11,8 @@ export async function getAllProduct() {
 }
 
 // get same product
-export async function getSameProduct() {
-  const res = await fetch(`${baseUrl}/cart-row/offerList`, {cache: 'no-cache'});
+export async function getSameProduct(productName: string) {
+  const res = await fetch(`${baseUrl}/product/sameProduct?productName=${productName}`, {cache: 'no-cache'});
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }
@@ -42,26 +42,6 @@ export async function getOneProduct(productId: number) {
 //get favorite product
 export async function getFavoriteProduct() {
   const res = await fetch(`${baseUrl}/favorite`, {cache: 'no-cache'});
-  if (!res.ok) {
-    throw new Error('Failed to fetch data');
-  }
-
-  return res.json();
-}
-
-// get all shirini product
-export async function getAllShiriniProduct() {
-  const res = await fetch(`${baseUrl}/product?categoryName=شیرینی جات`, {cache: 'no-cache'});
-  if (!res.ok) {
-    throw new Error('Failed to fetch data');
-  }
-
-  return res.json();
-}
-
-// get all torshi product
-export async function getAllTorshiProduct() {
-  const res = await fetch(`${baseUrl}/product?categoryName=ترشیجات`, {cache: 'no-cache'});
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }

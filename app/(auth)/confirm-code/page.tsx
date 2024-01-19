@@ -10,7 +10,7 @@ import {useMutation} from '@tanstack/react-query';
 import React from 'react';
 import {useRouter} from 'next/navigation';
 import {toast} from 'react-hot-toast';
-import useProductStore from '@/store/zustand';
+import {useProductStore} from '@/store/zustand';
 import useAddCartList from '@/service/cart/useAddCartList';
 import axios from 'axios';
 import {baseUrl} from '@/lib/config';
@@ -48,7 +48,7 @@ function ConfirmCode() {
               authorization: 'Bearer ' + `${data.token}`,
             },
           });
-          window.location.href = '/';
+          window.location.href = '/profile';
         } catch (error) {
           console.log(error);
         }

@@ -8,7 +8,7 @@ import OffCode from '@/components/shoppingBasket/OffCode';
 import Checkout from '@/components/shoppingBasket/Checkout';
 import Link from 'next/link';
 import Loading from '@/components/ui/Loading';
-import useProductStore from '@/store/zustand';
+import {useProductStore} from '@/store/zustand';
 import useGetCart from '@/service/cart/useGetCart';
 import {useRouter} from 'next/navigation';
 

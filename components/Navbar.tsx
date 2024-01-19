@@ -18,21 +18,30 @@ import Link from 'next/link';
 import {cn} from '@/lib/cn';
 import {SearchIcon} from 'lucide-react';
 import {Combobox, Transition} from '@headlessui/react';
-import React, {Fragment, useEffect} from 'react';
+import React, {Fragment, useCallback, useRef} from 'react';
 import useDebounce from '@/hooks/useDebounce';
 import axios from 'axios';
 import {baseUrl} from '@/lib/config';
 import {Product} from '@/entities/product';
 import {MobileMenu} from './MobileMenu';
+import {useProductStore, useCartListCount} from '@/store/zustand';
+import {digitsEnToFa} from '@persian-tools/persian-tools';
+import useProductQueryStore from '@/store/search';
 
 type NavbarProps = {};
 
 const Navbar: React.FC<NavbarProps> = () => {
   const [data, setData] = React.useState([]);
+  const [cartRow, setCartRow] = React.useState(0);
   const [name, setName] = React.useState('');
   const pathName = usePathname();
   const router = useRouter();
-  const debouncedValue = useDebounce(name, 3000);
+  const debouncedValue = useDebounce(name, 500);
+  const unSignCartListCount = useProductStore((state) => state.products).length;
+  const signCartListCount = useCartListCount((state) => state.count);
+  const {setKeyWord} = useProductQueryStore();
+  const inputElement = useRef(null);
+
   const getProduct = async () => {
     try {
       const res = await axios.get(`${baseUrl}/product?productName=${name}`);
@@ -41,10 +50,33 @@ const Navbar: React.FC<NavbarProps> = () => {
       console.log(error);
     }
   };
+  const cartListCount = () => {
+    if (signCartListCount != 0) {
+      setCartRow(signCartListCount);
+    } else {
+      setCartRow(unSignCartListCount);
+    }
+  };
+
+  const createQueryString = useCallback((name: string, value: string) => {
+    const params = new URLSearchParams();
+    params.set(name, value);
+
+    return params.toString();
+  }, []);
 
   React.useEffect(() => {
     getProduct();
-  }, [debouncedValue]);
+    cartListCount();
+  }, [debouncedValue, unSignCartListCount, signCartListCount]);
+
+  const handleKeyPress = (event: any) => {
+    if (event.key == 'Enter') {
+      setKeyWord(name);
+      router.push(`/search` + '?' + createQueryString('productName', name) + '&' + createQueryString('page', '1'));
+    }
+  };
+
   return (
     <div>
       <div className='navbar_shadow fixed z-50 flex h-[72px] w-full items-center justify-between bg-white pb-2 lg:hidden'>
@@ -57,7 +89,15 @@ const Navbar: React.FC<NavbarProps> = () => {
           <LogoIcon />
         </Link>
         <Link href='/shopingbasket' className='navbar_bg_left flex items-center justify-center'>
-          <div className='cursor-pointer'>
+          <div className=' flex h-8 w-16 cursor-pointer flex-row items-center justify-around  '>
+            {cartRow != 0 ? (
+              <div className=' flex w-6 justify-center rounded-full bg-white  text-red-700'>
+                {digitsEnToFa(cartRow)}
+              </div>
+            ) : (
+              <></>
+            )}
+
             <StoreActiveIcon />
           </div>
         </Link>
@@ -84,17 +124,39 @@ const Navbar: React.FC<NavbarProps> = () => {
                 <SearchBarSvg />
               </div>
             </div> */}
+
             <Combobox>
-              <div className='relative mt-1'>
-                <div className='relative  '>
+              <div className='relative '>
+                <div className='relative z-30 pl-8'>
                   <Combobox.Input
-                    className='w-[352px] rounded-[18px] bg-gray-200 py-1.5 pr-10 outline-none'
+                    className='w-[300px] rounded-[18px] bg-gray-200 py-1.5 pr-20 outline-none'
                     displayValue={() => name}
                     onChange={(event) => setName(() => event.target.value)}
                     placeholder='جستجو'
+                    onKeyDown={handleKeyPress}
                   />
-                  <div className='pointer-events-none absolute inset-y-0  right-0 flex items-center pr-3'>
-                    <SearchBarSvg />
+
+                  <div className={name.length === 0 ? ' absolute inset-y-0  right-0  flex items-center pr-3 ' : ''}>
+                    {name.length === 0 ? (
+                      <SearchBarSvg />
+                    ) : (
+                      <Link
+                        className=' search_btn  absolute inset-y-0 z-40 items-center px-2 py-1.5 text-white'
+                        href={
+                          `/search` +
+                          '?' +
+                          createQueryString('productName', name) +
+                          '&' +
+                          createQueryString('page', '1')
+                        }
+                        ref={inputElement}
+                        onClick={() => {
+                          setKeyWord(name);
+                        }}
+                      >
+                        جستجو
+                      </Link>
+                    )}
                   </div>
                 </div>
                 <Transition
@@ -145,12 +207,19 @@ const Navbar: React.FC<NavbarProps> = () => {
                 </Transition>
               </div>
             </Combobox>
-
-            <div className='contact_us flex h-10 w-10 items-center justify-center rounded-full bg-red-700'>
-              <Link href='/shopingbasket'>
+            <div className=''></div>
+            <Link href='/shopingbasket'>
+              <div className='contact_us  flex h-8 w-16 flex-row items-center justify-around rounded-[18px] bg-red-700'>
+                {cartRow != 0 ? (
+                  <div className=' flex w-6 justify-center rounded-full bg-white  text-red-700'>
+                    {digitsEnToFa(cartRow)}
+                  </div>
+                ) : (
+                  <></>
+                )}
                 <BucketIcon />
-              </Link>
-            </div>
+              </div>
+            </Link>
           </div>
         </div>
         <div className='flex h-10 w-full flex-row-reverse justify-between bg-[#E9EAEA] px-12'>
@@ -180,15 +249,15 @@ const Navbar: React.FC<NavbarProps> = () => {
             <span className='py-2 text-xs font-black'>فروشگاه</span>
           </Link>
           <Link
-            href='/search'
+            href='/search?page=1'
             className={cn(
-              pathName === '/search'
+              pathName === '/search?page=1'
                 ? 'rounded-t-3xl border-t  border-t-[#F6622C] bg-white text-[#F6622C]'
                 : 'text-black-items',
               'flex items-center gap-3 px-24 text-[14px] font-extrabold',
             )}
           >
-            {pathName == '/search' ? <SearchIcon /> : <SearchBarSvg />}
+            {pathName == '/search?page=1' ? <SearchIcon /> : <SearchBarSvg />}
             <span className='py-2 text-center text-xs font-black'>جست و جو</span>
           </Link>
           <Link

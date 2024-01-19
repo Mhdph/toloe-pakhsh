@@ -2,6 +2,7 @@ import {create} from 'zustand';
 
 interface ProductQuery {
   categoryName?: string;
+  categoryEnglishName?: string;
   startPrice?: string;
   endPrice?: string;
   brand?: string;
@@ -16,6 +17,7 @@ interface ProductQuery {
 interface ProductQueryStore {
   productQuery: ProductQuery;
   setCategoryName: (categoryName: string | undefined) => void;
+  setCategoryEnglishName: (categoryEnglishName: string | undefined) => void;
   setStartPrice: (startPrice: string | undefined) => void;
   setEndPrice: (endPrice: string | undefined) => void;
   setBrand: (brand: string | undefined) => void;
@@ -25,11 +27,14 @@ interface ProductQueryStore {
   setSkip: (skip: number | undefined) => void;
   setDirection: (sortDirection: number | undefined) => void;
   setKeyWord: (keyword: string | undefined) => void;
+  setQuery: (keyword: string | undefined, skip: number | undefined) => void;
 }
 
 const useProductQueryStore = create<ProductQueryStore>((set) => ({
   productQuery: {},
   setCategoryName: (categoryName) => set((state) => ({productQuery: {...state.productQuery, categoryName}})),
+  setCategoryEnglishName: (categoryEnglishName) =>
+    set((state) => ({productQuery: {...state.productQuery, categoryEnglishName}})),
   setStartPrice: (startPrice) => set((state) => ({productQuery: {...state.productQuery, startPrice}})),
   setEndPrice: (endPrice) => set((state) => ({productQuery: {...state.productQuery, endPrice}})),
   setSortName: (sortName, sortDirection) =>
@@ -40,6 +45,7 @@ const useProductQueryStore = create<ProductQueryStore>((set) => ({
   setSkip: (skip) => set((state) => ({productQuery: {...state.productQuery, skip}})),
   setDirection: (sortDirection) => set((state) => ({productQuery: {...state.productQuery, sortDirection}})),
   setKeyWord: (keyword) => set((state) => ({productQuery: {...state.productQuery, keyword}})),
+  setQuery: (keyword, skip) => set((state) => ({productQuery: {...state.productQuery, keyword, skip}})),
 }));
 
 export default useProductQueryStore;

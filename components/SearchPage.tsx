@@ -9,8 +9,8 @@ import {Switch} from '@/components/ui/Switch';
 import {FilterList} from '@/constant/List';
 import useProducts from '@/service/product/useProducts';
 import useProductQueryStore from '@/store/search';
-import {useParams} from 'next/navigation';
-import {useEffect, useState} from 'react';
+import {useParams, usePathname, useSearchParams, useRouter} from 'next/navigation';
+import {useCallback, useEffect, useState} from 'react';
 import SameProduct from './search/SameProduct';
 import Loading from './ui/Loading';
 import {PaginationList} from './ui/Pagination';
@@ -19,38 +19,104 @@ import Link from 'next/link';
 import Image from 'next/image';
 import {baseUrl} from '@/lib/config';
 import {digitsEnToFa} from '@persian-tools/persian-tools';
+import {convertNumberFatoEnInStr} from '@/translate';
+
+type Props = {
+  params: {id: string};
+  searchParams: {[key: string]: string | string[] | undefined};
+};
+
+export async function generateMetadata({params, searchParams}: Props) {
+  const {page, categoryName} = searchParams;
+  const siteURL = 'https://toloupakhsh.ir';
+
+  if (categoryName !== '' || categoryName !== undefined) {
+    return {
+      alternates: {
+        canonical: `${siteURL}/product-category/${categoryName}?page=${page}`,
+      },
+    };
+  }
+}
 
 function SearchPage() {
-  const {setEndPrice, setOff, setExist, setStartPrice, setCategoryName, setSortName, setSkip, setDirection, setBrand} =
-    useProductQueryStore();
+  const {
+    setEndPrice,
+    setOff,
+    setExist,
+    setStartPrice,
+    setCategoryName,
+    setCategoryEnglishName,
+    setSortName,
+    setSkip,
+    setDirection,
+    setBrand,
+    setKeyWord,
+    setQuery,
+  } = useProductQueryStore();
+  const router = useRouter();
+  const path = usePathname();
+  const searchParams = useParams();
+  const useSearch = useSearchParams();
+
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState<number>(1);
+  const [productName, setProductName] = useState('');
+
+  const queryPage = parseInt(useSearch.get('page') || '1');
+  const queryProductName = useSearch.get('productName') || '';
   const gameQuery = useProductQueryStore((s) => s.productQuery);
-  const searchParams = useParams();
+
   const {data: categoryData} = useGetCategoriesAndChilds();
+
+  const createQueryString = useCallback((name: string, value: string) => {
+    const params = new URLSearchParams();
+    params.set(name, value);
+
+    return params.toString();
+  }, []);
 
   useEffect(() => {
     const search = decodeURIComponent(searchParams.category || '');
     const subCategory = decodeURIComponent(searchParams.subcategory || '');
 
+    if (queryProductName != '') {
+      setProductName(queryProductName);
+      setPage(queryPage);
+      const calculate = page - 1;
+      setQuery(queryProductName, calculate * 10);
+    } else {
+      setKeyWord(undefined);
+      setPage(queryPage);
+    }
+
     if (subCategory) {
-      setCategoryName(subCategory);
+      setCategoryEnglishName(subCategory);
+      setPage(page);
+      const calculate = page - 1;
+      setSkip(calculate);
     } else if (search) {
       const matchingData = categoryData?.data.find((item) => item.englishName === search);
       if (matchingData) {
-        setCategoryName(matchingData.name);
+        setCategoryEnglishName(matchingData.name);
       } else {
         // Handle the case where no matching data is found
-        setCategoryName(search);
+        setCategoryEnglishName(search);
       }
+      setPage(page);
+      const calculate = page - 1;
+      setSkip(calculate);
+    } else {
+      setCategoryEnglishName(undefined);
     }
-  }, [searchParams.category, searchParams.subcategory]);
+  }, [searchParams.category, searchParams.subcategory, queryProductName]);
 
   const handleStartChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPage(1);
 
     setStartPrice(event.target.value);
   };
+
   const handleEndChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPage(1);
 
@@ -73,9 +139,20 @@ function SearchPage() {
   };
 
   const onPageChange = (page: number) => {
-    setPage(page);
-    const calculate = page - 1;
-    setSkip(calculate * 10);
+    if (productName != '') {
+      router.push(
+        `${path}` +
+          '?' +
+          createQueryString('productName', productName || '') +
+          '&' +
+          createQueryString('page', page.toString()),
+      );
+    } else {
+      router.push(`${path}` + '?' + createQueryString('page', page.toString()));
+      setPage(page);
+      const calculate = page - 1;
+      setSkip(calculate * 10);
+    }
   };
 
   const resetStartPrice = () => {
@@ -84,25 +161,47 @@ function SearchPage() {
   };
   const resetEndPrice = () => {
     (document.getElementById('endPrice') as HTMLInputElement).value = '';
-    setStartPrice('');
+    setEndPrice('');
+  };
+
+  const resetKeyword = () => {
+    router.push(`${path}` + '?' + createQueryString('page', '1'));
   };
 
   const date = new Date().toLocaleDateString('fa-IR');
 
   useEffect(() => {
-    document.title = `قیمت و خرید ${gameQuery.categoryName} (${date}) | طلوع پخش `;
-  }, [gameQuery.categoryName]);
+    if (gameQuery.categoryEnglishName === undefined || gameQuery.categoryEnglishName === '') {
+      if (page === 1) {
+        document.title = `جستجو محصولات | طلوع پخش `;
+      } else {
+        document.title = `جستجو محصولات صفحه  ${page} | طلوع پخش `;
+      }
+    } else {
+      if (page === 1) {
+        document.title = `قیمت و خرید ${gameQuery.categoryName} (${convertNumberFatoEnInStr(date)}) | طلوع پخش `;
+      } else {
+        document.title = `قیمت و خرید ${gameQuery.categoryName} (${convertNumberFatoEnInStr(
+          date,
+        )}) - صفحه ${page} | طلوع پخش `;
+      }
+    }
+  }, [gameQuery.categoryEnglishName, page]);
 
   const {data, isLoading} = useProducts();
-
+  if (data?.message == 'category not found') {
+    setCategoryEnglishName('');
+    router.push('/not-found');
+  }
   console.log(gameQuery.categoryName);
   return (
     <div>
-      {gameQuery.categoryName === undefined ? (
+      <h1 className='hidden'>جستجوی محصولات</h1>
+      {gameQuery.categoryEnglishName === undefined ? (
         <div className='mr-14 hidden flex-wrap gap-2 md:flex'>
           {categoryData?.data?.map((item) => (
             <div key={item.name} className='category_card h-[142px] w-[110px] '>
-              <Link href={`/product-category/${item.name}`}>
+              <Link href={`/product-category/${item.englishName}`}>
                 <Image
                   src={baseUrl + item.picture}
                   className='max-h-[110px] min-h-[110px] min-w-[110px] max-w-[110px] rounded-t-3xl'
@@ -118,10 +217,10 @@ function SearchPage() {
       ) : (
         <div className='mr-14 hidden flex-wrap gap-2 md:flex'>
           {categoryData?.data?.map((item) => {
-            if (item.name === gameQuery.categoryName) {
+            if (item.englishName === gameQuery.categoryEnglishName) {
               return item.chailds.map((sub) => (
                 <div key={sub.id} className='category_card h-[142px] w-[110px] '>
-                  <Link href={`/product-category/${sub.name}`}>
+                  <Link href={`/product-category/${item.englishName}/${sub.englishName}`}>
                     <Image
                       src={baseUrl + sub.picture}
                       className='max-h-[110px] min-h-[110px] min-w-[110px] max-w-[110px] rounded-t-3xl'
@@ -138,7 +237,7 @@ function SearchPage() {
           })}
         </div>
       )}
-      <SearchBar count={data?.count} />
+      <SearchBar count={data?.count} onChangePage={page} />
       <div className='flex md:gap-2  md:px-10 md:pt-10 '>
         <div className='filter_bg_sidebar hidden h-[1108px] min-w-[300px] rounded-3xl bg-red-700 px-3 md:flex md:flex-col'>
           <div className='mt-4 px-4'>
@@ -220,9 +319,11 @@ function SearchPage() {
           <div className='flex items-center gap-2'>
             {gameQuery.categoryName !== undefined && gameQuery.categoryName !== '' ? (
               <div
-                onClick={() => setCategoryName('')}
+                onClick={() => setCategoryEnglishName('')}
                 className='filter_bg_sidebar hidden w-[120px] cursor-pointer items-center justify-center gap-3 rounded-xl  px-3 py-1.5 md:flex'
               >
+                {/* seo config "h1" */}
+                <h1 className='hidden'>خرید {gameQuery.categoryName}</h1>
                 <p className='text-[10px]  font-normal text-black-items'> {gameQuery.categoryName}</p>
                 <CloseIcon />
               </div>
@@ -270,6 +371,15 @@ function SearchPage() {
                 className='filter_bg_sidebar hidden w-[120px] cursor-pointer items-center justify-center gap-3 rounded-xl  px-3 py-1.5 md:flex'
               >
                 <p className='text-[10px]  font-normal text-black-items'>قیمت نهایی</p>
+                <CloseIcon />
+              </div>
+            ) : null}
+            {gameQuery.keyword !== undefined && gameQuery.keyword !== '' ? (
+              <div
+                onClick={resetKeyword}
+                className='filter_bg_sidebar hidden w-[120px] cursor-pointer items-center justify-center gap-3 rounded-xl  px-3 py-1.5 md:flex'
+              >
+                <p className='text-[10px]  font-normal text-black-items'>نام محصول</p>
                 <CloseIcon />
               </div>
             ) : null}

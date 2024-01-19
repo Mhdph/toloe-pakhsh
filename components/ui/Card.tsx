@@ -4,7 +4,7 @@ import {baseUrl} from '@/lib/config';
 import Link from 'next/link';
 import Button from './Button';
 import Cookies from 'js-cookie';
-import useProductStore from '@/store/zustand';
+import {useCartListCount, useProductStore} from '@/store/zustand';
 import useAddFavouriteProduct from '@/service/product/useAddFavouriteProduct';
 import useAddCart from '@/service/cart/useAddCart';
 import ReactStars from 'react-stars';
@@ -44,6 +44,7 @@ function Card({data: {brand, picture, name, unitCount, unit, price, id, off, FaP
   const user = Cookies.get('token');
   const quantity = 1;
   const {mutate, isLoading} = useAddCart();
+  // const increaseCountCart = useCartListCount((state) => state.increaseCount);
   const handleAddToCart = () => {
     const product: ProductProps = {
       name,
@@ -56,6 +57,7 @@ function Card({data: {brand, picture, name, unitCount, unit, price, id, off, FaP
       picture,
       off,
     };
+    // increaseCountCart(1);
     addProduct(product);
     toast.success('محصول به سبد اضافه شد');
   };

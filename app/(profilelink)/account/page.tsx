@@ -18,22 +18,28 @@ import DatePicker from 'react-multi-date-picker';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
 import {digitsFaToEn} from '@persian-tools/persian-tools';
+import {useRouter} from 'next/navigation';
 const apiClient = new APIClient<User>('/user/get');
 
 function Account() {
   const id = Cookies.get('userId')!;
   let [date, setDate] = React.useState<any>();
+  const router = useRouter();
   const form = useForm();
   const {mutate} = useUpdateUser();
+  const nowFa = new Date().toLocaleDateString('fa-IR');
   const updateUser: SubmitHandler<any> = async (data) => {
     mutate({
       address: data.address,
       city: data.city,
       firstName: data.firstName,
       lastName: data.lastName,
-      phone: data.phone,
-      birthDate: digitsFaToEn(date.toString()),
+      // phone: data.phone,
+      birthDate: date ? digitsFaToEn(date.toString()) : digitsFaToEn(nowFa.toString()),
     });
+    if (!!mutate) {
+      router.push('/shopingbasket');
+    }
   };
   const useUser = (slug: string) =>
     useQuery({
@@ -44,7 +50,7 @@ function Account() {
         form.setValue('firstName', data?.firstName);
         form.setValue('birthDate', data?.faBirthDate ? data.faBirthDate.substring(0, 10) : data.faBirthDate);
         form.setValue('lastName', data?.lastName);
-        form.setValue('phone', data?.phone);
+        // form.setValue('phone', data?.phone);
         form.setValue('city', data?.city);
       },
     });
@@ -111,7 +117,7 @@ function Account() {
           </div>
           <hr className='my-6 border opacity-50' />
           <div className='flex flex-col items-center gap-6 md:flex-row md:gap-12'>
-            <FormField
+            {/* <FormField
               control={form.control}
               name='phone'
               render={({field}) => (
@@ -130,13 +136,13 @@ function Account() {
                   <FormMessage />
                 </FormItem>
               )}
-            />
+            /> */}
             <FormField
               control={form.control}
               name='city'
               render={({field}) => (
                 <FormItem>
-                  <FormLabel>نام شهر</FormLabel>
+                  <FormLabel>نام شهر (الزامی)</FormLabel>
                   <FormControl>
                     <div className='md:w-[304px]'>
                       <div className='relative'>
@@ -156,7 +162,7 @@ function Account() {
               name='address'
               render={({field}) => (
                 <FormItem>
-                  <FormLabel> آدرس</FormLabel>
+                  <FormLabel> آدرس (الزامی)</FormLabel>
                   <FormControl>
                     <div className='md:w-[304px]'>
                       <div className='relative'>

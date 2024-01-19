@@ -49,6 +49,7 @@ const SliderImage: React.FC<SliderProps> = () => {
         }
       }
     })();
+    document.title = 'طلوع پخش | خرید انواع مزه‌جات با قیمت عمده';
   }, []); // Ensure the useEffect runs only once (on mount)
 
   const useComponents = () =>

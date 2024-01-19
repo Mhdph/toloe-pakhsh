@@ -14,7 +14,7 @@ interface UserQuery {
 
 const useUsers = () => {
   const userQuery = useUserSerachStore((s) => s.userQuery);
-  const debouncedName = useDebounce(userQuery.keyword, 3000);
+  const debouncedName = useDebounce(userQuery.keyword, 1000);
 
   const params: UserQuery = {};
 

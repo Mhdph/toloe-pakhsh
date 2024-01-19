@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, {useEffect} from 'react';
 import ListItems from './ListItems';
 import axios from 'axios';
 import {baseUrl} from '@/lib/config';
@@ -7,17 +7,22 @@ import {useQuery} from '@tanstack/react-query';
 import Loading from './ui/Loading';
 interface ListStoreProps {
   categoryName: string;
+  englishName: string;
   urlName: string;
 }
 
-function ListStore({categoryName, urlName}: ListStoreProps) {
+function ListStore({categoryName, englishName, urlName}: ListStoreProps) {
+  useEffect(() => {
+    document.title = 'فروشگاه طلوع پخش';
+  }, []);
+
   const getProductData = async () => {
-    const response = await axios.get(`${baseUrl}/product?categoryName=${categoryName}`);
+    const response = await axios.get(`${baseUrl}/product?categoryEnglishName=${englishName}`);
     return response.data;
   };
 
   const {data, isLoading} = useQuery({
-    queryKey: ['productCa', categoryName],
+    queryKey: ['productCa', englishName],
     queryFn: getProductData,
   });
   if (isLoading) return <Loading />;

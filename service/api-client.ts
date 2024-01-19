@@ -5,6 +5,7 @@ export interface FetchResponse<T> {
   count: number;
   next: string | null;
   data: T[];
+  message: string | null;
 }
 
 const axiosInstance = axios.create({
